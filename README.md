@@ -43,6 +43,11 @@ Currently, these workflows perform the following tasks:
     [DockerHub](https://hub.docker.com/) with your package and all its
     dependencies pre-installed.
 
+Importantly, these files are designed to work with any R package
+out-of-the-box. This means you won’t have to manually edit any of the
+files provided here, simply copy and paste them into the appropriate
+folders.
+
 ## Setup
 
 To use these workflows when [developing your own R
