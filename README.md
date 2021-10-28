@@ -1,11 +1,21 @@
 r\_workflows
 ================
 <h4>
-Author: <i>Brian M. Schilder</i>
-</h4>
+Authors:
 <h4>
-Most recent update: <i>Oct-28-2021</i>
+<h5>
+<i>Brian M. Schilder and Alan Murphy</i>
+</h5>
+<a href='https://www.neurogenomics.co.uk/' target='_blank'>Neurogenomics
+Lab</a><br><a href='https://www.imperial.ac.uk/brain-sciences/' target='_blank'>Imperial
+College London</a>
+
+<h4>
+Most recent update:
 </h4>
+<h5>
+<i>Oct-28-2021</i>
+</h5>
 
 ## Intro
 
