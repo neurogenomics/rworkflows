@@ -224,13 +224,31 @@ Once the image has been created, you can launch it with:
         --rm \
         -p 8788:8787 <DockerHub_repo_name>/<package_name> 
 
+**NOTES**:  
+\* The `-d` ensures the container will run in “detached” mode, which
+means it will persist even after you’ve closed your command line
+session.  
+\* Optionally, you can also install the [Docker
+Desktop](https://www.docker.com/products/docker-desktop) to easily
+manage your containers.  
+\* You can set the password to whatever you like by changing the
+`-e PASSWORD=...` flag.  
+\* The username will be *“rstudio”* by default.
+
 Finally, launch the containerised Rstudio by entering the following URL
 in any web browser:
 
 <http://localhost:8788/>
 
-The username will be “rstudio” by default, and you can set the password
-to whatever you like.
+## Singularity usage
+
+If you are using a system that does not allow Docker (as is the case for
+many institutional computing clusters), you can instead [install Docker
+images via
+Singularity](https://sylabs.io/guides/2.6/user-guide/singularity_and_docker.html).
+
+    singularity pull docker:://<DockerHub_repo_name>/<package_name>
+    singularity run <package_name>_latest.sif
 
 # Session Info
 
