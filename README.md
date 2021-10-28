@@ -21,12 +21,13 @@ Most recent update:
 
 [GitHub Actions](https://docs.github.com/en/actions) are a powerful way
 to automatically launch workflows every time you push changes to a
-GitHub repository. This is a form of Continuous Integration (CI), which
-helps ensure that your code is always working as expected (without
+GitHub repository. This is a form of [Continuous Integration
+(CI)](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
+which helps ensure that your code is always working as expected (without
 having to manually check each time).
 
-Here, I have designed robust and flexible workflows specifically for the
-development of R packages.
+Here, we have designed robust and flexible workflows specifically for
+the development of R packages.
 
 Currently, these workflows perform the following tasks:
 
