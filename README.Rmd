@@ -119,12 +119,13 @@ package. This workflow takes advantage of several key features:
 [AnVIL](https://bioconductor.org/packages/release/bioc/html/AnVIL.html) to more
 rapidly install R packages from binaries.  
 
-However, I have modified the `bioc` workflow to make a number of improvements: 
-1. Uses dynamic variables to specify R/Bioconductor versions 
+However, I have modified the `bioc` workflow to make a number of improvements:  
+
+- Uses dynamic variables to specify R/Bioconductor versions 
 (e.g. `r: "latest"`) and the name of your R package, as opposed to static 
 names that are likely to become outdated (e.g. `r: "4.0.1"`).  
-2. Additional error handling and dependencies checks.  
-3. Re-renders `README.Rmd` before rebuilding the documentation website. 
+- Additional error handling and dependencies checks.  
+- Re-renders `README.Rmd` before rebuilding the documentation website. 
 
 ### `.github/workflows/dockerhub.yml` 
 
