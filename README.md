@@ -54,9 +54,18 @@ folders.
 
 ## Setup
 
-To use these workflows when [developing your own R
+If you haven’t already [created your R
 package](https://support.rstudio.com/hc/en-us/articles/200486488-Developing-Packages-with-the-RStudio-IDE),
-follow these steps (after replacing text indicated by `< >`):
+you may want to get started with
+[`devtools`](https://github.com/r-lib/devtools) and/or
+[`biocthis`](https://github.com/lcolladotor/biocthis) which include
+functions for generating R package templates. However as long as you
+have the basic components of an R package (e.g. `DECSRIPTION`.
+`R/<functions.R>`, etc.) stored on a GitHub repo, the workflows provided
+here will work.
+
+To use these workflows when developing your own R package, follow these
+steps (after replacing text indicated by `< >`):
 
 ### 1. Setup GitHub Secrets
 

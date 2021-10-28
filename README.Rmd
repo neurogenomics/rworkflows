@@ -18,7 +18,7 @@ which helps ensure that your code is always working as expected
 (without having to manually check each time).
 
 Here, we have designed robust and flexible workflows 
-specifically for the development of R packages.  
+specifically for the development of R packages. 
 
 Currently, these workflows perform the following tasks:  
 
@@ -39,7 +39,16 @@ simply copy and paste them into the appropriate folders.
 
 ## Setup 
 
-To use these workflows when [developing your own R package](https://support.rstudio.com/hc/en-us/articles/200486488-Developing-Packages-with-the-RStudio-IDE), follow these steps (after replacing text indicated by `< >`):
+If you haven't already [created your R package](https://support.rstudio.com/hc/en-us/articles/200486488-Developing-Packages-with-the-RStudio-IDE), 
+you may want to get started with
+[`devtools`](https://github.com/r-lib/devtools) and/or [`biocthis`](https://github.com/lcolladotor/biocthis) 
+which include functions for generating R package templates. 
+However as long as you have the basic components of an R package 
+(e.g. `DECSRIPTION`. `R/<functions.R>`, etc.) stored on a GitHub repo, 
+the workflows provided here will work.
+
+To use these workflows when developing your own R package, 
+follow these steps (after replacing text indicated by `< >`):
 
 ### 1. Setup GitHub Secrets 
 
