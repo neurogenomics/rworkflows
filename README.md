@@ -114,8 +114,8 @@ within the command line.
 
 ## Usage
 
-Now, these workflows will automatically be run every time you make a
-push changes to your GitHub repo.
+Now, these workflows will automatically be run every time you push
+changes to your GitHub repo.
 
     git add .
     git commit -m "<commit message>"
@@ -163,10 +163,12 @@ Step 6 [above](https://github.com/neurogenomics/r_workflows#Intro).
 
 Uses the official
 [`Bioconductor/bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker)
-Docker container. *NOTE*: This Docker container often lags behind the
-actual Bioconductor releases. This means that sometimes “devel” in
-`Bioconductor/bioconductor_docker` is actually referring to the
-“release” version of Bioconductor.See this
+Docker container.
+
+**NOTE**: The `Bioconductor/bioconductor_docker` container often lags
+behind the actual Bioconductor releases. This means that sometimes
+“devel” in `Bioconductor/bioconductor_docker` is actually referring to
+the “release” version of Bioconductor. See this
 [Issue](https://github.com/Bioconductor/bioconductor_docker/issues/37)
 for details.
 
