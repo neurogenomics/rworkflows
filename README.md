@@ -169,14 +169,17 @@ This Dockerfile is designed for developers of any R package stored on
 GitHub. Unlike other Dockerfiles, this one **does not require any manual
 editing when applying to different R packages**. This means that users
 who are unfamiliar with Docker do not have to troubleshoot making this
-file correctly, and also means that it will continue to work even if
-your R package’s dependencies change.
+file correctly. It also means that it will continue to work even if your
+R package dependencies change.
 
-It runs several steps: 1. Pulls the official bioconductor Docker
-container (which includes Rstudio). 2. Runs CRAN checks on the R
-package. 3. Runs all Bioconductor checks on the R package. 3. Installs
-the R package and all of its dependencies (including `Depends`,
-`Imports`, and `Suggests`).
+It runs several steps:
+
+1.  Pulls the official bioconductor Docker container (which includes
+    Rstudio).  
+2.  Runs CRAN checks on the R package.  
+3.  Runs all Bioconductor checks on the R package.  
+4.  Installs the R package and all of its dependencies (including
+    `Depends`, `Imports`, and `Suggests`).
 
 **NOTE**: If any of the CRAN/Bioconductor checks do not pass, the Docker
 container will not be pushed to DockerHub. This means you don’t have to
