@@ -207,8 +207,8 @@ Once the image has been created, you can launch it with:
         -e PASSWORD=bioc \
         -v ~/Desktop:/Desktop \
         -v /Volumes:/Volumes \
-        --rm -p  
-    8788:8787 <DockerHub_repo_name>/<package_name> 
+        --rm \
+        -p 8788:8787 <DockerHub_repo_name>/<package_name> 
 
 Finally, launch the containerised Rstudio by entering the following URL
 in any web browser:
