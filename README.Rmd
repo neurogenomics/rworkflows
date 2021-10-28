@@ -1,7 +1,7 @@
 ---
 title: "r_workflows" 
-author: "<h4>Authors:<h4><h5><i>Brian M. Schilder and Alan Murphy</i></h5> <a href='https://www.neurogenomics.co.uk/' target='_blank'>Neurogenomics Lab</a><br><a href='https://www.imperial.ac.uk/brain-sciences/' target='_blank'>Imperial College London</a>" 
-date: "<h4>Most recent update:</h4><h5> <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h5>"
+author: "<h4>Authors:<h4><h5>Brian M. Schilder and Alan Murphy</h5> <h5><a href='https://www.neurogenomics.co.uk/' target='_blank'>Neurogenomics Lab</a></h5> <h5><a href='https://www.imperial.ac.uk/brain-sciences/' target='_blank'>Imperial College London</a></h5>" 
+date: "<h4>Most recent update:</h4><h5>`r format( Sys.Date(), '%b-%d-%Y')`</h5>"
 output:
     github_document:
 editor_options:
@@ -73,7 +73,7 @@ Copy the following folders/files into the folder where your
 R package's project folder. 
 
 ```
-scp r_workflows/.github <my_package_folder>
+scp -r r_workflows/.github <my_package_folder>
 scp r_workflows/Dockerfile <my_package_folder>
 ``` 
 

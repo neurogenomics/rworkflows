@@ -4,17 +4,21 @@ r\_workflows
 Authors:
 <h4>
 <h5>
-<i>Brian M. Schilder and Alan Murphy</i>
+Brian M. Schilder and Alan Murphy
 </h5>
+<h5>
 <a href='https://www.neurogenomics.co.uk/' target='_blank'>Neurogenomics
-Lab</a><br><a href='https://www.imperial.ac.uk/brain-sciences/' target='_blank'>Imperial
+Lab</a>
+</h5>
+<h5>
+<a href='https://www.imperial.ac.uk/brain-sciences/' target='_blank'>Imperial
 College London</a>
-
+</h5>
 <h4>
 Most recent update:
 </h4>
 <h5>
-<i>Oct-28-2021</i>
+Oct-28-2021
 </h5>
 
 ## Intro
@@ -87,7 +91,7 @@ this repo.
 Copy the following folders/files into the folder where your R package’s
 project folder.
 
-    scp r_workflows/.github <my_package_folder>
+    scp -r r_workflows/.github <my_package_folder>
     scp r_workflows/Dockerfile <my_package_folder>
 
 Alternatively, you can simply download the files you need directly from
