@@ -23,7 +23,7 @@
 #   http://localhost:8788/
 #
 # The username will be "rstudio" by default, 
-# and you can set the password to whatever you like.
+# and you can set the password to whatever you like, 
 #
 # This DockerFile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
 FROM bioconductor/bioconductor_docker:devel
