@@ -65,12 +65,14 @@ RUN Rscript -e 'options(download.file.method= "libcurl"); \
 # Run R CMD check - will fail with any errors or warnings
 Run Rscript -e 'devtools::check()'
 # Run Bioconductor's BiocCheck (optional)
-Run Rscript -e 'if(!"BiocCheck" %in% rownames(utils::installed.packages)) AnVIL::install("BiocCheck", quiet = TRUE);\
-                pkg <- read.dcf("DESCRIPTION", field="Package")[[1]]; \
-                BiocCheck::BiocCheck(package = pkg,\
-                                     `quit-with-status` = TRUE,\
-                                     `no-check-R-ver` = TRUE,\
-                                     `no-check-bioc-help` = TRUE);'
+## Must provide package name to BiocCheck directly since 
+## it makes some faulty assummptions about the folder name being the same as the package name.
+#Run Rscript -e 'if(!"BiocCheck" %in% rownames(utils::installed.packages)) AnVIL::install("BiocCheck", quiet = TRUE);\
+#                pkg <- read.dcf("DESCRIPTION", field="Package")[[1]]; \
+#                BiocCheck::BiocCheck(package = pkg,\
+#                                     `quit-with-status` = TRUE,\
+#                                     `no-check-R-ver` = TRUE,\
+#                                     `no-check-bioc-help` = TRUE);'
 # Install R package from source
 RUN R -e 'remotes::install_local(upgrade="never")'
 RUN rm -rf /build_zone
