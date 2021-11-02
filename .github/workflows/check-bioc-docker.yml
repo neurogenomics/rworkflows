@@ -52,7 +52,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, r: 'latest', bioc: 'release', cont: "bioconductor/bioconductor_docker:devel", rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/release"}
+          - { os: ubuntu-latest, r: 'devel', bioc: 'devel', cont: "bioconductor/bioconductor_docker:devel", rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/release"}
           - { os: macOS-latest, r: 'latest', bioc: 'release'}
           - { os: windows-latest, r: 'latest', bioc: 'release'}
           ## Check https://github.com/r-lib/actions/tree/master/examples
@@ -94,17 +94,8 @@ jobs:
       ## pandoc is already included in the Bioconductor docker images
       - name: Setup pandoc from r-lib
         if: runner.os != 'Linux'
-        uses: r-lib/actions/setup-pandoc@master
+        uses: r-lib/actions/setup-pandoc@master 
         
-      # "devel" doesn't tell you which version R it actually is, 
-      # which is needed to properly reference cache folders.
-      # Without caching, workflows are extraordinarily slow (or fail entirely).
-      # - name: Get actual R version
-      #   run: |
-      #     r_version=$(Rscript -e 'cat(paste0(version$major,".",version$minor))')
-      #     echo "r_ver=${r_version}" >> $GITHUB_ENV
-      #     echo "R version:" $r_ver
-
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -153,6 +144,13 @@ jobs:
 
           ## Required for tcltk
           brew install xquartz --cask
+          
+          ## Required for some ggplot2 functions
+          # brew tap homebrew/cask
+          # brew tap homebrew/cask-fonts
+          # brew install svn
+          # brew install --cask font-roboto
+          brew install libxfont
 
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
@@ -172,7 +170,7 @@ jobs:
         run: |
           #### BiocManager::install doesn't understand "latest" #####
           if("${{ matrix.config.bioc }}" %in% c("latest","release")){
-            BiocManager::install(ask = FALSE)
+            BiocManager::install(update = TRUE, ask = FALSE)
           } else {
             BiocManager::install(version = "${{ matrix.config.bioc }}", ask = FALSE)
           }
@@ -200,8 +198,9 @@ jobs:
               ) else BiocManager::repositories()
 
           ## For running the checks
+          ### hrbrthemes necessary to avoid ggplot2 errors on MacOS: https://stackoverflow.com/a/66423481/13214824
           message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))
-          install.packages(c("rcmdcheck", "BiocCheck"), repos = gha_repos)
+          install.packages(c("rcmdcheck", "BiocCheck", repos = gha_repos)
 
           ## Pass #1 at installing dependencies
           ## This pass uses AnVIL-powered fast binaries
@@ -261,6 +260,7 @@ jobs:
           )
         shell: Rscript {0}
 
+      ## Might need an to add this to the if:  && runner.os == 'Linux'
       - name: Reveal testthat details
         if:  env.has_testthat == 'true'
         run: find . -name testthat.Rout -exec cat '{}' ';'
@@ -322,5 +322,5 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
-          path: check
+          path: check 
           
