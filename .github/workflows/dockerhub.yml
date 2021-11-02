@@ -19,9 +19,9 @@ jobs:
       RGL_USE_NULL: TRUE
       GITHUB_REPO: ${{ github.repository }}
       ## Replace with DockerHub username
-      DOCKER_USERNAME: "bschilder" 
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # e.g. "bschilder" 
       ## Replace with DockerHub organization name (or simply username)
-      DOCKER_ORG: "neurogenomicslab"
+      DOCKER_ORG: ${{ secrets.DOCKER_USERNAME }} # e.g. "neurogenomicslab"
     steps:
       - uses: actions/checkout@v2
       - name: Setup R
