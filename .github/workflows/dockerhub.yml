@@ -18,10 +18,12 @@ jobs:
       GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
       RGL_USE_NULL: TRUE
       GITHUB_REPO: ${{ github.repository }}
-      ## Replace with DockerHub username
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # e.g. "bschilder" 
-      ## Replace with DockerHub organization name (or simply username)
-      DOCKER_ORG: ${{ secrets.DOCKER_USERNAME }} # e.g. "neurogenomicslab"
+      ## Can save variable as GitHub Secret, or manually enter DockerHub 
+      ## username here (e.g. "bschilder").
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      ## Can save variable as GitHub Secret, or manually enter DockerHub 
+      ## organization name (or simply username) here (e.g. "neurogenomicslab").
+      DOCKER_ORG: ${{ secrets.DOCKER_USERNAME }} 
     steps:
       - uses: actions/checkout@v2
       - name: Setup R
