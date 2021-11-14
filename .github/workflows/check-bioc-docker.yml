@@ -256,6 +256,7 @@ jobs:
           DISPLAY: 99.0
         run: |
           options(crayon.enabled = TRUE)
+          if(!require("sessioninfo")) install.packages("rcmdcheck")
           rcmdcheck::rcmdcheck(
               args = c("--no-manual", "--timings"),
               build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
@@ -280,8 +281,8 @@ jobs:
         env:
           DISPLAY: 99.0
         run: |
-          if(!"BiocManager" %in% rownames(installed.packages())) install.packages("BiocManager")
-          if(!"BiocCheck" %in% rownames(installed.packages())) BiocManager::install("BiocCheck")
+          if(!require("BiocManager")) install.packages("BiocManager") 
+          if(!require("BiocCheck")) BiocManager::install("BiocCheck")
           BiocCheck::BiocCheck(
               dir('check', 'tar.gz$', full.names = TRUE),
               `quit-with-status` = TRUE,
@@ -305,7 +306,7 @@ jobs:
           DISPLAY: 99.0
         run: |
           if(file.exists("README.Rmd")){
-            if(!"rmarkdown" %in% rownames(installed.packages())) install.packages("rmarkdown");
+            if(!require("rmarkdown")) install.packages("rmarkdown");
             rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
           }
         shell: Rscript {0}
