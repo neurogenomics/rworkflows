@@ -245,7 +245,9 @@ jobs:
           options(width = 100)
           pkgs <- installed.packages()[, "Package"]
           if(!require("sessioninfo")) install.packages("sessioninfo")
-          sessioninfo::session_info(pkgs, include_base = TRUE)
+          tryCatch({
+            sessioninfo::session_info(pkgs, include_base = TRUE)
+          }, error = function(x){utils::sessionInfo()})
         shell: Rscript {0}
 
       - name: Run CMD check
