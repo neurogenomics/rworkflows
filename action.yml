@@ -1,0 +1,28 @@
+name: 'r-workflows'
+description: 'Push changes back to a Pull Request branch'
+author: 'Brian M. Schilder'
+inputs:
+  repo-token:
+    description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
+  run_bioccheck:
+    description: "Run BiocCheck::BiocCheck. Must pass in order to continue workflow."
+    default: 'true'
+  has_testthat:
+    description: "Run unit tests and report results."
+    default: 'true'
+  run_covr:
+    description: "Run code coverage tests and publish results to codecov."
+    default: 'true'
+  run_pkgdown:
+    description: "Run pkgdown::build_site and deploy to gh-pages branch."
+    default: 'true'
+  has_RUnit: 
+    description: "Run R Unit tests."
+    default: 'false'
+  cache-version: 
+    description: "Which cache version to use."
+    default: 'cache-v1'
+  run_docker: 
+    description: "Whether to build and push a Docker container to DockerHub."
+    default: 'false' 
+    
