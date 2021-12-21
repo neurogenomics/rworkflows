@@ -18,7 +18,7 @@ College London</a>
 Most recent update:
 </h4>
 <h5>
-Oct-28-2021
+Dec-21-2021
 </h5>
 
 ## Intro
@@ -83,6 +83,10 @@ repo.
     instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)&gt;  
 -   `DOCKER_USERNAME`: &lt;Your DockerHub username. [Create an
     account](https://hub.docker.com/signup) if you haven’t already&gt;  
+-   `DOCKER_ORG`: &lt;Your DockerHub organization name
+    (e.g. “neurogenomicslab”). If you’re pushing to your personal
+    DockerHub account instead, this will be the same as
+    `DOCKER_USERNAME`&gt;  
 -   `DOCKER_TOKEN`: &lt;Your DockerHub access token generated [via the
     following
     instructions](https://docs.docker.com/docker-hub/access-tokens/)&gt;  
@@ -274,8 +278,8 @@ utils::sessionInfo()
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] compiler_4.1.0  magrittr_2.0.1  fastmap_1.1.0   tools_4.1.0    
-    ##  [5] htmltools_0.5.2 yaml_2.2.1      stringi_1.7.5   rmarkdown_2.11 
-    ##  [9] knitr_1.36      stringr_1.4.0   xfun_0.27       digest_0.6.28  
+    ##  [5] htmltools_0.5.2 yaml_2.2.1      stringi_1.7.6   rmarkdown_2.11 
+    ##  [9] knitr_1.36      stringr_1.4.0   xfun_0.28       digest_0.6.29  
     ## [13] rlang_0.4.12    evaluate_0.14
 
 </details>

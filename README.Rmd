@@ -64,6 +64,7 @@ You will need to store the following variables as Secrets in your GitHub repo.
 generated [via the following instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)>  
 * `DOCKER_USERNAME`: <Your DockerHub username. 
 [Create an account](https://hub.docker.com/signup) if you haven't already>  
+* `DOCKER_ORG`: <Your DockerHub organization name (e.g. "neurogenomicslab"). If you're pushing to your personal DockerHub account instead, this will be the same as `DOCKER_USERNAME`>  
 * `DOCKER_TOKEN`: <Your DockerHub access token generated 
 [via the following instructions](https://docs.docker.com/docker-hub/access-tokens/)>  
 * `CODECOV_TOKEN`: <A [Codecov](https://app.codecov.io/gh) 
