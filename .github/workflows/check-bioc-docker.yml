@@ -306,6 +306,7 @@ jobs:
           run: R CMD INSTALL .
         
         - name: Render README
+          if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
           env:
             DISPLAY: 99.0
           run: |

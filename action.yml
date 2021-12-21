@@ -14,7 +14,7 @@ inputs:
     description: "Run code coverage tests and publish results to codecov."
     default: 'true'
   run_pkgdown:
-    description: "Run pkgdown::build_site and deploy to gh-pages branch."
+    description: "Knit the README.Rmd (if available), run pkgdown::build_site, and deploy to gh-pages branch."
     default: 'true'
   has_RUnit: 
     description: "Run R Unit tests."
