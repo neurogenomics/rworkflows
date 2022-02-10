@@ -3,15 +3,15 @@ name: r_workflows test
 on: [workflow_dispatch]
 
 jobs:
-  test:
-    name: test r_workflows
-    steps:
-      - name: Run r_workflows
-        uses: neurogenomics/r_workflows@latest
-        with: 
-          run_bioccheck: 'true'
-          run_crancheck: 'true'
-          run_docker: 'false'
-          DOCKER_USERNAME: 'bschilder'
-          DOCKER_ORG: 'neurogenomicslab'
-          repository: 'neurogenomics/templateR'
+    R-CMD-check:
+        name: test r_workflows
+        steps:
+            - name: Run r_workflows
+            uses: neurogenomics/r_workflows@latest
+            with: 
+                run_bioccheck: 'true'
+                run_crancheck: 'true'
+                run_docker: 'false'
+                DOCKER_USERNAME: 'bschilder'
+                DOCKER_ORG: 'neurogenomicslab'
+                repository: 'neurogenomics/templateR'
