@@ -41,7 +41,6 @@ inputs:
 runs:
   using: 'composite'
   steps: 
-    - name: r_workflows
-      uses: .github/workflows/check-bioc-docker.yml
+      - uses: ./.github/workflows/check-bioc-docker.yml
     
     
