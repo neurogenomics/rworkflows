@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         name: test r_workflows
         steps:
-        uses: neurogenomics/r_workflows
+        uses: neurogenomics/r_workflows@latest
         with: 
             run_bioccheck: 'true'
             run_crancheck: 'true'
