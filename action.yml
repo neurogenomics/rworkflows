@@ -1,9 +1,10 @@
 name: 'r-workflows'
-description: 'Push changes back to a Pull Request branch'
+description: 'Test, document, and deploy R packages.'
 author: 'Brian M. Schilder'
 inputs:
   repo-token:
     description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
+    default: ${{ secrets.PAT_GITHUB }}
   run_bioccheck:
     description: "Run Bioconductor checks. Must pass in order to continue workflow."
     default: 'true'
@@ -34,9 +35,12 @@ inputs:
   DOCKER_ORG: 
     description: "DockerHub organization name." 
     default: 'neurogenomicslab'
+  DOCKER_TOKEN:
+    description: "DockerHub token."
+    default: ${{ secrets.DOCKER_TOKEN }}
 runs:
   using: 'composite'
   steps: 
-    - uses: ./.github/workflows/check-bioc-docker.yml
+    - uses: ./.github/actions/check-bioc-docker.yml
     
     

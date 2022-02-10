@@ -1,0 +1,17 @@
+name: r_workflows test
+
+on: [workflow_dispatch]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        name: test r_workflows
+        steps:
+            - uses: neurogenomics/r_workflows
+                with: 
+                    run_bioccheck: 'true'
+                    run_crancheck: 'true'
+                    run_docker: 'false'
+                    DOCKER_USERNAME: 'bschilder'
+                    DOCKER_ORG: 'neurogenomicslab'
+            
