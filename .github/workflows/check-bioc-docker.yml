@@ -31,15 +31,6 @@ name: R-CMD-check-bioc
 ## cache-version as discussed at https://github.com/r-lib/actions/issues/86.
 ## Note that you can always run a GHA test without the cache by using the word
 ## "/nocache" in the commit message.
-# env:
-#   run_bioccheck: 'false'
-#   run_crancheck: 'true'
-#   has_testthat: 'true'
-#   run_covr: 'true'
-#   run_pkgdown: 'true'
-#   has_RUnit: 'false'
-#   cache-version: 'cache-v1'
-#   run_docker: 'true'
 
 jobs: 
   R-CMD-check:
@@ -87,6 +78,8 @@ jobs:
       ## If they update their steps, we will also need to update ours.
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          repository: ${{ env.repository }}
 
       # R is already included in the Bioconductor docker image, 
       # which is only available with Linux as the OS.

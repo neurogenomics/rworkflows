@@ -2,6 +2,9 @@ name: 'r-workflows'
 description: 'Test, document, and deploy R packages.'
 author: 'Brian M. Schilder'
 inputs:
+  repository:
+    description: 'GitHub repository to be checked.'
+    default: ${{ github.repository }}
   repo-token:
     description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
     default: ${{ secrets.PAT_GITHUB }}
@@ -41,6 +44,6 @@ inputs:
 runs:
   using: 'composite'
   steps: 
-      - uses: check-bioc-docker.yml
+      - uses: ./.github/workflows/check-bioc-docker.yml
     
     
