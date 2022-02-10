@@ -41,6 +41,6 @@ inputs:
 runs:
   using: 'composite'
   steps: 
-      - uses: ${{ github.action_path }}/.github/workflows/check-bioc-docker.yml
+      - uses: check-bioc-docker.yml
     
     
