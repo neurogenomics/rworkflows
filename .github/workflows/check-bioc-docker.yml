@@ -33,15 +33,15 @@ name: R-CMD-check-bioc
 ## cache-version as discussed at https://github.com/r-lib/actions/issues/86.
 ## Note that you can always run a GHA test without the cache by using the word
 ## "/nocache" in the commit message.
-env:
-  run_bioccheck: 'false'
-  run_crancheck: 'true'
-  has_testthat: 'true'
-  run_covr: 'true'
-  run_pkgdown: 'true'
-  has_RUnit: 'false'
-  cache-version: 'cache-v1'
-  run_docker: 'true'
+# env:
+#   run_bioccheck: 'false'
+#   run_crancheck: 'true'
+#   has_testthat: 'true'
+#   run_covr: 'true'
+#   run_pkgdown: 'true'
+#   has_RUnit: 'false'
+#   cache-version: 'cache-v1'
+#   run_docker: 'true'
 
 jobs: 
   R-CMD-check:
