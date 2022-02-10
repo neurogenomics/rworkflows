@@ -3,11 +3,10 @@ name: r_workflows test
 on: [workflow_dispatch]
 
 jobs:
-    R-CMD-check:
-        name: test r_workflows
-        steps:
-            - name: Run r_workflows
-            uses: neurogenomics/r_workflows@latest
+    test:
+        steps: 
+            - uses: neurogenomics/r_workflows@latest
+            name: Run r_workflows
             with: 
                 run_bioccheck: 'true'
                 run_crancheck: 'true'
