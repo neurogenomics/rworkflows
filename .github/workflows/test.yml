@@ -11,8 +11,6 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
-    env:
-      RSPM: ${{ matrix.config.rspm }}
     strategy:
       fail-fast: false
       matrix:
@@ -20,6 +18,8 @@ jobs:
           - { os: ubuntu-latest, r: 'devel', bioc: 'devel', cont: "bioconductor/bioconductor_docker:devel", rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/release"}
           - { os: macOS-latest, r: 'latest', bioc: 'release'}
           - { os: windows-latest, r: 'latest', bioc: 'release'} 
+    env:
+      RSPM: ${{ matrix.config.rspm }}
     steps: 
       - if: ${{ env.ACT }}
         name: Hack container for local development
@@ -34,9 +34,9 @@ jobs:
             has_testthat: 'true'
             run_covr: 'true'
             run_pkgdown: 'true'
-            has_RUnit: 'true'
+            has_runit: 'true'
             repository: ${{ github.repository }}
-            repo-token: ${{ secrets.PAT_GITHUB }}
+            github_token: ${{ secrets.PAT_GITHUB }}
             run_docker: 'true'
             DOCKER_USERNAME: 'bschilder'
             DOCKER_ORG: 'neurogenomicslab'

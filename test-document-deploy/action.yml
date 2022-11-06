@@ -5,7 +5,7 @@ inputs:
   repository:
     description: 'GitHub repository to be checked.'
     default: ''
-  repo-token:
+  github_token:
     description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
     default: ''
   run_bioccheck:
@@ -23,7 +23,7 @@ inputs:
   run_pkgdown:
     description: "Knit the README.Rmd (if available), build documentation website, and deploy to gh-pages branch."
     default: 'true'
-  has_RUnit: 
+  has_runit: 
     description: "Run R Unit tests."
     default: 'false'
   cache-version: 
@@ -223,7 +223,7 @@ runs:
         shell: Rscript {0}
 
       - name: Install BiocGenerics
-        if:  env.has_RUnit == 'true'
+        if:  env.has_runit == 'true'
         run: |
           ## Install BiocGenerics
           BiocManager::install("BiocGenerics")
@@ -264,18 +264,16 @@ runs:
               args = c("--no-manual", "--timings", as_cran),
               build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
               error_on = "warning",
-              check_dir = "check"
-          )
+              check_dir = "check")
         shell: Rscript {0}
-
-      ## Might need an to add this to the if:  && env.runner.os == 'Linux'
+        
       - name: Reveal testthat details
         if: env.has_testthat == 'true'
         run: find . -name testthat.Rout -exec cat '{}' ';'
         shell: bash {0}
 
       - name: Run RUnit tests
-        if: env.has_RUnit == 'true'
+        if: env.has_runit == 'true'
         run: |
           BiocGenerics:::testPackage()
         shell: Rscript {0}
@@ -330,20 +328,19 @@ runs:
             rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
           }
         shell: Rscript {0}
-
         
-      ## Note that you need to run pkgdown::deploy_to_branch(new_process = FALSE)
-      ## at least one locally before this will work. This creates the gh-pages
-      ## branch (erasing anything you haven't version controlled!) and
-      ## makes the git history recognizable by pkgdown.
-      - name: Build and deploy pkgdown site
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && env.runner.os == 'Linux'
+     - name: Install deploy dependencies
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: |
-          git config --global --add safe.directory '*'
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          Rscript -e "pkgdown::deploy_to_branch(new_process = FALSE)"
-        shell: bash {0}
+          apt-get update && apt-get -y install rsync
+
+      - name: Deploy pkgdown site to GitHub pages 🚀
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          clean: false
+          branch: gh-pages
+          folder: .
 
       - name: Upload check results
         if: failure()
@@ -363,7 +360,4 @@ runs:
           tag_with_ref: true
           tag_with_sha: false
           tags: ${{ env.packageVersion }},latest
-          build_args: PKG=${{ env.packageNameOrig }},BIOC=${{ env.run_bioccheck }},GITHUB_PAT=${{ env.repo-token }}
-
-    
-    
+          build_args: PKG=${{ env.packageNameOrig }},BIOC=${{ env.run_bioccheck }},GITHUB_PAT=${{ env.github_token }}

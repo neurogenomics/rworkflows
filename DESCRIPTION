@@ -13,7 +13,9 @@ Authors@R:
            role = c("aut","cre"),
            email = "alanmurph94@hotmail.com",
            comment = c(ORCID = "0000-0002-2487-8753"))) 
-Description: rworkflows: Continuous integration for R packages.
+Description: Continuous integration for R packages. 
+    Automates testing, documentation website building,
+    and containerised deployment.
 URL: https://github.com/neurogenomics/rworkflows
 BugReports: https://github.com/neurogenomics/rworkflows/issues
 Encoding: UTF-8
