@@ -40,4 +40,5 @@ jobs:
           DOCKER_USERNAME: 'bschilder'
           DOCKER_ORG: 'neurogenomicslab'
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          matrix_config: ${{ matrix.config }} 
           runner_os: ${{ runner.os }} 
