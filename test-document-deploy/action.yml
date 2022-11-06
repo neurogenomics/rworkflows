@@ -37,10 +37,10 @@ inputs:
     default: ''
   DOCKER_ORG: 
     description: "DockerHub organization name." 
-    default: 'neurogenomicslab'
+    default: ''
   DOCKER_TOKEN:
     description: "DockerHub token."
-    default: ${{ secrets.DOCKER_TOKEN }}
+    default: ''
     
 runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
