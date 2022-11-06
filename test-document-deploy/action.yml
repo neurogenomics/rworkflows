@@ -41,7 +41,6 @@ inputs:
   DOCKER_TOKEN:
     description: "DockerHub token."
     default: ''
-    
 runs:
     using: 'composite'   
     steps:
@@ -342,12 +341,12 @@ runs:
         uses: docker/build-push-action@v1
         with:
           username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          password: ${{ env.DOCKER_TOKEN }}
           repository: ${{ env.DOCKER_ORG }}/${{ env.packageName }}
           tag_with_ref: true
           tag_with_sha: false
           tags: ${{ env.packageVersion }},latest
-          build_args: PKG=${{ env.packageNameOrig }},BIOC=${{ env.run_bioccheck }},GITHUB_PAT=${{ secrets.PAT_GITHUB }}
+          build_args: PKG=${{ env.packageNameOrig }},BIOC=${{ env.run_bioccheck }},GITHUB_PAT=${{ env.repo-token }}
 
     
     
