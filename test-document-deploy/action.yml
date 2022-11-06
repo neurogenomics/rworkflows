@@ -65,7 +65,7 @@ runs:
     - name: Set R Library home on Linux 
       if: env.runner_os == 'Linux'
       run: |
-        echo "RSPM=${{ env.matrix_config.rspm }}" >> $GITHUB_ENV
+        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
       shell: bash {0}
@@ -82,8 +82,8 @@ runs:
       if: env.runner_os != 'Linux'
       uses: r-lib/actions/setup-r@v2
       with:
-        r-version: ${{ env.matrix_config.r }}
-        http-user-agent: ${{ env.matrix_config.http-user-agent }}
+        r-version: ${{ matrix.config.r }}
+        http-user-agent: ${{ matrix.config.http-user-agent }}
 
     ## pandoc is already included in the Bioconductor docker images
     - name: Setup pandoc from r-lib
@@ -101,16 +101,16 @@ runs:
       uses: actions/cache@v3
       with:
         path: ${{ env.R_LIBS_USER }}
-        key: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ env.matrix_config.bioc }}-r-${{ env.matrix_config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ env.matrix_config.bioc }}-r-${{  env.matrix_config.r }}-
+        key: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+        restore-keys: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: Cache R packages on Linux
       if: "!contains(github.event.head_commit.message, '/nocache') && env.runner_os == 'Linux' "
       uses: actions/cache@v3
       with:
         path: /home/runner/work/_temp/Library
-        key: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ env.matrix_config.bioc }}-r-${{  env.matrix_config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ env.matrix_config.bioc }}-r-${{  env.matrix_config.r }}-
+        key: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+        restore-keys: ${{ env.cache-version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: Install Linux system dependencies
       if: env.runner_os == 'Linux'
@@ -122,7 +122,7 @@ runs:
       shell: bash {0}
 
     - name: Install macOS system dependencies
-      if: env.matrix_config.os == 'macOS-latest'
+      if: matrix.config.os == 'macOS-latest'
       run: |
         ## Enable installing XML from source if needed
         brew install libxml2
@@ -166,10 +166,10 @@ runs:
       if: env.runner_os != 'Linux'
       run: |
         #### BiocManager::install doesn't understand "latest" #####
-        if("${{ env.matrix_config.bioc }}" %in% c("latest","release")){
+        if("${{ matrix.config.bioc }}" %in% c("latest","release")){
           BiocManager::install(update = TRUE, ask = FALSE)
         } else {
-          BiocManager::install(version = "${{ env.matrix_config.bioc }}", ask = FALSE)
+          BiocManager::install(version = "${{ matrix.config.bioc }}", ask = FALSE)
         }
       shell: Rscript {0}
 
@@ -347,7 +347,7 @@ runs:
       if: failure()
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.runner_os }}-biocversion-${{ env.matrix_config.bioc }}-r-${{  env.matrix_config.r }}-results
+        name: ${{ env.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check
 
     ## DockerHub steps
