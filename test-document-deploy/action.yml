@@ -274,13 +274,13 @@ runs:
         if: env.has_testthat == 'true'
         run: find . -name testthat.Rout -exec cat '{}' ';'
         shell: bash {0}
-
+        
       - name: Run RUnit tests
         if: env.has_runit == 'true'
         run: |
           BiocGenerics:::testPackage()
         shell: Rscript {0}
-
+        
       - name: Run BiocCheck
         if: env.run_bioccheck == 'true'
         env:
@@ -292,10 +292,9 @@ runs:
               dir('check', 'tar.gz$', full.names = TRUE),
               `quit-with-status` = TRUE,
               `no-check-R-ver` = TRUE,
-              `no-check-bioc-help` = TRUE
-          )
+              `no-check-bioc-help` = TRUE)
         shell: Rscript {0}
-
+        
       - name: Test coverage
         if: env.run_covr == 'true' && env.runner.os == 'Linux'
         run: |
@@ -331,9 +330,9 @@ runs:
             rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
           }
         shell: Rscript {0} 
-
+        
       - name: Deploy pkgdown site to GitHub pages 🚀
-        if: env.run_pkgdown == 'true' && runner.os == 'Linux'
+        if: env.run_pkgdown == 'true' && env.runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           clean: false
