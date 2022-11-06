@@ -27,18 +27,18 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./test-document-deploy
         with:  
-            run_bioccheck: 'false'
-            run_crancheck: 'true'
-            has_testthat: 'true'
-            run_covr: 'true'
-            run_pkgdown: 'true'
-            has_runit: 'true'
-            repository: ${{ github.repository }}
-            GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
-            github_ref: ${{ github.ref }}
-            run_docker: 'true'
-            DOCKER_USERNAME: 'bschilder'
-            DOCKER_ORG: 'neurogenomicslab'
-            DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-            runner_os: ${{ runner.os }} 
-            matrix_config: ${{ matrix.config }}
+          run_bioccheck: 'false'
+          run_crancheck: 'true'
+          has_testthat: 'true'
+          run_covr: 'true'
+          run_pkgdown: 'true'
+          has_runit: 'true'
+          repository: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+          github_ref: ${{ github.ref }}
+          run_docker: 'true'
+          DOCKER_USERNAME: 'bschilder'
+          DOCKER_ORG: 'neurogenomicslab'
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          runner_os: ${{ runner.os }} 
+          matrix_config: ${{ matrix.config }}
