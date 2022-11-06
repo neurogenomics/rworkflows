@@ -92,6 +92,7 @@ runs:
 
     - name: Query dependencies
       run: |
+        options(crayon.enabled = TRUE)
         install.packages('remotes')
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
@@ -157,6 +158,7 @@ runs:
 
     - name: Install BiocManager
       run: |
+        options(crayon.enabled = TRUE)
         message(paste('****', Sys.time(), 'installing BiocManager ****'))
         remotes::install_cran("BiocManager", upgrade = "never")
       shell: Rscript {0}
@@ -165,6 +167,7 @@ runs:
     - name: Set BiocVersion
       if: env.runner_os != 'Linux'
       run: |
+        options(crayon.enabled = TRUE)
         #### BiocManager::install doesn't understand "latest" #####
         if("${{ matrix.config.bioc }}" %in% c("latest","release")){
           BiocManager::install(update = TRUE, ask = FALSE)
@@ -186,7 +189,7 @@ runs:
          ## Alternatively use https://storage.googleapis.com/bioconductor_docker/packages/
          ## though based on https://bit.ly/bioc2021-package-binaries
          ## the Azure link will be the main one going forward.
-
+         options(crayon.enabled = TRUE)
          bioc_ver <- BiocManager::version()
          gha_repos <- if(
              .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
@@ -225,6 +228,7 @@ runs:
       run: |
         ## Pass #3 at installing dependencies
         ## Install via binaries
+        options(crayon.enabled = TRUE)
         message(paste('****', Sys.time(), 'pass number 3 at installing dependencies: any remaining dependencies ****'))
         remotes::install_local(type = "binary", dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = FALSE, upgrade = TRUE, force = TRUE)
       shell: Rscript {0}
@@ -233,18 +237,21 @@ runs:
       if:  env.has_runit == 'true'
       run: |
         ## Install BiocGenerics
+        options(crayon.enabled = TRUE)
         BiocManager::install("BiocGenerics")
       shell: Rscript {0}
 
     - name: Install covr
       if: env.run_covr == 'true' && env.runner_os == 'Linux'
       run: |
+        options(crayon.enabled = TRUE)
         remotes::install_cran("covr")
       shell: Rscript {0}
 
     - name: Install pkgdown
       if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
       run: |
+        options(crayon.enabled = TRUE)
         remotes::install_github("r-lib/pkgdown")
       shell: Rscript {0}
 
@@ -282,6 +289,7 @@ runs:
     - name: Run RUnit tests
       if: env.has_runit == 'true'
       run: |
+        options(crayon.enabled = TRUE)
         BiocGenerics:::testPackage()
       shell: Rscript {0}
         
@@ -292,6 +300,7 @@ runs:
       run: |
         if(!require("BiocManager")) install.packages("BiocManager")
         if(!require("BiocCheck")) BiocManager::install("BiocCheck")
+        options(crayon.enabled = TRUE)
         BiocCheck::BiocCheck(
             dir('check', 'tar.gz$', full.names = TRUE),
             `quit-with-status` = TRUE,
@@ -330,6 +339,7 @@ runs:
         DISPLAY: 99.0
       run: |
         if(file.exists("README.Rmd")){
+          options(crayon.enabled = TRUE)
           if(!require("rmarkdown")) install.packages("rmarkdown");
           rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
         }

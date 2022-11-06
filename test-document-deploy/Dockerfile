@@ -45,7 +45,7 @@ RUN mkdir -p /$PKG
 ADD . /$PKG
 WORKDIR /$PKG
 # Install dependencies with AnVil (faster)
-RUN Rscript -e 'options(download.file.method= "libcurl"); \
+RUN Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE); \
                 if(!require("BiocManager")) install.packages("BiocManager"); \
                 if(!require("AnVIL"))  {BiocManager::install("AnVIL", ask = FALSE)}; \
                 AnVIL::install(c("remotes","devtools")); \
@@ -70,5 +70,6 @@ RUN Rscript -e 'options(download.file.method= "libcurl"); \
 #                    `no-check-bioc-help` = TRUE);'\
 #    fi
 # Install R package from source
-RUN R -e 'remotes::install_local(upgrade="never")'
+RUN R -e 'options(crayon.enabled = TRUE); \
+          remotes::install_local(upgrade="never")'
 RUN rm -rf /$PKG
