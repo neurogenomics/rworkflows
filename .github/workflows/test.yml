@@ -1,19 +1,25 @@
 name: r_workflows test
 
-on: [workflow_dispatch]
+on: [workflow_dispatch] 
 
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:  
-            - uses: neurogenomics/r_workflows/test-document-deploy@latest
-            with:  
-                run_bioccheck: 'false'
-                run_crancheck: 'true'
-                has_testthat: 'true'
-                run_covr: 'true'
-                run_pkgdown: 'true'
-                has_RUnit: 'true'
-                run_docker: 'true'
-                DOCKER_USERNAME: 'bschilder'
-                DOCKER_ORG: 'neurogenomicslab'
+  R-CMD-check:
+    runs-on: ubuntu-latest
+
+    name: r_workflows test  
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: neurogenomics/r_workflows/test-document-deploy@latest
+        with:  
+            run_bioccheck: 'false'
+            run_crancheck: 'true'
+            has_testthat: 'true'
+            run_covr: 'true'
+            run_pkgdown: 'true'
+            has_RUnit: 'true'
+            run_docker: 'true'
+            DOCKER_USERNAME: 'bschilder'
+            DOCKER_ORG: 'neurogenomicslab'
