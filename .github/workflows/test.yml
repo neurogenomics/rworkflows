@@ -16,7 +16,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: neurogenomics/r_workflows/test-document-deploy@latest
+      - uses: ./test-document-deploy@latest
         with:  
             run_bioccheck: 'false'
             run_crancheck: 'true'
