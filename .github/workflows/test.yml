@@ -5,9 +5,8 @@ on: [workflow_dispatch]
 jobs:
     test:
         runs-on: ubuntu-latest
-        steps:
-            - name: Run r_workflows
-            uses: neurogenomics/r_workflows@latest
+        steps:  
+            - uses: neurogenomics/r_workflows@latest
             with:
                 run_bioccheck: 'false'
                 run_crancheck: 'true'
