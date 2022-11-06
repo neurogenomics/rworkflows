@@ -51,7 +51,7 @@ simply copy and paste them into the appropriate folders.
 ### 1. Create your R package
 
 If you haven't already [created your R package](https://support.rstudio.com/hc/en-us/articles/200486488-Developing-Packages-with-the-RStudio-IDE), 
-you may want to get started by use [`templateR`](https://github.com/neurogenomics/templateR) as a template.
+you can use [`templateR`](https://github.com/neurogenomics/templateR) as a CRAN/Bioconductor-ready template.
 
 ### 2. Setup GitHub Secrets 
 
@@ -59,7 +59,8 @@ GitHub now lets you store "Secrets" within each repo.
 These are basically hidden variables that no one but the repo admins 
 can see/edit. 
 
-See here for instructions on how to [create GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets). 
+See here for instructions on how to create [GitHub Secrets](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/managing-encrypted-secrets-for-your-repository-and-organization-for-github-codespaces) 
+and [GitHub Organization Secrets](https://docs.github.com/en/codespaces/managing-codespaces-for-your-organization/managing-encrypted-secrets-for-your-repository-and-organization-for-github-codespaces#adding-secrets-for-an-organization). 
 
 You will need to store the following variables as Secrets in your GitHub repo.
 

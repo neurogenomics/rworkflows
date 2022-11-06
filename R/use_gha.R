@@ -22,6 +22,7 @@
 #' @param docker_username DockerHub username.
 #' @param docker_org DockerHub organization name. 
 #' Is the same as \code{docker_username} by default.
+#' @param docker_token DockerHub token.
 #' 
 #' @param save_dir Directory to save workflow to.
 #' @param return_path Return the path to the saved \emph{yaml} workflow file

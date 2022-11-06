@@ -59,6 +59,8 @@ Can be passed in using {{ secrets.PAT_GITHUB }}.}
 \item{docker_org}{DockerHub organization name. 
 Is the same as \code{docker_username} by default.}
 
+\item{docker_token}{DockerHub token.}
+
 \item{save_dir}{Directory to save workflow to.}
 
 \item{return_path}{Return the path to the saved \emph{yaml} workflow file
