@@ -20,6 +20,9 @@ Encoding: UTF-8
 Depends: R (>= 4.2)
 biocViews:
     Genetics, FunctionalGenomics, SystemsBiology
+Imports:
+    here,
+    yaml
 Suggests:
     markdown,
     rmarkdown,
@@ -30,8 +33,7 @@ Suggests:
     covr,
     testthat (>= 3.0.0),
     utils,
-    badger,
-    here,
+    badger, 
     hexSticker
 RoxygenNote: 7.2.1.9000
 VignetteBuilder: knitr

@@ -35,9 +35,9 @@ jobs:
             run_covr: 'true'
             run_pkgdown: 'true'
             has_RUnit: 'true'
-            run_docker: 'true' 
             repository: ${{ github.repository }}
             repo-token: ${{ secrets.PAT_GITHUB }}
+            run_docker: 'true'
             DOCKER_USERNAME: 'bschilder'
             DOCKER_ORG: 'neurogenomicslab'
             DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}

@@ -42,7 +42,7 @@ inputs:
     description: "DockerHub token."
     default: ''
   runner.os:
-    description: "Information on the Operating System (OS ) that the workflow is running on."
+    description: "The Operating System (OS ) that the workflow is running on."
     default: 'Linux'
 ## Environment variables unique to this job.
 env: 
@@ -91,7 +91,7 @@ runs:
 
       - name: Restore R package cache
         if: "!contains(github.event.head_commit.message, '/nocache') && env.runner.os != 'Linux'"
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ env.cache-version }}-${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
@@ -99,7 +99,7 @@ runs:
 
       - name: Cache R packages on Linux
         if: "!contains(github.event.head_commit.message, '/nocache') && env.runner.os == 'Linux' "
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/work/_temp/Library
           key: ${{ env.cache-version }}-${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
@@ -331,6 +331,11 @@ runs:
           }
         shell: Rscript {0}
 
+        
+      ## Note that you need to run pkgdown::deploy_to_branch(new_process = FALSE)
+      ## at least one locally before this will work. This creates the gh-pages
+      ## branch (erasing anything you haven't version controlled!) and
+      ## makes the git history recognizable by pkgdown.
       - name: Build and deploy pkgdown site
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && env.runner.os == 'Linux'
         run: |
@@ -339,10 +344,6 @@ runs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           Rscript -e "pkgdown::deploy_to_branch(new_process = FALSE)"
         shell: bash {0}
-        ## Note that you need to run pkgdown::deploy_to_branch(new_process = FALSE)
-        ## at least one locally before this will work. This creates the gh-pages
-        ## branch (erasing anything you haven't version controlled!) and
-        ## makes the git history recognizable by pkgdown.
 
       - name: Upload check results
         if: failure()
@@ -353,8 +354,8 @@ runs:
 
       # DockerHub steps
       - name: Build and push to DockerHub
-        if: "!contains(github.event.head_commit.message, '/nodocker') && env.run_docker == 'true' && env.runner.os == 'Linux' "
-        uses: docker/build-push-action@v1
+        if: "(!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && env.runner.os == 'Linux'"
+        uses: docker/build-push-action@v3
         with:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_TOKEN }}
