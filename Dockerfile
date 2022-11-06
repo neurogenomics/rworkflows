@@ -7,14 +7,6 @@
 #   2. Runs CRAN checks on the R package.
 #   3. Installs the R package and all of its dependencies (including Depends, Imports, and Suggests).
 #
-# This Dockerfile should be used with the [dockerhub.yml](https://github.com/neurogenomics/orthogene/blob/main/.github/workflows/dockerhub.yml) workflow file,
-# as you must first checkout the R package from GitHub,
-# along with several other GitHub Actions.
-#
-# If the R package passes all checks, the dockerhub.yml workflow will subsequently
-# push the Docker container to DockerHub (using the username and token credentials
-# stored as GitHub Secrets).
-#
 # You can then create an image of the Docker container in any command line:
 #   docker pull <DockerHub_repo_name>/<package_name>
 # Once the image has been created, you can launch it with:
@@ -42,10 +34,11 @@ RUN apt-get update && \
 	biber \
 	libsbml5-dev \
 	qpdf \
+	cmake \
 	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-# Create a buildzone folder named after the R package 
-# BiocCheck requires the buildzone to have the same name as the R package 
+# Create a buildzone folder named after the R package
+# BiocCheck requires the buildzone to have the same name as the R package
 ARG PKG
 RUN echo $PKG
 RUN mkdir -p /$PKG
@@ -57,7 +50,7 @@ RUN Rscript -e 'options(download.file.method= "libcurl"); \
                 if(!require("AnVIL"))  {BiocManager::install("AnVIL", ask = FALSE)}; \
                 AnVIL::install(c("remotes","devtools")); \
                 try({remotes::install_github("bergant/rapiclient")}); \
-                bioc_ver <- BiocManager::version(); \ 
+                bioc_ver <- BiocManager::version(); \
                 options(repos = c(AnVIL::repositories(),\
                                   AnVIL = file.path("https://bioconductordocker.blob.core.windows.net/packages",bioc_ver,"bioc"),\
                                   CRAN = "https://cran.rstudio.com/"),\
@@ -67,7 +60,7 @@ RUN Rscript -e 'options(download.file.method= "libcurl"); \
                 deps_left <- deps[!deps %in% rownames(installed.packages())]; \
                 if(length(deps_left)>0) devtools::install_dev_deps(dependencies = TRUE, upgrade = "never");'
 # Run R CMD check - will fail with any errors or warnings
-Run Rscript -e 'devtools::check()'
+# Run Rscript -e 'devtools::check()'
 # Run Bioconductor's BiocCheck (optional)
 #ARG BIOC
 #RUN if [ "$BIOC" = "true" ]; then \
@@ -76,6 +69,6 @@ Run Rscript -e 'devtools::check()'
 #                    `no-check-R-ver` = TRUE,\
 #                    `no-check-bioc-help` = TRUE);'\
 #    fi
-# Install R package from source 
+# Install R package from source
 RUN R -e 'remotes::install_local(upgrade="never")'
 RUN rm -rf /$PKG
