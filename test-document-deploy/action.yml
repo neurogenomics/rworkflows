@@ -131,6 +131,7 @@ runs:
           # brew install svn
           # brew install --cask font-roboto
           brew install libxfont
+        shell: bash {0}
 
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
