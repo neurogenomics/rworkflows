@@ -47,7 +47,6 @@ runs:
     env: 
       R_KEEP_PKG_SOURCE: yes 
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
       runner_os: ${{ runner.os }}
       NOT_CRAN: true
       TZ: UTC 

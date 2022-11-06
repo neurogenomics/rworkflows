@@ -11,6 +11,8 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
+    env:
+      RSPM: ${{ matrix.config.rspm }}
     strategy:
       fail-fast: false
       matrix:
