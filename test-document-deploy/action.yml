@@ -4,10 +4,10 @@ author: 'Brian M. Schilder'
 inputs:
   repository:
     description: 'GitHub repository to be checked.'
-    default: ${{ github.repository }}
+    default: ''
   repo-token:
     description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
-    default: ${{ secrets.PAT_GITHUB }}
+    default: ''
   run_bioccheck:
     description: "Run Bioconductor checks. Must pass in order to continue workflow."
     default: 'true'

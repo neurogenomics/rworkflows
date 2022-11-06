@@ -28,3 +28,5 @@ jobs:
             run_docker: 'true'
             DOCKER_USERNAME: 'bschilder'
             DOCKER_ORG: 'neurogenomicslab'
+            repository: ${{ github.repository }}
+            repo-token: ${{ secrets.PAT_GITHUB }}
