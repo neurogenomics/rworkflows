@@ -41,7 +41,7 @@ inputs:
   DOCKER_TOKEN:
     description: "DockerHub token."
     default: ''
-  runner:
+  runner.os:
     description: "Information on the Operating System (OS ) that the workflow is running on."
     default: 'Linux'
 ## Environment variables unique to this job.
