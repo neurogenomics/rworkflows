@@ -38,7 +38,6 @@ jobs:
             sudo apt-get install -y nodejs
       - uses: actions/checkout@v3
       - uses: ./test-document-deploy
-        shell: bash
         with:  
             run_bioccheck: 'false'
             run_crancheck: 'true'

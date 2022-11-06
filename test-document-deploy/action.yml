@@ -47,10 +47,12 @@ runs:
       ## Set the R library to the directory matching the
       ## R packages cache step further below when running on Docker (Linux).
       - name: Set R Library home on Linux
+      
         if: runner.os == 'Linux'
         run: |
           mkdir -p /__w/_temp/Library
           echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
+        shell: bash {0}
 
       ## Most of these steps are the same as the ones in
       ## https://github.com/r-lib/actions/blob/master/examples/check-standard.yaml
@@ -101,6 +103,7 @@ runs:
           echo $sysreqs
           sudo -s eval "$sysreqs"
           sudo apt-get install -y qpdf
+        shell: bash {0}
 
       - name: Install macOS system dependencies
         if: matrix.config.os == 'macOS-latest'
@@ -133,6 +136,7 @@ runs:
         if: runner.os == 'Windows'
         run: |
           npm install curl
+        shell: bash {0}
 
       - name: Install BiocManager
         run: |
@@ -258,6 +262,7 @@ runs:
       - name: Reveal testthat details
         if:  env.has_testthat == 'true'
         run: find . -name testthat.Rout -exec cat '{}' ';'
+        shell: bash {0}
 
       - name: Run RUnit tests
         if:  env.has_RUnit == 'true'
@@ -289,6 +294,7 @@ runs:
       - name: Install package
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: R CMD INSTALL .
+        shell: bash {0}
 
       - name: Get R package info
         if: runner.os == 'Linux'
