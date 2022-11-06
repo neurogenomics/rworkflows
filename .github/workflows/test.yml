@@ -11,6 +11,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
+    shell: bash
     ## Environment variables unique to this job.
 
     strategy:
@@ -34,7 +35,7 @@ jobs:
       - if: ${{ env.ACT }}
         name: Hack container for local development
         run: |
-            curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+            curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
       - uses: actions/checkout@v3
       - uses: ./test-document-deploy
