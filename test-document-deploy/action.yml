@@ -111,7 +111,7 @@ runs:
           sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
           echo $sysreqs
           sudo -s eval "$sysreqs"
-          sudo apt-get install -y qpdf
+          sudo apt-get install -y qpdf rsync
         shell: bash {0}
 
       - name: Install macOS system dependencies
@@ -327,12 +327,7 @@ runs:
             if(!require("rmarkdown")) install.packages("rmarkdown");
             rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
           }
-        shell: Rscript {0}
-        
-     - name: Install deploy dependencies
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
-        run: |
-          apt-get update && apt-get -y install rsync
+        shell: Rscript {0} 
 
       - name: Deploy pkgdown site to GitHub pages 🚀
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
@@ -340,7 +335,7 @@ runs:
         with:
           clean: false
           branch: gh-pages
-          folder: .
+          folder: "."
 
       - name: Upload check results
         if: failure()
