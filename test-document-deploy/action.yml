@@ -58,7 +58,7 @@ env:
   # NOT_CRAN: true
   TZ: UTC 
   RGL_USE_NULL: TRUE  
-  RSPM: ${{ matrix_config.rspm }}
+  RSPM: ${{ env.matrix_config.rspm }}
 runs:
     using: 'composite'    
     steps:
