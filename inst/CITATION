@@ -9,6 +9,6 @@ citEntry(
   volume   = "",
   number   = "",
   pages    = "",
-  url      = "https://github.com/neurogenomics/r_workflows",
-  textVersion = paste("Brian M. Schilder, Alan E. Murphy (2021) rworkflows: Continuous integration for R packages, *GitHub*; https://github.com/neurogenomics/r_workflows")
+  url      = "https://github.com/neurogenomics/rworkflows",
+  textVersion = paste("Brian M. Schilder, Alan E. Murphy (2021) rworkflows: Continuous integration for R packages, *GitHub*; https://github.com/neurogenomics/rworkflows")
 )

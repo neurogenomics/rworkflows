@@ -14,8 +14,8 @@ Authors@R:
            email = "alanmurph94@hotmail.com",
            comment = c(ORCID = "0000-0002-2487-8753"))) 
 Description: rworkflows: Continuous integration for R packages.
-URL: https://github.com/neurogenomics/r_workflows
-BugReports: https://github.com/neurogenomics/r_workflows/issues
+URL: https://github.com/neurogenomics/rworkflows
+BugReports: https://github.com/neurogenomics/rworkflows/issues
 Encoding: UTF-8
 Depends: R (>= 4.2)
 biocViews:
