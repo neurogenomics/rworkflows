@@ -19,7 +19,7 @@ jobs:
           - { os: macOS-latest, r: 'latest', bioc: 'release'}
           - { os: windows-latest, r: 'latest', bioc: 'release'} 
     env:
-      matrix_config: ${{ matrix.config }}
+        matrix_config: ${{ matrix.config }}
     steps: 
       - if: ${{ env.ACT }}
         name: Hack container for local development
