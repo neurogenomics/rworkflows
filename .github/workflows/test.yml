@@ -36,7 +36,8 @@ jobs:
             run_pkgdown: 'true'
             has_runit: 'true'
             repository: ${{ github.repository }}
-            github_token: ${{ secrets.PAT_GITHUB }}
+            GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+            github_ref: ${{ github.ref }}
             run_docker: 'true'
             DOCKER_USERNAME: 'bschilder'
             DOCKER_ORG: 'neurogenomicslab'
