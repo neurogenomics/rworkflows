@@ -55,10 +55,9 @@ inputs:
 env: 
   R_KEEP_PKG_SOURCE: yes 
   R_REMOTES_NO_ERRORS_FROM_WARNINGS: true 
-  # NOT_CRAN: true
+  NOT_CRAN: true
   TZ: UTC 
   RGL_USE_NULL: TRUE  
-  RSPM: ${{ env.matrix_config.rspm }}
 runs:
     using: 'composite'    
     steps:
@@ -67,6 +66,7 @@ runs:
       - name: Set R Library home on Linux 
         if: env.runner_os == 'Linux'
         run: |
+          echo "RSPM=${{ env.matrix_config.rspm }}" >> $GITHUB_ENV
           mkdir -p /__w/_temp/Library
           echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
         shell: bash {0}
