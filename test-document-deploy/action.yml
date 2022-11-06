@@ -355,6 +355,7 @@ runs:
         clean: false
         branch: gh-pages
         folder: "."
+        token: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Upload check results
       if: failure()
