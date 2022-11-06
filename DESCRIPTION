@@ -1,6 +1,6 @@
 Package: rworkflows
 Type: Package
-Title: Test package for GitHub Actions workflow
+Title: Test, document, containerise, and deploy R packages
 Version: 0.99.0
 Authors@R:
     c(person(given = "Brian",

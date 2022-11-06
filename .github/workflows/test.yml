@@ -4,6 +4,7 @@ on: [workflow_dispatch]
 
 jobs:
     test:
+        runs-on: ubuntu-latest
         steps:
             - name: Run r_workflows
             uses: neurogenomics/r_workflows@latest
