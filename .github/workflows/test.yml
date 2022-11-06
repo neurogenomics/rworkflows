@@ -4,14 +4,16 @@ on: [workflow_dispatch]
 
 jobs:
     test:
-        runs-on: ubuntu-latest
         steps:
             - name: Run r_workflows
             uses: neurogenomics/r_workflows@latest
-            with: 
-                run_bioccheck: 'true'
+            with:
+                run_bioccheck: 'false'
                 run_crancheck: 'true'
-                run_docker: 'false'
+                has_testthat: 'true'
+                run_covr: 'true'
+                run_pkgdown: 'true'
+                has_RUnit: 'true'
+                run_docker: 'true'
                 DOCKER_USERNAME: 'bschilder'
                 DOCKER_ORG: 'neurogenomicslab'
-                repository: 'neurogenomics/templateR'
