@@ -49,7 +49,7 @@ runs:
       - name: Set R Library home on Linux
         if: runner.os == 'Linux'
         run: |
-          mkdir /__w/_temp/Library
+          mkdir -p /__w/_temp/Library
           echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
 
       ## Most of these steps are the same as the ones in
