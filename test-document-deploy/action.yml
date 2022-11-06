@@ -1,51 +1,48 @@
-## Read more about GitHub actions the features of this GitHub Actions workflow
-## at https://lcolladotor.github.io/biocthis/articles/biocthis.html#use_bioc_github_action
-##
-## For more details, check the biocthis developer notes vignette at
-## https://lcolladotor.github.io/biocthis/articles/biocthis_dev_notes.html
-##
-## You can add this workflow to other packages using:
-## > biocthis::use_bioc_github_action()
-##
-## Using GitHub Actions exposes you to many details about how R packages are
-## compiled and installed in several operating system.s
-### If you need help, please follow the steps listed at
-## https://github.com/r-lib/actions#where-to-find-help
-##
-## If you found an issue specific to biocthis's GHA workflow, please report it
-## with the information that will make it easier for others to help you.
-## Thank you!
-
-## Acronyms:
-## * GHA: GitHub Action
-## * OS: operating system
-
-on:
-  push:
-  pull_request:
-
-name: R-CMD-check-bioc
-
-## These environment variables control whether to run GHA code later on that is
-## specific to testthat, covr, and pkgdown.
-##
-## If you need to clear the cache of packages, update the number inside
-## cache-version as discussed at https://github.com/r-lib/actions/issues/86.
-## Note that you can always run a GHA test without the cache by using the word
-## "/nocache" in the commit message.
-env:
-  run_bioccheck: 'false'
-  run_crancheck: 'true'
-  has_testthat: 'true'
-  run_covr: 'true'
-  run_pkgdown: 'true'
-  has_RUnit: 'false'
-  cache-version: 'cache-v1'
-  run_docker: 'true'
-
-jobs:
-  R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
+name: 'test-document-deploy'
+description: 'Test, document, and deploy R packages.'
+author: 'Brian M. Schilder'
+inputs:
+  repository:
+    description: 'GitHub repository to be checked.'
+    default: ${{ github.repository }}
+  repo-token:
+    description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
+    default: ${{ secrets.PAT_GITHUB }}
+  run_bioccheck:
+    description: "Run Bioconductor checks. Must pass in order to continue workflow."
+    default: 'true'
+  run_crancheck:
+    description: "Run CRAN checks. Must pass in order to continue workflow."
+    default: 'true'
+  has_testthat:
+    description: "Run unit tests and report results."
+    default: 'true'
+  run_covr:
+    description: "Run code coverage tests and publish results to codecov."
+    default: 'true'
+  run_pkgdown:
+    description: "Knit the README.Rmd (if available), build documentation website, and deploy to gh-pages branch."
+    default: 'true'
+  has_RUnit: 
+    description: "Run R Unit tests."
+    default: 'false'
+  cache-version: 
+    description: "Which cache version to use."
+    default: 'cache-v1'
+  run_docker: 
+    description: "Whether to build and push a Docker container to DockerHub."
+    default: 'false' 
+  DOCKER_USERNAME: 
+    description: "DockerHub username." 
+    default: ''
+  DOCKER_ORG: 
+    description: "DockerHub organization name." 
+    default: 'neurogenomicslab'
+  DOCKER_TOKEN:
+    description: "DockerHub token."
+    default: ${{ secrets.DOCKER_TOKEN }}
+    
+runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
     ## Environment variables unique to this job.
@@ -63,17 +60,8 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       NOT_CRAN: true
-      TZ: UTC
-      GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
-      GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
-      GITHUB_REPO: ${{ github.repository }}
-      RGL_USE_NULL: TRUE
-      ## Can save variable as GitHub Secret, or manually enter DockerHub
-      ## username here (e.g. "bschilder").
-      DOCKER_USERNAME: "bschilder"
-      ## Can save variable as GitHub Secret, or manually enter DockerHub
-      ## organization name (or simply username) here (e.g. "neurogenomicslab").
-      DOCKER_ORG: "neurogenomicslab"
+      TZ: UTC 
+      RGL_USE_NULL: TRUE 
 
     steps:
       ## Set the R library to the directory matching the
@@ -379,3 +367,6 @@ jobs:
           tag_with_sha: false
           tags: ${{ env.packageVersion }},latest
           build_args: PKG=${{ env.packageNameOrig }},BIOC=${{ env.run_bioccheck }},GITHUB_PAT=${{ secrets.PAT_GITHUB }}
+
+    
+    

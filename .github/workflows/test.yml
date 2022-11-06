@@ -6,7 +6,7 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:  
-            - uses: neurogenomics/r_workflows@latest
+            - uses: neurogenomics/r_workflows/test-document-deploy@latest
             with:  
                 run_bioccheck: 'false'
                 run_crancheck: 'true'
