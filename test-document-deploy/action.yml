@@ -3,56 +3,65 @@ description: 'Test, document, and deploy R packages.'
 author: 'Brian M. Schilder'
 inputs:
   repository:
-    description: 'GitHub repository to be checked.'
-    default: ''
+    description: >
+      GitHub repository to be checked.
   GITHUB_TOKEN:
-    description: 'Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}'
-    default: ''
+    description: >
+      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}
   github_ref:
-    description: 'Branch name of the GitHub repository.'
-    default: ''
+    description: >
+      Branch name of the GitHub repository.
   run_bioccheck:
-    description: "Run Bioconductor checks. Must pass in order to continue workflow."
-    default: 'true'
+    description: >
+      Run Bioconductor checks. Must pass in order to continue workflow.
   run_crancheck:
-    description: "Run CRAN checks. Must pass in order to continue workflow."
-    default: 'true'
+    description: >
+      Run CRAN checks. Must pass in order to continue workflow."
+    default: true
   has_testthat:
-    description: "Run unit tests and report results."
-    default: 'true'
+    description: >
+      Run unit tests and report results.
+    default: true
   run_covr:
-    description: "Run code coverage tests and publish results to codecov."
-    default: 'true'
+    description: >
+      Run code coverage tests and publish results to codecov.
+    default: true
   run_pkgdown:
-    description: "Knit the README.Rmd (if available), build documentation website, and deploy to gh-pages branch."
-    default: 'true'
+    description: >
+      Knit the README.Rmd (if available), build documentation website,
+      and deploy to gh-pages branch.
+    default: true
   has_runit: 
-    description: "Run R Unit tests."
-    default: 'false'
+    description: >
+      Run R Unit tests. Requires a subdirectory named 'unitTests'.
+    default: false
   cache-version: 
-    description: "Which cache version to use."
-    default: 'cache-v1'
+    description: >
+      Which cache version to use.
+    default: cache-v1
   run_docker: 
-    description: "Whether to build and push a Docker container to DockerHub."
-    default: 'true' 
+    description: >
+      Whether to build and push a Docker container to DockerHub.
+    default: true
   DOCKER_USERNAME: 
-    description: "DockerHub username." 
-    default: ''
+    description: >
+      DockerHub username. 
   DOCKER_ORG: 
-    description: "DockerHub organization name." 
-    default: ''
+    description: >
+      DockerHub organization name.
   DOCKER_TOKEN:
-    description: "DockerHub token."
-    default: ''
+    description: >
+      DockerHub token.
   runner_os:
-    description: "The Operating System (OS ) that the workflow is running on."
+    description: >
+      The Operating System (OS ) that the workflow is running on.
     default: 'Linux' 
 ## Environment variables unique to this job.
-env: 
-  R_KEEP_PKG_SOURCE: yes 
-  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-  TZ: UTC 
-  RGL_USE_NULL: TRUE
+# env: 
+  # R_KEEP_PKG_SOURCE: yes 
+  # R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+  # TZ: UTC 
+  # RGL_USE_NULL: TRUE
 runs:
   using: 'composite'    
   steps:
@@ -230,7 +239,7 @@ runs:
       shell: Rscript {0}
 
     - name: Install BiocGenerics
-      if:  env.has_runit == 'true'
+      if:  env.has_runit == true
       run: |
         ## Install BiocGenerics
         options(crayon.enabled = TRUE)
@@ -238,14 +247,14 @@ runs:
       shell: Rscript {0}
 
     - name: Install covr
-      if: env.run_covr == 'true' && env.runner_os == 'Linux'
+      if: env.run_covr == true && env.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         remotes::install_cran("covr")
       shell: Rscript {0}
 
     - name: Install pkgdown
-      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
+      if: env.run_pkgdown == true && env.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         remotes::install_github("r-lib/pkgdown")
@@ -269,7 +278,7 @@ runs:
       run: |
         options(crayon.enabled = TRUE)
         if(!require("sessioninfo")) install.packages("rcmdcheck")
-        as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
+        as_cran <- if(Sys.getenv("AS_CRAN")==true) "--as-cran" else NULL
         rcmdcheck::rcmdcheck(
             args = c("--no-manual", "--timings", as_cran),
             build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
@@ -278,26 +287,26 @@ runs:
       shell: Rscript {0}
         
     - name: Reveal testthat details
-      if: env.has_testthat == 'true'
+      if: env.has_testthat == true
       run: |
         find . -name testthat.Rout -exec cat '{}' ';'
       shell: bash {0}
         
     - name: Run RUnit tests
-      if: env.has_runit == 'true'
+      if: env.has_runit == true
       run: |
         options(crayon.enabled = TRUE)
         BiocGenerics:::testPackage()
       shell: Rscript {0}
         
     - name: Run BiocCheck
-      if: env.run_bioccheck == 'true'
+      if: env.run_bioccheck == true
       env:
         DISPLAY: 99.0
       run: |
+        options(crayon.enabled = TRUE)
         if(!require("BiocManager")) install.packages("BiocManager")
         if(!require("BiocCheck")) BiocManager::install("BiocCheck")
-        options(crayon.enabled = TRUE)
         BiocCheck::BiocCheck(
             dir('check', 'tar.gz$', full.names = TRUE),
             `quit-with-status` = TRUE,
@@ -306,13 +315,13 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
-      if: env.run_covr == 'true' && env.runner_os == 'Linux'
+      if: env.run_covr == true && env.runner_os == 'Linux'
       run: |
         covr::codecov()
       shell: Rscript {0}
 
     - name: Install package
-      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
+      if: env.run_pkgdown == true && env.runner_os == 'Linux'
       run: R CMD INSTALL .
       shell: bash {0}
 
@@ -331,7 +340,7 @@ runs:
       shell: bash {0}
 
     - name: Render README
-      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
+      if: env.run_pkgdown == true && env.runner_os == 'Linux'
       env:
         DISPLAY: 99.0
       run: |
@@ -343,7 +352,7 @@ runs:
       shell: Rscript {0} 
         
     - name: Deploy pkgdown site to GitHub pages 🚀
-      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
+      if: env.run_pkgdown == true && env.runner_os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
         clean: false
@@ -359,7 +368,7 @@ runs:
 
     ## DockerHub steps
     - name: Build and push to DockerHub
-      if: "(!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && env.runner_os == 'Linux'"
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == true && env.runner_os == 'Linux'"
       uses: docker/build-push-action@v3
       with:
         username: ${{ env.DOCKER_USERNAME }}

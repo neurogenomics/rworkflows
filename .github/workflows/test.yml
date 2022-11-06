@@ -32,7 +32,7 @@ jobs:
           has_testthat: 'true'
           run_covr: 'true'
           run_pkgdown: 'true'
-          has_runit: 'true'
+          has_runit: 'false'
           repository: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
           github_ref: ${{ github.ref }}
