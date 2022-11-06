@@ -46,15 +46,11 @@ inputs:
     default: ''
   runner_os:
     description: "The Operating System (OS ) that the workflow is running on."
-    default: 'Linux'
-  matrix_config:
-    description: "Matrix configuration file."
-    default: ''
+    default: 'Linux' 
 ## Environment variables unique to this job.
 env: 
   R_KEEP_PKG_SOURCE: yes 
-  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true 
-  NOT_CRAN: true
+  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
   TZ: UTC 
   RGL_USE_NULL: TRUE
 runs:
@@ -283,7 +279,8 @@ runs:
         
     - name: Reveal testthat details
       if: env.has_testthat == 'true'
-      run: find . -name testthat.Rout -exec cat '{}' ';'
+      run: |
+        find . -name testthat.Rout -exec cat '{}' ';'
       shell: bash {0}
         
     - name: Run RUnit tests
