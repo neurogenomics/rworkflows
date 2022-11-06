@@ -41,11 +41,13 @@ inputs:
   DOCKER_TOKEN:
     description: "DockerHub token."
     default: ''
+  runner_os:
+    description: "Operating System that the workflow is running on."
+    default: 'Linux'
 ## Environment variables unique to this job.
 env: 
   R_KEEP_PKG_SOURCE: yes 
-  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-  runner_os: ${{ runner.os }}
+  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true 
   NOT_CRAN: true
   TZ: UTC 
   RGL_USE_NULL: TRUE  
@@ -55,7 +57,7 @@ runs:
       ## Set the R library to the directory matching the
       ## R packages cache step further below when running on Docker (Linux).
       - name: Set R Library home on Linux 
-        if: runner.os == 'Linux'
+        if: ${{ env.runner.os }} == 'Linux'
         run: |
           mkdir -p /__w/_temp/Library
           echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
@@ -70,7 +72,7 @@ runs:
       # R is already included in the Bioconductor docker image,
       # which is only available with Linux as the OS.
       - name: Setup R from r-lib
-        if: runner.os != 'Linux'
+        if: ${{ env.runner.os }} != 'Linux'
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
@@ -78,7 +80,7 @@ runs:
 
       ## pandoc is already included in the Bioconductor docker images
       - name: Setup pandoc from r-lib
-        if: runner.os != 'Linux'
+        if: ${{ env.runner.os }} != 'Linux'
         uses: r-lib/actions/setup-pandoc@v2
 
       - name: Query dependencies
@@ -88,23 +90,23 @@ runs:
         shell: Rscript {0}
 
       - name: Restore R package cache
-        if: "!contains(github.event.head_commit.message, '/nocache') && runner.os != 'Linux'"
+        if: "!contains(github.event.head_commit.message, '/nocache') && ${{ env.runner.os }} != 'Linux'"
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ env.cache-version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ env.cache-version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
+          key: ${{ env.cache-version }}-${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ env.cache-version }}-${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
       - name: Cache R packages on Linux
-        if: "!contains(github.event.head_commit.message, '/nocache') && runner.os == 'Linux' "
+        if: "!contains(github.event.head_commit.message, '/nocache') && ${{ env.runner.os }} == 'Linux' "
         uses: actions/cache@v2
         with:
           path: /home/runner/work/_temp/Library
-          key: ${{ env.cache-version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ env.cache-version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
+          key: ${{ env.cache-version }}-${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ env.cache-version }}-${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
       - name: Install Linux system dependencies
-        if: runner.os == 'Linux'
+        if: ${{ env.runner.os }} == 'Linux'
         run: |
           sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
           echo $sysreqs
@@ -141,7 +143,7 @@ runs:
         shell: bash {0}
 
       - name: Install Windows system dependencies
-        if: runner.os == 'Windows'
+        if: ${{ env.runner.os }} == 'Windows'
         run: |
           npm install curl
         shell: bash {0}
@@ -154,7 +156,7 @@ runs:
 
       # Linux Bioconductor docker comes with bioconductor installed
       - name: Set BiocVersion
-        if: runner.os != 'Linux'
+        if: ${{ env.runner.os }} != 'Linux'
         run: |
           #### BiocManager::install doesn't understand "latest" #####
           if("${{ matrix.config.bioc }}" %in% c("latest","release")){
@@ -228,13 +230,13 @@ runs:
         shell: Rscript {0}
 
       - name: Install covr
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_covr == 'true' && runner.os == 'Linux'
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_covr == 'true' && ${{ env.runner.os }} == 'Linux'
         run: |
           remotes::install_cran("covr")
         shell: Rscript {0}
 
       - name: Install pkgdown
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && ${{ env.runner.os }} == 'Linux'
         run: |
           remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
@@ -266,7 +268,7 @@ runs:
           )
         shell: Rscript {0}
 
-      ## Might need an to add this to the if:  && runner.os == 'Linux'
+      ## Might need an to add this to the if:  && ${{ env.runner.os }} == 'Linux'
       - name: Reveal testthat details
         if:  env.has_testthat == 'true'
         run: find . -name testthat.Rout -exec cat '{}' ';'
@@ -294,18 +296,18 @@ runs:
         shell: Rscript {0}
 
       - name: Test coverage
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_covr == 'true' && runner.os == 'Linux'
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_covr == 'true' && ${{ env.runner.os }} == 'Linux'
         run: |
           covr::codecov()
         shell: Rscript {0}
 
       - name: Install package
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && ${{ env.runner.os }} == 'Linux'
         run: R CMD INSTALL .
         shell: bash {0}
 
       - name: Get R package info
-        if: runner.os == 'Linux'
+        if: ${{ env.runner.os }} == 'Linux'
         run: |
           #### DockerHub repos must be lowercase (,,) ####
           name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
@@ -319,7 +321,7 @@ runs:
         shell: bash {0}
 
       - name: Render README
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && ${{ env.runner.os }} == 'Linux'
         env:
           DISPLAY: 99.0
         run: |
@@ -330,7 +332,7 @@ runs:
         shell: Rscript {0}
 
       - name: Build and deploy pkgdown site
-        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && runner.os == 'Linux'
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && env.run_pkgdown == 'true' && ${{ env.runner.os }} == 'Linux'
         run: |
           git config --global --add safe.directory '*'
           git config --local user.name "$GITHUB_ACTOR"
@@ -346,12 +348,12 @@ runs:
         if: failure()
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
+          name: ${{ env.runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
           path: check
 
       # DockerHub steps
       - name: Build and push to DockerHub
-        if: "!contains(github.event.head_commit.message, '/nodocker') && env.run_docker == 'true' && runner.os == 'Linux' "
+        if: "!contains(github.event.head_commit.message, '/nodocker') && env.run_docker == 'true' && ${{ env.runner.os }} == 'Linux' "
         uses: docker/build-push-action@v1
         with:
           username: ${{ env.DOCKER_USERNAME }}
