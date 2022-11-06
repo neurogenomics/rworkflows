@@ -50,7 +50,6 @@ inputs:
   matrix_config:
     description: "Matrix configuration file."
     default: ''
-      
 ## Environment variables unique to this job.
 env: 
   R_KEEP_PKG_SOURCE: yes 
@@ -58,7 +57,6 @@ env:
   NOT_CRAN: true
   TZ: UTC 
   RGL_USE_NULL: TRUE
-    
 runs:
   using: 'composite'    
   steps:
