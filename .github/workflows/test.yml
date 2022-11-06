@@ -1,6 +1,10 @@
 name: r_workflows test
 
-on: [workflow_dispatch] 
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 
 jobs:
   R-CMD-check:
