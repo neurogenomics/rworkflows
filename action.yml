@@ -57,11 +57,6 @@ inputs:
 runs:
   using: 'composite'    
   steps:
-    - name: Check github object
-      run: |
-        echo ${{ github }}
-      shell: bash {0}
-    
     - name: Install system dependencies
       uses: neurogenomics/rworkflows/install-system@master
       with:
