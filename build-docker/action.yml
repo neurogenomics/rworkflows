@@ -31,7 +31,7 @@ runs:
         
     ## DockerHub steps
     - name: Create Docker file
-      if: inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux'
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux' "
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
@@ -39,7 +39,7 @@ runs:
       shell: Rscript {0} 
       
     - name: Build and push to DockerHub
-      if: inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux'
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux' "
       uses: docker/build-push-action@v1
       with:
         username: ${{ inputs.i.DOCKER_USERNAME }}
