@@ -1,11 +1,10 @@
 name: 'install-r'
 description: 'rworkflows: Install all necessary R packages.'
 author: 'Brian M. Schilder'
-inputs: 
-  inputs: 
+inputs:
   i:
     description: >
-      A list of inputs from the controller workflow.  
+      A list of inputs from the controller workflow.
 runs:
   using: 'composite'    
   steps:
