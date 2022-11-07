@@ -1,4 +1,4 @@
-name: 'rworkflows-full'
+name: 'rworkflows-merged'
 description: >
   rworkflows: Full workflow to test, document, and deploy R packages.
 author: 'Brian M. Schilder'

@@ -24,7 +24,7 @@ jobs:
         run: |
             curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
-      - uses: neurogenomics/rworkflows@master
+      - uses: rworkflows@v1
         with:  
           run_bioccheck: true
           run_crancheck: true
