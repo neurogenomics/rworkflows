@@ -21,14 +21,14 @@ jobs:
     steps:  
       - uses: neurogenomics/rworkflows/test-document-deploy@master
         with:  
-          run_bioccheck: true
-          run_crancheck: true
-          has_testthat: true
-          run_covr: true
-          run_pkgdown: true
-          has_runit: false 
+          run_bioccheck: "true"
+          run_crancheck: "true"
+          has_testthat: "true"
+          run_covr: "true"
+          run_pkgdown: "true"
+          has_runit: "false" 
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }} 
-          run_docker: true
+          run_docker: "true"
           DOCKER_USERNAME: 'bschilder'
           DOCKER_ORG: 'neurogenomicslab'
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }} 
