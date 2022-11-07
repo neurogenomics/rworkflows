@@ -68,5 +68,4 @@ runs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ inputs.i.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
-        path: check 
-        
+        path: check

@@ -120,4 +120,3 @@ runs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         }, error = function(x){utils::sessionInfo()})
       shell: Rscript {0}
-      
