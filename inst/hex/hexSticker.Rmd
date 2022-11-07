@@ -1,0 +1,60 @@
+---
+title: "hexSticker"
+date: "<h4>Updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{hexSticker}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo=FALSE, include=TRUE}
+pkg <- read.dcf(here::here("DESCRIPTION"), fields = "Package")[1]
+description <- read.dcf(here::here("DESCRIPTION"), fields = "Description")[1] 
+library(hexSticker)  
+```
+
+You can make awesome hex stickers for your R packages using:
+
+- [hexSticker](https://github.com/GuangchuangYu/hexSticker)   
+
+# `r pkg`
+
+## File path
+
+Create file path to save hex sticker to.
+
+```{r}
+filename <- here::here("inst/hex/hex.png")
+dir.create(dirname(filename), showWarnings = FALSE, recursive = TRUE)
+```
+ 
+## hexSticker 
+
+```{r}    
+s_size = .8
+stick <- hexSticker::sticker( 
+  subplot = here::here("inst/hex/rworkflows.png"),
+  #### Package name ####
+  package = pkg, p_size=13, p_y = 1.65, p_color = "black",
+  #### Subplot #####
+  s_x=1.1, s_y=.9,  s_height = s_size, s_width = s_size,
+  #### Fill & border ####
+  h_fill = "white", h_color = "grey30",
+  #### Spotlight ####
+  spotlight = TRUE, l_alpha = .3, l_width = 10,
+  #### File output ####
+  filename = filename, dpi = 300)
+print(stick)
+```
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  

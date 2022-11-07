@@ -1,0 +1,35 @@
+Package: rworkflows
+Type: Package
+Title: Test, document, containerise, and deploy R packages
+Version: 0.99.0
+Authors@R: 
+    c(person(given = "Brian",
+           family = "Schilder",
+           role = c("aut","ctb"),
+           email = "brian_schilder@alumni.brown.edu",
+           comment = c(ORCID = "0000-0001-5949-2191")),
+      person(given = "Alan",
+           family = "Murphy",
+           role = c("aut","cre"),
+           email = "alanmurph94@hotmail.com",
+           comment = c(ORCID = "0000-0002-2487-8753"))) 
+Description: Continuous integration for R packages. 
+    Automates testing, documentation website building,
+    and containerised deployment.
+URL: https://github.com/neurogenomics/rworkflows
+BugReports: https://github.com/neurogenomics/rworkflows/issues
+Encoding: UTF-8
+Depends: R (>= 4.2)
+biocViews: Genetics, FunctionalGenomics, SystemsBiology
+Imports: here, yaml
+Suggests: markdown, rmarkdown, magick, remotes, knitr, BiocStyle, covr,
+        testthat (>= 3.0.0), utils, badger, hexSticker
+RoxygenNote: 7.2.1.9000
+VignetteBuilder: knitr
+License: GPL-3
+Config/testthat/edition: 3
+NeedsCompilation: no
+Packaged: 2022-11-07 00:10:21 UTC; root
+Author: Brian Schilder [aut, ctb] (<https://orcid.org/0000-0001-5949-2191>),
+  Alan Murphy [aut, cre] (<https://orcid.org/0000-0002-2487-8753>)
+Maintainer: Alan Murphy <alanmurph94@hotmail.com>
