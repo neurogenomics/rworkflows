@@ -14,17 +14,6 @@ runs:
         echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0} 
-      
-    ## Set the R library to the directory matching the
-    ## R packages cache step further below when running on Docker (Linux).
-    - name: Set R Library home on Linux 
-      if: inputs.i.runner_os == 'Linux'
-      run: |
-        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
-        mkdir -p /__w/_temp/Library
-        echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
-        git config --global --add safe.directory '*'
-      shell: bash {0}
 
     - name: Get R package info
       if: inputs.i.runner_os == 'Linux'
@@ -41,7 +30,7 @@ runs:
         
     ## DockerHub steps
     - name: Create Docker file
-      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux'"
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux' "
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
@@ -49,7 +38,7 @@ runs:
       shell: Rscript {0} 
       
     - name: Build and push to DockerHub
-      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux'"
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.i.run_docker == 'true' && inputs.i.runner_os == 'Linux' "
       uses: docker/build-push-action@v1
       with:
         username: ${{ inputs.i.DOCKER_USERNAME }}
