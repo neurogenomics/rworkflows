@@ -94,7 +94,7 @@ even if your R package dependencies change.
 
 ### [`act`](https://github.com/nektos/act)
 
-A very useful command line tool for testing GitHub Actions locally.
+A very useful command line tool for testing GitHub Actions locally. 
 
 </details> 
  
