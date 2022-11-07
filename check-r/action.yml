@@ -60,13 +60,13 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
-      if: ${{ inputs.i.runner_os }} == 'Linux'
+      if: inputs.i.runner_os == 'Linux'
       uses: codecov/codecov-action@v3 
 
     - name: Upload check results
       if: failure()
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ inputs.i.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
+        name: inputs.i.runner_os-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check
         

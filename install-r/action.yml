@@ -23,7 +23,7 @@ runs:
 
     ## Linux Bioconductor docker comes with bioconductor installed
     - name: Set BiocVersion
-      if: ${{ inputs.i.runner_os }} != 'Linux'
+      if: inputs.i.runner_os != 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         #### BiocManager::install doesn't understand "latest" #####
@@ -98,14 +98,14 @@ runs:
       shell: Rscript {0}
 
     - name: Install covr
-      if: ${{ inputs.i.run_covr }} == 'true' && ${{ inputs.i.runner_os }} == 'Linux'
+      if: ${{ inputs.i.run_covr }} == 'true' && inputs.i.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("covr") 
       shell: Rscript {0}
 
     - name: Install pkgdown
-      if: ${{ inputs.i.run_pkgdown }} == 'true' && ${{ inputs.i.runner_os }} == 'Linux'
+      if: ${{ inputs.i.run_pkgdown }} == 'true' && inputs.i.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("pkgdown")
