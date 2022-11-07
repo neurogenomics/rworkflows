@@ -59,7 +59,7 @@ runs:
     - name: Query dependencies
       run: |
         options(crayon.enabled = TRUE)
-        install.packages('remotes', repos = "http://cran.us.r-project.org")
+        install.packages('remotes')
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
 
