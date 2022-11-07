@@ -2,38 +2,17 @@ name: 'install-r'
 description: 'rworkflows: Install all necessary R packages.'
 author: 'Brian M. Schilder'
 inputs: 
-  GITHUB_TOKEN:
+  inputs: 
+  i:
     description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}  
-    default: true 
-  run_covr:
-    description: >
-      Run code coverage tests and publish results to codecov.
-    default: true
-  run_pkgdown:
-    description: >
-      Knit the README.Rmd (if available), build documentation website,
-      and deploy to gh-pages branch.
-    default: true
-  has_runit: 
-    description: >
-      Run R Unit tests. Requires a subdirectory named 'unitTests'.
-    default: false
-  cache_version: 
-    description: >
-      Which cache version to use.
-    default: cache-v1  
-  runner_os:
-    description: >
-      The Operating System (OS) that the workflow is running on.
-    default: 'Linux'
+      A list of inputs from the controller workflow.  
 runs:
   using: 'composite'    
   steps:
     - name: Set GitHub token 
       run: |
-        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0}
 
     - name: Install BiocManager
@@ -45,7 +24,7 @@ runs:
 
     ## Linux Bioconductor docker comes with bioconductor installed
     - name: Set BiocVersion
-      if: inputs.runner_os != 'Linux'
+      if: inputs.i.runner_os != 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         #### BiocManager::install doesn't understand "latest" #####
@@ -112,7 +91,7 @@ runs:
       shell: Rscript {0}
 
     - name: Install BiocGenerics
-      if:  inputs.has_runit == 'true'
+      if:  inputs.i.has_runit == 'true'
       run: |
         ## Install BiocGenerics
         options(crayon.enabled = TRUE)
@@ -120,14 +99,14 @@ runs:
       shell: Rscript {0}
 
     - name: Install covr
-      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.i.run_covr == 'true' && inputs.i.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("covr") 
       shell: Rscript {0}
 
     - name: Install pkgdown
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("pkgdown")

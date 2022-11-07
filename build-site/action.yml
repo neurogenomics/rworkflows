@@ -3,44 +3,31 @@ description: >
   rworkflows: Build and deploy a documentation website for an R package.
 author: 'Brian M. Schilder'
 inputs: 
-  GITHUB_TOKEN:
+  i:
     description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
-  run_pkgdown:
-    description: >
-      Knit the README.Rmd (if available), build documentation website,
-      and deploy to gh-pages branch.
-    default: true 
-  cache_version: 
-    description: >
-      Which cache version to use.
-    default: cache-v1
-  runner_os:
-    description: >
-      The Operating System (OS) that the workflow is running on.
-    default: 'Linux'
+      A list of inputs from the controller workflow.
 runs:
   using: 'composite'    
   steps:
     - name: Set GitHub token 
       run: |
-        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0}
       
     - name: Set git safe.directory
-      if: inputs.runner_os == 'Linux'
+      if: inputs.i.runner_os == 'Linux'
       run: | 
         git config --global --add safe.directory '*'
       shell: bash {0}
 
     - name: Install package
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       run: R CMD INSTALL .
       shell: bash {0}
 
     - name: Get R package info
-      if: inputs.runner_os == 'Linux'
+      if: inputs.i.runner_os == 'Linux'
       run: |
         #### DockerHub repos must be lowercase (,,) ####
         name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
@@ -53,7 +40,7 @@ runs:
       shell: bash {0}
 
     - name: Render README
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       env:
         DISPLAY: 99.0
       run: |
@@ -65,16 +52,16 @@ runs:
       shell: Rscript {0} 
         
     - name: Build pkgdown site
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       run: |
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
     - name: Deploy pkgdown site to GitHub pages 🚀
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
         clean: false
         branch: gh-pages
         folder: docs
-        token: ${{ inputs.GITHUB_TOKEN }}
+        token: ${{ inputs.i.GITHUB_TOKEN }}
