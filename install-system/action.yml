@@ -17,7 +17,7 @@ runs:
     - name: Check github object
       run: |
         echo ${{ env.github }}
-        echo ${{ inputs.github }}
+        echo ${{ github }}
       shell: bash {0} 
       
     ## Set the R library to the directory matching the
