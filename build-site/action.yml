@@ -58,5 +58,5 @@ runs:
         clean: false
         branch: gh-pages
         folder: docs
-        token: ${{ inputs.i.GITHUB_TOKEN }}
+        token: ${{ env.GITHUB_TOKEN }}
         

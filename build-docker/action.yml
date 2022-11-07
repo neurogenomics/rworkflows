@@ -13,6 +13,7 @@ runs:
       run: |
         echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "DOCKER_TOKEN=${{ inputs.i.DOCKER_TOKEN }}" >> $GITHUB_ENV  
       shell: bash {0} 
 
     - name: Get R package info
@@ -42,7 +43,7 @@ runs:
       uses: docker/build-push-action@v1
       with:
         username: ${{ inputs.i.DOCKER_USERNAME }}
-        password: ${{ inputs.i.DOCKER_TOKEN }}
+        password: ${{ env.DOCKER_TOKEN }}
         repository: ${{ inputs.i.DOCKER_ORG }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
