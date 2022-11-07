@@ -8,9 +8,8 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-Dockerfile
+^Dockerfile$
 ^LICENSE
-^action.yml$
 
 node_modules$
 package-lock\.json$
