@@ -59,7 +59,6 @@ runs:
   steps:
     - name: Check github object
       run: |
-        echo ${{ env.github }}
         echo ${{ github }}
       shell: bash {0}
     
