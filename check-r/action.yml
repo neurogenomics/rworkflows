@@ -11,8 +11,8 @@ runs:
   steps:
     - name: Set GitHub token 
       run: |
-        echo "GITHUB_PAT=inputs.i.GITHUB_TOKEN" >> $GITHUB_ENV 
-        echo "GITHUB_TOKEN=inputs.i.GITHUB_TOKEN" >> $GITHUB_ENV 
+        echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0}
      
     - name: Run CMD check

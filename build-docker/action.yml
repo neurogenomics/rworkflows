@@ -41,9 +41,9 @@ runs:
       if: "(!contains(github.event.head_commit.message, '/nodocker')) && ${{ inputs.i.run_docker }} == 'true' && inputs.i.runner_os == 'Linux' "
       uses: docker/build-push-action@v1
       with:
-        username: ${{ inputs.i.DOCKER_USERNAME }}
-        password: ${{ inputs.i.DOCKER_TOKEN }}
-        repository: ${{ inputs.i.DOCKER_ORG }}/${{ env.packageName }}
+        username: inputs.i.DOCKER_USERNAME
+        password: inputs.i.DOCKER_TOKEN
+        repository: inputs.i.DOCKER_ORG/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: ${{ env.packageVersion }},latest

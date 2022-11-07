@@ -16,7 +16,7 @@ runs:
       shell: bash {0} 
       
     - name: Install package
-      if: ${{ inputs.i.run_pkgdown }} == 'true' && inputs.i.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       run: R CMD INSTALL .
       shell: bash {0}
 
@@ -34,7 +34,7 @@ runs:
       shell: bash {0}
 
     - name: Render README
-      if: ${{ inputs.i.run_pkgdown }} == 'true' && inputs.i.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       env:
         DISPLAY: 99.0
       run: |
@@ -46,13 +46,13 @@ runs:
       shell: Rscript {0} 
         
     - name: Build pkgdown site
-      if: ${{ inputs.i.run_pkgdown }} == 'true' && inputs.i.runner_os== 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os== 'Linux'
       run: |
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
     - name: Deploy pkgdown site to GitHub pages 🚀
-      if: ${{ inputs.i.run_pkgdown }} == 'true' && inputs.i.runner_os == 'Linux'
+      if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
         clean: false
