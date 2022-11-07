@@ -60,32 +60,32 @@ inputs:
 runs:
   using: 'composite'    
   steps:
-    - name: Install system dependencies
-      uses: neurogenomics/rworkflows/install-system@master
-      with:
-        i: inputs
-      env: github
-      
-    - name: Install R dependencies
-      uses: neurogenomics/rworkflows/install-r@master
-      with:
-        i: inputs
-      env: github
-      
-    - name: Check R package
-      uses: neurogenomics/rworkflows/check-r@master
-      with:
-        i: inputs
-      env: github
-        
-    - name: Build and deploy R package documentation website
-      uses: neurogenomics/rworkflows/build-site@master
-      with:
-        i: inputs
-      env: github
-      
-    - name: Build and deploy R package docker container
-      uses: neurogenomics/rworkflows/build-docker@master
-      with:
-        i: inputs
-      Z
+    - name Check github object
+      run: |
+        echo ${{ env.github }}
+        echo ${{ inputs.github }} 
+    #   
+    # - name: Install system dependencies
+    #   uses: neurogenomics/rworkflows/install-system@master
+    #   with:
+    #     i: inputs 
+    #   
+    # - name: Install R dependencies
+    #   uses: neurogenomics/rworkflows/install-r@master
+    #   with:
+    #     i: inputs 
+    #   
+    # - name: Check R package
+    #   uses: neurogenomics/rworkflows/check-r@master
+    #   with:
+    #     i: inputs 
+    #     
+    # - name: Build and deploy R package documentation website
+    #   uses: neurogenomics/rworkflows/build-site@master
+    #   with:
+    #     i: inputs 
+    #   
+    # - name: Build and deploy R package docker container
+    #   uses: neurogenomics/rworkflows/build-docker@master
+    #   with:
+    #     i: inputs
