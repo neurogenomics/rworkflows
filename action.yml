@@ -60,24 +60,24 @@ runs:
     - name: Install system dependencies
       uses: neurogenomics/rworkflows/install-system@master
       with:
-        i: ${{inputs}}
+        i: inputs
         
     - name: Install R dependencies
       uses: neurogenomics/rworkflows/install-r@master
       with:
-        i: ${{inputs}}
+        i: inputs
         
     - name: Check R package
       uses: neurogenomics/rworkflows/check-r@master
       with:
-        i: ${{inputs}}
+        i: inputs
         
     - name: Build and deploy R package documentation website
       uses: neurogenomics/rworkflows/build-site@master
       with:
-        i: ${{inputs}}
+        i: inputs
         
     - name: Build and deploy R package docker container
       uses: neurogenomics/rworkflows/build-docker@master
       with:
-        i: ${{inputs}}
+        i: inputs
