@@ -48,7 +48,7 @@ folders.
 
 ## [Documentation](https://neurogenomics.github.io/rworkflows)
 
-### [Getting started](https://neurogenomics.github.io/rworkflows/articles)
+### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
 
 ### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
 
@@ -67,7 +67,7 @@ function within the
 [`biothis`](http://www.bioconductor.org/packages/release/bioc/html/biocthis.html)
 package.
 
-### Key changes in `rworkflows`
+#### Key changes in `rworkflows`
 
 -   Uses dynamic variables to specify R/Bioconductor versions
     (e.g. `r: "latest"`) and the name of your R package, as opposed to
@@ -94,7 +94,7 @@ the “release” version of Bioconductor. See this
 [Issue](https://github.com/Bioconductor/bioconductor_docker/issues/37)
 for details.
 
-#### `scFlow`
+### [`scFlow`](https://github.com/combiz/scFlow)
 
 This DockerFile was partly adapted from the [scFlow
 Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
