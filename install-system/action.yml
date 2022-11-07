@@ -12,13 +12,7 @@ inputs:
   runner_os:
     description: >
       The Operating System (OS ) that the workflow is running on.
-    default: 'Linux'
-env:
-  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-  # RSPM: ${{ matrix.config.rspm }}
-  NOT_CRAN: true
-  TZ: UTC
-  RGL_USE_NULL: TRUE
+    default: 'Linux' 
 runs:
   using: 'composite'    
   steps:
@@ -26,20 +20,17 @@ runs:
       run: |
         echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-      shell: bash {0}
+      shell: bash {0} 
       
-    - name: Set RSPM
-      run: |
-        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
-      shell: bash {0}
-    
     ## Set the R library to the directory matching the
     ## R packages cache step further below when running on Docker (Linux).
     - name: Set R Library home on Linux 
       if: inputs.runner_os == 'Linux'
-      run: | 
+      run: |
+        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
+        git config --global --add safe.directory '*'
       shell: bash {0}
 
     ## Most of these steps are the same as the ones in
