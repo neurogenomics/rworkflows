@@ -71,7 +71,7 @@ runs:
          ## the Azure link will be the main one going forward.
          options(crayon.enabled = TRUE)
          bioc_ver <- BiocManager::version()
-         gha_repos <- if(
+         repos <- if(
              .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
          ) c(
              "AnVIL" = file.path("https://bioconductordocker.blob.core.windows.net/packages",bioc_ver,"bioc"),
@@ -80,14 +80,14 @@ runs:
 
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))
-         install.packages(c("rcmdcheck", "BiocCheck","rmarkdown"), repos = gha_repos)
+         install.packages(c("rcmdcheck", "BiocCheck","rmarkdown"), repos = repos)
 
          ## Pass #1 at installing dependencies
          ## This pass uses AnVIL-powered fast binaries
          ## details at https://github.com/nturaga/bioc2021-bioconductor-binaries
          ## The speed gains only apply to the docker builds.
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies: local dependencies ****'))
-         remotes::install_local(dependencies = TRUE, repos = gha_repos, build_vignettes = FALSE, upgrade = TRUE)
+         remotes::install_local(dependencies = TRUE, repos = repos, build_vignettes = FALSE, upgrade = TRUE)
       continue-on-error: true
       shell: Rscript {0}
 
