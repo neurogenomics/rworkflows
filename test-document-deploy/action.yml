@@ -313,8 +313,7 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
-      uses: codecov/codecov-action@v3
-      shell: Rscript {0}
+      uses: codecov/codecov-action@v3 
 
     - name: Install package
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
