@@ -4,10 +4,7 @@ author: 'Brian M. Schilder'
 inputs: 
   GITHUB_TOKEN:
     description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}
-  github_ref:
-    description: >
-      Branch name of the GitHub repository.
+      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
@@ -227,6 +224,7 @@ runs:
         ## Pass #2 at installing dependencies
         ## This pass does not use AnVIL and will thus update any packages
         ## that have seen been updated in Bioconductor
+        options(crayon.enabled = TRUE)
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies: any remaining dependencies ****'))
         remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = TRUE, upgrade = TRUE, force = TRUE)
       continue-on-error: true
