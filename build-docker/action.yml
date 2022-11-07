@@ -14,6 +14,17 @@ runs:
         echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0} 
+      
+    ## Set the R library to the directory matching the
+    ## R packages cache step further below when running on Docker (Linux).
+    - name: Set R Library home on Linux 
+      if: inputs.i.runner_os == 'Linux'
+      run: |
+        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
+        mkdir -p /__w/_temp/Library
+        echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
+        git config --global --add safe.directory '*'
+      shell: bash {0}
 
     - name: Get R package info
       if: inputs.i.runner_os == 'Linux'
