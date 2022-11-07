@@ -26,7 +26,13 @@ runs:
       run: |
         echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-      shell: bash {0} 
+      shell: bash {0}
+      
+    - name: Set git safe.directory
+      if: inputs.runner_os == 'Linux'
+      run: | 
+        git config --global --add safe.directory '*'
+      shell: bash {0}
 
     - name: Install package
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
