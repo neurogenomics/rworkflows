@@ -37,6 +37,31 @@ Type 'q()' to quit R.
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 > cleanEx()
+> nameEx("use_dockerfile")
+> ### * use_dockerfile
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: use_dockerfile
+> ### Title: Use Dockerfile
+> ### Aliases: use_dockerfile
+> 
+> ### ** Examples
+> 
+> path <- use_dockerfile(save_dir=tempdir())
+Creating new Docker file ==> /tmp/Rtmpz4mK2W/working_dir/Rtmpu3ykyS/Dockerfile
+trying URL 'https://github.com/neurogenomics/rworkflows/raw/master/Dockerfile'
+Content type 'text/plain; charset=utf-8' length 2916 bytes
+==================================================
+downloaded 2916 bytes
+
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("use_dockerfile", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
 > nameEx("use_gha")
 > ### * use_gha
 > 
@@ -51,7 +76,7 @@ Type 'q()' to quit R.
 > 
 >  
 > path <- use_gha(save_dir = file.path(tempdir(),".github","workflows"))
-Saving workflow ==> /tmp/RtmpMHE7mk/working_dir/Rtmp9kwWYd/.github/workflows/test-document-deploy
+Saving workflow ==> /tmp/Rtmpz4mK2W/working_dir/Rtmpu3ykyS/.github/workflows/test-document-deploy
 > 
 > 
 > 
@@ -62,7 +87,7 @@ Saving workflow ==> /tmp/RtmpMHE7mk/working_dir/Rtmp9kwWYd/.github/workflows/tes
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.133 0.017 0.152 0 0 
+Time elapsed:  0.218 0.012 0.724 0 0 
 > grDevices::dev.off()
 null device 
           1 

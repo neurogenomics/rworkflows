@@ -4,10 +4,7 @@ author: 'Brian M. Schilder'
 inputs: 
   GITHUB_TOKEN:
     description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }}
-  github_ref:
-    description: >
-      Branch name of the GitHub repository.
+      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
@@ -207,8 +204,6 @@ runs:
              ) else BiocManager::repositories()
 
          ## For running the checks
-         ### hrbrthemes necessary to avoid ggplot2 errors on MacOS: https://stackoverflow.com/a/66423481/13214824
-
          message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))
          install.packages(c("rcmdcheck", "BiocCheck","rmarkdown"), repos = gha_repos)
 
@@ -216,7 +211,6 @@ runs:
          ## This pass uses AnVIL-powered fast binaries
          ## details at https://github.com/nturaga/bioc2021-bioconductor-binaries
          ## The speed gains only apply to the docker builds.
-
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies: local dependencies ****'))
          remotes::install_local(dependencies = TRUE, repos = gha_repos, build_vignettes = FALSE, upgrade = TRUE)
       continue-on-error: true
@@ -227,6 +221,7 @@ runs:
         ## Pass #2 at installing dependencies
         ## This pass does not use AnVIL and will thus update any packages
         ## that have seen been updated in Bioconductor
+        options(crayon.enabled = TRUE)
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies: any remaining dependencies ****'))
         remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = TRUE, upgrade = TRUE, force = TRUE)
       continue-on-error: true
@@ -368,9 +363,17 @@ runs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
-        path: check
-
+        path: check 
+        
     ## DockerHub steps
+    - name: Create Docker file
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'"
+      run: |
+        options(crayon.enabled = TRUE)
+        remotes::install_github("neurogenomics/rworkflows")
+        path <- rworkflows::use_dockerfile()
+      shell: Rscript {0} 
+      
     - name: Build and push to DockerHub
       if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'"
       uses: docker/build-push-action@v1
@@ -381,4 +384,4 @@ runs:
         tag_with_ref: true
         tag_with_sha: false
         tags: ${{ env.packageVersion }},latest
-        build_args: PKG=${{ env.packageNameOrig }},BIOC=${{ inputs.run_bioccheck }},GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}
+        build_args: PKG=${{ env.packageNameOrig }}
