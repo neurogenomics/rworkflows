@@ -313,9 +313,7 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
-      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
-      run: |
-        covr::codecov()
+      - uses: codecov/codecov-action@v3
       shell: Rscript {0}
 
     - name: Install package
