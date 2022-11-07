@@ -1,0 +1,71 @@
+name: 'build-docker'
+description: >
+  rworkflows: Build a Docker container and push it to DockerHub.
+author: 'Brian M. Schilder'
+inputs: 
+  GITHUB_TOKEN:
+    description: >
+      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
+  cache_version: 
+    description: >
+      Which cache version to use.
+    default: cache-v1
+  run_docker: 
+    description: >
+      Whether to build and push a Docker container to DockerHub.
+    default: true
+  DOCKER_USERNAME: 
+    description: >
+      DockerHub username. 
+  DOCKER_ORG: 
+    description: >
+      DockerHub organization name.
+  DOCKER_TOKEN:
+    description: >
+      DockerHub token.
+  runner_os:
+    description: >
+      The Operating System (OS ) that the workflow is running on.
+    default: 'Linux'
+runs:
+  using: 'composite'    
+  steps:
+    - name: Set GitHub token 
+      run: |
+        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+      shell: bash {0} 
+
+    - name: Get R package info
+      if: inputs.runner_os == 'Linux'
+      run: |
+        #### DockerHub repos must be lowercase (,,) ####
+        name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+        echo "packageName=${name,,}" >> $GITHUB_ENV
+        echo "packageNameOrig=${name}" >> $GITHUB_ENV
+        echo $name
+        version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
+        echo "packageVersion=${version}" >> $GITHUB_ENV
+        echo $version
+      shell: bash {0} 
+        
+    ## DockerHub steps
+    - name: Create Docker file
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'"
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
+        path <- rworkflows::use_dockerfile()
+      shell: Rscript {0} 
+      
+    - name: Build and push to DockerHub
+      if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'"
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ inputs.DOCKER_USERNAME }}
+        password: ${{ inputs.DOCKER_TOKEN }}
+        repository: ${{ inputs.DOCKER_ORG }}/${{ env.packageName }}
+        tag_with_ref: true
+        tag_with_sha: false
+        tags: ${{ env.packageVersion }},latest
+        build_args: PKG=${{ env.packageNameOrig }}

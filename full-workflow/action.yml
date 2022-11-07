@@ -1,5 +1,6 @@
-name: 'test-document-deploy'
-description: 'Test, document, and deploy R packages.'
+name: 'rworkflows-full'
+description: >
+  rworkflows: Full workflow to test, document, and deploy R packages.
 author: 'Brian M. Schilder'
 inputs: 
   GITHUB_TOKEN:
@@ -49,13 +50,7 @@ inputs:
   runner_os:
     description: >
       The Operating System (OS ) that the workflow is running on.
-    default: 'Linux' 
-## Environment variables unique to this job.
-# env: 
-  # R_KEEP_PKG_SOURCE: yes 
-  # R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-  # TZ: UTC 
-  # RGL_USE_NULL: TRUE
+    default: 'Linux'
 runs:
   using: 'composite'    
   steps:

@@ -1,0 +1,99 @@
+name: 'check-r'
+description: >
+  rworkflows: Run CRAN/Bioc checks and unit tests on an R package.
+author: 'Brian M. Schilder'
+inputs: 
+  GITHUB_TOKEN:
+    description: >
+      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
+  run_bioccheck:
+    description: >
+      Run Bioconductor checks. Must pass in order to continue workflow.
+  run_crancheck:
+    description: >
+      Run CRAN checks. Must pass in order to continue workflow."
+    default: true
+  has_testthat:
+    description: >
+      Run unit tests and report results.
+    default: true
+  run_covr:
+    description: >
+      Run code coverage tests and publish results to codecov.
+    default: true
+  has_runit: 
+    description: >
+      Run R Unit tests. Requires a subdirectory named 'unitTests'.
+    default: false
+  cache_version: 
+    description: >
+      Which cache version to use.
+    default: cache-v1
+  runner_os:
+    description: >
+      The Operating System (OS ) that the workflow is running on.
+    default: 'Linux'  
+runs:
+  using: 'composite'    
+  steps:
+    - name: Set GitHub token 
+      run: |
+        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+      shell: bash {0}
+     
+    - name: Run CMD check
+      env:
+        _R_CHECK_CRAN_INCOMING_: false
+        DISPLAY: 99.0
+        AS_CRAN: ${{ inputs.run_crancheck }}
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("sessioninfo")) install.packages("rcmdcheck")
+        as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
+        rcmdcheck::rcmdcheck(
+            args = c("--no-manual", "--timings", as_cran),
+            build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
+            error_on = "warning",
+            check_dir = "check")
+      shell: Rscript {0}
+        
+    - name: Reveal testthat details
+      if: inputs.has_testthat == 'true'
+      run: |
+        find . -name testthat.Rout -exec cat '{}' ';'
+      shell: bash {0}
+        
+    - name: Run RUnit tests
+      if: inputs.has_runit == 'true'
+      run: |
+        options(crayon.enabled = TRUE)
+        BiocGenerics:::testPackage()
+      shell: Rscript {0}
+        
+    - name: Run BiocCheck
+      if: inputs.run_bioccheck == 'true'
+      env:
+        DISPLAY: 99.0
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("BiocManager")) install.packages("BiocManager")
+        if(!require("BiocCheck")) BiocManager::install("BiocCheck")
+        BiocCheck::BiocCheck(
+            dir('check', 'tar.gz$', full.names = TRUE),
+            `quit-with-status` = TRUE,
+            `no-check-R-ver` = TRUE,
+            `no-check-bioc-help` = TRUE)
+      shell: Rscript {0}
+        
+    - name: Test coverage
+      if: inputs.runner_os == 'Linux'
+      uses: codecov/codecov-action@v3 
+
+    - name: Upload check results
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
+        path: check 
+        
