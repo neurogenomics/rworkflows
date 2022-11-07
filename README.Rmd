@@ -1,5 +1,5 @@
 ---
-title: "rworkflows"  
+title: ""  
 author: "<img src='`r read.dcf('DESCRIPTION', fields = 'URL')[1]`/raw/master/inst/hex/hex.png' height='300'><br><br>
         `r badger::badge_github_version(color = 'black')` 
         `r badger::badge_github_actions(action = 'R-CMD-check-bioc')`

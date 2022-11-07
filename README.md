@@ -1,5 +1,3 @@
-rworkflows
-================
 <img src='https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height='300'><br><br>
 [![](https://img.shields.io/badge/devel%20version-0.99.0-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
