@@ -24,7 +24,8 @@ biocViews:
     Genetics, FunctionalGenomics, SystemsBiology
 Imports:
     here,
-    yaml
+    yaml,
+    utils
 Suggests:
     markdown,
     rmarkdown,
@@ -34,7 +35,6 @@ Suggests:
     BiocStyle,
     covr,
     testthat (>= 3.0.0),
-    utils,
     badger, 
     hexSticker
 RoxygenNote: 7.2.1.9000
