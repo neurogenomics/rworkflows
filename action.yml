@@ -54,6 +54,8 @@ inputs:
     description: >
       The Operating System (OS) that the workflow is running on.
     default: 'Linux'
+env:
+  github: ''
 runs:
   using: 'composite'    
   steps:
@@ -85,4 +87,4 @@ runs:
       uses: neurogenomics/rworkflows/build-docker@master
       with:
         i: inputs
-      env: github
+      Z
