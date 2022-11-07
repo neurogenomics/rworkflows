@@ -7,7 +7,7 @@ on:
     branches: [main, master]
 
 jobs:
-  test-document-deploy:
+  check_action:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
