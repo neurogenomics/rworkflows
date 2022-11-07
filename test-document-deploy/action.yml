@@ -313,7 +313,7 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
-      - uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v3
       shell: Rscript {0}
 
     - name: Install package
