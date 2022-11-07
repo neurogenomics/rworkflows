@@ -52,7 +52,7 @@ inputs:
       DockerHub token.
   runner_os:
     description: >
-      The Operating System (OS ) that the workflow is running on.
+      The Operating System (OS) that the workflow is running on.
     default: 'Linux'
 runs:
   using: 'composite'    
@@ -60,19 +60,12 @@ runs:
     - name: Install system dependencies
       uses: neurogenomics/rworkflows/install-system@master
       with:
-        GITHUB_TOKEN: inputs.GITHUB_TOKEN
-        cache_version: inputs.cache_version
-        runner_os: inputs.runner_os
+        i: inputs
       
     - name: Install R dependencies
       uses: neurogenomics/rworkflows/install-r@master
       with:
-        GITHUB_TOKEN: inputs.GITHUB_TOKEN
-        run_covr: inputs.run_covr
-        run_pkgdown: inputs.run_pkgdown
-        has_runit: inputs.has_runit
-        cache_version: inputs.cache_version
-        runner_os: inputs.runner_os 
+        i: inputs
       
     - name: Check R package
       uses: neurogenomics/rworkflows/check-r@master

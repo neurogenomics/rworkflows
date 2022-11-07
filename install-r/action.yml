@@ -25,7 +25,7 @@ inputs:
     default: cache-v1  
   runner_os:
     description: >
-      The Operating System (OS ) that the workflow is running on.
+      The Operating System (OS) that the workflow is running on.
     default: 'Linux'
 runs:
   using: 'composite'    
