@@ -124,7 +124,7 @@ use_gha <- function(name="test-document-deploy",
     
     if(!is.null(save_dir)){
         yml2 <- yaml::as.yaml(x = yml)
-        path <- file.path(save_dir,name)
+        path <- file.path(save_dir,paste0(name,".yml"))
         dir.create(dirname(path),showWarnings = FALSE, recursive = TRUE)
         messager("Saving workflow ==>",path,v=verbose)
         writeLines(text = yml2, con = path)

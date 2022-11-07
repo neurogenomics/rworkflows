@@ -103,6 +103,10 @@ unfamiliar with Docker do not have to troubleshoot making this file
 correctly. It also means that it will continue to work even if your R
 package dependencies change.
 
+### [`act`](https://github.com/nektos/act)
+
+A very useful command line tool for testing GitHub Actions locally.
+
 </details>
 
 # Session Info
