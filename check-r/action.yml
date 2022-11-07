@@ -32,20 +32,20 @@ runs:
       shell: Rscript {0}
         
     - name: Reveal testthat details
-      if: inputs.i.has_testthat == 'true'
+      if: ${{ inputs.i.has_testthat }} == 'true'
       run: |
         find . -name testthat.Rout -exec cat '{}' ';'
       shell: bash {0}
         
     - name: Run RUnit tests
-      if: inputs.i.has_runit == 'true'
+      if: ${{ inputs.i.has_runit }} == 'true'
       run: |
         options(crayon.enabled = TRUE)
         BiocGenerics:::testPackage()
       shell: Rscript {0}
         
     - name: Run BiocCheck
-      if: inputs.i.run_bioccheck == 'true'
+      if: ${{ inputs.i.run_bioccheck }} == 'true'
       env:
         DISPLAY: 99.0
       run: |
@@ -60,7 +60,7 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
-      if: inputs.i.runner_os == 'Linux'
+      if: ${{ inputs.i.runner_os }} == 'Linux'
       uses: codecov/codecov-action@v3 
 
     - name: Upload check results
@@ -69,3 +69,4 @@ runs:
       with:
         name: ${{ inputs.i.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check
+        
