@@ -13,6 +13,12 @@ runs:
         echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0} 
+  
+    - name: Check github object
+      run: |
+        echo ${{ env.github }}
+        echo ${{ inputs.github }}
+      shell: bash {0} 
       
     ## Set the R library to the directory matching the
     ## R packages cache step further below when running on Docker (Linux).
