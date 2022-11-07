@@ -29,7 +29,7 @@ VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-11-07 01:43:50 UTC; root
+Packaged: 2022-11-07 02:21:08 UTC; root
 Author: Brian Schilder [aut, ctb] (<https://orcid.org/0000-0001-5949-2191>),
   Alan Murphy [aut, cre] (<https://orcid.org/0000-0002-2487-8753>)
 Maintainer: Alan Murphy <alanmurph94@hotmail.com>

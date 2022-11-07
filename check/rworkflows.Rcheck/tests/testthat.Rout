@@ -28,15 +28,15 @@ Type 'q()' to quit R.
 > 
 > test_check("rworkflows")
 Hello world
-Creating new Docker file ==> /tmp/Rtmpz4mK2W/working_dir/Rtmp38KHNr/Dockerfile
+Creating new Docker file ==> /tmp/RtmpvRbQsR/working_dir/RtmpvnoZqq/Dockerfile
 trying URL 'https://github.com/neurogenomics/rworkflows/raw/master/Dockerfile'
 Content type 'text/plain; charset=utf-8' length 2916 bytes
 ==================================================
 downloaded 2916 bytes
 
-Saving workflow ==> /tmp/Rtmpz4mK2W/working_dir/Rtmp38KHNr/.github/workflows/test-document-deploy
+Saving workflow ==> /tmp/RtmpvRbQsR/working_dir/RtmpvnoZqq/.github/workflows/test-document-deploy
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
 > 
 > proc.time()
    user  system elapsed 
-  0.678   0.113   0.818 
+  0.833   0.112   1.214 

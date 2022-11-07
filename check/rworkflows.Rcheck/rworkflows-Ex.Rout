@@ -50,7 +50,7 @@ Type 'q()' to quit R.
 > ### ** Examples
 > 
 > path <- use_dockerfile(save_dir=tempdir())
-Creating new Docker file ==> /tmp/Rtmpz4mK2W/working_dir/Rtmpu3ykyS/Dockerfile
+Creating new Docker file ==> /tmp/RtmpvRbQsR/working_dir/RtmpYumRDO/Dockerfile
 trying URL 'https://github.com/neurogenomics/rworkflows/raw/master/Dockerfile'
 Content type 'text/plain; charset=utf-8' length 2916 bytes
 ==================================================
@@ -76,7 +76,7 @@ downloaded 2916 bytes
 > 
 >  
 > path <- use_gha(save_dir = file.path(tempdir(),".github","workflows"))
-Saving workflow ==> /tmp/Rtmpz4mK2W/working_dir/Rtmpu3ykyS/.github/workflows/test-document-deploy
+Saving workflow ==> /tmp/RtmpvRbQsR/working_dir/RtmpYumRDO/.github/workflows/test-document-deploy
 > 
 > 
 > 
@@ -87,7 +87,7 @@ Saving workflow ==> /tmp/Rtmpz4mK2W/working_dir/Rtmpu3ykyS/.github/workflows/tes
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.218 0.012 0.724 0 0 
+Time elapsed:  0.245 0.024 0.947 0 0 
 > grDevices::dev.off()
 null device 
           1 
