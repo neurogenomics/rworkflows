@@ -63,8 +63,9 @@ runs:
     - name: Check github object
       run: |
         echo ${{ env.github }}
-        echo ${{ inputs.github }} 
-    #   
+        echo ${{ inputs.github }}
+      shell: bash {0}
+    
     # - name: Install system dependencies
     #   uses: neurogenomics/rworkflows/install-system@master
     #   with:
