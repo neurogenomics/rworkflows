@@ -51,7 +51,7 @@ Type 'q()' to quit R.
 > 
 >  
 > path <- use_gha(save_dir = file.path(tempdir(),".github","workflows"))
-Saving workflow ==> /tmp/RtmpzMeaPn/working_dir/RtmpXctSRl/.github/workflows/test-document-deploy
+Saving workflow ==> /tmp/RtmpyDUQXc/working_dir/RtmpB91Qja/.github/workflows/test-document-deploy
 > 
 > 
 > 
@@ -62,7 +62,7 @@ Saving workflow ==> /tmp/RtmpzMeaPn/working_dir/RtmpXctSRl/.github/workflows/tes
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.118 0.006 0.127 0 0 
+Time elapsed:  0.138 0.012 0.153 0 0 
 > grDevices::dev.off()
 null device 
           1 

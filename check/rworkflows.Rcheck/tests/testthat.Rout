@@ -32,4 +32,4 @@ Hello world
 > 
 > proc.time()
    user  system elapsed 
-  0.517   0.099   0.512 
+  0.592   0.102   0.578 
