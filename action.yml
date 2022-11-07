@@ -60,7 +60,7 @@ inputs:
 runs:
   using: 'composite'    
   steps:
-    - name Check github object
+    - name: Check github object
       run: |
         echo ${{ env.github }}
         echo ${{ inputs.github }} 
