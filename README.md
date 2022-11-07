@@ -12,7 +12,7 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 Authors: <i>Brian Schilder, Alan Murphy</i>
 </h4>
 <h4>
-README updated: <i>Nov-06-2022</i>
+README updated: <i>Nov-07-2022</i>
 </h4>
 
 ## Intro
@@ -225,25 +225,20 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] tidyselect_1.2.0    xfun_0.34           purrr_0.3.5        
-    ##  [4] colorspace_2.0-3    vctrs_0.4.2         generics_0.1.3     
-    ##  [7] htmltools_0.5.3     usethis_2.1.6       yaml_2.3.6         
-    ## [10] utf8_1.2.2          rlang_1.0.6         gert_1.9.1         
-    ## [13] pillar_1.8.1        glue_1.6.2          DBI_1.1.3          
-    ## [16] RColorBrewer_1.1-3  rvcheck_0.2.1       lifecycle_1.0.3    
-    ## [19] stringr_1.4.1       dlstats_0.1.5       munsell_0.5.0      
-    ## [22] gtable_0.3.1        evaluate_0.17       knitr_1.40         
-    ## [25] fastmap_1.1.0       curl_4.3.3          sys_3.4.1          
-    ## [28] fansi_1.0.3         openssl_2.0.4       scales_1.2.1       
-    ## [31] BiocManager_1.30.18 desc_1.4.2          jsonlite_1.8.3     
-    ## [34] fs_1.5.2            credentials_1.3.2   ggplot2_3.3.6      
-    ## [37] askpass_1.1         digest_0.6.30       stringi_1.7.8      
-    ## [40] gh_1.3.1            dplyr_1.0.10        grid_4.2.1         
-    ## [43] rprojroot_2.0.3     cli_3.4.1           tools_4.2.1        
-    ## [46] yulab.utils_0.0.5   magrittr_2.0.3      tibble_3.1.8       
-    ## [49] crayon_1.5.2        pkgconfig_2.0.3     assertthat_0.2.1   
-    ## [52] rmarkdown_2.17      httr_1.4.4          rstudioapi_0.14    
-    ## [55] badger_0.2.1        R6_2.5.1            gitcreds_0.1.2     
-    ## [58] compiler_4.2.1
+    ##  [1] BiocManager_1.30.18 pillar_1.8.1        compiler_4.2.1     
+    ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.5   tools_4.2.1        
+    ##  [7] digest_0.6.30       jsonlite_1.8.3      evaluate_0.17      
+    ## [10] lifecycle_1.0.3     tibble_3.1.8        gtable_0.3.1       
+    ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.4.1          
+    ## [16] DBI_1.1.3           rstudioapi_0.14     rvcheck_0.2.1      
+    ## [19] yaml_2.3.6          xfun_0.34           fastmap_1.1.0      
+    ## [22] stringr_1.4.1       dplyr_1.0.10        knitr_1.40         
+    ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.4.2        
+    ## [28] dlstats_0.1.5       rprojroot_2.0.3     grid_4.2.1         
+    ## [31] tidyselect_1.2.0    glue_1.6.2          R6_2.5.1           
+    ## [34] fansi_1.0.3         rmarkdown_2.17      ggplot2_3.3.6      
+    ## [37] badger_0.2.1        magrittr_2.0.3      scales_1.2.1       
+    ## [40] htmltools_0.5.3     assertthat_0.2.1    colorspace_2.0-3   
+    ## [43] utf8_1.2.2          stringi_1.7.8       munsell_0.5.0
 
 </details>

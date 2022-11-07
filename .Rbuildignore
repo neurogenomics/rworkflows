@@ -18,3 +18,4 @@ package\.json$
 
 ^inst/hex$
 ^hex$
+^test-document-deploy$
