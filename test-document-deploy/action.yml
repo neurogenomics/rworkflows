@@ -62,6 +62,7 @@ runs:
     - name: Set GitHub token 
       run: |
         echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
       shell: bash {0}
     
     ## Set the R library to the directory matching the
@@ -313,6 +314,7 @@ runs:
       shell: Rscript {0}
         
     - name: Test coverage
+      if: inputs.runner_os == 'Linux'
       uses: codecov/codecov-action@v3 
 
     - name: Install package
@@ -328,7 +330,6 @@ runs:
         echo "packageName=${name,,}" >> $GITHUB_ENV
         echo "packageNameOrig=${name}" >> $GITHUB_ENV
         echo $name
-
         version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
         echo "packageVersion=${version}" >> $GITHUB_ENV
         echo $version
@@ -346,13 +347,19 @@ runs:
         }
       shell: Rscript {0} 
         
+    - name: Build pkgdown site
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      run: |
+        pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+      shell: Rscript {0}
+        
     - name: Deploy pkgdown site to GitHub pages 🚀
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
         clean: false
         branch: gh-pages
-        folder: "."
+        folder: docs
         token: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Upload check results
