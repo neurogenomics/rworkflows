@@ -12,6 +12,11 @@ runs:
       run: |
         echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo ${{ fromJSON(github) }} 
+        echo ${{ github }} 
+        echo ${{ inputs.i.run_docker }} 
+        echo $inputs.i.run_docker
+        echo inputs.i.run_docker
       shell: bash {0}  
     
     ## Set the R library to the directory matching the
