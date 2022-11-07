@@ -78,7 +78,7 @@ runs:
       shell: bash {0}
 
     - name: Install macOS system dependencies
-      if: ${{ matrix.config.os }} == 'macOS-latest'
+      if: matrix.config.os == 'macOS-latest'
       run: |
         ## Enable installing XML from source if needed
         brew install libxml2
