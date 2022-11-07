@@ -54,8 +54,9 @@ inputs:
     description: >
       The Operating System (OS) that the workflow is running on.
     default: 'Linux'
-env:
-  github: ''
+  github:
+    description: >
+      GitHub object from controller workflow.
 runs:
   using: 'composite'    
   steps:
