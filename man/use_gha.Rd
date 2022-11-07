@@ -16,12 +16,14 @@ use_gha(
   has_runit = TRUE,
   run_docker = TRUE,
   repository = "${{ github.repository }}",
-  repo_token = "${{ secrets.PAT_GITHUB }}",
+  github_token = "${{ secrets.PAT_GITHUB }}",
   docker_username = NULL,
   docker_org = docker_username,
   docker_token = "${{ secrets.DOCKER_TOKEN }}",
+  cache_version = "cache_version",
   save_dir = here::here(".github", "workflows"),
   return_path = TRUE,
+  force_new = FALSE,
   verbose = TRUE
 )
 }
@@ -51,7 +53,7 @@ build documentation website, and deploy to \emph{gh-pages} branch.}
 
 \item{repository}{GitHub repository to be checked.}
 
-\item{repo_token}{Token for the repo. 
+\item{github_token}{Token for the repo. 
 Can be passed in using {{ secrets.PAT_GITHUB }}.}
 
 \item{docker_username}{DockerHub username.}
@@ -61,10 +63,16 @@ Is the same as \code{docker_username} by default.}
 
 \item{docker_token}{DockerHub token.}
 
+\item{cache_version}{Name of the cache sudirectory to be used
+when reinstalling software in GHA.}
+
 \item{save_dir}{Directory to save workflow to.}
 
 \item{return_path}{Return the path to the saved \emph{yaml} workflow file
 (default: \code{TRUE}), or return the \emph{yaml} object directly.}
+
+\item{force_new}{If the GHA workflow yaml already exists, 
+overwrite with new one (default: \code{FALSE}).}
 
 \item{verbose}{Print messages.}
 }

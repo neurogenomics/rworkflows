@@ -17,16 +17,20 @@
 #' @param has_runit Run R Unit tests.
 #' @param run_docker Whether to build and push a Docker container to DockerHub.
 #' @param repository GitHub repository to be checked.
-#' @param repo_token Token for the repo. 
+#' @param github_token Token for the repo. 
 #' Can be passed in using {{ secrets.PAT_GITHUB }}.
 #' @param docker_username DockerHub username.
 #' @param docker_org DockerHub organization name. 
 #' Is the same as \code{docker_username} by default.
 #' @param docker_token DockerHub token.
+#' @param force_new If the GHA workflow yaml already exists, 
+#' overwrite with new one (default: \code{FALSE}).
 #' 
 #' @param save_dir Directory to save workflow to.
 #' @param return_path Return the path to the saved \emph{yaml} workflow file
 #' (default: \code{TRUE}), or return the \emph{yaml} object directly.
+#' @param cache_version Name of the cache sudirectory to be used
+#'  when reinstalling software in GHA.
 #' @param verbose Print messages.
 #' @returns Path or yaml object.
 #' 
@@ -46,13 +50,15 @@ use_gha <- function(name="test-document-deploy",
                     has_runit=TRUE, 
                     run_docker=TRUE, 
                     repository="${{ github.repository }}",
-                    repo_token="${{ secrets.PAT_GITHUB }}",
+                    github_token="${{ secrets.PAT_GITHUB }}",
                     docker_username=NULL,
                     docker_org=docker_username,
                     docker_token="${{ secrets.DOCKER_TOKEN }}",
+                    cache_version="cache_version",
                     
                     save_dir=here::here(".github","workflows"),
                     return_path=TRUE,
+                    force_new=FALSE,
                     verbose=TRUE){
     
     # templateR:::source_all()
@@ -102,11 +108,12 @@ use_gha <- function(name="test-document-deploy",
                               "has_runit:"=tolower(toString(has_runit)),    
                               "run_docker:"=tolower(toString(run_docker)),   
                               "repository:"=repository,    
-                              "github_token:"=repo_token,    
+                              "GITHUB_TOKEN:"=github_token,    
                               "DOCKER_USERNAME:"=docker_username,
                               "DOCKER_ORG:"=docker_org,
                               "DOCKER_TOKEN:"=docker_token,
-                              "runner.os:"="${{ runner.os }}" 
+                              "runner.os:"="${{ runner.os }}",
+                              "cache_version"=cache_version
                               )
                          )
                     )       
