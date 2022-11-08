@@ -12,48 +12,59 @@ inputs:
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
+    type: boolean
+    default: false
   run_crancheck:
     description: >
       Run CRAN checks. Must pass in order to continue workflow."
+    type: boolean
     default: true
   has_testthat:
     description: >
       Run unit tests and report results.
+    type: boolean
     default: true
   run_covr:
     description: >
       Run code coverage tests and publish results to codecov.
+    type: boolean
     default: true
   run_pkgdown:
     description: >
       Knit the README.Rmd (if available), build documentation website,
       and deploy to gh-pages branch.
+    type: boolean
     default: true
   has_runit: 
     description: >
       Run R Unit tests. Requires a subdirectory named 'unitTests'.
+    type: boolean
     default: false
   cache_version: 
     description: >
       Which cache version to use.
+    type: string
     default: cache-v1
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
+    type: boolean
     default: true
   DOCKER_USERNAME: 
     description: >
       DockerHub username. 
+    type: string
   DOCKER_ORG: 
     description: >
       DockerHub organization name.
+    type: string
   DOCKER_TOKEN:
     description: >
       DockerHub token.
   runner_os:
     description: >
       The Operating System (OS) that the workflow is running on.
-    default: 'Linux'
+    type: string
 runs:
   using: 'composite'    
   steps:

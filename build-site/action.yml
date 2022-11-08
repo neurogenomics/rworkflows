@@ -6,57 +6,57 @@ inputs:
   i:
     description: >
       A list of inputs from the controller workflow.
-runs:
-  using: 'composite'    
-  steps:
-    - name: Set GitHub token 
-      run: |
-        echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-        echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-      shell: bash {0} 
-      
-    - name: Install package
-      if: ${{ inputs.i.run_pkgdown == true }} && inputs.i.runner_os == 'Linux'
-      run: R CMD INSTALL .
-      shell: bash {0}
-
-    - name: Get R package info
-      if: inputs.i.runner_os == 'Linux'
-      run: |
-        #### DockerHub repos must be lowercase (,,) ####
-        name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
-        echo "packageName=${name,,}" >> $GITHUB_ENV
-        echo "packageNameOrig=${name}" >> $GITHUB_ENV
-        echo $name
-        version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
-        echo "packageVersion=${version}" >> $GITHUB_ENV
-        echo $version
-      shell: bash {0}
-
-    - name: Render README
-      if: ${{ inputs.i.run_pkgdown == true }} && inputs.i.runner_os == 'Linux'
-      env:
-        DISPLAY: 99.0
-      run: |
-        if(file.exists("README.Rmd")){
-          options(crayon.enabled = TRUE)
-          if(!require("rmarkdown")) install.packages("rmarkdown");
-          rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
-        }
-      shell: Rscript {0} 
+jobs:
+  build-site:
+    steps:
+      - name: Set GitHub token 
+        run: |
+          echo "GITHUB_PAT=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+          echo "GITHUB_TOKEN=${{ inputs.i.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        shell: bash {0} 
         
-    - name: Build pkgdown site
-      if: ${{ inputs.i.run_pkgdown == true }} && inputs.i.runner_os== 'Linux'
-      run: |
-        pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
-      shell: Rscript {0}
-        
-    - name: Deploy pkgdown site to GitHub pages 🚀
-      if: ${{ inputs.i.run_pkgdown == true }} && inputs.i.runner_os == 'Linux'
-      uses: JamesIves/github-pages-deploy-action@releases/v4
-      with:
-        clean: false
-        branch: gh-pages
-        folder: docs
-        token: ${{ env.GITHUB_TOKEN }}
+      - name: Install package
+        if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
+        run: R CMD INSTALL .
+        shell: bash {0}
+
+      - name: Get R package info
+        if: inputs.i.runner_os == 'Linux'
+        run: |
+          #### DockerHub repos must be lowercase (,,) ####
+          name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+          echo "packageName=${name,,}" >> $GITHUB_ENV
+          echo "packageNameOrig=${name}" >> $GITHUB_ENV
+          echo $name
+          version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
+          echo "packageVersion=${version}" >> $GITHUB_ENV
+          echo $version
+        shell: bash {0}
+
+      - name: Render README
+        if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
+        env:
+          DISPLAY: 99.0
+        run: |
+          if(file.exists("README.Rmd")){
+            options(crayon.enabled = TRUE)
+            if(!require("rmarkdown")) install.packages("rmarkdown");
+            rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
+          }
+        shell: Rscript {0} 
+          
+      - name: Build pkgdown site
+        if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os== 'Linux'
+        run: |
+          pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
+          
+      - name: Deploy pkgdown site to GitHub pages 🚀
+        if: inputs.i.run_pkgdown == 'true' && inputs.i.runner_os == 'Linux'
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs
+          token: ${{ env.GITHUB_TOKEN }}
         
