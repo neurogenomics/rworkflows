@@ -55,7 +55,12 @@ inputs:
       The Operating System (OS) that the workflow is running on.
     default: 'Linux'
 runs:
-  using: 'composite'    
+  using: 'composite'
+  env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true 
+      NOT_CRAN: true
+      TZ: UTC
+      RGL_USE_NULL: TRUE
   steps:
     - name: Set GitHub token 
       run: |
