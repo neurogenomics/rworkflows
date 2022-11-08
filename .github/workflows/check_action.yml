@@ -1,11 +1,9 @@
-name: check_action
-
+name: check_action 
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
-
 jobs:
   check_action:
     runs-on: ${{ matrix.config.os }}
