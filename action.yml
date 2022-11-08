@@ -56,16 +56,13 @@ inputs:
     default: 'Linux'
 runs:
   using: 'composite'
-  env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true 
-      NOT_CRAN: true
-      TZ: UTC
-      RGL_USE_NULL: TRUE
   steps:
     - name: Set GitHub token 
       run: |
         echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV 
+        echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV 
       shell: bash {0}
     
     ## Set the R library to the directory matching the
