@@ -1,11 +1,11 @@
-name: check_action 
+name: check_action_v1
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
 jobs:
-  check_action:
+  check_action_v1:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
@@ -24,8 +24,8 @@ jobs:
             curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
             sudo apt-get install -y nodejs
         shell: bash {0} 
-      #### Check master branch ####
-      - uses: neurogenomics/rworkflows@master
+      #### Check v1 tag ####
+      - uses: neurogenomics/rworkflows@v1
         with:
           run_bioccheck: false
           run_crancheck: true
