@@ -2,6 +2,9 @@ name: 'rworkflows'
 description: >
   rworkflows: Full workflow to test, document, and deploy R packages.
 author: 'Brian M. Schilder'
+branding:
+  icon: check-square
+  color: green
 inputs: 
   GITHUB_TOKEN:
     description: >
