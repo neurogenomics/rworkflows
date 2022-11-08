@@ -70,8 +70,8 @@ runs:
   steps:
     - name: Install system dependencies
       uses: neurogenomics/rworkflows/install-system@master
-      with:
-        i: inputs
+      env:
+        inputs.i: inputs
         
     - name: Install R dependencies
       uses: neurogenomics/rworkflows/install-r@master
