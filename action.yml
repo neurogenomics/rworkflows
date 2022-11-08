@@ -67,6 +67,9 @@ runs:
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV 
         echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV 
+        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
+        echo "TZ=UTC" >> $GITHUB_ENV
+        echo "NOT_CRAN=true" >> $GITHUB_ENV
       shell: bash {0}
     
     ## Set the R library to the directory matching the
@@ -74,7 +77,6 @@ runs:
     - name: Set R Library home on Linux 
       if: inputs.runner_os == 'Linux'
       run: |
-        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
         git config --global --add safe.directory '*'
@@ -285,7 +287,7 @@ runs:
         options(crayon.enabled = TRUE)
         if(!require("rcmdcheck")) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
-        run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--no-vignettes"
+        run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"
         rcmdcheck::rcmdcheck(
             args = c("--no-manual", "--timings", as_cran, run_vignettes),
             build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
