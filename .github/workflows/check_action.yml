@@ -29,6 +29,7 @@ jobs:
         with:
           run_bioccheck: false
           run_crancheck: true
+          run_vignettes: true
           has_testthat: true
           run_covr: true
           run_pkgdown: true

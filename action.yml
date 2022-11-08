@@ -16,6 +16,10 @@ inputs:
     description: >
       Run CRAN checks. Must pass in order to continue workflow."
     default: true
+  run_vignettes:
+    description: >
+      Build and check R package vignettes.
+    default: true
   has_testthat:
     description: >
       Run unit tests and report results.
@@ -57,7 +61,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Set GitHub token 
+    - name: Set GitHub environment variables 
       run: |
         echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
@@ -270,16 +274,20 @@ runs:
       shell: Rscript {0}
 
     - name: Run CMD check
+      if: inputs.run_crancheck == 'true'
       env:
         _R_CHECK_CRAN_INCOMING_: false
+        RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
         DISPLAY: 99.0
         AS_CRAN: ${{ inputs.run_crancheck }}
+        run_vignettes: ${{ inputs.run_vignettes }}
       run: |
         options(crayon.enabled = TRUE)
-        if(!require("sessioninfo")) install.packages("rcmdcheck")
+        if(!require("rcmdcheck")) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
+        run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--no-vignettes"
         rcmdcheck::rcmdcheck(
-            args = c("--no-manual", "--timings", as_cran),
+            args = c("--no-manual", "--timings", as_cran, run_vignettes),
             build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
             error_on = "warning",
             check_dir = "check")
@@ -302,15 +310,19 @@ runs:
       if: inputs.run_bioccheck == 'true'
       env:
         DISPLAY: 99.0
+        RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
+        run_vignettes: ${{ inputs.run_vignettes }}
       run: |
         options(crayon.enabled = TRUE)
         if(!require("BiocManager")) install.packages("BiocManager")
         if(!require("BiocCheck")) BiocManager::install("BiocCheck")
+        no_check_vignettes <- Sys.getenv("run_vignettes")=='true'
         BiocCheck::BiocCheck(
             dir('check', 'tar.gz$', full.names = TRUE),
             `quit-with-status` = TRUE,
             `no-check-R-ver` = TRUE,
-            `no-check-bioc-help` = TRUE)
+            `no-check-bioc-help` = TRUE,
+            `no-check-vignettes` = no_check_vignettes)
       shell: Rscript {0}
         
     - name: Test coverage
