@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       i:
-        desription: "Inputs passed down from controller workflow."
+        description: "Inputs passed down from controller workflow."
         required: true
 jobs:
   install-system:  
