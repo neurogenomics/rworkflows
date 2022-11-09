@@ -1,5 +1,5 @@
 name: rworkflows
-'on':
+on:
   push:
   - master
   - main

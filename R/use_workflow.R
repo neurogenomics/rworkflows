@@ -35,6 +35,8 @@
 #' @returns Path or yaml object.
 #' @source \href{https://github.com/vubiostat/r-yaml/issues/5}{
 #' Issue reading in "on:"/"y","n" elements}.
+#' @source \href{https://github.com/vubiostat/r-yaml/issues/123}{
+#' Issue writing "on:" as "'as':"}
 #' 
 #' @export
 #' @importFrom here here
@@ -77,7 +79,7 @@ use_workflow <- function(name="rworkflows",
     yml <- yaml::read_yaml(
       system.file("yaml","rworkflows_template.yml",
                   package = "rworkflows"),
-      handlers=handlers)
+      handlers = handlers)
     #### name ####
     yml$name <- name
     #### on ####
@@ -113,8 +115,18 @@ use_workflow <- function(name="rworkflows",
     path <- file.path(save_dir,paste0(name,".yml"))
     dir.create(dirname(path),showWarnings = FALSE, recursive = TRUE)
     messager("Saving workflow ==>",path,v=verbose)   
-    yaml::write_yaml(x = yml,
-                     file = path)
+    
+    write_yaml2 <- function(yml,path){
+      result <- gsub(shQuote("on"),"on",yaml::as.yaml(yml))
+      path <- file(path, "w", encoding = "UTF-8", raw=TRUE)
+      open(path, "w")
+      on.exit(close(path))
+      cat(result, file = path, sep = "")
+    }   
+    write_yaml2(yml = yml,
+                path = path)
+    # yaml::write_yaml(x = yml, 
+                     # file = path)
     if(isTRUE(return_path)){
       return(path)
     } else {

@@ -6,6 +6,9 @@
 \source{
 \href{https://github.com/vubiostat/r-yaml/issues/5}{
 Issue reading in "on:"/"y","n" elements}.
+
+\href{https://github.com/vubiostat/r-yaml/issues/123}{
+Issue writing "on:" as "'as':"}
 }
 \usage{
 use_workflow(
