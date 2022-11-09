@@ -50,6 +50,8 @@ Must pass in order to continue workflow.}
 \item{run_crancheck}{Run CRAN checks. 
 Must pass in order to continue workflow.}
 
+\item{run_vignettes}{Build and check R package vignettes.}
+
 \item{has_testthat}{Run unit tests and report results.}
 
 \item{run_covr}{Run code coverage tests and publish results to codecov.}
@@ -76,6 +78,10 @@ Is the same as \code{docker_username} by default.}
 \item{cache_version}{Name of the cache sudirectory to be used
 when reinstalling software in GHA.}
 
+\item{enable_act}{Whether to add extra lines to the yaml to 
+enable local workflow checking with 
+\href{https://github.com/nektos/act}{act}.}
+
 \item{save_dir}{Directory to save workflow to.}
 
 \item{return_path}{Return the path to the saved \emph{yaml} workflow file
@@ -83,6 +89,8 @@ when reinstalling software in GHA.}
 
 \item{force_new}{If the GHA workflow yaml already exists, 
 overwrite with new one (default: \code{FALSE}).}
+
+\item{preview}{Print the yaml file to the R console.}
 
 \item{verbose}{Print messages.}
 }

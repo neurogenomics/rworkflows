@@ -31,6 +31,11 @@
 #' (default: \code{TRUE}), or return the \emph{yaml} object directly.
 #' @param cache_version Name of the cache sudirectory to be used
 #'  when reinstalling software in GHA.
+#' @param run_vignettes Build and check R package vignettes.
+#' @param enable_act Whether to add extra lines to the yaml to 
+#' enable local workflow checking with 
+#' \href{https://github.com/nektos/act}{act}.
+#' @param preview Print the yaml file to the R console.
 #' @param verbose Print messages.
 #' @returns Path or yaml object.
 #' @source \href{https://github.com/vubiostat/r-yaml/issues/5}{
@@ -119,7 +124,7 @@ use_workflow <- function(name="rworkflows",
     messager("Saving workflow ==>",path,v=verbose)
     #### Write bools as true/false rather than yes/no (default) ####
     handlers2 <- list('bool#yes' = function(x){"${{ true }}"},
-                      'bool#no' = function(x){enquote("${{ false }}")})
+                      'bool#no' = function(x){"${{ false }}"})
     yml2 <- yaml::yaml.load(yaml::as.yaml(yml), handlers = handlers2)
     yaml::write_yaml(x = yml2,
                      file = path)
