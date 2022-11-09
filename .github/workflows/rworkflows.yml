@@ -14,7 +14,7 @@ jobs:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
     strategy:
-      fail-fast: 'false'
+      fail-fast: ${{ false }}
       matrix:
         config:
         - os: ubuntu-latest
@@ -37,15 +37,15 @@ jobs:
       shell: bash {0}
     - uses: neurogenomics/rworkflows@master
       with:
-        run_bioccheck: 'false'
-        run_crancheck: 'true'
-        run_vignettes: 'true'
-        has_testthat: 'true'
-        run_covr: 'true'
-        run_pkgdown: 'true'
-        has_runit: 'false'
+        run_bioccheck: ${{ false }}
+        run_crancheck: ${{ true }}
+        run_vignettes: ${{ true }}
+        has_testthat: ${{ true }}
+        run_covr: ${{ true }}
+        run_pkgdown: ${{ true }}
+        has_runit: ${{ false }}
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
-        run_docker: 'true'
+        run_docker: ${{ true }}
         DOCKER_USERNAME: bschilder
         DOCKER_ORG: neurogenomicslab
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
