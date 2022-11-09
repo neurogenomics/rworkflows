@@ -44,8 +44,8 @@ Currently, `rworkflows` *action* performs the following tasks:
 
 Importantly, these *workflow files* and *action* are designed to work
 with any R package out-of-the-box. This means you won’t have to manually
-edit any of the files provided here, simply copy and paste them into the
-appropriate folders.
+edit any yaml files, just run the `rworkflows::use_workflow()` function
+and you’re ready to go!
 
 ## [Documentation](https://neurogenomics.github.io/rworkflows)
 
