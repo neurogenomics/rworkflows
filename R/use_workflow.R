@@ -83,7 +83,8 @@ use_workflow <- function(name="rworkflows",
     #### name ####
     yml$name <- name
     #### on ####
-    on2 <- lapply(stats::setNames(on,on),function(x){branches})
+    on2 <- lapply(stats::setNames(on,on),
+                  function(x){list("branches"=branches)})
     yml$on <- on2
     #### with: args ####
     with2 <- yml$jobs[[1]]$steps[[2]]$with
@@ -116,17 +117,17 @@ use_workflow <- function(name="rworkflows",
     dir.create(dirname(path),showWarnings = FALSE, recursive = TRUE)
     messager("Saving workflow ==>",path,v=verbose)   
     
-    write_yaml2 <- function(yml,path){
-      result <- gsub(shQuote("on"),"on",yaml::as.yaml(yml))
-      path <- file(path, "w", encoding = "UTF-8", raw=TRUE)
-      open(path, "w")
-      on.exit(close(path))
-      cat(result, file = path, sep = "")
-    }   
-    write_yaml2(yml = yml,
-                path = path)
-    # yaml::write_yaml(x = yml, 
-                     # file = path)
+    # write_yaml2 <- function(yml,path){
+    #   result <- gsub(shQuote("on"),"on",yaml::as.yaml(yml))
+    #   path <- file(path, "w", encoding = "UTF-8", raw=TRUE)
+    #   open(path, "w")
+    #   on.exit(close(path))
+    #   cat(result, file = path, sep = "")
+    # }   
+    # write_yaml2(yml = yml,
+    #             path = path)
+    yaml::write_yaml(x = yml,
+                     file = path)
     if(isTRUE(return_path)){
       return(path)
     } else {
