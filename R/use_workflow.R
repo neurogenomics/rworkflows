@@ -33,6 +33,8 @@
 #'  when reinstalling software in GHA.
 #' @param verbose Print messages.
 #' @returns Path or yaml object.
+#' @source \href{https://github.com/vubiostat/r-yaml/issues/5}{
+#' Issue reading in "on:"/"y","n" elements}.
 #' 
 #' @export
 #' @importFrom here here
@@ -68,11 +70,14 @@ use_workflow <- function(name="rworkflows",
   # templateR:::source_all()
   # templateR:::args2vars(use_workflow) 
   
+  
+  ## Custom handler prevents "on" from being converted to TRUE
+  handlers <- list('bool#yes' = function(x) { if (x == "on") x else TRUE})
   if(is.null(name) || name=="rworkflows"){
     yml <- yaml::read_yaml(
       system.file("yaml","rworkflows_template.yml",
-                  package = "rworkflows")
-    )
+                  package = "rworkflows"),
+      handlers=handlers)
     #### name ####
     yml$name <- name
     #### on ####
@@ -107,8 +112,9 @@ use_workflow <- function(name="rworkflows",
   if(!is.null(save_dir)){ 
     path <- file.path(save_dir,paste0(name,".yml"))
     dir.create(dirname(path),showWarnings = FALSE, recursive = TRUE)
-    messager("Saving workflow ==>",path,v=verbose)
-    yaml::write_yaml(x = yml, file = path)
+    messager("Saving workflow ==>",path,v=verbose)   
+    yaml::write_yaml(x = yml,
+                     file = path)
     if(isTRUE(return_path)){
       return(path)
     } else {

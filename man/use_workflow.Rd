@@ -3,6 +3,10 @@
 \name{use_workflow}
 \alias{use_workflow}
 \title{Use GitHub Actions workflow}
+\source{
+\href{https://github.com/vubiostat/r-yaml/issues/5}{
+Issue reading in "on:"/"y","n" elements}.
+}
 \usage{
 use_workflow(
   name = "rworkflows",
@@ -14,7 +18,7 @@ use_workflow(
   has_testthat = TRUE,
   run_covr = TRUE,
   run_pkgdown = TRUE,
-  has_runit = TRUE,
+  has_runit = FALSE,
   run_docker = TRUE,
   repository = "${{ github.repository }}",
   github_token = "${{ secrets.PAT_GITHUB }}",
