@@ -40,7 +40,7 @@
 #' 
 #' @export
 #' @importFrom here here
-#' @importFrom yaml as.yaml read_yaml write_yaml
+#' @importFrom yaml as.yaml read_yaml write_yaml yaml.load
 #' @examples  
 #' path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
 use_workflow <- function(name="rworkflows",
@@ -71,6 +71,7 @@ use_workflow <- function(name="rworkflows",
   
   # templateR:::source_all()
   # templateR:::args2vars(use_workflow) 
+  # docker_org <- eval(docker_org)
   
   
   ## Custom handler prevents "on" from being converted to TRUE
@@ -115,19 +116,14 @@ use_workflow <- function(name="rworkflows",
   if(!is.null(save_dir)){ 
     path <- file.path(save_dir,paste0(name,".yml"))
     dir.create(dirname(path),showWarnings = FALSE, recursive = TRUE)
-    messager("Saving workflow ==>",path,v=verbose)   
-    
-    # write_yaml2 <- function(yml,path){
-    #   result <- gsub(shQuote("on"),"on",yaml::as.yaml(yml))
-    #   path <- file(path, "w", encoding = "UTF-8", raw=TRUE)
-    #   open(path, "w")
-    #   on.exit(close(path))
-    #   cat(result, file = path, sep = "")
-    # }   
-    # write_yaml2(yml = yml,
-    #             path = path)
-    yaml::write_yaml(x = yml,
+    messager("Saving workflow ==>",path,v=verbose)
+    #### Write bools as true/false rather than yes/no (default) ####
+    handlers2 <- list('bool#yes' = function(x){'true'},
+                      'bool#no' = function(x){'false'})
+    yml2 <- yaml::yaml.load(yaml::as.yaml(yml), handlers = handlers2)
+    yaml::write_yaml(x = yml2,
                      file = path)
+    #### Return ####
     if(isTRUE(return_path)){
       return(path)
     } else {
