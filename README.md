@@ -10,45 +10,63 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 Authors: <i>Brian Schilder, Alan Murphy</i>
 </h4>
 <h4>
-README updated: <i>Nov-07-2022</i>
+README updated: <i>Nov-09-2022</i>
 </h4>
 
 ## Intro
 
-[GitHub Actions](https://docs.github.com/en/actions) are a powerful way
-to automatically launch workflows every time you push changes to a
-GitHub repository. This is a form of [Continuous Integration
-(CI)](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
+[*GitHub Actions*](https://docs.github.com/en/actions) are a powerful
+way to automatically launch workflows every time you push changes to a
+GitHub repository. This is a form of [*Continuous Integration
+(CI)*](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
 which helps ensure that your code is always working as expected (without
 having to manually check each time).
 
-Here, we have designed robust and flexible workflows specifically for
-the development of R packages.
+Here, we have designed a robust, reusable, and flexible *action*
+specifically for the development of R packages. We also provide an R
+function to automatically generate a *workflow file* that calls the
+`rworkflows` composite action:
 
-Currently, these workflows perform the following tasks:
+Currently, `rworkflows` *action* performs the following tasks:
 
-1.  Build a Docker container to run subsequent steps within.
-2.  Build and check your R package (with CRAN and Bioconductor
+1.  Builds a Docker container to run subsequent steps within.
+2.  Builds and checks your R package (with CRAN and/or Bioconductor
     checks).  
-3.  Run units tests.  
-4.  Run code coverage tests and upload the results to
-    [Codecov](https://about.codecov.io/).  
-5.  (Re)build and launch a documentation website for your R package.  
-6.  Push an [Rstudio](https://www.rstudio.com/)
-    [Docker](https://www.docker.com/) container to
-    [DockerHub](https://hub.docker.com/) with your package and all its
-    dependencies pre-installed.
+3.  Runs units tests.  
+4.  Runs code coverage tests and uploads the results to
+    [*Codecov*](https://about.codecov.io/).  
+5.  (Re)builds and launches a documentation website for your R
+    package.  
+6.  Pushes an [*Rstudio*](https://www.rstudio.com/)
+    [*Docker*](https://www.docker.com/) container to
+    [*DockerHub*](https://hub.docker.com/) with your R package and all
+    its dependencies pre-installed.
 
-Importantly, these files are designed to work with any R package
-out-of-the-box. This means you won’t have to manually edit any of the
-files provided here, simply copy and paste them into the appropriate
-folders.
+Importantly, these *workflow files* and *action* are designed to work
+with any R package out-of-the-box. This means you won’t have to manually
+edit any of the files provided here, simply copy and paste them into the
+appropriate folders.
 
 ## [Documentation](https://neurogenomics.github.io/rworkflows)
 
 ### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
 
 ### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
+
+## Quickstart
+
+Install and create the workflow in your R package’s project folder:
+
+``` r
+if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
+path <- rworkflows::use_workflow()
+```
+
+Push to GitHub, and let everything else run automatically!:
+
+    git add .
+    git commit -m "Added GHA workflow via rworkflows::use_workflow()"
+    git push
 
 ## Acknowledgments
 
@@ -105,7 +123,7 @@ package dependencies change.
 
 ### [`act`](https://github.com/nektos/act)
 
-A very useful command line tool for testing GitHub Actions locally.
+A very useful command line tool for testing *GitHub Actions* locally.
 
 </details>
 
@@ -132,19 +150,19 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] BiocManager_1.30.18 pillar_1.8.1        compiler_4.2.1     
+    ##  [1] BiocManager_1.30.19 compiler_4.2.1      pillar_1.8.1       
     ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.5   tools_4.2.1        
-    ##  [7] digest_0.6.30       jsonlite_1.8.3      evaluate_0.17      
+    ##  [7] digest_0.6.30       jsonlite_1.8.3      evaluate_0.18      
     ## [10] lifecycle_1.0.3     tibble_3.1.8        gtable_0.3.1       
     ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.4.1          
     ## [16] DBI_1.1.3           rstudioapi_0.14     rvcheck_0.2.1      
     ## [19] yaml_2.3.6          xfun_0.34           fastmap_1.1.0      
     ## [22] stringr_1.4.1       dplyr_1.0.10        knitr_1.40         
-    ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.4.2        
+    ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.0        
     ## [28] dlstats_0.1.5       rprojroot_2.0.3     grid_4.2.1         
     ## [31] tidyselect_1.2.0    glue_1.6.2          R6_2.5.1           
-    ## [34] fansi_1.0.3         rmarkdown_2.17      ggplot2_3.3.6      
-    ## [37] badger_0.2.1        magrittr_2.0.3      scales_1.2.1       
+    ## [34] fansi_1.0.3         rmarkdown_2.17      ggplot2_3.4.0      
+    ## [37] badger_0.2.2        magrittr_2.0.3      scales_1.2.1       
     ## [40] htmltools_0.5.3     assertthat_0.2.1    colorspace_2.0-3   
     ## [43] utf8_1.2.2          stringi_1.7.8       munsell_0.5.0
 
