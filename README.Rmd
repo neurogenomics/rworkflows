@@ -49,13 +49,15 @@ This means you won't have to manually edit any yaml files, just run the `rworkfl
 
 ## Quickstart
 
-Install and create the workflow in your R package's project folder:
+Install and create the workflow in your R package's project folder.
 ```R
+## (in R)
 if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
 path <- rworkflows::use_workflow()
 ```
-Push to GitHub, and let everything else run automatically!:
-```
+Push to GitHub, and let everything else run automatically!
+```bash
+## (in the Terminal)
 git add .
 git commit -m "Added GHA workflow via rworkflows::use_workflow()"
 git push
