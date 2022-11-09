@@ -51,7 +51,7 @@ GHA workflows in your R package directory.
 
 ```R
 if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
-path <- rworkflows::use_gha()
+path <- rworkflows::use_workflow()
 ```   
 
 ### 4. Push to GitHub
@@ -61,7 +61,7 @@ to your GitHub repo.
 
 ```
 git add .
-git commit -m "Added GHA workflow via rworkflows::use_gha()"
+git commit -m "Added GHA workflow via rworkflows::use_workflow()"
 git push
 ```
 
