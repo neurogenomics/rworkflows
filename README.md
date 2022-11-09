@@ -58,7 +58,7 @@ and you’re ready to go!
 Install and create the workflow in your R package’s project folder.
 
 ``` r
-## (in R)
+## in R
 if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
 path <- rworkflows::use_workflow()
 ```
@@ -66,7 +66,7 @@ path <- rworkflows::use_workflow()
 Push to GitHub, and let everything else run automatically!
 
 ``` bash
-## (in the Terminal)
+## in the Terminal
 git add .
 git commit -m "Added GHA workflow via rworkflows::use_workflow()"
 git push
