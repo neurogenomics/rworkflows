@@ -44,7 +44,7 @@ inputs:
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
-    default: true
+    default: false
   DOCKER_USERNAME: 
     description: >
       DockerHub username. 
