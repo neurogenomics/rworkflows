@@ -6,9 +6,14 @@
   - `run_crancheck` --> `run_rcmdcheck`
   - `DOCKER_ORG` --> `docker_org`
   - `DOCKER_USERNAME` --> `docker_user`
-* Added new arg:
-  - `as_cran`
+* Added new args:
+  - `as_cran`: separate from `run_rcmdcheck`
+  - `tag`: specify action version.
+* Set default: `use_workflow(run_docker=FALSE)` 
+* Removed unused args: `repository`
 * Add 'RELEASE_**' as one of the default trigger branches (for Bioconductor).
+* New function: `badge`
+
 
 ## Bug fixes
 

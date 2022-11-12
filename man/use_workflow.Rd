@@ -13,6 +13,7 @@ Issue writing "on:" as "'as':"}
 \usage{
 use_workflow(
   name = "rworkflows",
+  tag = "@master",
   on = c("push", "pull_request"),
   branches = c("master", "main", "RELEASE_**"),
   run_bioccheck = FALSE,
@@ -23,8 +24,7 @@ use_workflow(
   run_covr = TRUE,
   run_pkgdown = TRUE,
   has_runit = FALSE,
-  run_docker = TRUE,
-  repository = "${{ github.repository }}",
+  run_docker = FALSE,
   github_token = "${{ secrets.PAT_GITHUB }}",
   docker_user = NULL,
   docker_org = docker_user,
@@ -40,6 +40,13 @@ use_workflow(
 }
 \arguments{
 \item{name}{Workflow name.}
+
+\item{tag}{Which version of the \code{rworkflows} action to use. 
+Can be a branch name on the
+ \href{https://github.com/neurogenomics/rworkflows/branches}{
+ GitHub repository} (e.g. "\@master"), 
+ or a \href{https://github.com/neurogenomics/rworkflows/tags}{Release Tag} 
+ (e.g. "\@v1").}
 
 \item{on}{GitHub trigger conditions.}
 
@@ -68,8 +75,6 @@ build documentation website, and deploy to \emph{gh-pages} branch.}
 \item{has_runit}{Run R Unit tests.}
 
 \item{run_docker}{Whether to build and push a Docker container to DockerHub.}
-
-\item{repository}{GitHub repository to be checked.}
 
 \item{github_token}{Token for the repo. 
 Can be passed in using {{ secrets.PAT_GITHUB }}.}

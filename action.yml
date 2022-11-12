@@ -6,9 +6,6 @@ branding:
   icon: check-square
   color: green
 inputs: 
-  GITHUB_TOKEN:
-    description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
@@ -40,10 +37,9 @@ inputs:
     description: >
       Run R Unit tests. Requires a subdirectory named 'unitTests'.
     default: false
-  cache_version: 
+  GITHUB_TOKEN:
     description: >
-      Which cache version to use.
-    default: cache-v1
+      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -57,6 +53,10 @@ inputs:
   DOCKER_TOKEN:
     description: >
       DockerHub token.
+  cache_version: 
+    description: >
+      Which cache version to use.
+    default: cache-v1 
   runner_os:
     description: >
       The Operating System (OS) that the workflow is running on.

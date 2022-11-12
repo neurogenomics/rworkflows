@@ -4,6 +4,12 @@
 #' \href{https://github.com/neurogenomics/rworkflows}{rworkflows}
 #' \href{https://github.com/features/actions}{GitHub Actions (GHA)}  
 #' @param name Workflow name.
+#' @param tag Which version of the \code{rworkflows} action to use. 
+#' Can be a branch name on the
+#'  \href{https://github.com/neurogenomics/rworkflows/branches}{
+#'  GitHub repository} (e.g. "\@master"), 
+#'  or a \href{https://github.com/neurogenomics/rworkflows/tags}{Release Tag} 
+#'  (e.g. "\@v1").
 #' @param on GitHub trigger conditions.
 #' @param branches GitHub trigger branches.
 #' @param run_bioccheck Run Bioconductor checks using
@@ -20,7 +26,6 @@
 #' build documentation website, and deploy to \emph{gh-pages} branch.
 #' @param has_runit Run R Unit tests.
 #' @param run_docker Whether to build and push a Docker container to DockerHub.
-#' @param repository GitHub repository to be checked.
 #' @param github_token Token for the repo. 
 #' Can be passed in using {{ secrets.PAT_GITHUB }}.
 #' @param docker_user DockerHub username.
@@ -52,10 +57,12 @@
 #' @importFrom yaml as.yaml read_yaml write_yaml yaml.load
 #' @examples  
 #' path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
-use_workflow <- function(name="rworkflows",
+use_workflow <- function(## action-level args
+                         name="rworkflows",
+                         tag="@master",
                          on=c("push","pull_request"),
                          branches=c("master","main","RELEASE_**"),
-                         ## with: args ##
+                         ## workflow-level args
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
                          as_cran=TRUE,
@@ -64,25 +71,22 @@ use_workflow <- function(name="rworkflows",
                          run_covr=TRUE, 
                          run_pkgdown=TRUE, 
                          has_runit=FALSE, 
-                         run_docker=TRUE, 
-                         repository="${{ github.repository }}",
+                         run_docker=FALSE,  
                          github_token="${{ secrets.PAT_GITHUB }}",
                          docker_user=NULL,
                          docker_org=docker_user,
                          docker_token="${{ secrets.DOCKER_TOKEN }}",
                          cache_version="cache-v1",
                          enable_act=TRUE,
-                         ## function args ##
+                         ## function-level args
                          save_dir=here::here(".github","workflows"),
                          return_path=TRUE,
                          force_new=FALSE,
                          preview=FALSE,
                          verbose=TRUE){
-  
   # templateR:::source_all()
   # templateR:::args2vars(use_workflow) 
-  # docker_org <- eval(docker_org)
-  
+  # docker_org <- eval(docker_org) 
   
   ## Custom handler prevents "on" from being converted to TRUE
   handlers <- list('bool#yes' = function(x) { if (x == "on") x else TRUE})
@@ -98,6 +102,7 @@ use_workflow <- function(name="rworkflows",
                   function(x){list("branches"=branches)})
     yml$on <- on2
     #### with: args ####
+    yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",name,tag)
     with2 <- yml$jobs[[1]]$steps[[2]]$with
     with2$run_bioccheck <- run_bioccheck
     with2$run_rcmdcheck <- run_rcmdcheck
