@@ -14,7 +14,7 @@ inputs:
       Run Bioconductor checks. Must pass in order to continue workflow.
     type: boolean
     default: false
-  run_crancheck:
+  run_rcmdcheck:
     description: >
       Run CRAN checks. Must pass in order to continue workflow."
     type: boolean
@@ -50,11 +50,11 @@ inputs:
       Whether to build and push a Docker container to DockerHub.
     type: boolean
     default: true
-  DOCKER_USERNAME: 
+  docker_user: 
     description: >
       DockerHub username. 
     type: string
-  DOCKER_ORG: 
+  docker_org: 
     description: >
       DockerHub organization name.
     type: string

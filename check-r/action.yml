@@ -19,7 +19,7 @@ runs:
       env:
         _R_CHECK_CRAN_INCOMING_: false
         DISPLAY: 99.0
-        AS_CRAN: inputs.i.run_crancheck
+        AS_CRAN: inputs.i.run_rcmdcheck
       run: |
         options(crayon.enabled = TRUE)
         if(!require("sessioninfo")) install.packages("rcmdcheck")

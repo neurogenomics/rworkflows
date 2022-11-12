@@ -1,3 +1,20 @@
+# rworkflows 0.99.1
+
+## New features
+
+* Renamed workflow args:
+  - `run_crancheck` --> `run_rcmdcheck`
+  - `DOCKER_ORG` --> `docker_org`
+  - `DOCKER_USERNAME` --> `docker_user`
+* Added new arg:
+  - `as_cran`
+* Add 'RELEASE_**' as one of the default trigger branches (for Bioconductor).
+
+## Bug fixes
+
+* Make sure all docker args actually get modified in template.
+* Set default docker_org/docker_user to 
+
 # rworkflows 0.99.0
 
 ## New features

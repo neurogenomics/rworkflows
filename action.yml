@@ -12,10 +12,13 @@ inputs:
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
-  run_crancheck:
+  run_rcmdcheck:
     description: >
-      Run CRAN checks. Must pass in order to continue workflow."
+      Run R CMD checks. Must pass in order to continue workflow."
     default: true
+  as_cran:
+    description: >
+      When running R CMD checks, use the '--as-cran' flag to apply CRAN standards.
   run_vignettes:
     description: >
       Build and check R package vignettes.
@@ -45,10 +48,10 @@ inputs:
     description: >
       Whether to build and push a Docker container to DockerHub.
     default: false
-  DOCKER_USERNAME: 
+  docker_user: 
     description: >
       DockerHub username. 
-  DOCKER_ORG: 
+  docker_org: 
     description: >
       DockerHub organization name.
   DOCKER_TOKEN:
@@ -69,7 +72,7 @@ runs:
         echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV 
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
-        echo "NOT_CRAN=true" >> $GITHUB_ENV
+        echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
     
     ## Set the R library to the directory matching the
@@ -276,12 +279,12 @@ runs:
       shell: Rscript {0}
 
     - name: Run CMD check
-      if: inputs.run_crancheck == 'true'
+      if: inputs.run_rcmdcheck == 'true'
       env:
         _R_CHECK_CRAN_INCOMING_: false
         RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
         DISPLAY: 99.0
-        AS_CRAN: ${{ inputs.run_crancheck }}
+        AS_CRAN: ${{ inputs.as_cran }}
         run_vignettes: ${{ inputs.run_vignettes }}
       run: |
         options(crayon.enabled = TRUE)
@@ -396,9 +399,9 @@ runs:
       if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'"
       uses: docker/build-push-action@v1
       with:
-        username: ${{ inputs.DOCKER_USERNAME }}
+        username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}
-        repository: ${{ inputs.DOCKER_ORG }}/${{ env.packageName }}
+        repository: ${{ inputs.docker_org }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: ${{ env.packageVersion }},latest

@@ -2,12 +2,14 @@ name: rworkflows
 'on':
   push:
     branches:
-    - main
     - master
+    - main
+    - RELEASE_**
   pull_request:
     branches:
-    - main
     - master
+    - main
+    - RELEASE_**
 jobs:
   rworkflows:
     runs-on: ${{ matrix.config.os }}
@@ -38,7 +40,8 @@ jobs:
     - uses: neurogenomics/rworkflows@master
       with:
         run_bioccheck: ${{ false }}
-        run_crancheck: ${{ true }}
+        run_rcmdcheck: ${{ true }}
+        as_cran: ${{ true }}
         run_vignettes: ${{ true }}
         has_testthat: ${{ true }}
         run_covr: ${{ true }}
@@ -46,8 +49,8 @@ jobs:
         has_runit: ${{ false }}
         GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
         run_docker: ${{ true }}
-        DOCKER_USERNAME: bschilder
-        DOCKER_ORG: neurogenomicslab
+        docker_user: bschilder
+        docker_org: neurogenomicslab
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         runner_os: ${{ runner.os }}
-        cache_version: cache-master
+        cache_version: cache-v1

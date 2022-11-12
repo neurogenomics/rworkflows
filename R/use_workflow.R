@@ -6,10 +6,14 @@
 #' @param name Workflow name.
 #' @param on GitHub trigger conditions.
 #' @param branches GitHub trigger branches.
-#' @param run_bioccheck Run Bioconductor checks. 
+#' @param run_bioccheck Run Bioconductor checks using
+#'  \link[BiocCheck]{BiocCheck}. 
 #' Must pass in order to continue workflow.
-#' @param run_crancheck Run CRAN checks. 
+#' @param run_rcmdcheck Run R CMD checks using 
+#' \link[rcmdcheck]{rcmdcheck}. 
 #' Must pass in order to continue workflow.
+#' @param as_cran When running R CMD checks, 
+#' use the '--as-cran' flag to apply CRAN standards
 #' @param has_testthat Run unit tests and report results.
 #' @param run_covr Run code coverage tests and publish results to codecov.
 #' @param run_pkgdown Knit the \emph{README.Rmd} (if available), 
@@ -19,9 +23,9 @@
 #' @param repository GitHub repository to be checked.
 #' @param github_token Token for the repo. 
 #' Can be passed in using {{ secrets.PAT_GITHUB }}.
-#' @param docker_username DockerHub username.
+#' @param docker_user DockerHub username.
 #' @param docker_org DockerHub organization name. 
-#' Is the same as \code{docker_username} by default.
+#' Is the same as \code{docker_user} by default.
 #' @param docker_token DockerHub token.
 #' @param force_new If the GHA workflow yaml already exists, 
 #' overwrite with new one (default: \code{FALSE}).
@@ -50,10 +54,11 @@
 #' path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
 use_workflow <- function(name="rworkflows",
                          on=c("push","pull_request"),
-                         branches=c("master","main"),
+                         branches=c("master","main","RELEASE_**"),
                          ## with: args ##
                          run_bioccheck=FALSE,
-                         run_crancheck=TRUE, 
+                         run_rcmdcheck=TRUE, 
+                         as_cran=TRUE,
                          run_vignettes=TRUE,
                          has_testthat=TRUE, 
                          run_covr=TRUE, 
@@ -62,8 +67,8 @@ use_workflow <- function(name="rworkflows",
                          run_docker=TRUE, 
                          repository="${{ github.repository }}",
                          github_token="${{ secrets.PAT_GITHUB }}",
-                         docker_username=NULL,
-                         docker_org=docker_username,
+                         docker_user=NULL,
+                         docker_org=docker_user,
                          docker_token="${{ secrets.DOCKER_TOKEN }}",
                          cache_version="cache-v1",
                          enable_act=TRUE,
@@ -95,17 +100,19 @@ use_workflow <- function(name="rworkflows",
     #### with: args ####
     with2 <- yml$jobs[[1]]$steps[[2]]$with
     with2$run_bioccheck <- run_bioccheck
-    with2$run_crancheck <- run_crancheck
+    with2$run_rcmdcheck <- run_rcmdcheck
+    with2$as_cran <- as_cran
     with2$run_vignettes <- run_vignettes
     with2$has_testthat <- has_testthat
     with2$run_covr <- run_covr
     with2$run_pkgdown <- run_pkgdown
     with2$has_runit <- has_runit 
     with2$GITHUB_TOKEN <- github_token 
-    with2$docker_username <- docker_username 
+    with2$run_docker <- run_docker 
+    with2$docker_user <- docker_user 
     with2$docker_org <- docker_org 
-    with2$cache_version <- cache_version 
-    with2$cache_version <- cache_version
+    with2$DOCKER_TOKEN <- docker_token 
+    with2$cache_version <- cache_version  
     #### replace with: args ####
     yml$jobs[[1]]$steps[[2]]$with <- with2
     ### Enable running workflow locally with act ####

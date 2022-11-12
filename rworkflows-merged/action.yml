@@ -9,7 +9,7 @@ inputs:
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
-  run_crancheck:
+  run_rcmdcheck:
     description: >
       Run CRAN checks. Must pass in order to continue workflow."
     default: true
@@ -38,10 +38,10 @@ inputs:
     description: >
       Whether to build and push a Docker container to DockerHub.
     default: true
-  DOCKER_USERNAME: 
+  docker_user: 
     description: >
       DockerHub username. 
-  DOCKER_ORG: 
+  docker_org: 
     description: >
       DockerHub organization name.
   DOCKER_TOKEN:
@@ -268,7 +268,7 @@ runs:
       env:
         _R_CHECK_CRAN_INCOMING_: false
         DISPLAY: 99.0
-        AS_CRAN: ${{ inputs.run_crancheck }}
+        AS_CRAN: ${{ inputs.run_rcmdcheck }}
       run: |
         options(crayon.enabled = TRUE)
         if(!require("sessioninfo")) install.packages("rcmdcheck")
@@ -377,9 +377,9 @@ runs:
       if: "(!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'"
       uses: docker/build-push-action@v1
       with:
-        username: ${{ inputs.DOCKER_USERNAME }}
+        username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}
-        repository: ${{ inputs.DOCKER_ORG }}/${{ env.packageName }}
+        repository: ${{ inputs.docker_org }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: ${{ env.packageVersion }},latest

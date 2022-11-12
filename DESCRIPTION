@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, document, containerise, and deploy R packages
-Version: 0.99.0
+Version: 0.99.1
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -37,7 +37,7 @@ Suggests:
     testthat (>= 3.0.0),
     badger, 
     hexSticker
-RoxygenNote: 7.2.1.9000
+RoxygenNote: 7.2.2
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

@@ -1,7 +1,7 @@
 <img src='https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height='300'><br><br>
-[![](https://img.shields.io/badge/devel%20version-0.99.0-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.1-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
-status](https://github.com/neurogenomics/rworkflows/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
+status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 [![](https://app.codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/rworkflows)
 [![License:
@@ -10,7 +10,7 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 Authors: <i>Brian Schilder, Alan Murphy</i>
 </h4>
 <h4>
-README updated: <i>Nov-09-2022</i>
+README updated: <i>Nov-12-2022</i>
 </h4>
 
 ## Intro
@@ -165,7 +165,7 @@ utils::sessionInfo()
     ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.0        
     ## [28] dlstats_0.1.5       rprojroot_2.0.3     grid_4.2.1         
     ## [31] tidyselect_1.2.0    glue_1.6.2          R6_2.5.1           
-    ## [34] fansi_1.0.3         rmarkdown_2.17      ggplot2_3.4.0      
+    ## [34] fansi_1.0.3         rmarkdown_2.18      ggplot2_3.4.0      
     ## [37] badger_0.2.2        magrittr_2.0.3      scales_1.2.1       
     ## [40] htmltools_0.5.3     assertthat_0.2.1    colorspace_2.0-3   
     ## [43] utf8_1.2.2          stringi_1.7.8       munsell_0.5.0

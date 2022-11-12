@@ -14,9 +14,10 @@ Issue writing "on:" as "'as':"}
 use_workflow(
   name = "rworkflows",
   on = c("push", "pull_request"),
-  branches = c("master", "main"),
+  branches = c("master", "main", "RELEASE_**"),
   run_bioccheck = FALSE,
-  run_crancheck = TRUE,
+  run_rcmdcheck = TRUE,
+  as_cran = TRUE,
   run_vignettes = TRUE,
   has_testthat = TRUE,
   run_covr = TRUE,
@@ -25,8 +26,8 @@ use_workflow(
   run_docker = TRUE,
   repository = "${{ github.repository }}",
   github_token = "${{ secrets.PAT_GITHUB }}",
-  docker_username = NULL,
-  docker_org = docker_username,
+  docker_user = NULL,
+  docker_org = docker_user,
   docker_token = "${{ secrets.DOCKER_TOKEN }}",
   cache_version = "cache-v1",
   enable_act = TRUE,
@@ -44,11 +45,16 @@ use_workflow(
 
 \item{branches}{GitHub trigger branches.}
 
-\item{run_bioccheck}{Run Bioconductor checks. 
+\item{run_bioccheck}{Run Bioconductor checks using
+ \link[BiocCheck]{BiocCheck}. 
 Must pass in order to continue workflow.}
 
-\item{run_crancheck}{Run CRAN checks. 
+\item{run_rcmdcheck}{Run R CMD checks using 
+\link[rcmdcheck]{rcmdcheck}. 
 Must pass in order to continue workflow.}
+
+\item{as_cran}{When running R CMD checks, 
+use the '--as-cran' flag to apply CRAN standards}
 
 \item{run_vignettes}{Build and check R package vignettes.}
 
@@ -68,10 +74,10 @@ build documentation website, and deploy to \emph{gh-pages} branch.}
 \item{github_token}{Token for the repo. 
 Can be passed in using {{ secrets.PAT_GITHUB }}.}
 
-\item{docker_username}{DockerHub username.}
+\item{docker_user}{DockerHub username.}
 
 \item{docker_org}{DockerHub organization name. 
-Is the same as \code{docker_username} by default.}
+Is the same as \code{docker_user} by default.}
 
 \item{docker_token}{DockerHub token.}
 
