@@ -69,6 +69,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_workflow</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"rworkflows"</span>,</span>
+<span>  tag <span class="op">=</span> <span class="st">"@master"</span>,</span>
 <span>  on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"push"</span>, <span class="st">"pull_request"</span><span class="op">)</span>,</span>
 <span>  branches <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"master"</span>, <span class="st">"main"</span>, <span class="st">"RELEASE_**"</span><span class="op">)</span>,</span>
 <span>  run_bioccheck <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -79,8 +80,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
 <span>  run_covr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  run_pkgdown <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  has_runit <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  run_docker <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  repository <span class="op">=</span> <span class="st">"${{ github.repository }}"</span>,</span>
+<span>  run_docker <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  github_token <span class="op">=</span> <span class="st">"${{ secrets.PAT_GITHUB }}"</span>,</span>
 <span>  docker_user <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  docker_org <span class="op">=</span> <span class="va">docker_user</span>,</span>
@@ -106,6 +106,15 @@ Issue writing "on:" as "'as':"</a></p>
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>Workflow name.</p></dd>
+
+
+<dt>tag</dt>
+<dd><p>Which version of the <code>rworkflows</code> action to use. 
+Can be a branch name on the
+ <a href="https://github.com/neurogenomics/rworkflows/branches" class="external-link">
+ GitHub repository</a> (e.g. "\@master"), 
+ or a <a href="https://github.com/neurogenomics/rworkflows/tags" class="external-link">Release Tag</a> 
+ (e.g. "\@v1").</p></dd>
 
 
 <dt>on</dt>
@@ -156,10 +165,6 @@ build documentation website, and deploy to <em>gh-pages</em> branch.</p></dd>
 
 <dt>run_docker</dt>
 <dd><p>Whether to build and push a Docker container to DockerHub.</p></dd>
-
-
-<dt>repository</dt>
-<dd><p>GitHub repository to be checked.</p></dd>
 
 
 <dt>github_token</dt>
@@ -224,7 +229,7 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> </span></span>
 <span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/RtmpAET09Q/.github/workflows/rworkflows.yml</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/RtmpQkg8sy/.github/workflows/rworkflows.yml</span>
 </code></pre></div>
     </div>
   </div>

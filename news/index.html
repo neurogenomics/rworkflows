@@ -72,10 +72,20 @@
 <code>DOCKER_USERNAME</code> –&gt; <code>docker_user</code>
 </li>
 </ul></li>
-<li>Added new arg:
-<ul><li><code>as_cran</code></li>
+<li>Added new args:
+<ul><li>
+<code>as_cran</code>: separate from <code>run_rcmdcheck</code>
+</li>
+<li>
+<code>tag</code>: specify action version.</li>
 </ul></li>
+<li>Set default: <code>use_workflow(run_docker=FALSE)</code>
+</li>
+<li>Removed unused args: <code>repository</code>
+</li>
 <li>Add ’RELEASE_**’ as one of the default trigger branches (for Bioconductor).</li>
+<li>New function: <code>badge</code>
+</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-1"></a></h3>
