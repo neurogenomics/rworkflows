@@ -22,7 +22,7 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/badge.html</loc>
+    <loc>/reference/get_authors.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -32,6 +32,9 @@
   </url>
   <url>
     <loc>/reference/messager.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_badges.html</loc>
   </url>
   <url>
     <loc>/reference/use_dockerfile.html</loc>
