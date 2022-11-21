@@ -6,16 +6,28 @@
 \usage{
 use_badges(
   ref = NULL,
-  add_version = TRUE,
-  add_actions = TRUE,
+  add_hex = TRUE,
+  add_actions = "rworkflows",
+  add_doi = NULL,
+  add_github_version = TRUE,
   add_commit = TRUE,
+  add_code_size = TRUE,
   add_codecov = TRUE,
   add_license = TRUE,
   add_authors = TRUE,
-  action = "rworkflows",
+  add_bioc_release = FALSE,
+  add_bioc_download_month = FALSE,
+  add_bioc_download_total = FALSE,
+  add_bioc_download_rank = FALSE,
+  add_cran_release = FALSE,
+  add_cran_checks = FALSE,
+  add_cran_download_month = FALSE,
+  add_cran_download_total = FALSE,
   branch = "master",
   as_list = FALSE,
   sep = "\\n",
+  hex_height = 600,
+  colors = list(github = "black", bioc = "green", cran = "blue", default = "blue"),
   verbose = TRUE
 )
 }
@@ -23,14 +35,27 @@ use_badges(
 \item{ref}{Reference for a GitHub repository. If \code{NULL} (the default),
 the reference is determined by the URL field in the DESCRIPTION file.}
 
-\item{add_version}{Add package version with 
-\link[badger]{badge_github_version}.}
+\item{add_hex}{Add a hex sticker. 
+If \code{add_hex=TRUE}, will assume the sticker is located at the following
+ relative path: "inst/hex/hex.png". 
+ If \code{add_hex} is a character string, this will instead
+be used as the relative hex path (e.g. \code{"/images/mysticker.png"}).}
 
-\item{add_actions}{Add GitHub Actions status with
-\link[badger]{badge_github_actions}.}
+\item{add_actions}{The name of one or more GitHub Actions to show the 
+status for with \link[badger]{badge_github_actions}
+ (e.g. c("rworkflows","rworkflows_static")).}
+
+\item{add_doi}{Add the DOI of a given package or publication 
+associated with the package. Must be provided as a character string.}
+
+\item{add_github_version}{Add package version with 
+\link[badger]{badge_github_version}.}
 
 \item{add_commit}{Add the last GitHub repo commit date with
 \link[badger]{badge_last_commit}.}
+
+\item{add_code_size}{Add code size with
+\link[badger]{badge_code_size}.}
 
 \item{add_codecov}{Add CodeCov status with
 \link[badger]{badge_codecov}.}
@@ -41,7 +66,29 @@ the reference is determined by the URL field in the DESCRIPTION file.}
 \item{add_authors}{Add author names inferred from 
 the \code{DESCRIPTION} file.}
 
-\item{action}{GitHub Actions workflow to create status badge for.}
+\item{add_bioc_release}{Add Bioc release version with 
+\link[badger]{badge_bioc_release}.}
+
+\item{add_bioc_download_month}{Add the number of Bioc downloads last month 
+\link[badger]{badge_bioc_download}.}
+
+\item{add_bioc_download_total}{Add the number of Bioc downloads total
+\link[badger]{badge_bioc_download}.}
+
+\item{add_bioc_download_rank}{Add the download rank of the package on Bioc
+\link[badger]{badge_bioc_download_rank}.}
+
+\item{add_cran_release}{Add Bioc release version with 
+\link[badger]{badge_cran_release}.}
+
+\item{add_cran_checks}{Add whether package is passing all checks on CRAN 
+with \link[badger]{badge_cran_checks}.}
+
+\item{add_cran_download_month}{Add the number of CRAN downloads last month 
+\link[badger]{badge_cran_download}.}
+
+\item{add_cran_download_total}{Add the number of CRAN downloads total
+\link[badger]{badge_cran_download}.}
 
 \item{branch}{Name of the GitHub repository branch to use.}
 
@@ -50,6 +97,11 @@ or a collapsed text string (default: \code{FALSE}).}
 
 \item{sep}{Character to separate each item in the list with 
 using \link[base]{paste}.}
+
+\item{hex_height}{Height of the hex sticker in pixels
+(when \code{add_hex=TRUE}).}
+
+\item{colors}{Colors to assign to each group of badges (when possible).}
 
 \item{verbose}{Print messages.}
 }

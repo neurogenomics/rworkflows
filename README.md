@@ -1,17 +1,16 @@
-<img src='https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height='600'><br><br>
+<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '600' ><br><br><br><br>
 [![](https://img.shields.io/badge/devel%20version-0.99.1-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
+[![R build
+status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
+[![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://app.codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-<h4>
-Authors: <i>Brian Schilder, Alan Murphy</i>
-</h4>
-<h4>
-README updated: <i>Nov-12-2022</i>
-</h4>
+¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
+<h4> ¶ README updated: <i>Nov-21-2022</i> ¶ </h4>
 
 ## Intro
 
@@ -89,12 +88,11 @@ package.
 
 #### Key changes in `rworkflows`
 
--   Uses dynamic variables to specify R/Bioconductor versions
-    (e.g. `r: "latest"`) and the name of your R package, as opposed to
-    static names that are likely to become outdated
-    (e.g. `r: "4.0.1"`).  
--   Additional error handling and dependencies checks.  
--   Re-renders `README.Rmd` before rebuilding the documentation website.
+- Uses dynamic variables to specify R/Bioconductor versions
+  (e.g. `r: "latest"`) and the name of your R package, as opposed to
+  static names that are likely to become outdated (e.g. `r: "4.0.1"`).  
+- Additional error handling and dependencies checks.  
+- Re-renders `README.Rmd` before rebuilding the documentation website.
 
 ### [`github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action)
 
@@ -158,16 +156,17 @@ utils::sessionInfo()
     ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.5   tools_4.2.1        
     ##  [7] digest_0.6.30       jsonlite_1.8.3      evaluate_0.18      
     ## [10] lifecycle_1.0.3     tibble_3.1.8        gtable_0.3.1       
-    ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.4.1          
-    ## [16] DBI_1.1.3           rstudioapi_0.14     rvcheck_0.2.1      
+    ## [13] pkgconfig_2.0.3     rlang_1.0.6         DBI_1.1.3          
+    ## [16] cli_3.4.1           rstudioapi_0.14     rvcheck_0.2.1      
     ## [19] yaml_2.3.6          xfun_0.34           fastmap_1.1.0      
     ## [22] stringr_1.4.1       dplyr_1.0.10        knitr_1.40         
     ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.0        
     ## [28] dlstats_0.1.5       rprojroot_2.0.3     grid_4.2.1         
-    ## [31] tidyselect_1.2.0    glue_1.6.2          R6_2.5.1           
-    ## [34] fansi_1.0.3         rmarkdown_2.18      ggplot2_3.4.0      
-    ## [37] badger_0.2.2        magrittr_2.0.3      scales_1.2.1       
-    ## [40] htmltools_0.5.3     assertthat_0.2.1    colorspace_2.0-3   
-    ## [43] utf8_1.2.2          stringi_1.7.8       munsell_0.5.0
+    ## [31] tidyselect_1.2.0    glue_1.6.2          here_1.0.1         
+    ## [34] R6_2.5.1            fansi_1.0.3         rmarkdown_2.18     
+    ## [37] ggplot2_3.4.0       badger_0.2.2        magrittr_2.0.3     
+    ## [40] scales_1.2.1        htmltools_0.5.3     rworkflows_0.99.1  
+    ## [43] assertthat_0.2.1    colorspace_2.0-3    utf8_1.2.2         
+    ## [46] stringi_1.7.8       munsell_0.5.0
 
 </details>
