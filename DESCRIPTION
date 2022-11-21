@@ -25,7 +25,8 @@ biocViews:
 Imports:
     here,
     yaml,
-    utils
+    utils,
+    desc
 Suggests:
     markdown,
     rmarkdown,

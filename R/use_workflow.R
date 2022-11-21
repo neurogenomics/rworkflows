@@ -4,6 +4,8 @@
 #' \href{https://github.com/neurogenomics/rworkflows}{rworkflows}
 #' \href{https://github.com/features/actions}{GitHub Actions (GHA)}  
 #' @param name Workflow name.
+#' \itemize{"rworkflows"}{}
+#' \itemize{"rworkflows_static"}{}
 #' @param tag Which version of the \code{rworkflows} action to use. 
 #' Can be a branch name on the
 #'  \href{https://github.com/neurogenomics/rworkflows/branches}{
@@ -91,45 +93,32 @@ use_workflow <- function(## action-level args
                          verbose=TRUE){
   # templateR:::source_all()
   # templateR:::args2vars(use_workflow) 
-  # docker_org <- eval(docker_org) 
-  
+  # docker_org <- eval(docker_org)  
+
   ## Custom handler prevents "on" from being converted to TRUE
-  handlers <- list('bool#yes' = function(x) { if (x == "on") x else TRUE})
-  if(is.null(name) || name=="rworkflows"){
-    yml <- yaml::read_yaml(
-      system.file("yaml","rworkflows_template.yml",
-                  package = "rworkflows"),
-      handlers = handlers)
-    #### name ####
-    yml$name <- name
-    #### on ####
-    on2 <- lapply(stats::setNames(on,on),
-                  function(x){list("branches"=branches)})
-    yml$on <- on2
-    #### with: args ####
-    yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",name,tag)
-    with2 <- yml$jobs[[1]]$steps[[2]]$with
-    with2$run_bioccheck <- run_bioccheck
-    with2$run_rcmdcheck <- run_rcmdcheck
-    with2$as_cran <- as_cran
-    with2$run_vignettes <- run_vignettes
-    with2$has_testthat <- has_testthat
-    with2$run_covr <- run_covr
-    with2$run_pkgdown <- run_pkgdown
-    with2$has_runit <- has_runit 
-    with2$GITHUB_TOKEN <- github_token 
-    with2$run_docker <- run_docker 
-    with2$docker_user <- docker_user 
-    with2$docker_org <- docker_org 
-    with2$DOCKER_TOKEN <- docker_token 
-    with2$cache_version <- cache_version  
-    #### replace with: args ####
-    yml$jobs[[1]]$steps[[2]]$with <- with2
-    ### Enable running workflow locally with act ####
-    if(isFALSE(enable_act)){
-      yml$jobs[[1]]$steps[[1]] <- NULL
-    } 
-  } 
+  yml <- get_yaml(name = name)
+  yml <- fill_yaml(yml=yml,
+                   ## action-level args
+                   name=name,
+                   tag=tag,
+                   on=on,
+                   branches=branches,
+                   ## workflow-level args
+                   run_bioccheck=run_bioccheck,
+                   run_rcmdcheck=run_rcmdcheck, 
+                   as_cran=as_cran,
+                   run_vignettes=run_vignettes,
+                   has_testthat=has_testthat, 
+                   run_covr=run_covr, 
+                   run_pkgdown=run_pkgdown, 
+                   has_runit=has_runit, 
+                   run_docker=run_docker,  
+                   github_token=github_token,
+                   docker_user=docker_user,
+                   docker_org=docker_org,
+                   docker_token=docker_token,
+                   cache_version=cache_version,
+                   enable_act=enable_act)
   #### Preview ####
   if(isTRUE(preview)){
     cat(yaml::as.yaml(yml)) 

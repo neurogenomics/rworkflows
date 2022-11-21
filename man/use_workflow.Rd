@@ -39,7 +39,9 @@ use_workflow(
 )
 }
 \arguments{
-\item{name}{Workflow name.}
+\item{name}{Workflow name.
+\itemize{"rworkflows"}{}
+\itemize{"rworkflows_static"}{}}
 
 \item{tag}{Which version of the \code{rworkflows} action to use. 
 Can be a branch name on the
@@ -115,5 +117,10 @@ Create workflow that calls an
 }
 \examples{
  
+### Example 1 ####
 path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+### Example 2 ####
+# use_workflow(run_docker=TRUE,
+#              docker_user="bschilder",
+#              docker_org="neurogenomicslab")
 }

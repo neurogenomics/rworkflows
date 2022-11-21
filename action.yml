@@ -9,9 +9,10 @@ inputs:
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.
+    default: true
   run_rcmdcheck:
     description: >
-      Run R CMD checks. Must pass in order to continue workflow."
+      Run R CMD checks. Must pass in order to continue workflow.
     default: true
   as_cran:
     description: >
@@ -20,26 +21,25 @@ inputs:
     description: >
       Build and check R package vignettes.
     default: true
-  has_testthat:
-    description: >
-      Run unit tests and report results.
-    default: true
   run_covr:
     description: >
-      Run code coverage tests and publish results to codecov.
+      Run code coverage tests and publish results to Codecov.
     default: true
   run_pkgdown:
     description: >
       Knit the README.Rmd (if available), build documentation website,
       and deploy to gh-pages branch.
     default: true
+  has_testthat:
+    description: >
+      Run unit tests with the `testthat` package and report the results.
+      Requires a subdirectory named 'tests'.
+    default: true
   has_runit: 
     description: >
-      Run R Unit tests. Requires a subdirectory named 'unitTests'.
-    default: false
-  GITHUB_TOKEN:
-    description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
+      Run unit tests with the `RUnit` package.
+      Requires a subdirectory named 'unitTests'.
+    default: false 
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -49,13 +49,22 @@ inputs:
       DockerHub username. 
   docker_org: 
     description: >
-      DockerHub organization name.
+      DockerHub organization name. Can be the same as Docker username.
   DOCKER_TOKEN:
     description: >
-      DockerHub token.
+      DockerHub authentication token.
+    default: {{ secrets.DOCKER_TOKEN }}
+  GITHUB_TOKEN:
+    description: >
+      GitHub authentication token with permissions to push 
+      to the R package's GitHub repository. 
+      Also used to bypass GitHub download limits.
+      Can be passed in using {{ secrets.PAT_GITHUB }}.
+    default: {{ secrets.PAT_GITHUB }}
   cache_version: 
     description: >
-      Which cache version to use.
+      Which cache version to use. 
+      Change this when trying to avoid using previous caches.
     default: cache-v1 
   runner_os:
     description: >
