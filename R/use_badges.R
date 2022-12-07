@@ -57,6 +57,7 @@
 #' @inheritParams badger::badge_github_actions
 #' 
 #' @export
+#' @import badger
 #' @examples
 #' ## Causes issues bc examples can't find the  the DESCRIPTION file.
 #'  \dontrun{
@@ -93,8 +94,6 @@ use_badges <- function(ref = NULL,
                                      "cran"="blue",
                                      "default"="blue"),
                        verbose = TRUE){
-  
-  requireNamespace("badger")
   
   h <- list() 
   #### Hex ####
