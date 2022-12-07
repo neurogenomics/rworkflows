@@ -69,16 +69,28 @@ Uses the package
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_badges</span><span class="op">(</span></span>
 <span>  ref <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  add_version <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  add_actions <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_hex <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_actions <span class="op">=</span> <span class="st">"rworkflows"</span>,</span>
+<span>  add_doi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_github_version <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_commit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_code_size <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_codecov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_license <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_authors <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  action <span class="op">=</span> <span class="st">"rworkflows"</span>,</span>
+<span>  add_bioc_release <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_bioc_download_month <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_bioc_download_total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_bioc_download_rank <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_cran_release <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_cran_checks <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_cran_download_month <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_cran_download_total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  branch <span class="op">=</span> <span class="st">"master"</span>,</span>
 <span>  as_list <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  sep <span class="op">=</span> <span class="st">"\n"</span>,</span>
+<span>  hex_height <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>github <span class="op">=</span> <span class="st">"black"</span>, bioc <span class="op">=</span> <span class="st">"green"</span>, cran <span class="op">=</span> <span class="st">"blue"</span>, default <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -90,19 +102,38 @@ Uses the package
 the reference is determined by the URL field in the DESCRIPTION file.</p></dd>
 
 
-<dt>add_version</dt>
-<dd><p>Add package version with 
-<a href="https://rdrr.io/pkg/badger/man/badge_github_version.html" class="external-link">badge_github_version</a>.</p></dd>
+<dt>add_hex</dt>
+<dd><p>Add a hex sticker. 
+If <code>add_hex=TRUE</code>, will assume the sticker is located at the following
+ relative path: "inst/hex/hex.png". 
+ If <code>add_hex</code> is a character string, this will instead
+be used as the relative hex path (e.g. <code>"/images/mysticker.png"</code>).</p></dd>
 
 
 <dt>add_actions</dt>
-<dd><p>Add GitHub Actions status with
-<a href="https://rdrr.io/pkg/badger/man/badge_github_actions.html" class="external-link">badge_github_actions</a>.</p></dd>
+<dd><p>The name of one or more GitHub Actions to show the 
+status for with <a href="https://rdrr.io/pkg/badger/man/badge_github_actions.html" class="external-link">badge_github_actions</a>
+ (e.g. c("rworkflows","rworkflows_static")).</p></dd>
+
+
+<dt>add_doi</dt>
+<dd><p>Add the DOI of a given package or publication 
+associated with the package. Must be provided as a character string.</p></dd>
+
+
+<dt>add_github_version</dt>
+<dd><p>Add package version with 
+<a href="https://rdrr.io/pkg/badger/man/badge_github_version.html" class="external-link">badge_github_version</a>.</p></dd>
 
 
 <dt>add_commit</dt>
 <dd><p>Add the last GitHub repo commit date with
 <a href="https://rdrr.io/pkg/badger/man/badge_last_commit.html" class="external-link">badge_last_commit</a>.</p></dd>
+
+
+<dt>add_code_size</dt>
+<dd><p>Add code size with
+<a href="https://rdrr.io/pkg/badger/man/badge_code_size.html" class="external-link">badge_code_size</a>.</p></dd>
 
 
 <dt>add_codecov</dt>
@@ -120,8 +151,44 @@ the reference is determined by the URL field in the DESCRIPTION file.</p></dd>
 the <code>DESCRIPTION</code> file.</p></dd>
 
 
-<dt>action</dt>
-<dd><p>GitHub Actions workflow to create status badge for.</p></dd>
+<dt>add_bioc_release</dt>
+<dd><p>Add Bioc release version with 
+<a href="https://rdrr.io/pkg/badger/man/badge_bioc_release.html" class="external-link">badge_bioc_release</a>.</p></dd>
+
+
+<dt>add_bioc_download_month</dt>
+<dd><p>Add the number of Bioc downloads last month 
+<a href="https://rdrr.io/pkg/badger/man/badge_bioc_download.html" class="external-link">badge_bioc_download</a>.</p></dd>
+
+
+<dt>add_bioc_download_total</dt>
+<dd><p>Add the number of Bioc downloads total
+<a href="https://rdrr.io/pkg/badger/man/badge_bioc_download.html" class="external-link">badge_bioc_download</a>.</p></dd>
+
+
+<dt>add_bioc_download_rank</dt>
+<dd><p>Add the download rank of the package on Bioc
+<a href="https://rdrr.io/pkg/badger/man/biocRanking.html" class="external-link">badge_bioc_download_rank</a>.</p></dd>
+
+
+<dt>add_cran_release</dt>
+<dd><p>Add Bioc release version with 
+<a href="https://rdrr.io/pkg/badger/man/badge_cran_release.html" class="external-link">badge_cran_release</a>.</p></dd>
+
+
+<dt>add_cran_checks</dt>
+<dd><p>Add whether package is passing all checks on CRAN 
+with <a href="https://rdrr.io/pkg/badger/man/badge_cran_checks.html" class="external-link">badge_cran_checks</a>.</p></dd>
+
+
+<dt>add_cran_download_month</dt>
+<dd><p>Add the number of CRAN downloads last month 
+<a href="https://rdrr.io/pkg/badger/man/badge_cran_download.html" class="external-link">badge_cran_download</a>.</p></dd>
+
+
+<dt>add_cran_download_total</dt>
+<dd><p>Add the number of CRAN downloads total
+<a href="https://rdrr.io/pkg/badger/man/badge_cran_download.html" class="external-link">badge_cran_download</a>.</p></dd>
 
 
 <dt>branch</dt>
@@ -136,6 +203,15 @@ or a collapsed text string (default: <code>FALSE</code>).</p></dd>
 <dt>sep</dt>
 <dd><p>Character to separate each item in the list with 
 using <a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a>.</p></dd>
+
+
+<dt>hex_height</dt>
+<dd><p>Height of the hex sticker in pixels
+(when <code>add_hex=TRUE</code>).</p></dd>
+
+
+<dt>colors</dt>
+<dd><p>Colors to assign to each group of badges (when possible).</p></dd>
 
 
 <dt>verbose</dt>
