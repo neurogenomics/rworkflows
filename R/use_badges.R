@@ -99,7 +99,8 @@ use_badges <- function(ref = NULL,
   #### Hex ####
   if(isTRUE(add_hex)){
     h["hex"] <- get_hex(branch = branch, 
-                        hex_height = hex_height)
+                        hex_height = hex_height,
+                        verbose = verbose)
   }
   #### GitHub ####
   if(isTRUE(add_github_version)){

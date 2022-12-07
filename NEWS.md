@@ -1,3 +1,14 @@
+# rworkflows 0.99.2
+
+## New features
+
+* `add_badges`
+  - Check whether hex URL actually exists first.
+
+## Bug fixes
+
+  - Make `badger` a *Import*
+
 # rworkflows 0.99.1
 
 ## New features
