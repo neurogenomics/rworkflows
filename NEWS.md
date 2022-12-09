@@ -4,6 +4,10 @@
 
 * `add_badges`
   - Check whether hex URL actually exists first.
+* New functions:
+  - `use_readme`
+  - `use_vignette_docker`
+  - `use_vignettte_getstarted`
 
 ## Bug fixes
 

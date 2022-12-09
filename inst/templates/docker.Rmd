@@ -1,17 +1,19 @@
 ---
-title: Docker/Singularity Containers
-author: '<h4>Authors: <i>`r auths <- eval(parse(text = gsub("person","c",read.dcf("../DESCRIPTION",
-  fields = "Authors@R"))));paste(auths[names(auths)=="given"],auths[names(auths)=="family"],
-  collapse = ", ")`</i></h4>'
-date: '<h4>Vignette updated: <i>`r format( Sys.Date(), "%b-%d-%Y")`</i></h4>'
+title: "Docker/Singularity Containers" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   BiocStyle::html_document:
-    md_extensions: -autolink_bare_uris
+    md_extensions: [ 
+      "-autolink_bare_uris" 
+    ]
 params:
-  docker_user:
-    value: neurogenomicslab
-vignette: |
-  %\VignetteIndexEntry{docker}  %\usepackage[utf8]{inputenc} %\VignetteEngine{knitr::rmarkdown}
+  docker_org: 
+    value: "neurogenomicslab"
+vignette: >
+    %\VignetteIndexEntry{docker} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown}
 ---
 
 
@@ -22,13 +24,13 @@ library(pkg, character.only = TRUE)
 ## Docker containers must be lowercase
 pkg <- tolower(pkg)
 #### Username of DockerHub account ####
-docker_user <- params$docker_user
+docker_org <- params$docker_org
 ```
 
 # DockerHub 
 
 `r pkg` is now available via 
-[DockerHub](https://hub.docker.com/repository/docker/`r docker_user`/`r pkg`) 
+[DockerHub](https://hub.docker.com/repository/docker/`r docker_org`/`r pkg`) 
 as a containerised environment with Rstudio and 
 all necessary dependencies pre-installed.
 
@@ -43,7 +45,7 @@ Create an image of the [Docker](https://www.docker.com/) container
 in command line:  
 
 ```
-docker pull `r docker_user`/`r pkg`
+docker pull `r docker_org`/`r pkg`
 ```
 
 Once the image has been created, you can launch it with:  
@@ -56,7 +58,7 @@ docker run \
   -v ~/Desktop:/Desktop \
   -v /Volumes:/Volumes \
   -p 8787:8787 \
-  `r docker_user`/`r pkg`
+  `r docker_org`/`r pkg`
 ```  
 
 ### NOTES
@@ -76,7 +78,7 @@ If you are using a system that does not allow Docker
 you can instead [install Docker images via Singularity](https://sylabs.io/guides/2.6/user-guide/singularity_and_docker.html).  
 
 ```
-singularity pull docker://`r docker_user`/`r pkg`
+singularity pull docker://`r docker_org`/`r pkg`
 ```
 
 

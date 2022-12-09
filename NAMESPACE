@@ -2,6 +2,9 @@
 
 export(use_badges)
 export(use_dockerfile)
+export(use_readme)
+export(use_vignette_docker)
+export(use_vignette_getstarted)
 export(use_workflow)
 import(badger)
 importFrom(desc,desc_fields)

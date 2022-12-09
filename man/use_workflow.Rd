@@ -30,7 +30,7 @@ use_workflow(
   docker_org = docker_user,
   docker_token = "${{ secrets.DOCKER_TOKEN }}",
   cache_version = "cache-v1",
-  enable_act = TRUE,
+  enable_act = FALSE,
   save_dir = here::here(".github", "workflows"),
   return_path = TRUE,
   force_new = FALSE,

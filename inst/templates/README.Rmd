@@ -1,0 +1,41 @@
+---
+title: "`r read.dcf('DESCRIPTION', fields = 'Package')[1]`"  
+author: "`r rworkflows::use_badges()`" 
+date: "<h4>README updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  github_document
+---
+
+<!-- To modify Package/Title/Description/Authors fields, edit the DESCRIPTION file -->
+
+```{r, echo=FALSE, include=FALSE}
+pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
+title <- read.dcf("DESCRIPTION", fields = "Title")[1]
+description <- read.dcf("DESCRIPTION", fields = "Description")[1]
+URL <- read.dcf('DESCRIPTION', fields = 'URL')[1]
+owner <- tolower(strsplit(URL,"/")[[1]][4])
+```
+ 
+## ``r pkg``: `r title`
+
+### `r description`
+ 
+If you use ``r pkg``, please cite: 
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+> `r utils::citation(pkg)$textVersion`
+
+## Installation 
+
+```R
+if(!require("remotes")) install.packages("remotes")
+
+remotes::install_github("`r URL`")
+library(`r pkg`)
+```
+## Documentation 
+
+### [Website](https://`r owner`.github.io/`r pkg`) 
+### [Get started](https://`r owner`.github.io/`r pkg`/articles/`r pkg`) 
+
+<br>

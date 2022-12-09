@@ -1,0 +1,66 @@
+---
+title: "Get Started" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document
+vignette: >
+    %\VignetteIndexEntry{rworkflows} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown}
+---
+
+
+```{r, echo=FALSE, include=FALSE}
+pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
+library(pkg, character.only = TRUE)
+```
+
+
+```R
+library(`r pkg`)
+```
+
+# `use_workflow`
+
+User only have to run `use_workflow` once per R package to create
+a workflow file that calls the `rworkflows` action. 
+
+```{r}
+workflow <- rworkflows::use_workflow(run_bioccheck = FALSE, 
+                                     run_rcmdcheck = TRUE,  
+                                     run_pkgdown = TRUE, 
+                                     run_docker = TRUE,
+                                     docker_user = "bschilder",
+                                     docker_org = "neurogenomicslab")
+```
+
+# `use_badges`
+
+This function creates a banner containing badges, a hex sticker (if one is available), and author names.
+
+```{r, results='asis'}
+badges <- rworkflows::use_badges()
+```
+
+
+# `use_dockerfile`
+
+Create a *Dockerfile* that installs your R package and all its 
+*Imports*/*Suggests*. It is normally not necessary for users to run this function themselves unless they would like to use it to create a template *Dockerfile* and then customise it further (rather than creating one on the fly).
+
+```{r, results='asis'}
+dockerfile <- rworkflows::use_dockerfile(save_dir = tempdir())
+```
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+
+<br>

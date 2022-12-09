@@ -1,0 +1,74 @@
+---
+title: "Dependency graph" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document
+vignette: >
+    %\VignetteIndexEntry{depgraph} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown}
+---
+
+A dependency graph for all GitHub repos that use the `rworkflows` GitHub Action.
+
+# Create
+
+Here is the code for creating the plot.
+
+## Install required packages
+
+```R
+if(!require("rworkflows"))remotes::install_github("neurogenomics/rworkflows",
+                                                  dependencies = TRUE)
+if(!require("echodeps"))remotes::install_github("RajLabMSSM/echodeps",
+                                                dependencies = TRUE)
+```
+
+## Create graph 
+
+```R
+dgc_out <- echodeps::dep_graph_create(pkg_name = "rworkflows",
+                                      method = "github",
+                                      node_size = "clones_uniques")
+```
+
+## Subset graph
+
+```R
+## Remove repos that are automatically created by GitHub to check actions
+## published on the GitHub Actions marketplace.
+g <- dgc_out$subgraph
+exclude <- grep("actions-marketplace-validations",
+                names(igraph::V(g)),value = TRUE)
+g2 <- echodeps::subset_graph(g=g, exclude=exclude)
+```
+
+
+## Plot graph
+
+```R
+vis <- echodeps::dep_graph_plot(g = g2,
+                                shape = "hexagon",
+                                pkg_name = dgc_out$pkg_name,
+                                save_path = here::here(
+                                  "depgraph","rworkflows_depgraph.html"))
+## Remove temp files
+unlink(here::here("depgraph","rworkflows_depgraph_files"), recursive = TRUE)
+``` 
+
+# Show
+
+<iframe src="https://ntu.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=894e2520-46b3-4c7e-9666-acbc00eee050&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=false&amp;start=0&amp;interactivity=all" height="405" width="720" style="border: 1px solid #464646;" allowfullscreen="" allow="autoplay"></iframe>
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+
+<br>

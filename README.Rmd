@@ -37,11 +37,9 @@ Importantly, these *workflow files* and *action* are
 designed to work with any R package out-of-the-box.
 This means you won't have to manually edit any yaml files, just run the `rworkflows::use_workflow()` function and you're ready to go!
 
-## [Documentation](https://neurogenomics.github.io/rworkflows)
-### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
-### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
+## Documentation
 
-## Quickstart
+### Quickstart
 
 Install and create the workflow in your R package's project folder.
 ```R
@@ -56,6 +54,22 @@ git add .
 git commit -m "Added GHA workflow via rworkflows::use_workflow()"
 git push
 ```
+
+### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
+
+Introductory tutorial for using `rworkflows`.
+
+### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
+
+Copy-and-paste instructions for creating a *Docker* or *Singularity* container
+with the `rworkflows` R package pre-installed.
+
+## [Dependency graph]()
+
+Interactive graph showing all the GitHub repos that currently use 
+the `rworkflows` action.
+
+
 
 ## Acknowledgments
 

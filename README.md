@@ -1,5 +1,5 @@
 <img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '600' ><br><br><br><br>
-[![](https://img.shields.io/badge/devel%20version-0.99.1-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.2-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![R build
@@ -10,7 +10,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Nov-21-2022</i> ¶ </h4>
+<h4> ¶ README updated: <i>Dec-07-2022</i> ¶ </h4>
 
 ## Intro
 
@@ -156,16 +156,16 @@ utils::sessionInfo()
     ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.5   tools_4.2.1        
     ##  [7] digest_0.6.30       jsonlite_1.8.3      evaluate_0.18      
     ## [10] lifecycle_1.0.3     tibble_3.1.8        gtable_0.3.1       
-    ## [13] pkgconfig_2.0.3     rlang_1.0.6         DBI_1.1.3          
-    ## [16] cli_3.4.1           rstudioapi_0.14     rvcheck_0.2.1      
-    ## [19] yaml_2.3.6          xfun_0.34           fastmap_1.1.0      
-    ## [22] stringr_1.4.1       dplyr_1.0.10        knitr_1.40         
-    ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.0        
+    ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.4.1          
+    ## [16] DBI_1.1.3           rstudioapi_0.14     rvcheck_0.2.1      
+    ## [19] yaml_2.3.6          xfun_0.35           fastmap_1.1.0      
+    ## [22] stringr_1.4.1       dplyr_1.0.10        knitr_1.41         
+    ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.1        
     ## [28] dlstats_0.1.5       rprojroot_2.0.3     grid_4.2.1         
-    ## [31] tidyselect_1.2.0    glue_1.6.2          here_1.0.1         
+    ## [31] tidyselect_1.2.0    here_1.0.1          glue_1.6.2         
     ## [34] R6_2.5.1            fansi_1.0.3         rmarkdown_2.18     
     ## [37] ggplot2_3.4.0       badger_0.2.2        magrittr_2.0.3     
-    ## [40] scales_1.2.1        htmltools_0.5.3     rworkflows_0.99.1  
+    ## [40] scales_1.2.1        htmltools_0.5.3     rworkflows_0.99.2  
     ## [43] assertthat_0.2.1    colorspace_2.0-3    utf8_1.2.2         
     ## [46] stringi_1.7.8       munsell_0.5.0
 

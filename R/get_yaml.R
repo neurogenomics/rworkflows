@@ -6,12 +6,12 @@ get_yaml <- function(name){
   if(is.null(name) || 
      name=="rworkflows"){
       yml <- yaml::read_yaml(
-        system.file("yaml","rworkflows_template.yml",
+        system.file("templates","rworkflows_template.yml",
                     package = "rworkflows"),
         handlers = handlers)
     } else if(name=="rworkflows_static"){
       yml <- yaml::read_yaml(
-        system.file("yaml","rworkflows_template_static.yml",
+        system.file("templates","rworkflows_template_static.yml",
                     package = "rworkflows"),
         handlers = handlers)
     } else {

@@ -6,6 +6,7 @@ check-r
 install-r
 install-system
 rworkflows-merged
+^depgraph$
 
 .*\.Rproj$
 ^\.Rproj\.user$

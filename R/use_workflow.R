@@ -84,7 +84,7 @@ use_workflow <- function(## action-level args
                          docker_org=docker_user,
                          docker_token="${{ secrets.DOCKER_TOKEN }}",
                          cache_version="cache-v1",
-                         enable_act=TRUE,
+                         enable_act=FALSE,
                          ## function-level args
                          save_dir=here::here(".github","workflows"),
                          return_path=TRUE,
