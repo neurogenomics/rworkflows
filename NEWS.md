@@ -13,6 +13,7 @@
 
 * Make `badger` a *Import*
 * Use Dockerfile stored in *inst/templates* instead of getting from GitHub.
+* Fix `vignette` field in `use_vignette_*` functions.
 
 # rworkflows 0.99.1
 

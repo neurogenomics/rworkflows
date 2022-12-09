@@ -10,7 +10,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Dec-07-2022</i> ¶ </h4>
+<h4> ¶ README updated: <i>Dec-09-2022</i> ¶ </h4>
 
 ## Intro
 
@@ -46,12 +46,6 @@ with any R package out-of-the-box. This means you won’t have to manually
 edit any yaml files, just run the `rworkflows::use_workflow()` function
 and you’re ready to go!
 
-## [Documentation](https://neurogenomics.github.io/rworkflows)
-
-### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
-
-### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
-
 ## Quickstart
 
 Install and create the workflow in your R package’s project folder.
@@ -70,6 +64,22 @@ git add .
 git commit -m "Added GHA workflow via rworkflows::use_workflow()"
 git push
 ```
+
+## Documentation
+
+### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
+
+Introductory tutorial for using `rworkflows`.
+
+### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
+
+Copy-and-paste instructions for creating a *Docker* or *Singularity*
+container with the `rworkflows` R package pre-installed.
+
+### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph)
+
+Interactive graph showing all the GitHub repos that currently use the
+`rworkflows` action.
 
 ## Acknowledgments
 
