@@ -67,7 +67,7 @@ unlink(here::here("depgraph","rworkflows_depgraph_files"), recursive = TRUE)
 
 Hover over each node to show additional metadata.
 
-```{r fig.height=15}
+```{r fig.height=20, fig.width=20}
 htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/depgraph/rworkflows_depgraph.html")
 ```
 
