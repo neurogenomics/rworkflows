@@ -23,6 +23,9 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
+  <a href="../articles/rworkflows.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -32,6 +35,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/depgraph.html">Dependency graph</a>
+    </li>
+    <li>
       <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
   </ul></li>
@@ -65,11 +71,17 @@
 <code>add_badges</code>
 <ul><li>Check whether hex URL actually exists first.</li>
 </ul></li>
+<li>New functions:
+<ul><li><code>use_readme</code></li>
+<li><code>use_vignette_docker</code></li>
+<li><code>use_vignettte_getstarted</code></li>
+</ul></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-2"></a></h3>
 <ul><li>Make <code>badger</code> a <em>Import</em>
 </li>
+<li>Use Dockerfile stored in <em>inst/templates</em> instead of getting from GitHub.</li>
 </ul></div>
 </div>
     <div class="section level2">

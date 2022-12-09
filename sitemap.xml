@@ -7,10 +7,16 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/articles/depgraph.html</loc>
+  </url>
+  <url>
     <loc>/articles/docker.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/rworkflows.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -38,6 +44,15 @@
   </url>
   <url>
     <loc>/reference/use_dockerfile.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_readme.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_vignette_docker.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_vignette_getstarted.html</loc>
   </url>
   <url>
     <loc>/reference/use_workflow.html</loc>
