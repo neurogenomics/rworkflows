@@ -37,7 +37,8 @@ Suggests:
     BiocStyle,
     covr,
     testthat (>= 3.0.0),
-    hexSticker
+    hexSticker,
+    htmltools
 RoxygenNote: 7.2.2
 VignetteBuilder: knitr
 License: GPL-3

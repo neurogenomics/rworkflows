@@ -4,7 +4,7 @@ get_hex <- function(branch,
                     add_html=TRUE,
                     verbose=TRUE){
   
-  if("URL" %in% desc:::desc_fields()){
+  if("URL" %in% desc::desc_fields()){
     URL <- desc::desc_get_field(key = "URL")
   } else {
     wrn <- "URL key not found in DESCRIPTION file."

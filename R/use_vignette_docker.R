@@ -54,11 +54,9 @@ use_vignette_docker <- function(docker_org,
     yml$params$docker_org$value <- docker_org
     ## vignette title
     yml$title <- title
-    yml$vignette <- gsub(
-      "%\\VignetteIndexEntry{docker}", 
-      paste0("%\\VignetteIndexEntry{",vignette_index_entry,"}"), 
-      yml$vignette, 
-      fixed = TRUE)
+    yml <- set_vignette_index(yml = yml,
+                              pattern = "%\\VignetteIndexEntry{docker}",
+                              vignette_index_entry = vignette_index_entry)
     #### Render to text ####
     yml_txt <- gsub("''","\"",yaml::as.yaml(yml))
     new_rmd <-c("---",strsplit(yml_txt,"\n")[[1]],"---",

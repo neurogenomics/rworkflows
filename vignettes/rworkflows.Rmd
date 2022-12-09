@@ -23,6 +23,8 @@ library(`r pkg`)
 
 # `use_workflow`
 
+## dynamic action
+
 User only have to run `use_workflow` once per R package to create
 a workflow file that calls the `rworkflows` action. 
 
@@ -32,12 +34,31 @@ workflow <- rworkflows::use_workflow(run_bioccheck = FALSE,
                                      run_pkgdown = TRUE, 
                                      run_docker = TRUE,
                                      docker_user = "bschilder",
-                                     docker_org = "neurogenomicslab")
+                                     docker_org = "neurogenomicslab",
+                                     ## Use default save_dir in practice
+                                     save_dir = tempdir())
+```
+
+## static workflow
+
+Alternatively, you may use 
+
+```{r}
+workflow_static <- rworkflows::use_workflow(name = "rworkflows_static",
+                                     run_bioccheck = FALSE, 
+                                     run_rcmdcheck = TRUE,  
+                                     run_pkgdown = TRUE, 
+                                     run_docker = TRUE,
+                                     docker_user = "bschilder",
+                                     docker_org = "neurogenomicslab",
+                                     ## Use default save_dir in practice
+                                     save_dir = tempdir())
 ```
 
 # `use_badges`
 
-This function creates a banner containing badges, a hex sticker (if one is available), and author names.
+This function creates a banner containing badges, 
+a hex sticker (if one is available), and author names.
 
 ```{r, results='asis'}
 badges <- rworkflows::use_badges()
@@ -50,7 +71,58 @@ Create a *Dockerfile* that installs your R package and all its
 *Imports*/*Suggests*. It is normally not necessary for users to run this function themselves unless they would like to use it to create a template *Dockerfile* and then customise it further (rather than creating one on the fly).
 
 ```{r, results='asis'}
-dockerfile <- rworkflows::use_dockerfile(save_dir = tempdir())
+## Use default save_dir in practice
+dockerfile <- rworkflows::use_dockerfile(save_dir = tempdir()) 
+```
+
+# Templates
+
+You can generate templates for each of the following R package elements.
+These templates are designed to dynamically autofill as as much information 
+as possible (package name, date, authors) to minimise manual editing steps and
+ensure documentation is as up-to-date as possible.
+
+## README
+
+README rmarkdown file. 
+Allows you to run code inside to generate a README *markdown* file. 
+
+```{r}
+## Use default save_dir in practice
+readme <- rworkflows::use_readme(save_dir = tempdir())
+```
+
+## Vignette: Get started
+
+Generate a vignette on how to get started with your R package.
+Requires additional editing to fill in examples.
+
+```{r}
+## Use default save_dir in practice
+vignette1 <- rworkflows::use_vignette_getstarted(package = "mypackage",
+                                                 save_dir = tempdir())
+```
+
+
+## Vignette: docker
+
+Generate a vignette on how to install your R package via with your R package, 
+RStudio, and all dependencies already installed.
+This vignette does not require any manual editing after creation (unless you 
+want to change things like port number, for example).
+
+Note, this is only relevant when you have a Dockerhub repo for your R package,
+e.g. created with:
+
+```R
+rworkflows::use_workflow(run_docker = TRUE, 
+                         docker_org = "<docker_org>")
+```
+
+```{r}
+## Use default save_dir in practice
+vignette2 <- rworkflows::use_vignette_docker(docker_org = "neurogenomicslab",
+                                             save_dir = tempdir())
 ```
 
 # Session Info 

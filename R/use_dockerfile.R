@@ -20,14 +20,16 @@ use_dockerfile <- function(save_dir=getwd(),
                            show=FALSE,
                            verbose=TRUE){
   
-  if(file.exists(path) & isFALSE(force_new)){
+  if(file.exists(path) &&
+     isFALSE(force_new)){
     messager("Using existing Docker file:",path,v=verbose)
   } else {
     messager("Creating new Docker file ==>",path,v=verbose)
-    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
-    utils::download.file(
-      url = "https://github.com/neurogenomics/rworkflows/raw/master/Dockerfile", 
-      destfile = path) 
+    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE) 
+    file.copy(from = system.file("templates","Dockerfile",
+                                 package = "rworkflows"), 
+              to = path,  
+              overwrite = TRUE)
   }
   if(isTRUE(show)){
     messager("Docker file preview:",v=verbose)

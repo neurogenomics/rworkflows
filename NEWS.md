@@ -11,7 +11,8 @@
 
 ## Bug fixes
 
-  - Make `badger` a *Import*
+* Make `badger` a *Import*
+* Use Dockerfile stored in *inst/templates* instead of getting from GitHub.
 
 # rworkflows 0.99.1
 

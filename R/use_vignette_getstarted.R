@@ -40,12 +40,10 @@ use_vignette_getstarted <- function(package,
                      rev(grep("---",l))[1] ) 
     yml <- yaml::read_yaml(text = l[yml_lines]) 
     ## vignette title
-    yml$title <- title
-    yml$vignette <- gsub(
-      "%\\VignetteIndexEntry{templateR}", 
-      paste0("%\\VignetteIndexEntry{",vignette_index_entry,"}"), 
-      yml$vignette, 
-      fixed = TRUE)
+    yml$title <- title 
+    yml <- set_vignette_index(yml = yml,
+                              pattern = "%\\VignetteIndexEntry{templateR}",
+                              vignette_index_entry = vignette_index_entry)
     #### Render to text ####
     yml_txt <- gsub("''","\"",yaml::as.yaml(yml))
     new_rmd <-c("---",strsplit(yml_txt,"\n")[[1]],"---",

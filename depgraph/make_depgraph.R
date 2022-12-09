@@ -20,9 +20,12 @@ exclude <- grep("actions-marketplace-validations",
                 names(igraph::V(g)),value = TRUE)
 g2 <- echodeps::subset_graph(g=g, exclude=exclude)
 #### Plot graph ####
+colors <- echodeps::construct_colors(save_background = "transparent",
+                                     background = "transparent")
 vis <- echodeps::dep_graph_plot(g = g2,
                                 shape = "hexagon",
                                 pkg_name = dgc_out$pkg_name,
+                                colors = colors,
                                 save_path = here::here(
                                   "depgraph","rworkflows_depgraph.html"))
 #### Remove temp files ####

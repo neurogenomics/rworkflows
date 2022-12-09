@@ -11,7 +11,7 @@ params:
   docker_org: 
     value: "neurogenomicslab"
 vignette: >
-    %\VignetteIndexEntry{docker} 
+    %\VignetteIndexEntry{docker}
     %\usepackage[utf8]{inputenc}
     %\VignetteEngine{knitr::rmarkdown}
 ---
