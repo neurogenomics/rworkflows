@@ -1,0 +1,168 @@
+---
+title: "Repositories analysis" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document
+vignette: >
+    %\VignetteIndexEntry{Repositories analysis} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown}
+---
+
+# Install required packages
+
+```R
+for(p in c("UpSetR","githubinstall","rvest","ggplot2","data.table")){
+  requireNamespace(p)
+  install.packages(p)
+}
+```
+```R
+library(data.table)
+```
+
+ 
+
+# Get all packages per repo
+
+## Base R
+
+```{r}
+baser <- rownames(installed.packages(priority="base"))
+```
+
+
+## CRAN
+
+```{r} 
+cran <- utils::available.packages(contriburl = "https://cran.rstudio.com/src/contrib") |> data.frame()
+length(cran$Package)
+```
+
+## Bioc
+
+*Note*: This only retrieves Bioc packages in the currently installed 
+release of Bioconductor. Packages that are only in older versions of Bioc 
+(and were later deprecated) will not be listed here.
+
+```{r}
+### This function gives all packages, including CRAN, Bioc, and anything currently installed. ####
+# bioc <- BiocManager::available() 
+
+### This only gives Bioc packages ####
+repos <- BiocManager::repositories()
+repos <- repos[names(repos)!="CRAN"]
+bioc <- utils::available.packages(repos = repos) |> data.frame()
+length(bioc$Package)
+```
+
+## rOpenSci
+
+```{r}
+ropensci <- 
+  rvest::read_html("https://docs.ropensci.org/") |>
+  rvest::html_element("#repolist") |>
+  rvest::html_children() |> 
+  rvest::html_text()
+length(ropensci)
+```
+
+## GitHub
+
+> The githubinstall package uses Gepuro Task Views for getting the list of R packages on GitHub. Gepuro Task Views is crawling the GitHub and updates information every day. The package downloads the list of R packages from Gepuro Task Views each time it was loaded. Thus, you can always use the newest list of packages on a new R session.
+However, you may use an R session for a long time. In such case, gh_update_package_list() is useful.
+gh_update_package_list() updates the downloaded list of the R packages explicitly.
+
+However this is not actually true, 
+as the file has not been updated since February 3rd 2018:
+https://github.com/hoxo-m/githubinstall/issues/41
+
+A Pull Request was made in 2019 but it was never integrated:
+https://github.com/pabter/gepuro-task-views-copy/tree/76b7c4e48a704927432f328c6f898cbac0c5731c
+
+```{r}
+githubinstall::gh_update_package_list()
+github <- githubinstall::gh_list_packages()
+length(github$package_name)
+```
+
+## Merge all repos
+
+```{r}
+pkgs <- rbind(
+  cbind(package=baser,
+        repo="base"),
+  cbind(package=cran$Package,
+        repo="CRAN"),
+  cbind(package=bioc$Package,
+        repo="Bioc"),
+  cbind(package=ropensci,
+        repo="rOpenSci"),
+  cbind(package=github$package_name,
+        repo="GitHub")
+  ) |>
+  data.table::data.table()
+pkgs_count <- pkgs[, .(count = .N), by = repo]
+pkgs_count
+```
+
+
+## Plot
+
+### Upset plot
+
+```{r}
+#### Create data ####
+upsetr_data <- lapply(stats::setNames(unique(pkgs$repo),
+                                      unique(pkgs$repo)),
+                    function(r){
+                      unique(subset(pkgs,repo==r)$package)
+                    }) |> UpSetR::fromList()
+
+#### Plot ####
+upset_plot <- UpSetR::upset(data = upsetr_data,  
+                            sets.bar.color = "slategrey",
+                            main.bar.color = "slategrey",
+                            text.scale = 1.5,
+                            queries = list(list(query = UpSetR::intersects, 
+                                                params = list("GitHub"),
+                                                color = "darkred", 
+                                                active = TRUE))
+                            )
+#### Save  ####
+path <- "~/Downloads/upsetr" ##tempfile(fileext = "")
+## PDF
+grDevices::pdf(paste0(path,".pdf"))
+upset_plot
+grDevices::dev.off() 
+## PNG
+grDevices::png(paste0(path,".png"))
+upset_plot
+grDevices::dev.off() 
+```
+
+### Compute percentages
+
+```{r}
+stats_1repo <- colSums(upsetr_data[rowSums(upsetr_data)==1,])
+stats_repo <- data.table::data.table(
+  repo=names(stats_1repo),
+  total=length(unique(pkgs$package)),
+  count_all=colSums(upsetr_data),
+  count_exclusive=stats_1repo
+  )[,percent_all:=(count_all/total*100)][,percent_exclusive:=(count_exclusive/total*100)]
+stats_repo
+```
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+
+<br>

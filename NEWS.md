@@ -8,6 +8,9 @@
   - `use_readme`
   - `use_vignette_docker`
   - `use_vignettte_getstarted`
+* New vignettes:
+  - *depgraph*: Plot which R packages use the `rworkflow` action.
+  - *repos*: Evaluate how R packages are distributed.
 
 ## Bug fixes
 

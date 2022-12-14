@@ -13,6 +13,7 @@ vignette: >
 
 ```{r}
 requireNamespace("htmltools")
+library(data.table)
 ```
 
 
@@ -48,6 +49,29 @@ g <- dgc_out$subgraph
 exclude <- grep("actions-marketplace-validations",
                 names(igraph::V(g)),value = TRUE)
 g2 <- echodeps::subset_graph(g=g, exclude=exclude)
+```
+
+## View and data
+
+```R
+dgc_out$metadata
+
+saveRDS(dgc_out, here::here("depgraph","dgc_out.rds"))
+```
+
+## Count stars/clones/views
+
+```R
+cols <- c("stargazers_count",
+          "clones_count","clones_uniques",
+          "views_count","views_uniques")
+
+metadata_counts <- data.frame(
+  total=dgc_out$metadata[repo!="rworkflows",
+                         lapply(.SD, sum, na.rm=TRUE),
+                         .SDcols=cols] |> t()
+  )
+metadata_counts
 ```
 
 

@@ -38,8 +38,13 @@ Suggests:
     covr,
     testthat (>= 3.0.0),
     hexSticker,
-    htmltools
-RoxygenNote: 7.2.2
+    htmltools,
+    rvest,
+    UpSetR,
+    githubinstall,
+    BiocManager,
+    data.table
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
