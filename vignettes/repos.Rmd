@@ -134,6 +134,7 @@ upset_plot <- UpSetR::upset(data = upsetr_data,
                                                 color = "darkred", 
                                                 active = TRUE))
                             )
+methods::show(upset_plot)
 ```
 
 #### Save
@@ -142,11 +143,11 @@ upset_plot <- UpSetR::upset(data = upsetr_data,
 path <- "~/Downloads/upsetr" 
 ## PDF
 grDevices::pdf(paste0(path,".pdf"))
-upset_plot
+methods::show(upset_plot)
 grDevices::dev.off() 
 ## PNG
 grDevices::png(paste0(path,".png"))
-upset_plot
+methods::show(upset_plot)
 grDevices::dev.off() 
 ```
 
