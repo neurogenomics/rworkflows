@@ -4,8 +4,16 @@
 #' \href{https://github.com/neurogenomics/rworkflows}{rworkflows}
 #' \href{https://github.com/features/actions}{GitHub Actions (GHA)}  
 #' @param name Workflow name.
-#' \itemize{"rworkflows"}{}
-#' \itemize{"rworkflows_static"}{}
+#' \itemize{
+#' \item{"rworkflows"}{A short workflow script that calls
+#'  the GitHub action from the GitHub Marketplace.
+#' The action is continually updated 
+#' so users do not need to worry about maintaining it.}
+#' \item{"rworkflows_static"}{A longer workflow scripts that 
+#' explicitly copies all steps from the \pkg{rworkflows} action
+#' into a static file. Users may need to update this file themselves over time,
+#' though this does allow for a fully customisable workflow.}
+#' }
 #' @param tag Which version of the \code{rworkflows} action to use. 
 #' Can be a branch name on the
 #'  \href{https://github.com/neurogenomics/rworkflows/branches}{

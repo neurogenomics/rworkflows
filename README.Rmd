@@ -6,6 +6,11 @@ output:
   github_document
 ---
 
+```{r setup}
+pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
+```
+
+
 ## Intro
 
 [*GitHub Actions*](https://docs.github.com/en/actions) 
@@ -28,7 +33,7 @@ Currently, `rworkflows` *action* performs the following tasks:
 4. Runs code coverage tests and uploads the results 
 to [*Codecov*](https://about.codecov.io/).  
 5. (Re)builds and launches a documentation website for your R package.  
-6. Pushes an [*Rstudio*](https://www.rstudio.com/) 
+6. Pushes an [*Rstudio*](https://posit.co/) 
 [*Docker*](https://www.docker.com/) container to 
 [*DockerHub*](https://hub.docker.com/) 
 with your R package and all its dependencies pre-installed.  
@@ -68,6 +73,13 @@ with the `rworkflows` R package pre-installed.
 
 Interactive graph showing all the GitHub repos that currently use 
 the `rworkflows` action.
+
+## Citation 
+
+If you use ``r pkg``, please cite: 
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+> `r utils::citation(pkg)$textVersion`
 
 ## Acknowledgments
 

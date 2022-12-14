@@ -10,7 +10,11 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Dec-09-2022</i> ¶ </h4>
+<h4> ¶ README updated: <i>Dec-14-2022</i> ¶ </h4>
+
+``` r
+pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
+```
 
 ## Intro
 
@@ -36,7 +40,7 @@ Currently, `rworkflows` *action* performs the following tasks:
     [*Codecov*](https://about.codecov.io/).  
 5.  (Re)builds and launches a documentation website for your R
     package.  
-6.  Pushes an [*Rstudio*](https://www.rstudio.com/)
+6.  Pushes an [*Rstudio*](https://posit.co/)
     [*Docker*](https://www.docker.com/) container to
     [*DockerHub*](https://hub.docker.com/) with your R package and all
     its dependencies pre-installed.
@@ -80,6 +84,16 @@ container with the `rworkflows` R package pre-installed.
 
 Interactive graph showing all the GitHub repos that currently use the
 `rworkflows` action.
+
+## Citation
+
+If you use `rworkflows`, please cite:
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+
+> Brian M. Schilder, Alan E. Murphy (2021) rworkflows: Continuous
+> integration for R packages, *GitHub*;
+> <https://github.com/neurogenomics/rworkflows>
 
 ## Acknowledgments
 
@@ -164,14 +178,14 @@ utils::sessionInfo()
     ## loaded via a namespace (and not attached):
     ##  [1] BiocManager_1.30.19 compiler_4.2.1      pillar_1.8.1       
     ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.5   tools_4.2.1        
-    ##  [7] digest_0.6.30       jsonlite_1.8.3      evaluate_0.18      
+    ##  [7] digest_0.6.30       jsonlite_1.8.4      evaluate_0.19      
     ## [10] lifecycle_1.0.3     tibble_3.1.8        gtable_0.3.1       
     ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.4.1          
     ## [16] DBI_1.1.3           rstudioapi_0.14     rvcheck_0.2.1      
     ## [19] yaml_2.3.6          xfun_0.35           fastmap_1.1.0      
-    ## [22] stringr_1.4.1       dplyr_1.0.10        knitr_1.41         
+    ## [22] stringr_1.5.0       dplyr_1.0.10        knitr_1.41         
     ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.1        
-    ## [28] dlstats_0.1.5       rprojroot_2.0.3     grid_4.2.1         
+    ## [28] dlstats_0.1.6       rprojroot_2.0.3     grid_4.2.1         
     ## [31] tidyselect_1.2.0    here_1.0.1          glue_1.6.2         
     ## [34] R6_2.5.1            fansi_1.0.3         rmarkdown_2.18     
     ## [37] ggplot2_3.4.0       badger_0.2.2        magrittr_2.0.3     
