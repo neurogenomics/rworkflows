@@ -101,6 +101,9 @@
 
     
     
+<p><em>NOTE</em>: A fully functionalized version of this script is
+available via the R package <a href="https://github.com/RajLabMSSM/echogithub" class="external-link"><code>echogithub</code></a>:
+<code>echogithub::r_repos()</code></p>
 <div class="section level2">
 <h2 id="install-required-packages">Install required packages<a class="anchor" aria-label="anchor" href="#install-required-packages"></a>
 </h2>
@@ -127,7 +130,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cran</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span>contriburl <span class="op">=</span> <span class="st">"https://cran.rstudio.com/src/contrib"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cran</span><span class="op">$</span><span class="va">Package</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 18909</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 18911</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="bioc">Bioc<a class="anchor" aria-label="anchor" href="#bioc"></a>
@@ -151,7 +154,7 @@ here.</p>
 <code class="sourceCode R"><span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="va">repos</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">repos</span><span class="op">)</span><span class="op">!=</span><span class="st">"CRAN"</span><span class="op">]</span></span>
 <span><span class="va">bioc</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="va">repos</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">bioc</span><span class="op">$</span><span class="va">Package</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 4836</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 4837</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="ropensci">rOpenSci<a class="anchor" aria-label="anchor" href="#ropensci"></a>
@@ -214,8 +217,8 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="va">pkgs_count</span></span></code></pre></div>
 <pre><code><span><span class="co">##        repo count</span></span>
 <span><span class="co">## 1:     base    14</span></span>
-<span><span class="co">## 2:     CRAN 18909</span></span>
-<span><span class="co">## 3:     Bioc  4836</span></span>
+<span><span class="co">## 2:     CRAN 18911</span></span>
+<span><span class="co">## 3:     Bioc  4837</span></span>
 <span><span class="co">## 4: rOpenSci   303</span></span>
 <span><span class="co">## 5:   GitHub 34491</span></span></code></pre>
 </div>
@@ -242,7 +245,9 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span>                                                params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"GitHub"</span><span class="op">)</span>,</span>
 <span>                                                color <span class="op">=</span> <span class="st">"darkred"</span>, </span>
 <span>                                                active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span>                            <span class="op">)</span></span></code></pre></div>
+<span>                            <span class="op">)</span></span>
+<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">upset_plot</span><span class="op">)</span></span></code></pre></div>
+<p><img src="repos_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <div class="section level5">
 <h5 id="save">Save<a class="anchor" aria-label="anchor" href="#save"></a>
 </h5>
@@ -250,11 +255,11 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="st">"~/Downloads/upsetr"</span> </span>
 <span><span class="co">## PDF</span></span>
 <span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">path</span>,<span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">upset_plot</span></span>
+<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">upset_plot</span><span class="op">)</span></span>
 <span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="co">## PNG</span></span>
 <span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">path</span>,<span class="st">".png"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">upset_plot</span></span>
+<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">upset_plot</span><span class="op">)</span></span>
 <span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
 </div>
 </div>
@@ -309,30 +314,31 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="co">##  [7] remotes_2.4.2       processx_3.8.0      callr_3.7.3        </span></span>
 <span><span class="co">## [10] generics_0.1.3      vctrs_0.5.1         tools_4.3.0        </span></span>
 <span><span class="co">## [13] ps_1.7.2            curl_4.3.3          fansi_1.0.3        </span></span>
-<span><span class="co">## [16] tibble_3.1.8        pkgconfig_2.0.3     data.table_1.14.6  </span></span>
-<span><span class="co">## [19] desc_1.4.2          assertthat_0.2.1    lifecycle_1.0.3    </span></span>
-<span><span class="co">## [22] farver_2.1.1        compiler_4.3.0      stringr_1.5.0      </span></span>
-<span><span class="co">## [25] textshaping_0.3.6   munsell_0.5.0       httpuv_1.6.6       </span></span>
-<span><span class="co">## [28] htmltools_0.5.4     usethis_2.1.6       sass_0.4.4         </span></span>
-<span><span class="co">## [31] yaml_2.3.6          pillar_1.8.1        later_1.3.0        </span></span>
-<span><span class="co">## [34] pkgdown_2.0.7       crayon_1.5.2        jquerylib_0.1.4    </span></span>
-<span><span class="co">## [37] urlchecker_1.0.1    ellipsis_0.3.2      cachem_1.0.6       </span></span>
-<span><span class="co">## [40] sessioninfo_1.2.2   mime_0.12           tidyselect_1.2.0   </span></span>
-<span><span class="co">## [43] rvest_1.0.3         digest_0.6.31       stringi_1.7.8      </span></span>
-<span><span class="co">## [46] dplyr_1.0.10        purrr_0.3.5         bookdown_0.31      </span></span>
-<span><span class="co">## [49] labeling_0.4.2      rprojroot_2.0.3     fastmap_1.1.0      </span></span>
-<span><span class="co">## [52] grid_4.3.0          colorspace_2.0-3    cli_3.4.1          </span></span>
-<span><span class="co">## [55] magrittr_2.0.3      utf8_1.2.2          pkgbuild_1.4.0     </span></span>
-<span><span class="co">## [58] withr_2.5.0         prettyunits_1.1.1   scales_1.2.1       </span></span>
-<span><span class="co">## [61] promises_1.2.0.1    rmarkdown_2.18      httr_1.4.4         </span></span>
-<span><span class="co">## [64] gridExtra_2.3       ragg_1.2.4          memoise_2.0.1      </span></span>
-<span><span class="co">## [67] shiny_1.7.3         evaluate_0.19       knitr_1.41         </span></span>
-<span><span class="co">## [70] UpSetR_1.4.0        miniUI_0.1.1.1      profvis_0.3.7      </span></span>
-<span><span class="co">## [73] rlang_1.0.6         Rcpp_1.0.9          githubinstall_0.2.2</span></span>
-<span><span class="co">## [76] DBI_1.1.3           xtable_1.8-4        glue_1.6.2         </span></span>
-<span><span class="co">## [79] selectr_0.4-2       BiocManager_1.30.19 xml2_1.3.3         </span></span>
-<span><span class="co">## [82] pkgload_1.3.2       jsonlite_1.8.4      plyr_1.8.8         </span></span>
-<span><span class="co">## [85] R6_2.5.1            systemfonts_1.0.4   fs_1.5.2</span></span></code></pre>
+<span><span class="co">## [16] tibble_3.1.8        highr_0.9           pkgconfig_2.0.3    </span></span>
+<span><span class="co">## [19] data.table_1.14.6   desc_1.4.2          assertthat_0.2.1   </span></span>
+<span><span class="co">## [22] lifecycle_1.0.3     farver_2.1.1        compiler_4.3.0     </span></span>
+<span><span class="co">## [25] stringr_1.5.0       textshaping_0.3.6   munsell_0.5.0      </span></span>
+<span><span class="co">## [28] httpuv_1.6.7        htmltools_0.5.4     usethis_2.1.6      </span></span>
+<span><span class="co">## [31] sass_0.4.4          yaml_2.3.6          pillar_1.8.1       </span></span>
+<span><span class="co">## [34] later_1.3.0         pkgdown_2.0.7       crayon_1.5.2       </span></span>
+<span><span class="co">## [37] jquerylib_0.1.4     urlchecker_1.0.1    ellipsis_0.3.2     </span></span>
+<span><span class="co">## [40] cachem_1.0.6        sessioninfo_1.2.2   mime_0.12          </span></span>
+<span><span class="co">## [43] tidyselect_1.2.0    rvest_1.0.3         digest_0.6.31      </span></span>
+<span><span class="co">## [46] stringi_1.7.8       dplyr_1.0.10        purrr_0.3.5        </span></span>
+<span><span class="co">## [49] bookdown_0.31       labeling_0.4.2      rprojroot_2.0.3    </span></span>
+<span><span class="co">## [52] fastmap_1.1.0       grid_4.3.0          colorspace_2.0-3   </span></span>
+<span><span class="co">## [55] cli_3.4.1           magrittr_2.0.3      utf8_1.2.2         </span></span>
+<span><span class="co">## [58] pkgbuild_1.4.0      withr_2.5.0         prettyunits_1.1.1  </span></span>
+<span><span class="co">## [61] scales_1.2.1        promises_1.2.0.1    rmarkdown_2.18     </span></span>
+<span><span class="co">## [64] httr_1.4.4          gridExtra_2.3       ragg_1.2.4         </span></span>
+<span><span class="co">## [67] memoise_2.0.1       shiny_1.7.3         evaluate_0.19      </span></span>
+<span><span class="co">## [70] knitr_1.41          UpSetR_1.4.0        miniUI_0.1.1.1     </span></span>
+<span><span class="co">## [73] profvis_0.3.7       rlang_1.0.6         Rcpp_1.0.9         </span></span>
+<span><span class="co">## [76] githubinstall_0.2.2 DBI_1.1.3           xtable_1.8-4       </span></span>
+<span><span class="co">## [79] glue_1.6.2          selectr_0.4-2       BiocManager_1.30.19</span></span>
+<span><span class="co">## [82] xml2_1.3.3          pkgload_1.3.2       jsonlite_1.8.4     </span></span>
+<span><span class="co">## [85] plyr_1.8.8          R6_2.5.1            systemfonts_1.0.4  </span></span>
+<span><span class="co">## [88] fs_1.5.2</span></span></code></pre>
 </details><p><br></p>
 </div>
   </div>
