@@ -12,10 +12,6 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
 <h4> ¶ README updated: <i>Dec-14-2022</i> ¶ </h4>
 
-``` r
-pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
-```
-
 ## Intro
 
 [*GitHub Actions*](https://docs.github.com/en/actions) are a powerful

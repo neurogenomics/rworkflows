@@ -6,7 +6,7 @@ output:
   github_document
 ---
 
-```{r setup}
+```{r setup, include=FALSE}
 pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 ```
 
