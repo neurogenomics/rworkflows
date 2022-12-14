@@ -10,6 +10,12 @@ vignette: >
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
+
+*NOTE*: A fully functionalized version of this script is available 
+via the R package [`echogithub`](https://github.com/RajLabMSSM/echogithub):
+`echogithub::r_repos()`
+
+
 # Install required packages
 
 ```R
@@ -21,8 +27,6 @@ for(p in c("UpSetR","githubinstall","rvest","ggplot2","data.table")){
 ```R
 library(data.table)
 ```
-
- 
 
 # Get all packages per repo
 
