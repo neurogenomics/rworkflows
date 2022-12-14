@@ -130,8 +130,12 @@ upset_plot <- UpSetR::upset(data = upsetr_data,
                                                 color = "darkred", 
                                                 active = TRUE))
                             )
-#### Save  ####
-path <- "~/Downloads/upsetr" ##tempfile(fileext = "")
+```
+
+#### Save
+
+```R
+path <- "~/Downloads/upsetr" 
 ## PDF
 grDevices::pdf(paste0(path,".pdf"))
 upset_plot
@@ -141,6 +145,7 @@ grDevices::png(paste0(path,".png"))
 upset_plot
 grDevices::dev.off() 
 ```
+
 
 ### Compute percentages
 

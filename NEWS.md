@@ -11,6 +11,8 @@
 * New vignettes:
   - *depgraph*: Plot which R packages use the `rworkflow` action.
   - *repos*: Evaluate how R packages are distributed.
+* Only require R >4.1 (instead of 4.2) 
+  bc that's when the native pipe `|>` was introduced.
 
 ## Bug fixes
 
