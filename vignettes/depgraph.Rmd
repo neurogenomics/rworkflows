@@ -35,57 +35,41 @@ if(!require("echodeps"))remotes::install_github("RajLabMSSM/echodeps",
 ## Create graph 
 
 ```R
-dgc_out <- echodeps::dep_graph_create(pkg_name = "rworkflows",
-                                      method = "github",
-                                      node_size = "clones_uniques")
+res <- echodeps::dep_graph(pkg = "rworkflows",
+                           method = "github",
+                           shape = "hexagon",
+                           exclude = c("neurogenomics_rworkflows",
+                                       "neurogenomics_r_workflows"),
+                           node_size = "clones_uniques",
+                           reverse = TRUE,
+                           save_path = here::here("depgraph","rworkflows_depgraph.html"))
 ```
-
-## Subset graph
-
-```R
-## Remove repos that are automatically created by GitHub to check actions
-## published on the GitHub Actions marketplace.
-g <- dgc_out$subgraph
-exclude <- grep("actions-marketplace-validations",
-                names(igraph::V(g)),value = TRUE)
-g2 <- echodeps::subset_graph(g=g, exclude=exclude)
-```
-
-## View and data
+ 
+## Save data
 
 ```R
 dgc_out$metadata
 
-saveRDS(dgc_out, here::here("depgraph","dgc_out.rds"))
+saveRDS(res, here::here("depgraph","dgc_out.rds"))
 ```
 
 ## Count stars/clones/views
 
 ```R
 cols <- c("stargazers_count",
-          "clones_count","clones_uniques",
-          "views_count","views_uniques")
+          "clones_count","clones_uniques","indirect_clones_uniques",
+          "views_count","views_uniques","indirect_views_uniques",
+          "total_downloads","indirect_total_downloads",
+          echogithub::r_repos_opts())
+cols <- cols[cols %in% names(res$metadata)]
 
 metadata_counts <- data.frame(
-  total=dgc_out$metadata[repo!="rworkflows",
+  total=res$metadata[repo!="rworkflows",
                          lapply(.SD, sum, na.rm=TRUE),
                          .SDcols=cols] |> t()
   )
 metadata_counts
 ```
-
-
-## Plot graph
-
-```R
-vis <- echodeps::dep_graph_plot(g = g2,
-                                shape = "hexagon",
-                                pkg_name = dgc_out$pkg_name,
-                                save_path = here::here(
-                                  "depgraph","rworkflows_depgraph.html"))
-## Remove temp files
-unlink(here::here("depgraph","rworkflows_depgraph_files"), recursive = TRUE)
-``` 
 
 # Show
 

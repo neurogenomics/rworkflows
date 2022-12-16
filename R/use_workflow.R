@@ -23,7 +23,8 @@
 #' @param on GitHub trigger conditions.
 #' @param branches GitHub trigger branches.
 #' @param run_bioccheck Run Bioconductor checks using
-#'  \link[BiocCheck]{BiocCheck}. 
+#' \href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{
+#' \code{BiocCheck::BiocCheck()}}. 
 #' Must pass in order to continue workflow.
 #' @param run_rcmdcheck Run R CMD checks using 
 #' \link[rcmdcheck]{rcmdcheck}. 

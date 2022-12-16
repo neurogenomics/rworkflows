@@ -63,7 +63,8 @@ Can be a branch name on the
 \item{branches}{GitHub trigger branches.}
 
 \item{run_bioccheck}{Run Bioconductor checks using
- \link[BiocCheck]{BiocCheck}. 
+\href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{
+\code{BiocCheck::BiocCheck()}}. 
 Must pass in order to continue workflow.}
 
 \item{run_rcmdcheck}{Run R CMD checks using 
