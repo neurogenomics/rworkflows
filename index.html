@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test, document, containerise, and deploy R packages • rworkflows</title>
+<title>Test, Document, Containerise, and Deploy R Packages • rworkflows</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Test, document, containerise, and deploy R packages">
+<script src="pkgdown.js"></script><meta property="og:title" content="Test, Document, Containerise, and Deploy R Packages">
 <meta property="og:description" content="Continuous integration for R packages. 
     Automates testing, documentation website building,
     and containerised deployment.">
@@ -94,7 +94,7 @@
 ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶
 </h4>
 <h4>
-¶ README updated: <i>Dec-14-2022</i> ¶
+¶ README updated: <i>Dec-16-2022</i> ¶
 </h4>
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
@@ -112,7 +112,7 @@
 </li>
 <li>(Re)builds and launches a documentation website for your R package.<br>
 </li>
-<li>Pushes an <a href="https://www.rstudio.com/" class="external-link"><em>Rstudio</em></a> <a href="https://www.docker.com/" class="external-link"><em>Docker</em></a> container to <a href="https://hub.docker.com/" class="external-link"><em>DockerHub</em></a> with your R package and all its dependencies pre-installed.</li>
+<li>Pushes an <a href="https://posit.co/" class="external-link"><em>Rstudio</em></a> <a href="https://www.docker.com/" class="external-link"><em>Docker</em></a> container to <a href="https://hub.docker.com/" class="external-link"><em>DockerHub</em></a> with your R package and all its dependencies pre-installed.</li>
 </ol>
 <p>Importantly, these <em>workflow files</em> and <em>action</em> are designed to work with any R package out-of-the-box. This means you won’t have to manually edit any yaml files, just run the <code><a href="reference/use_workflow.html">rworkflows::use_workflow()</a></code> function and you’re ready to go!</p>
 </div>
@@ -151,6 +151,15 @@
 </h3>
 <p>Interactive graph showing all the GitHub repos that currently use the <code>rworkflows</code> action.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>If you use <code>rworkflows</code>, please cite:</p>
+<!-- Modify this by editing the file: inst/CITATION  -->
+<blockquote>
+<p>Brian M. Schilder, Alan E. Murphy (2021) rworkflows: Continuous integration for R packages, <em>GitHub</em>; <a href="https://github.com/neurogenomics/rworkflows" class="external-link uri">https://github.com/neurogenomics/rworkflows</a></p>
+</blockquote>
 </div>
 <div class="section level2">
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
@@ -231,7 +240,7 @@
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="do">## other attached packages:</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.18</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.19</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="do">## loaded via a namespace (and not attached):</span></span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.1        jsonlite_1.8.4      BiocManager_1.30.19</span></span>
@@ -299,7 +308,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

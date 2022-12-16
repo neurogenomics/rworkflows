@@ -114,7 +114,15 @@ Issue writing "on:" as "'as':"</a></p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
-<dd><p>Workflow name.</p><ul></ul><p></p><ul></ul><p></p></dd>
+<dd><p>Workflow name.</p><ul><li><p>"rworkflows"A short workflow script that calls
+ the GitHub action from the GitHub Marketplace.
+The action is continually updated 
+so users do not need to worry about maintaining it.</p></li>
+<li><p>"rworkflows_static"A longer workflow scripts that 
+explicitly copies all steps from the <span class="pkg">rworkflows</span> action
+into a static file. Users may need to update this file themselves over time,
+though this does allow for a fully customisable workflow.</p></li>
+</ul></dd>
 
 
 <dt>tag</dt>
@@ -136,7 +144,8 @@ Can be a branch name on the
 
 <dt>run_bioccheck</dt>
 <dd><p>Run Bioconductor checks using
- <a href="https://rdrr.io/pkg/BiocCheck/man/BiocCheck.html" class="external-link">BiocCheck</a>. 
+<a href="https://doi.org/doi:10.18129/B9.bioc.BiocCheck" class="external-link">
+<code><a href="https://rdrr.io/pkg/BiocCheck/man/BiocCheck.html" class="external-link">BiocCheck::BiocCheck()</a></code></a>. 
 Must pass in order to continue workflow.</p></dd>
 
 
@@ -239,7 +248,7 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> </span></span>
 <span class="r-in"><span><span class="co">### Example 1 ####</span></span></span>
 <span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/RtmpbrCrHe/.github/workflows/rworkflows.yml</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/RtmpuTH8HT/.github/workflows/rworkflows.yml</span>
 <span class="r-in"><span><span class="co">### Example 2 ####</span></span></span>
 <span class="r-in"><span><span class="co"># use_workflow(run_docker=TRUE,</span></span></span>
 <span class="r-in"><span><span class="co">#              docker_user="bschilder",</span></span></span>
@@ -258,7 +267,7 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

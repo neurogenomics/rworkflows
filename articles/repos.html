@@ -92,7 +92,7 @@
 <i>Brian Schilder, Alan Murphy</i> ¶ </h4></h4>
             
             <h4 data-toc-skip class="date"><h4> ¶ Vignette updated:
-<i>Dec-14-2022</i> ¶ </h4></h4>
+<i>Dec-16-2022</i> ¶ </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/repos.Rmd" class="external-link"><code>vignettes/repos.Rmd</code></a></small>
       <div class="hidden name"><code>repos.Rmd</code></div>
@@ -130,7 +130,7 @@ available via the R package <a href="https://github.com/RajLabMSSM/echogithub" c
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cran</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span>contriburl <span class="op">=</span> <span class="st">"https://cran.rstudio.com/src/contrib"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cran</span><span class="op">$</span><span class="va">Package</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 18911</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 18929</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="bioc">Bioc<a class="anchor" aria-label="anchor" href="#bioc"></a>
@@ -166,7 +166,7 @@ here.</p>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_children.html" class="external-link">html_children</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html" class="external-link">html_text</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ropensci</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 303</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 304</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
@@ -217,9 +217,9 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="va">pkgs_count</span></span></code></pre></div>
 <pre><code><span><span class="co">##        repo count</span></span>
 <span><span class="co">## 1:     base    14</span></span>
-<span><span class="co">## 2:     CRAN 18911</span></span>
+<span><span class="co">## 2:     CRAN 18929</span></span>
 <span><span class="co">## 3:     Bioc  4837</span></span>
-<span><span class="co">## 4: rOpenSci   303</span></span>
+<span><span class="co">## 4: rOpenSci   304</span></span>
 <span><span class="co">## 5:   GitHub 34491</span></span></code></pre>
 </div>
 <div class="section level3">
@@ -309,8 +309,8 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="co">## [1] BiocStyle_2.27.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] gtable_0.3.1        xfun_0.35           bslib_0.4.1        </span></span>
-<span><span class="co">##  [4] ggplot2_3.4.0       htmlwidgets_1.5.4   devtools_2.4.5     </span></span>
+<span><span class="co">##  [1] gtable_0.3.1        xfun_0.35           bslib_0.4.2        </span></span>
+<span><span class="co">##  [4] ggplot2_3.4.0       htmlwidgets_1.6.0   devtools_2.4.5     </span></span>
 <span><span class="co">##  [7] remotes_2.4.2       processx_3.8.0      callr_3.7.3        </span></span>
 <span><span class="co">## [10] generics_0.1.3      vctrs_0.5.1         tools_4.3.0        </span></span>
 <span><span class="co">## [13] ps_1.7.2            curl_4.3.3          fansi_1.0.3        </span></span>
@@ -320,7 +320,7 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="co">## [25] stringr_1.5.0       textshaping_0.3.6   munsell_0.5.0      </span></span>
 <span><span class="co">## [28] httpuv_1.6.7        htmltools_0.5.4     usethis_2.1.6      </span></span>
 <span><span class="co">## [31] sass_0.4.4          yaml_2.3.6          pillar_1.8.1       </span></span>
-<span><span class="co">## [34] later_1.3.0         pkgdown_2.0.7.9000  crayon_1.5.2       </span></span>
+<span><span class="co">## [34] later_1.3.0         pkgdown_2.0.7       crayon_1.5.2       </span></span>
 <span><span class="co">## [37] jquerylib_0.1.4     urlchecker_1.0.1    ellipsis_0.3.2     </span></span>
 <span><span class="co">## [40] cachem_1.0.6        sessioninfo_1.2.2   mime_0.12          </span></span>
 <span><span class="co">## [43] tidyselect_1.2.0    rvest_1.0.3         digest_0.6.31      </span></span>
@@ -329,9 +329,9 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="co">## [52] fastmap_1.1.0       grid_4.3.0          colorspace_2.0-3   </span></span>
 <span><span class="co">## [55] cli_3.4.1           magrittr_2.0.3      utf8_1.2.2         </span></span>
 <span><span class="co">## [58] pkgbuild_1.4.0      withr_2.5.0         prettyunits_1.1.1  </span></span>
-<span><span class="co">## [61] scales_1.2.1        promises_1.2.0.1    rmarkdown_2.18     </span></span>
+<span><span class="co">## [61] scales_1.2.1        promises_1.2.0.1    rmarkdown_2.19     </span></span>
 <span><span class="co">## [64] httr_1.4.4          gridExtra_2.3       ragg_1.2.4         </span></span>
-<span><span class="co">## [67] memoise_2.0.1       shiny_1.7.3         evaluate_0.19      </span></span>
+<span><span class="co">## [67] memoise_2.0.1       shiny_1.7.4         evaluate_0.19      </span></span>
 <span><span class="co">## [70] knitr_1.41          UpSetR_1.4.0        miniUI_0.1.1.1     </span></span>
 <span><span class="co">## [73] profvis_0.3.7       rlang_1.0.6         Rcpp_1.0.9         </span></span>
 <span><span class="co">## [76] githubinstall_0.2.2 DBI_1.1.3           xtable_1.8-4       </span></span>
@@ -360,7 +360,7 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
