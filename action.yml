@@ -161,10 +161,12 @@ runs:
         # Required for tcltk 
         ### libxfont ###
         # Required for some ggplot2 functions  
+        ### texlive ###
+        # Required for rendering Sweave files (even with r-lib/actions/setup-tinytex)
         
         #### --- Install packages --- ####
         ### Install normally ###
-        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2
+        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2 texlive
         ### Install via cask ###
         brew install xquartz --cask 
         ### Set up xml2 ###
