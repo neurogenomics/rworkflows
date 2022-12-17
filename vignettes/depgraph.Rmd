@@ -74,7 +74,7 @@ metadata_counts
 Hover over each node to show additional metadata.
 
 ```{r fig.height=20, fig.width=20}
-htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/depgraph/rworkflows_depgraph.html")
+htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.html")
 ```
 
 # Identify high-impact packages
