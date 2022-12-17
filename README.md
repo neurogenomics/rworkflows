@@ -10,7 +10,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Dec-16-2022</i> ¶ </h4>
+<h4> ¶ README updated: <i>Dec-17-2022</i> ¶ </h4>
 
 ## Intro
 
@@ -115,10 +115,22 @@ package.
 - Additional error handling and dependencies checks.  
 - Re-renders `README.Rmd` before rebuilding the documentation website.
 
-### [`github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action)
+### [`actions/`](https://github.com/actions)
+
+A general set of GitHub Actions.
+
+### [`r-lib/actions`](https://github.com/r-lib/actions)
+
+A set of GitHub Actions for R development.
+
+### [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action)
 
 Builds and deploys the GitHub Pages documentation website in the
 `rworkflows` GHA workflows.
+
+### [`docker/build-push-action`](https://github.com/docker/build-push-action)
+
+A set of GitHub Actions for building/pushing Docker containers.
 
 ### [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker)
 
