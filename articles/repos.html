@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repositories analysis • rworkflows</title>
+<title>Repositories report • rworkflows</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Repositories analysis">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Repositories report">
 <meta property="og:description" content="rworkflows">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -59,7 +59,7 @@
       <a href="../articles/docker.html">Docker/Singularity Containers</a>
     </li>
     <li>
-      <a href="../articles/repos.html">Repositories analysis</a>
+      <a href="../articles/repos.html">Repositories report</a>
     </li>
   </ul>
 </li>
@@ -87,7 +87,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Repositories analysis</h1>
+      <h1 data-toc-skip>Repositories report</h1>
                         <h4 data-toc-skip class="author"><h4> ¶ Authors:
 <i>Brian Schilder, Alan Murphy</i> ¶ </h4></h4>
             
@@ -101,187 +101,34 @@
 
     
     
-<p><em>NOTE</em>: A fully functionalized version of this script is
-available via the R package <a href="https://github.com/RajLabMSSM/echogithub" class="external-link"><code>echogithub</code></a>:
-<code>echogithub::r_repos()</code></p>
 <div class="section level2">
 <h2 id="install-required-packages">Install required packages<a class="anchor" aria-label="anchor" href="#install-required-packages"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">for</span><span class="op">(</span><span class="va">p</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UpSetR"</span>,<span class="st">"githubinstall"</span>,<span class="st">"rvest"</span>,<span class="st">"ggplot2"</span>,<span class="st">"data.table"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"echodeps"</span><span class="op">)</span><span class="op">)</span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"RajLabMSSM/echogithub"</span>,</span>
+<span>                                                dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="get-all-packages-per-repo">Get all packages per repo<a class="anchor" aria-label="anchor" href="#get-all-packages-per-repo"></a>
 </h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">r_repos_res</span> <span class="op">&lt;-</span> <span class="fu">echogithub</span><span class="fu">::</span><span class="fu">r_repos</span><span class="op">(</span></span>
+<span>  which <span class="op">=</span> <span class="fu">echogithub</span><span class="fu">::</span><span class="fu">r_repos_opts</span><span class="op">(</span>exclude<span class="op">=</span><span class="st">"local"</span><span class="op">)</span>,</span>
+<span>  save_path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"reports"</span>,<span class="st">"r_repos.pdf"</span><span class="op">)</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code></pre></div>
+<p><a href="https://github.com/neurogenomics/rworkflows/raw/master/reports/r_repos.pdf" class="external-link">!Upset
+plot</a></p>
 <div class="section level3">
-<h3 id="base-r">Base R<a class="anchor" aria-label="anchor" href="#base-r"></a>
+<h3 id="save-results">Save results<a class="anchor" aria-label="anchor" href="#save-results"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">baser</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span>priority<span class="op">=</span><span class="st">"base"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="cran">CRAN<a class="anchor" aria-label="anchor" href="#cran"></a>
-</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cran</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span>contriburl <span class="op">=</span> <span class="st">"https://cran.rstudio.com/src/contrib"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cran</span><span class="op">$</span><span class="va">Package</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 18931</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="bioc">Bioc<a class="anchor" aria-label="anchor" href="#bioc"></a>
-</h3>
-<p><em>Note</em>: This only retrieves Bioc packages in the currently
-installed release of Bioconductor. Packages that are only in older
-versions of Bioc (and were later deprecated) will not be listed
-here.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">### This function gives all packages, including CRAN, Bioc, and anything currently installed. ####</span></span>
-<span><span class="co"># bioc &lt;- BiocManager::available() </span></span>
-<span></span>
-<span><span class="co">### This only gives Bioc packages ####</span></span>
-<span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/repositories.html" class="external-link">repositories</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 'getOption("repos")' replaces Bioconductor standard repositories, see</span></span>
-<span><span class="co">## '?repositories' for details</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## replacement repositories:</span></span>
-<span><span class="co">##     CRAN: https://cloud.r-project.org</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="va">repos</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">repos</span><span class="op">)</span><span class="op">!=</span><span class="st">"CRAN"</span><span class="op">]</span></span>
-<span><span class="va">bioc</span> <span class="op">&lt;-</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="va">repos</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">bioc</span><span class="op">$</span><span class="va">Package</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 4837</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="ropensci">rOpenSci<a class="anchor" aria-label="anchor" href="#ropensci"></a>
-</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ropensci</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">read_html</a></span><span class="op">(</span><span class="st">"https://docs.ropensci.org/"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html" class="external-link">html_element</a></span><span class="op">(</span><span class="st">"#repolist"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_children.html" class="external-link">html_children</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html" class="external-link">html_text</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ropensci</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 304</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
-</h3>
-<blockquote>
-<p>The githubinstall package uses Gepuro Task Views for getting the list
-of R packages on GitHub. Gepuro Task Views is crawling the GitHub and
-updates information every day. The package downloads the list of R
-packages from Gepuro Task Views each time it was loaded. Thus, you can
-always use the newest list of packages on a new R session. However, you
-may use an R session for a long time. In such case,
-gh_update_package_list() is useful. gh_update_package_list() updates the
-downloaded list of the R packages explicitly.</p>
-</blockquote>
-<p>However this is not actually true, as the file has not been updated
-since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues/41" class="external-link uri">https://github.com/hoxo-m/githubinstall/issues/41</a></p>
-<p>A Pull Request was made in 2019 but it was never integrated: <a href="https://github.com/pabter/gepuro-task-views-copy/tree/76b7c4e48a704927432f328c6f898cbac0c5731c" class="external-link uri">https://github.com/pabter/gepuro-task-views-copy/tree/76b7c4e48a704927432f328c6f898cbac0c5731c</a></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">githubinstall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/githubinstall/man/gh_update_package_list.html" class="external-link">gh_update_package_list</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in fread(download_url, sep = "\t", header = FALSE, stringsAsFactors =</span></span>
-<span><span class="co">## FALSE, : Found and resolved improper quoting out-of-sample. First healed line</span></span>
-<span><span class="co">## 4848: &lt;&lt;Puriney honfleuR "Evening, honfleuR" by Seurat&gt;&gt;. If the fields are not</span></span>
-<span><span class="co">## quoted (e.g. field separator does not appear within any field), try quote="" to</span></span>
-<span><span class="co">## avoid this warning.</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">github</span> <span class="op">&lt;-</span> <span class="fu">githubinstall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/githubinstall/man/gh_list_packages.html" class="external-link">gh_list_packages</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">github</span><span class="op">$</span><span class="va">package_name</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 34491</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="merge-all-repos">Merge all repos<a class="anchor" aria-label="anchor" href="#merge-all-repos"></a>
-</h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>package<span class="op">=</span><span class="va">baser</span>,</span>
-<span>        repo<span class="op">=</span><span class="st">"base"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>package<span class="op">=</span><span class="va">cran</span><span class="op">$</span><span class="va">Package</span>,</span>
-<span>        repo<span class="op">=</span><span class="st">"CRAN"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>package<span class="op">=</span><span class="va">bioc</span><span class="op">$</span><span class="va">Package</span>,</span>
-<span>        repo<span class="op">=</span><span class="st">"Bioc"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>package<span class="op">=</span><span class="va">ropensci</span>,</span>
-<span>        repo<span class="op">=</span><span class="st">"rOpenSci"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>package<span class="op">=</span><span class="va">github</span><span class="op">$</span><span class="va">package_name</span>,</span>
-<span>        repo<span class="op">=</span><span class="st">"GitHub"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">pkgs_count</span> <span class="op">&lt;-</span> <span class="va">pkgs</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>count <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">repo</span><span class="op">]</span></span>
-<span><span class="va">pkgs_count</span></span></code></pre></div>
-<pre><code><span><span class="co">##        repo count</span></span>
-<span><span class="co">## 1:     base    14</span></span>
-<span><span class="co">## 2:     CRAN 18931</span></span>
-<span><span class="co">## 3:     Bioc  4837</span></span>
-<span><span class="co">## 4: rOpenSci   304</span></span>
-<span><span class="co">## 5:   GitHub 34491</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
-</h3>
-<div class="section level4">
-<h4 id="upset-plot">Upset plot<a class="anchor" aria-label="anchor" href="#upset-plot"></a>
-</h4>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#### Create data ####</span></span>
-<span><span class="va">upsetr_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">$</span><span class="va">repo</span><span class="op">)</span>,</span>
-<span>                                      <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">$</span><span class="va">repo</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                    <span class="kw">function</span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">{</span></span>
-<span>                      <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">pkgs</span>,<span class="va">repo</span><span class="op">==</span><span class="va">r</span><span class="op">)</span><span class="op">$</span><span class="va">package</span><span class="op">)</span></span>
-<span>                    <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">UpSetR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/UpSetR/man/fromList.html" class="external-link">fromList</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#### Plot ####</span></span>
-<span><span class="va">upset_plot</span> <span class="op">&lt;-</span> <span class="fu">UpSetR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/UpSetR/man/upset.html" class="external-link">upset</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">upsetr_data</span>,  </span>
-<span>                            sets.bar.color <span class="op">=</span> <span class="st">"slategrey"</span>,</span>
-<span>                            main.bar.color <span class="op">=</span> <span class="st">"slategrey"</span>,</span>
-<span>                            text.scale <span class="op">=</span> <span class="fl">1.5</span>,</span>
-<span>                            queries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>query <span class="op">=</span> <span class="fu">UpSetR</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/UpSetR/man/intersects.html" class="external-link">intersects</a></span>, </span>
-<span>                                                params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"GitHub"</span><span class="op">)</span>,</span>
-<span>                                                color <span class="op">=</span> <span class="st">"darkred"</span>, </span>
-<span>                                                active <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span>                            <span class="op">)</span></span>
-<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">upset_plot</span><span class="op">)</span></span></code></pre></div>
-<p><img src="repos_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<div class="section level5">
-<h5 id="save">Save<a class="anchor" aria-label="anchor" href="#save"></a>
-</h5>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="st">"~/Downloads/upsetr"</span> </span>
-<span><span class="co">## PDF</span></span>
-<span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">path</span>,<span class="st">".pdf"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">upset_plot</span><span class="op">)</span></span>
-<span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> </span>
-<span><span class="co">## PNG</span></span>
-<span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">path</span>,<span class="st">".png"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">methods</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">upset_plot</span><span class="op">)</span></span>
-<span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
-</div>
-</div>
-<div class="section level4">
-<h4 id="compute-percentages">Compute percentages<a class="anchor" aria-label="anchor" href="#compute-percentages"></a>
-</h4>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stats_1repo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">upsetr_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">upsetr_data</span><span class="op">)</span><span class="op">==</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">stats_repo</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table</a></span><span class="op">(</span></span>
-<span>  repo<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">stats_1repo</span><span class="op">)</span>,</span>
-<span>  total<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">pkgs</span><span class="op">$</span><span class="va">package</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  count_all<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="va">upsetr_data</span><span class="op">)</span>,</span>
-<span>  count_exclusive<span class="op">=</span><span class="va">stats_1repo</span></span>
-<span>  <span class="op">)</span><span class="op">[</span>,<span class="va">percent_all</span><span class="op">:=</span><span class="op">(</span><span class="va">count_all</span><span class="op">/</span><span class="va">total</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span><span class="op">]</span><span class="op">[</span>,<span class="va">percent_exclusive</span><span class="op">:=</span><span class="op">(</span><span class="va">count_exclusive</span><span class="op">/</span><span class="va">total</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">stats_repo</span></span></code></pre></div>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">r_repos_res</span>, <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"reports"</span>,<span class="st">"r_repos_res.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<details><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<details><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R Under development (unstable) (2022-12-14 r83463)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
@@ -309,36 +156,18 @@ since February 3rd 2018: <a href="https://github.com/hoxo-m/githubinstall/issues
 <span><span class="co">## [1] BiocStyle_2.27.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] gtable_0.3.1        xfun_0.35           bslib_0.4.2        </span></span>
-<span><span class="co">##  [4] ggplot2_3.4.0       htmlwidgets_1.6.0   devtools_2.4.5     </span></span>
-<span><span class="co">##  [7] remotes_2.4.2       processx_3.8.0      callr_3.7.3        </span></span>
-<span><span class="co">## [10] generics_0.1.3      vctrs_0.5.1         tools_4.3.0        </span></span>
-<span><span class="co">## [13] ps_1.7.2            curl_4.3.3          fansi_1.0.3        </span></span>
-<span><span class="co">## [16] tibble_3.1.8        highr_0.9           pkgconfig_2.0.3    </span></span>
-<span><span class="co">## [19] data.table_1.14.6   desc_1.4.2          assertthat_0.2.1   </span></span>
-<span><span class="co">## [22] lifecycle_1.0.3     farver_2.1.1        compiler_4.3.0     </span></span>
-<span><span class="co">## [25] stringr_1.5.0       textshaping_0.3.6   munsell_0.5.0      </span></span>
-<span><span class="co">## [28] httpuv_1.6.7        htmltools_0.5.4     usethis_2.1.6      </span></span>
-<span><span class="co">## [31] sass_0.4.4          yaml_2.3.6          pillar_1.8.1       </span></span>
-<span><span class="co">## [34] later_1.3.0         pkgdown_2.0.7.9000  crayon_1.5.2       </span></span>
-<span><span class="co">## [37] jquerylib_0.1.4     urlchecker_1.0.1    ellipsis_0.3.2     </span></span>
-<span><span class="co">## [40] cachem_1.0.6        sessioninfo_1.2.2   mime_0.12          </span></span>
-<span><span class="co">## [43] tidyselect_1.2.0    rvest_1.0.3         digest_0.6.31      </span></span>
-<span><span class="co">## [46] stringi_1.7.8       dplyr_1.0.10        purrr_0.3.5        </span></span>
-<span><span class="co">## [49] bookdown_0.31       labeling_0.4.2      rprojroot_2.0.3    </span></span>
-<span><span class="co">## [52] fastmap_1.1.0       grid_4.3.0          colorspace_2.0-3   </span></span>
-<span><span class="co">## [55] cli_3.4.1           magrittr_2.0.3      utf8_1.2.2         </span></span>
-<span><span class="co">## [58] pkgbuild_1.4.0      withr_2.5.0         prettyunits_1.1.1  </span></span>
-<span><span class="co">## [61] scales_1.2.1        promises_1.2.0.1    rmarkdown_2.19     </span></span>
-<span><span class="co">## [64] httr_1.4.4          gridExtra_2.3       ragg_1.2.4         </span></span>
-<span><span class="co">## [67] memoise_2.0.1       shiny_1.7.4         evaluate_0.19      </span></span>
-<span><span class="co">## [70] knitr_1.41          UpSetR_1.4.0        miniUI_0.1.1.1     </span></span>
-<span><span class="co">## [73] profvis_0.3.7       rlang_1.0.6         Rcpp_1.0.9         </span></span>
-<span><span class="co">## [76] githubinstall_0.2.2 DBI_1.1.3           xtable_1.8-4       </span></span>
-<span><span class="co">## [79] glue_1.6.2          selectr_0.4-2       BiocManager_1.30.19</span></span>
-<span><span class="co">## [82] xml2_1.3.3          pkgload_1.3.2       jsonlite_1.8.4     </span></span>
-<span><span class="co">## [85] plyr_1.8.8          R6_2.5.1            systemfonts_1.0.4  </span></span>
-<span><span class="co">## [88] fs_1.5.2</span></span></code></pre>
+<span><span class="co">##  [1] vctrs_0.5.1         cli_3.4.1           knitr_1.41         </span></span>
+<span><span class="co">##  [4] rlang_1.0.6         xfun_0.35           stringi_1.7.8      </span></span>
+<span><span class="co">##  [7] purrr_0.3.5         textshaping_0.3.6   jsonlite_1.8.4     </span></span>
+<span><span class="co">## [10] glue_1.6.2          rprojroot_2.0.3     htmltools_0.5.4    </span></span>
+<span><span class="co">## [13] ragg_1.2.4          sass_0.4.4          rmarkdown_2.19     </span></span>
+<span><span class="co">## [16] evaluate_0.19       jquerylib_0.1.4     fastmap_1.1.0      </span></span>
+<span><span class="co">## [19] lifecycle_1.0.3     yaml_2.3.6          memoise_2.0.1      </span></span>
+<span><span class="co">## [22] bookdown_0.31       BiocManager_1.30.19 stringr_1.5.0      </span></span>
+<span><span class="co">## [25] compiler_4.3.0      fs_1.5.2            systemfonts_1.0.4  </span></span>
+<span><span class="co">## [28] digest_0.6.31       R6_2.5.1            magrittr_2.0.3     </span></span>
+<span><span class="co">## [31] bslib_0.4.2         tools_4.3.0         pkgdown_2.0.7.9000 </span></span>
+<span><span class="co">## [34] cachem_1.0.6        desc_1.4.2</span></span></code></pre>
 </details><p><br></p>
 </div>
   </div>
