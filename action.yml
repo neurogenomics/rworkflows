@@ -148,7 +148,6 @@ runs:
       if: matrix.config.os == 'macOS-latest'
       run: |
         #### --- Justifications for each package --- ####
-        
         ### libxml2 ###
         # Enable installing XML from source if needed
         ### imagemagick@6 ###
@@ -162,16 +161,15 @@ runs:
         # Required for tcltk 
         ### libxfont ###
         # Required for some ggplot2 functions 
-        ### basictex ###
+        ### basictex texlive ###
         # Required for knitting sweave files
         
-        #### Install normally ####
-        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2 basictex
-        
-        #### Install via cask #### 
-        brew install xquartz --cask   
-        
-        #### Set up xml2 ####
+        #### --- Install packages --- ####
+        ### Install normally ###
+        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2 basictex texlive
+        ### Install via cask ###
+        brew install xquartz --cask 
+        ### Set up xml2 ###
         echo "XML_CONFIG=/usr/local/opt/libxml2/bin/xml2-config" >> $GITHUB_ENV 
       shell: bash {0}
 

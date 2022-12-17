@@ -20,6 +20,7 @@
 * Make `badger` a *Import*
 * Use Dockerfile stored in *inst/templates* instead of getting from GitHub.
 * Fix `vignette` field in `use_vignette_*` functions.
+* Fix pdflatex-related errors on all 3 OS.
 
 # rworkflows 0.99.1
 
