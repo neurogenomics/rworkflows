@@ -10,7 +10,8 @@
   - `use_vignettte_getstarted`
 * New vignettes:
   - *depgraph*: Plot which R packages use the `rworkflow` action.
-  - *repos*: Evaluate how R packages are distributed.
+  - *repos*: Evaluate how R packages are distributed, 
+    and get data on most downloaded packages.
 * Only require R >4.1 (instead of 4.2) 
   bc that's when the native pipe `|>` was introduced.
 

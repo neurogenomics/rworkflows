@@ -79,6 +79,21 @@ Hover over each node to show additional metadata.
 htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/depgraph/rworkflows_depgraph.html")
 ```
 
+# Identify high-impact packages
+
+Identify the CRAN/Bioc R packages with the most number of downloads.
+This guides which packages would be the most useful
+to focus on implementing `rworkflows` in.
+
+```R
+pkgs <- echogithub::r_repos_downloads(which = c("CRAN","Bioc"),
+                                      nThread = 10)
+
+pkgs <- pkgs[!is.na(downloads),] 
+data.table::setkeyv(pkgs,c("r_repo","downloads"))
+pkgs_top <- pkgs[, tail(.SD, 10), by="r_repo"] 
+methods::show(pkgs_top)
+```
 
 # Session Info 
 
