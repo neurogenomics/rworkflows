@@ -176,7 +176,13 @@ runs:
     - name: Install Windows system dependencies
       if: inputs.runner_os == 'Windows'
       run: |
-        npm install curl pdflatex
+        #### npm ####
+        npm install curl
+        
+        #### miktex ####
+        wget https://miktex.org/download/win/miktexsetup-x64.zip
+        unzip miktexsetup-x64.zip
+        miktexsetup_standalone --verbose --local-package-repository=C:\temp\miktex --package-set=complete download
       shell: bash {0}
 
     - name: Install BiocManager
