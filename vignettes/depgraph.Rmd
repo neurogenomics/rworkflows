@@ -25,9 +25,7 @@ Here is the code for creating the plot.
 
 ## Install required packages
 
-```R
-if(!require("rworkflows"))remotes::install_github("neurogenomics/rworkflows",
-                                                  dependencies = TRUE)
+```R 
 if(!require("echodeps"))remotes::install_github("RajLabMSSM/echodeps",
                                                 dependencies = TRUE)
 ```

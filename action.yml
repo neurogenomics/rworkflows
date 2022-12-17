@@ -97,9 +97,6 @@ runs:
     ## If they update their steps, we will also need to update ours.
     - name: Checkout repository
       uses: actions/checkout@v3
-      
-    - name: Install latex
-      uses: r-lib/actions/setup-tinytex@v2 
     
     ## R is already included in the Bioconductor docker image,
     ## which is only available with Linux as the OS.
@@ -163,13 +160,11 @@ runs:
         ### xquartz --cask ###
         # Required for tcltk 
         ### libxfont ###
-        # Required for some ggplot2 functions 
-        ### basictex texlive ###
-        # Required for knitting sweave files
+        # Required for some ggplot2 functions  
         
         #### --- Install packages --- ####
         ### Install normally ###
-        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2 basictex texlive
+        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2
         ### Install via cask ###
         brew install xquartz --cask 
         ### Set up xml2 ###
@@ -182,6 +177,12 @@ runs:
         #### npm ####
         npm install curl 
       shell: bash {0}
+      
+    - name: Install latex
+      uses: r-lib/actions/setup-tinytex@v2 
+      env:
+          # install full prebuilt version
+          TINYTEX_INSTALLER: TinyTeX
 
     - name: Install BiocManager
       run: |
