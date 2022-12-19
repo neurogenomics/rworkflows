@@ -1,4 +1,4 @@
-name: rworkflows_static
+name: tinytex
 'on':
   push:
     branches:
@@ -25,7 +25,7 @@ env:
   GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
   run_vignettes: ${{ true }}
 jobs:
-  rworkflows_static:
+  tinytex:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
