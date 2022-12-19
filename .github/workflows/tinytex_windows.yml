@@ -1,4 +1,4 @@
-name: tinytex
+name: tinytex_windows
 'on':
   push:
     branches:
@@ -25,7 +25,7 @@ env:
   GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
   run_vignettes: ${{ true }}
 jobs:
-  tinytex:
+  tinytex_windows:
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
