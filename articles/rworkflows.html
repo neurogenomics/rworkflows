@@ -122,7 +122,7 @@ action.</p>
 <span>                                     docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmpB6j09R/rworkflows.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/Rtmp0LKARC/rworkflows.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="static-workflow">static workflow<a class="anchor" aria-label="anchor" href="#static-workflow"></a>
@@ -138,7 +138,7 @@ action.</p>
 <span>                                     docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmpB6j09R/rworkflows_static.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/Rtmp0LKARC/rworkflows_static.yml</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -178,7 +178,7 @@ to create a template <em>Dockerfile</em> and then customise it further
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">dockerfile</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_dockerfile.html">use_dockerfile</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/RtmpB6j09R/Dockerfile</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/Rtmp0LKARC/Dockerfile</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="templates">Templates<a class="anchor" aria-label="anchor" href="#templates"></a>
@@ -196,7 +196,7 @@ README <em>markdown</em> file.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">readme</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_readme.html">use_readme</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/RtmpB6j09R/README.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/Rtmp0LKARC/README.Rmd</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in file.copy(from = template_path, to = path, overwrite = TRUE, :</span></span>
 <span><span class="co">## 'recursive' will be ignored as 'to' is not a single existing directory</span></span></code></pre>
 </div>
@@ -209,7 +209,7 @@ Requires additional editing to fill in examples.</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette1</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_getstarted.html">use_vignette_getstarted</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"mypackage"</span>,</span>
 <span>                                                 save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpB6j09R/vignettes/mypackage.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmp0LKARC/vignettes/mypackage.Rmd</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="vignette-docker">Vignette: docker<a class="anchor" aria-label="anchor" href="#vignette-docker"></a>
@@ -227,7 +227,7 @@ package, e.g. created with:</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette2</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_docker.html">use_vignette_docker</a></span><span class="op">(</span>docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                             save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpB6j09R/vignettes/docker.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmp0LKARC/vignettes/docker.Rmd</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
