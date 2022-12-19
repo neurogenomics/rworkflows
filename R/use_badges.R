@@ -55,6 +55,7 @@
 #' @param hex_height Height of the hex sticker in pixels
 #' (when \code{add_hex=TRUE}). 
 #' @inheritParams badger::badge_github_actions
+#' @returns A named list of selected badges in markdown format.
 #' 
 #' @export
 #' @import badger

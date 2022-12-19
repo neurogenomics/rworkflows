@@ -12,9 +12,10 @@
 #' 
 #' @export
 #' @importFrom utils download.file
+#' @importFrom here here
 #' @examples 
 #' path <- use_dockerfile(save_dir=tempdir())
-use_dockerfile <- function(save_dir=getwd(),
+use_dockerfile <- function(save_dir=here::here(),
                            path=file.path(save_dir,"Dockerfile"),
                            force_new=FALSE,
                            show=FALSE,

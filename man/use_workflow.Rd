@@ -125,11 +125,5 @@ Create workflow that calls an
 \href{https://github.com/features/actions}{GitHub Actions (GHA)}
 }
 \examples{
- 
-### Example 1 ####
 path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
-### Example 2 ####
-# use_workflow(run_docker=TRUE,
-#              docker_user="bschilder",
-#              docker_org="neurogenomicslab")
 }

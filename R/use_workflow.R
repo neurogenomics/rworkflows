@@ -66,13 +66,8 @@
 #' @export
 #' @importFrom here here
 #' @importFrom yaml as.yaml read_yaml write_yaml yaml.load
-#' @examples  
-#' ### Example 1 ####
+#' @examples
 #' path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
-#' ### Example 2 ####
-#' # use_workflow(run_docker=TRUE,
-#' #              docker_user="bschilder",
-#' #              docker_org="neurogenomicslab")
 use_workflow <- function(## action-level args
                          name="rworkflows",
                          tag="@master",

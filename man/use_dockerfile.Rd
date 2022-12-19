@@ -5,7 +5,7 @@
 \title{Use Dockerfile}
 \usage{
 use_dockerfile(
-  save_dir = getwd(),
+  save_dir = here::here(),
   path = file.path(save_dir, "Dockerfile"),
   force_new = FALSE,
   show = FALSE,

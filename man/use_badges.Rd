@@ -105,6 +105,9 @@ using \link[base]{paste}.}
 
 \item{verbose}{Print messages.}
 }
+\value{
+A named list of selected badges in markdown format.
+}
 \description{
 Create one or more badges showing the status of your R package.
 Uses the package 
