@@ -65,12 +65,5 @@ jobs:
       run: |
         tlmgr install bera
         tlmgr list --only-installed
-      shell: bash {0}
-      
-    - name: Install additional LaTeX packages (Windows)
-      if: inputs.runner_os == 'Windows'
-      run: |
-        tlmgr install bera
-        tlmgr list --only-installed
-      shell: pwsh {0}
+      shell: cmd {0} 
       

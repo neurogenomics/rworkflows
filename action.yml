@@ -190,7 +190,7 @@ runs:
       run: |
         tlmgr install bera
         tlmgr list --only-installed
-      shell: pwsh {0}
+      shell: cmd {0}
 
     - name: Install BiocManager
       run: |
