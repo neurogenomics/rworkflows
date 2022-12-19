@@ -178,7 +178,7 @@ runs:
       run: |
         #### npm ####
         npm install curl 
-      shell: bash {0}
+      shell: pwsh {0}
       
     - name: Install latex
       uses: r-lib/actions/setup-tinytex@v2 
@@ -190,7 +190,7 @@ runs:
       run: |
         tlmgr install bera
         tlmgr list --only-installed
-      shell: bash {0}
+      shell: pwsh {0}
 
     - name: Install BiocManager
       run: |

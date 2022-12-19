@@ -40,7 +40,7 @@ res <- echodeps::dep_graph(pkg = "rworkflows",
                                        "neurogenomics_r_workflows"),
                            node_size = "clones_uniques",
                            reverse = TRUE,
-                           save_path = here::here("depgraph","rworkflows_depgraph.html"))
+                           save_path = here::here("reports","rworkflows_depgraph.html"))
 ```
  
 ## Save data
@@ -48,7 +48,7 @@ res <- echodeps::dep_graph(pkg = "rworkflows",
 ```R
 dgc_out$metadata
 
-saveRDS(res, here::here("depgraph","dgc_out.rds"))
+saveRDS(res, here::here("reports","dgc_out.rds"))
 ```
 
 ## Count stars/clones/views
