@@ -38,7 +38,7 @@ res <- echodeps::dep_graph(pkg = "rworkflows",
                            shape = "hexagon",
                            exclude = c("neurogenomics_rworkflows",
                                        "neurogenomics_r_workflows"),
-                           node_size = "clones_uniques",
+                           node_size = "total_downloads",
                            reverse = TRUE,
                            save_path = here::here("reports","rworkflows_depgraph.html"))
 ```
