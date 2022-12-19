@@ -1,0 +1,68 @@
+name: tinytex
+'on':
+  push:
+    branches:
+    - master
+    - main
+    - RELEASE_**
+  pull_request:
+    branches:
+    - master
+    - main
+    - RELEASE_**
+env:
+  run_bioccheck: ${{ false }}
+  run_rcmdcheck: ${{ true }}
+  as_cran: ${{ true }}
+  has_testthat: ${{ true }}
+  has_runit: ${{ false }}
+  run_covr: ${{ true }}
+  run_pkgdown: ${{ true }}
+  cache_version: cache-v1
+  run_docker: ${{ false }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+  GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
+  run_vignettes: ${{ true }}
+jobs:
+  tinytex:
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    container: ${{ matrix.config.cont }}
+    strategy:
+      fail-fast: ${{ false }}
+      matrix:
+        config:
+        - os: windows-latest
+          r: latest
+          bioc: release
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: ${{ true }}
+      RSPM: ${{ matrix.config.rspm }}
+      TZ: UTC
+      GITHUB_REPO: ${{ github.repository }}
+      RGL_USE_NULL: ${{ true }}
+    steps:
+    - name: Set GitHub environment variables 
+      run: |
+        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
+        echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV 
+        echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV 
+        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
+        echo "TZ=UTC" >> $GITHUB_ENV
+        echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
+      shell: bash {0} 
+      
+    - name: Install latex
+      uses: r-lib/actions/setup-tinytex@v2 
+      env:
+        # install full prebuilt version
+        TINYTEX_INSTALLER: TinyTeX
+          
+    - name: Install additional LaTeX packages
+      run: |
+        tlmgr install bera
+        tlmgr list --only-installed
+      shell: bash {0}
+      
