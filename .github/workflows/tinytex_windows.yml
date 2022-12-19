@@ -59,9 +59,16 @@ jobs:
       env:
         # install full prebuilt version
         TINYTEX_INSTALLER: TinyTeX
-          
+    
     - name: Install additional LaTeX packages (non-Windows)
       if: inputs.runner_os != 'Windows'
+      run: |
+        tlmgr install bera
+        tlmgr list --only-installed
+      shell: bash {0} 
+      
+    - name: Install additional LaTeX packages (non-Windows)
+      if: inputs.runner_os == 'Windows'
       run: |
         tlmgr install bera
         tlmgr list --only-installed
