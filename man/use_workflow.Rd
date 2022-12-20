@@ -24,6 +24,7 @@ use_workflow(
   run_covr = TRUE,
   run_pkgdown = TRUE,
   has_runit = FALSE,
+  has_latex = TRUE,
   run_docker = FALSE,
   github_token = "${{ secrets.PAT_GITHUB }}",
   docker_user = NULL,
@@ -84,6 +85,9 @@ use the '--as-cran' flag to apply CRAN standards}
 build documentation website, and deploy to \emph{gh-pages} branch.}
 
 \item{has_runit}{Run R Unit tests.}
+
+\item{has_latex}{Install a suite of LaTeX dependencies used for 
+rendering Sweave (.rnw) and other documentation files.}
 
 \item{run_docker}{Whether to build and push a Docker container to DockerHub.}
 

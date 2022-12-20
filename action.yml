@@ -40,6 +40,11 @@ inputs:
       Run unit tests with the `RUnit` package.
       Requires a subdirectory named 'unitTests'.
     default: false 
+  has_latex:
+    description: >
+      Install a suite of LaTeX dependencies used for rendering Sweave (.rnw)
+      and documentation files.
+    default: false
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -174,27 +179,28 @@ runs:
       shell: bash {0}
 
     - name: Install Windows system dependencies
-      if: inputs.runner_os == 'Windows'
+      if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
       run: |
         #### npm ####
         npm install curl 
       shell: pwsh {0}
       
     - name: Install latex
+      if: inputs.has_latex == 'true'
       uses: r-lib/actions/setup-tinytex@v2 
       env:
         # install full prebuilt version
         TINYTEX_INSTALLER: TinyTeX
           
     - name: Install additional LaTeX packages (non-Windows)
-      if: inputs.runner_os != 'Windows'
+      if: inputs.has_latex == 'true' && inputs.runner_os != 'Windows'
       run: |
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools 
         tlmgr list --only-installed
       shell: bash {0} 
       
     - name: Install additional LaTeX packages (Windows)
-      if: inputs.runner_os == 'Windows'
+      if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
       run: |
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools 
         tlmgr list --only-installed

@@ -14,6 +14,10 @@
     and get data on most downloaded packages.
 * Only require R >4.1 (instead of 4.2) 
   bc that's when the native pipe `|>` was introduced.
+* Add new arg `has_latex`
+  - Added to action
+  - Add to `use_workflow`
+  
 
 ## Bug fixes
 

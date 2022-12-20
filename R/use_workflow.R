@@ -37,6 +37,8 @@
 #' build documentation website, and deploy to \emph{gh-pages} branch.
 #' @param has_runit Run R Unit tests.
 #' @param run_docker Whether to build and push a Docker container to DockerHub.
+#' @param has_latex Install a suite of LaTeX dependencies used for 
+#' rendering Sweave (.rnw) and other documentation files.
 #' @param github_token Token for the repo. 
 #' Can be passed in using {{ secrets.PAT_GITHUB }}.
 #' @param docker_user DockerHub username.
@@ -82,6 +84,7 @@ use_workflow <- function(## action-level args
                          run_covr=TRUE, 
                          run_pkgdown=TRUE, 
                          has_runit=FALSE, 
+                         has_latex=TRUE,
                          run_docker=FALSE,  
                          github_token="${{ secrets.PAT_GITHUB }}",
                          docker_user=NULL,
@@ -116,6 +119,7 @@ use_workflow <- function(## action-level args
                    run_covr=run_covr, 
                    run_pkgdown=run_pkgdown, 
                    has_runit=has_runit, 
+                   has_latex=has_latex,
                    run_docker=run_docker,  
                    github_token=github_token,
                    docker_user=docker_user,

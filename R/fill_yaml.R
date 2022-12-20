@@ -13,6 +13,7 @@ fill_yaml <- function(yml,
                       run_covr, 
                       run_pkgdown, 
                       has_runit, 
+                      has_latex,
                       run_docker,  
                       github_token,
                       docker_user,
@@ -48,6 +49,7 @@ fill_yaml <- function(yml,
   with2$run_covr <- run_covr
   with2$run_pkgdown <- run_pkgdown
   with2$has_runit <- has_runit 
+  with2$has_latex <- has_latex 
   with2$GITHUB_TOKEN <- github_token 
   with2$run_docker <- run_docker 
   with2$docker_user <- docker_user 
