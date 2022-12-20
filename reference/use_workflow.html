@@ -89,6 +89,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
 <span>  run_covr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  run_pkgdown <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  has_runit <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  has_latex <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  run_docker <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  github_token <span class="op">=</span> <span class="st">"${{ secrets.PAT_GITHUB }}"</span>,</span>
 <span>  docker_user <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -181,6 +182,11 @@ build documentation website, and deploy to <em>gh-pages</em> branch.</p></dd>
 <dd><p>Run R Unit tests.</p></dd>
 
 
+<dt>has_latex</dt>
+<dd><p>Install a suite of LaTeX dependencies used for 
+rendering Sweave (.rnw) and other documentation files.</p></dd>
+
+
 <dt>run_docker</dt>
 <dd><p>Whether to build and push a Docker container to DockerHub.</p></dd>
 
@@ -246,7 +252,7 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/Rtmpe4FEVr/.github/workflows/rworkflows.yml</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/RtmpBFFk6d/.github/workflows/rworkflows.yml</span>
 </code></pre></div>
     </div>
   </div>
