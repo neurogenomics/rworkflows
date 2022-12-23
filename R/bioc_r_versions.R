@@ -41,5 +41,7 @@ bioc_r_versions <- function(bioc_version=NULL){
                 )
                 ))
   }
-  return(info)
+  # info[["r_latest"]] <- package_version(rversions::r_release()$version)
+  # info[["r_devel"]] <- package_version(rversions::r_release()$version)
+)  return(info)
 }
