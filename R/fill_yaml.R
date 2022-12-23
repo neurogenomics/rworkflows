@@ -59,10 +59,10 @@ fill_yaml <- function(yml,
   #### static workflow vs. action ####
   if(name=="rworkflows_static"){
     yml$env <- with2
-  } else if(name=="rworkflows"){
+  } else if(name=="rworkflows"){ 
     #### replace with: args ####
     steps <- yml$jobs[[1]]$steps
-    steps[[length(steps)]]$with <- with2
+    yml$jobs[[1]]$steps[[length(steps)]]$with <- with2
   }
   return(yml) 
 }

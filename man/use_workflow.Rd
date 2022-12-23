@@ -24,7 +24,7 @@ use_workflow(
   run_covr = TRUE,
   run_pkgdown = TRUE,
   has_runit = FALSE,
-  has_latex = TRUE,
+  has_latex = FALSE,
   run_docker = FALSE,
   github_token = "${{ secrets.PAT_GITHUB }}",
   docker_user = NULL,

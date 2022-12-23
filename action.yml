@@ -43,7 +43,7 @@ inputs:
   has_latex:
     description: >
       Install a suite of LaTeX dependencies used for rendering Sweave (.rnw)
-      and documentation files.
+      and other documentation files.
     default: false
   run_docker: 
     description: >

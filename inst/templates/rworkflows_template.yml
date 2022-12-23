@@ -36,6 +36,7 @@
           run_covr: true
           run_pkgdown: true
           has_runit: false
+          has_latex: false
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }} 
           run_docker: true
           docker_user: 'bschilder'

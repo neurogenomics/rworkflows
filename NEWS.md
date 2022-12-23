@@ -1,3 +1,24 @@
+# rworkflows 0.99.4
+
+## New features
+
+## Bug fixes
+
+* Fix workflows not getting filled with custom parameters.
+  - Add unit tests to ensure this can't happen.
+
+# rworkflows 0.99.3
+
+## New features
+
+* Add new arg `has_latex`
+  - Added to action
+  - Add to `use_workflow`
+* New vignettes:
+  - *depgraph*: Plot which R packages use the `rworkflow` action.
+  - *repos*: Evaluate how R packages are distributed, 
+    and get data on most downloaded packages.
+
 # rworkflows 0.99.2
 
 ## New features
@@ -8,15 +29,9 @@
   - `use_readme`
   - `use_vignette_docker`
   - `use_vignettte_getstarted`
-* New vignettes:
-  - *depgraph*: Plot which R packages use the `rworkflow` action.
-  - *repos*: Evaluate how R packages are distributed, 
-    and get data on most downloaded packages.
 * Only require R >4.1 (instead of 4.2) 
   bc that's when the native pipe `|>` was introduced.
-* Add new arg `has_latex`
-  - Added to action
-  - Add to `use_workflow`
+
   
 
 ## Bug fixes
