@@ -16,7 +16,7 @@ Authors@R:
 Description: Continuous integration for R packages. 
     Automates testing, documentation website building,
     and containerised deployment.
-URL: https://github.com/neurogenomics/rworkflows
+URL: https://github.com/neurogenomics/rworkflows, https://cran.r-project.org/web/packages/rworkflows/index.html
 BugReports: https://github.com/neurogenomics/rworkflows/issues
 Encoding: UTF-8
 Depends: R (>= 4.1)
@@ -39,10 +39,6 @@ Suggests:
     testthat (>= 3.0.0),
     hexSticker,
     htmltools,
-    rvest,
-    UpSetR,
-    githubinstall,
-    BiocManager,
     data.table
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr

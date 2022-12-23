@@ -2,6 +2,18 @@
 
 ## New features
 
+* New functions:
+  - `use_issue_template`
+* Remove unnecessary *Suggests*:
+    - `rvest`
+    - `UpSetR`
+    - `githubinstall`
+    - `BiocManager`
+    
+* Automatically synchronize R and Bioc versions:
+  - `bioc_r_versions`
+  - `construct_runners`
+
 ## Bug fixes
 
 * Fix workflows not getting filled with custom parameters.

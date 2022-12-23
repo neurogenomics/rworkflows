@@ -4,6 +4,7 @@ fill_yaml <- function(yml,
                       tag,
                       on,
                       branches,
+                      runners,
                       ## workflow-level args
                       run_bioccheck,
                       run_rcmdcheck, 
@@ -27,6 +28,10 @@ fill_yaml <- function(yml,
   on2 <- lapply(stats::setNames(on,on),
                 function(x){list("branches"=branches)})
   yml$on <- on2
+  #### set runners ####
+  if(!is.null(runners)){
+    yml$jobs[[1]]$strategy$matrix$config <- runners 
+  }
   #### static workflow vs. action ####
   if(name=="rworkflows_static"){
     with2 <- yml$env

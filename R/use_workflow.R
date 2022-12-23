@@ -22,6 +22,10 @@
 #'  (e.g. "\@v1").
 #' @param on GitHub trigger conditions.
 #' @param branches GitHub trigger branches.
+#' @param runners Runner configurations for multiple Operating Systems (OS), 
+#' including R versions, Bioc versions, and container sources.
+#' Can use the \link[rworkflows]{construct_runners} functions to assist 
+#' in constructing customized runners configurations.
 #' @param run_bioccheck Run Bioconductor checks using
 #' \href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{
 #' \code{BiocCheck::BiocCheck()}}. 
@@ -75,6 +79,7 @@ use_workflow <- function(## action-level args
                          tag="@master",
                          on=c("push","pull_request"),
                          branches=c("master","main","RELEASE_**"),
+                         runners=construct_runners(),
                          ## workflow-level args
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
@@ -127,6 +132,7 @@ use_workflow <- function(## action-level args
                    tag=tag,
                    on=on,
                    branches=branches,
+                   runners=runners,
                    ## workflow-level args
                    run_bioccheck=run_bioccheck,
                    run_rcmdcheck=run_rcmdcheck, 
