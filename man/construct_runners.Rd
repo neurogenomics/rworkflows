@@ -24,7 +24,10 @@ See \link[rworkflows]{bioc_r_versions} documentation for all options.}
 \item{r}{Which R version to use on each OS.}
 
 \item{cont}{Which Docker container to use on each OS
-(\code{NULL} means no container will be used for that OS).}
+(\code{NULL} means no container will be used for that OS).
+See 
+\href{https://hub.docker.com/r/bioconductor/bioconductor_docker/tags}{here}
+ for a list of all official Bioconductor Docker container versions.}
 
 \item{rspm}{Which R repository manager to use on each OS
 (\code{NULL} means the default will be used for that OS).}

@@ -35,6 +35,11 @@ bioc_r_versions <- function(bioc_version=NULL){
   } else if (bioc_version=="release") {
     return(info$release)
   } else if (bioc_version %in% names(info$r_ver_for_bioc_ver)){ 
+    if(grepl("RELEASE_",bioc_version,ignore.case = TRUE)){
+      bioc_version <- gsub("_",".",
+                           gsub("RELEASE_","",bioc_version,ignore.case = TRUE)
+                           )
+    }
     return(list(bioc=package_version(bioc_version),
                 r=package_version(
                   info$r_ver_for_bioc_ver[[as.character(bioc_version)]]

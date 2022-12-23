@@ -8,6 +8,9 @@
 #' @param r Which R version to use on each OS. 
 #' @param cont Which Docker container to use on each OS
 #'  (\code{NULL} means no container will be used for that OS).
+#'  See 
+#'  \href{https://hub.docker.com/r/bioconductor/bioconductor_docker/tags}{here}
+#'   for a list of all official Bioconductor Docker container versions.
 #' @param rspm Which R repository manager to use on each OS
 #'  (\code{NULL} means the default will be used for that OS).
 #' @param versions_explicit Specify R/Bioc versions explicitly
@@ -53,11 +56,16 @@ construct_runners <- function(os=c("ubuntu-latest",
                               versions_explicit=FALSE
                               ){ 
   
+  # templateR:::source_all()
+  # templateR:::args2vars(construct_runners)
+  
   #### Check args ####
   construct_runners_check_args(os = os, 
                                bioc = bioc, 
                                r = r, 
                                cont = cont)
+  cont <- construct_runners_check_cont(cont = cont,
+                                       versions_explicit = versions_explicit)
   #### Set runners  
   runners <- lapply(os, function(o){
     if(isTRUE(versions_explicit)){
