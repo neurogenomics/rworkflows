@@ -103,6 +103,8 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@v3
     
+    ## R/Bioc are already installed on the Bioc Docker container, 
+    ## and reinstalling them causes errors.
     - name: Setup R and Bioconductor
       if: inputs.runner_os != 'Linux'
       uses: grimbough/bioc-actions/setup-bioc@v1
