@@ -31,6 +31,12 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/bioc_r_versions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/construct_runners.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_authors.html</loc>
   </url>
   <url>
@@ -47,6 +53,9 @@
   </url>
   <url>
     <loc>/reference/use_dockerfile.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_issue_template.html</loc>
   </url>
   <url>
     <loc>/reference/use_readme.html</loc>

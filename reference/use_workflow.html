@@ -81,6 +81,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
 <span>  tag <span class="op">=</span> <span class="st">"@master"</span>,</span>
 <span>  on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"push"</span>, <span class="st">"pull_request"</span><span class="op">)</span>,</span>
 <span>  branches <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"master"</span>, <span class="st">"main"</span>, <span class="st">"RELEASE_**"</span><span class="op">)</span>,</span>
+<span>  runners <span class="op">=</span> <span class="fu"><a href="construct_runners.html">construct_runners</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  run_bioccheck <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  run_rcmdcheck <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  as_cran <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -141,6 +142,13 @@ Can be a branch name on the
 
 <dt>branches</dt>
 <dd><p>GitHub trigger branches.</p></dd>
+
+
+<dt>runners</dt>
+<dd><p>Runner configurations for multiple Operating Systems (OS), 
+including R versions, Bioc versions, and container sources.
+Can use the <a href="construct_runners.html">construct_runners</a> functions to assist 
+in constructing customized runners configurations.</p></dd>
 
 
 <dt>run_bioccheck</dt>
@@ -252,7 +260,7 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/RtmpvDJ4Ym/.github/workflows/rworkflows.yml</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving workflow ==&gt; /tmp/Rtmpdv0iN1/.github/workflows/rworkflows.yml</span>
 </code></pre></div>
     </div>
   </div>
