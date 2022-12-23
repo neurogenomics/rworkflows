@@ -14,6 +14,8 @@ use_issue_template(
 )
 }
 \arguments{
+\item{templates}{The names of templates to be used.}
+
 \item{save_dir}{Directory to save the Docker file to.}
 
 \item{path}{Path to the Docker file.}

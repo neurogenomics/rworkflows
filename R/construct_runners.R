@@ -5,7 +5,11 @@
 #' @param os Which OS to launch GitHub Actions on. 
 #' @param bioc Which Bioconductor version to use on each OS. 
 #' See \link[rworkflows]{bioc_r_versions} documentation for all options.
-#' @param r 
+#' @param r Which R version to use on each OS. 
+#' @param cont Which Docker container to use on each OS
+#'  (\code{NULL} means no container will be used for that OS).
+#' @param rspm Which R repository manager to use on each OS
+#'  (\code{NULL} means the default will be used for that OS).
 #' @param versions_explicit Specify R/Bioc versions explicitly
 #'  (e.g. \code{r: 4.2.0, bioc: 3.16}) 
 #'  as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).
@@ -38,7 +42,10 @@ construct_runners <- function(os=c("ubuntu-latest",
                                 os
                               ), 
                               rspm = stats::setNames(
-                                list("https://packagemanager.rstudio.com/cran/__linux__/focal/release",
+                                list(paste0(
+                                  "https://packagemanager.rstudio.com/",
+                                  "cran/__linux__/focal/release"
+                                ),
                                      NULL,
                                      NULL),
                                 os

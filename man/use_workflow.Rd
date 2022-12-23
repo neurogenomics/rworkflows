@@ -16,6 +16,7 @@ use_workflow(
   tag = "@master",
   on = c("push", "pull_request"),
   branches = c("master", "main", "RELEASE_**"),
+  runners = construct_runners(),
   run_bioccheck = FALSE,
   run_rcmdcheck = TRUE,
   as_cran = TRUE,
@@ -62,6 +63,11 @@ Can be a branch name on the
 \item{on}{GitHub trigger conditions.}
 
 \item{branches}{GitHub trigger branches.}
+
+\item{runners}{Runner configurations for multiple Operating Systems (OS), 
+including R versions, Bioc versions, and container sources.
+Can use the \link[rworkflows]{construct_runners} functions to assist 
+in constructing customized runners configurations.}
 
 \item{run_bioccheck}{Run Bioconductor checks using
 \href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{

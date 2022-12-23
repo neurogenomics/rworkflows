@@ -7,12 +7,11 @@
 construct_runners(
   os = c("ubuntu-latest", "macOS-latest", "windows-latest"),
   bioc = stats::setNames(list("devel", "release", "release"), os),
-  r = stats::setNames(list("devel", "latest", "latest"), os),
+  r = stats::setNames(list("auto", "auto", "auto"), os),
   cont = stats::setNames(list(paste0("bioconductor/bioconductor_docker:", bioc[[1]]),
     NULL, NULL), os),
-  rspm =
-    stats::setNames(list("https://packagemanager.rstudio.com/cran/__linux__/focal/release",
-    NULL, NULL), os),
+  rspm = stats::setNames(list(paste0("https://packagemanager.rstudio.com/",
+    "cran/__linux__/focal/release"), NULL, NULL), os),
   versions_explicit = FALSE
 )
 }
@@ -21,6 +20,14 @@ construct_runners(
 
 \item{bioc}{Which Bioconductor version to use on each OS. 
 See \link[rworkflows]{bioc_r_versions} documentation for all options.}
+
+\item{r}{Which R version to use on each OS.}
+
+\item{cont}{Which Docker container to use on each OS
+(\code{NULL} means no container will be used for that OS).}
+
+\item{rspm}{Which R repository manager to use on each OS
+(\code{NULL} means the default will be used for that OS).}
 
 \item{versions_explicit}{Specify R/Bioc versions explicitly
 (e.g. \code{r: 4.2.0, bioc: 3.16}) 

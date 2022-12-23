@@ -1,6 +1,7 @@
 #' Use Issue Template
 #' 
 #' Creates one or more Issue Templates to be used in a GitHub repository.
+#' @param templates The names of templates to be used.
 #' @inheritParams use_dockerfile
 #' @returns Path to Issue Templates.
 #' 
