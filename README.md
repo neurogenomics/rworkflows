@@ -1,5 +1,4 @@
-<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '600' ><br><br><br><br>
-[![](https://img.shields.io/badge/devel%20version-0.99.2-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.3-black.svg)](https://github.com/neurogenomics/rworkflows)<br><br>
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![R build
@@ -10,7 +9,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Dec-17-2022</i> ¶ </h4>
+<h4> ¶ README updated: <i>Dec-29-2022</i> ¶ </h4>
 
 ## Intro
 
@@ -71,6 +70,19 @@ git push
 ### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
 
 Introductory tutorial for using `rworkflows`.
+
+#### GitHub Secrets
+
+Before pushing changes to your new R package, you will need to set up
+one or more [GitHub
+Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
+
+- `PAT_GITHUB` \[Required\]: Speeds up installations and gives access to
+  private repos on GitHub Actions. You can generate your very own
+  Personal Authentication Token using [these
+  instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).  
+- `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
+  [DockerHub](https://hub.docker.com) account.
 
 ### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
 
@@ -179,26 +191,26 @@ utils::sessionInfo()
     ## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
-    ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] BiocManager_1.30.19 compiler_4.2.1      pillar_1.8.1       
-    ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.5   tools_4.2.1        
+    ##  [4] RColorBrewer_1.1-3  yulab.utils_0.0.6   tools_4.2.1        
     ##  [7] digest_0.6.31       jsonlite_1.8.4      evaluate_0.19      
     ## [10] lifecycle_1.0.3     tibble_3.1.8        gtable_0.3.1       
-    ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.4.1          
+    ## [13] pkgconfig_2.0.3     rlang_1.0.6         cli_3.5.0          
     ## [16] DBI_1.1.3           rstudioapi_0.14     rvcheck_0.2.1      
-    ## [19] yaml_2.3.6          xfun_0.35           fastmap_1.1.0      
+    ## [19] yaml_2.3.6          xfun_0.36           fastmap_1.1.0      
     ## [22] stringr_1.5.0       dplyr_1.0.10        knitr_1.41         
     ## [25] desc_1.4.2          generics_0.1.3      vctrs_0.5.1        
     ## [28] dlstats_0.1.6       rprojroot_2.0.3     grid_4.2.1         
     ## [31] tidyselect_1.2.0    here_1.0.1          glue_1.6.2         
     ## [34] R6_2.5.1            fansi_1.0.3         rmarkdown_2.19     
     ## [37] ggplot2_3.4.0       badger_0.2.2        magrittr_2.0.3     
-    ## [40] scales_1.2.1        htmltools_0.5.4     rworkflows_0.99.2  
+    ## [40] scales_1.2.1        htmltools_0.5.4     rworkflows_0.99.3  
     ## [43] assertthat_0.2.1    colorspace_2.0-3    utf8_1.2.2         
     ## [46] stringi_1.7.8       munsell_0.5.0
 
