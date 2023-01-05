@@ -90,7 +90,6 @@ runs:
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
-        echo "TIMEOUT=${{ inputs.timeout }}" >> $GITHUB_ENV
       shell: bash {0}
     
     ## Set the R library to the directory matching the
@@ -213,6 +212,10 @@ runs:
 
     - name: Setup R dependencies 
       uses: r-lib/actions/setup-r-dependencies@v2
+      pak-version: devel
+      extra-packages: |
+        any::rcmdcheck
+        any::BiocCheck
 
     - name: Install BiocGenerics
       if:  inputs.has_runit == 'true'
@@ -254,8 +257,9 @@ runs:
         DISPLAY: 99.0
         AS_CRAN: ${{ inputs.as_cran }}
         run_vignettes: ${{ inputs.run_vignettes }}
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("TIMEOUT"))
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck")) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
         run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"
@@ -285,27 +289,29 @@ runs:
         DISPLAY: 99.0
         RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
         run_vignettes: ${{ inputs.run_vignettes }}
+        as_cran: ${{ inputs.as_cran }}
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        #### Install deps ####
         if(!require("BiocManager")) install.packages("BiocManager")
         if(!require("BiocCheck")) BiocManager::install("BiocCheck")
+        #### Allow for packages on CRAN ####
         no_check_vignettes <- Sys.getenv("run_vignettes")=='true'
+        as_cran <- Sys.getenv("as_cran")=='true'
+        #### Run checks ####
         BiocCheck::BiocCheck(
             dir('check', 'tar.gz$', full.names = TRUE),
             `quit-with-status` = TRUE,
-            `no-check-R-ver` = TRUE,
-            `no-check-bioc-help` = TRUE,
-            `no-check-vignettes` = no_check_vignettes)
+            `no-check-R-ver` = TRUE, 
+            `no-check-vignettes` = no_check_vignettes,
+            `no-check-CRAN` = as_cran,
+            `no-check-bioc-help` = as_cran)
       shell: Rscript {0}
         
     - name: Test coverage
       if: inputs.runner_os == 'Linux'
-      uses: codecov/codecov-action@v3 
-
-    - name: Install package
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      run: R CMD INSTALL .
-      shell: bash {0}
+      uses: codecov/codecov-action@v3  
 
     - name: Get R package info
       if: inputs.runner_os == 'Linux'

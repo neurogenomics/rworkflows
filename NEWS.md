@@ -10,6 +10,12 @@
   - `timeout`
 - Update *rworkflows_static.yml*
 
+## Bug fixes
+
+* Add `no-check-CRAN` arg to `BiocCheck` step to allow using bioc checks for 
+  packages already on CRAN.
+* Remove redundant "Install package" step (now handled within Dockerfile).
+
 # rworkflows 0.99.4
 
 ## New features

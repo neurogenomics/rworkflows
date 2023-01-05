@@ -23,6 +23,7 @@ Depends: R (>= 4.1)
 biocViews:
     Genetics, FunctionalGenomics, SystemsBiology
 Imports:
+    stats,
     here,
     yaml,
     utils,
