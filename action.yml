@@ -212,10 +212,11 @@ runs:
 
     - name: Setup R dependencies 
       uses: r-lib/actions/setup-r-dependencies@v2
-      pak-version: devel
-      extra-packages: |
-        any::rcmdcheck
-        any::BiocCheck
+      with:
+        pak-version: devel
+        extra-packages: |
+          any::rcmdcheck
+          any::BiocCheck
 
     - name: Install BiocGenerics
       if:  inputs.has_runit == 'true'
