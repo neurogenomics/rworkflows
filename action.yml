@@ -73,6 +73,11 @@ inputs:
     description: >
       The Operating System (OS) that the workflow is running on.
     default: 'Linux'
+  timeout:
+    description: >
+      The maximum time to wait for long R processes like 
+      dependency installations, downloads, and code checks.
+    default: 2000
 runs:
   using: 'composite'
   steps:
@@ -85,6 +90,7 @@ runs:
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
+        echo "TIMEOUT=${{ inputs.timeout }}" >> $GITHUB_ENV
       shell: bash {0}
     
     ## Set the R library to the directory matching the
@@ -249,7 +255,7 @@ runs:
         AS_CRAN: ${{ inputs.as_cran }}
         run_vignettes: ${{ inputs.run_vignettes }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("TIMEOUT"))
         if(!require("rcmdcheck")) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
         run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"

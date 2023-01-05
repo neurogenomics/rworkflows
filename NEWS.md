@@ -1,3 +1,15 @@
+# rworkflows 0.99.5
+
+## New features
+
+- Use actions:
+  - `r-lib/setup-r-dependencies`
+  - `r-lib/setup-tinytex`
+  - `grimbough/bioc-actions/setup-bioc`
+- New workflow args:
+  - `timeout`
+- Update *rworkflows_static.yml*
+
 # rworkflows 0.99.4
 
 ## New features
@@ -18,6 +30,8 @@
 
 * Fix workflows not getting filled with custom parameters.
   - Add unit tests to ensure this can't happen.
+* Replace `rcmdcheck` `\link` with `\href`
+* `use_badges`: remove unnecessary `ref` arg.
 
 # rworkflows 0.99.3
 

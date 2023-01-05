@@ -53,8 +53,7 @@
 #' @param verbose Print messages.
 #' @param colors Colors to assign to each group of badges (when possible).
 #' @param hex_height Height of the hex sticker in pixels
-#' (when \code{add_hex=TRUE}). 
-#' @inheritParams badger::badge_github_actions
+#' (when \code{add_hex=TRUE}).  
 #' @returns A named list of selected badges in markdown format.
 #' 
 #' @export
@@ -64,8 +63,7 @@
 #'  \dontrun{
 #'  rworkflows::use_badges() 
 #'  }
-use_badges <- function(ref = NULL,
-                       add_hex = TRUE,
+use_badges <- function(add_hex = TRUE,
                        add_actions = "rworkflows",
                        add_doi = NULL, 
                        ## GitHub
@@ -124,11 +122,11 @@ use_badges <- function(ref = NULL,
   #### Other metadata ####
   if(isTRUE(add_code_size)){
     messager("Adding code size",v=verbose)
-    h["codesize"] <- badger::badge_code_size(ref = ref)
+    h["codesize"] <- badger::badge_code_size()
   }
   if(isTRUE(add_codecov)){
     messager("Adding codecov.",v=verbose)
-    h["codecov"] <- badger::badge_codecov(branch = branch)
+    h["codecov"] <- badger::badge_codecov(branch = branch) 
   }
   if(isTRUE(add_license)){
     messager("Adding license.",v=verbose)
