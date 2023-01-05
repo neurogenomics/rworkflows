@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/devel%20version-0.99.4-black.svg)](https://github.com/neurogenomics/rworkflows)<br><br>
+[![](https://img.shields.io/badge/devel%20version-0.99.5-black.svg)](https://github.com/neurogenomics/rworkflows)<br><br>
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![R build
@@ -14,7 +14,7 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Dec-29-2022</i> ¶ </h4>
+<h4> ¶ README updated: <i>Jan-05-2023</i> ¶ </h4>
 
 ## Intro
 
@@ -105,9 +105,11 @@ If you use `rworkflows`, please cite:
 
 <!-- Modify this by editing the file: inst/CITATION  -->
 
-> Brian M. Schilder, Alan E. Murphy (2021) rworkflows: Continuous
-> integration for R packages, *GitHub*;
-> <https://github.com/neurogenomics/rworkflows>
+> Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2022) The
+> rworkflows suite: automated continuous integration for quality
+> checking, documentation website creation, and containerised deployment
+> of R packages, *Research Square*;
+> <https://doi.org/10.21203/rs.3.rs-2399015/v1>
 
 ## Acknowledgments
 
@@ -215,7 +217,7 @@ utils::sessionInfo()
     ## [31] tidyselect_1.2.0    here_1.0.1          glue_1.6.2         
     ## [34] R6_2.5.1            fansi_1.0.3         rmarkdown_2.19     
     ## [37] ggplot2_3.4.0       badger_0.2.2        magrittr_2.0.3     
-    ## [40] scales_1.2.1        htmltools_0.5.4     rworkflows_0.99.3  
+    ## [40] scales_1.2.1        htmltools_0.5.4     rworkflows_0.99.5  
     ## [43] assertthat_0.2.1    colorspace_2.0-3    utf8_1.2.2         
     ## [46] stringi_1.7.8       munsell_0.5.0
 

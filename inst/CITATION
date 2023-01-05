@@ -2,13 +2,13 @@ citHeader("If you use rworkflows, please cite:")
 
 citEntry(
   entry    = "Article",
-  title    = "rworkflows: Continuous integration for R packages",
-  author   = "Brian M. Schilder, Alan E. Murphy",
-  journal  = "GitHub",
-  year     = "2021",
+  title    = "The rworkflows suite: automated continuous integration for quality checking, documentation website creation, and containerised deployment of R packages",
+  author   = "Brian M. Schilder, Alan E. Murphy, Nathan G. Skene",
+  journal  = "Research Square",
+  year     = "2022",
   volume   = "",
   number   = "",
   pages    = "",
-  url      = "https://github.com/neurogenomics/rworkflows",
-  textVersion = paste("Brian M. Schilder, Alan E. Murphy (2021) rworkflows: Continuous integration for R packages, *GitHub*; https://github.com/neurogenomics/rworkflows")
+  url      = "https://doi.org/10.21203/rs.3.rs-2399015/v1",
+  textVersion = paste("Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2022) The rworkflows suite: automated continuous integration for quality checking, documentation website creation, and containerised deployment of R packages, *Research Square*; https://doi.org/10.21203/rs.3.rs-2399015/v1")
 )
