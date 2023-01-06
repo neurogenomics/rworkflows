@@ -1,4 +1,5 @@
-[![](https://img.shields.io/badge/devel%20version-0.99.5-black.svg)](https://github.com/neurogenomics/rworkflows)<br><br>
+<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '600' ><br><br><br><br>
+[![](https://img.shields.io/badge/devel%20version-0.99.5-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![R build
@@ -14,7 +15,7 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
-<h4> ¶ README updated: <i>Jan-05-2023</i> ¶ </h4>
+<h4> ¶ README updated: <i>Jan-06-2023</i> ¶ </h4>
 
 ## Intro
 
@@ -105,7 +106,7 @@ If you use `rworkflows`, please cite:
 
 <!-- Modify this by editing the file: inst/CITATION  -->
 
-> Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2022) The
+> Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2023) The
 > rworkflows suite: automated continuous integration for quality
 > checking, documentation website creation, and containerised deployment
 > of R packages, *Research Square*;

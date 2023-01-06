@@ -93,6 +93,8 @@ use_badges <- function(add_hex = TRUE,
                                      "cran"="blue",
                                      "default"="blue"),
                        verbose = TRUE){
+  # templateR:::source_all()
+  # templateR:::args2vars(use_badges)
   
   h <- list() 
   #### Hex ####
