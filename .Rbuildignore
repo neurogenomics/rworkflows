@@ -19,11 +19,7 @@ rworkflows-merged
 ^docs$
 ^pkgdown$
 ^Dockerfile$
-^LICENSE
-
-node_modules$
-package-lock\.json$
-package\.json$
+^LICENSE 
 
 ^inst/hex$
 ^hex$
