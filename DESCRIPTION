@@ -12,7 +12,13 @@ Authors@R:
            family = "Murphy",
            role = c("aut","ctb"),
            email = "alanmurph94@hotmail.com",
-           comment = c(ORCID = "0000-0002-2487-8753"))) 
+           comment = c(ORCID = "0000-0002-2487-8753")),
+      person(given = "Nathan",
+             family = "Skene",
+             role = c("aut"),
+             email = "n.skene@imperial.ac.uk",
+             comment = c(ORCID = "0000-0002-6807-3180")) 
+             ) 
 Description: Continuous integration for R packages. 
     Automates testing, documentation website building,
     and containerised deployment.

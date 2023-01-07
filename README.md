@@ -14,7 +14,8 @@ GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-pro
 checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
 [![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
-¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy</i> ¶ </h4>
+¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i> ¶
+</h4>
 <h4> ¶ README updated: <i>Jan-07-2023</i> ¶ </h4>
 
 ## Intro
