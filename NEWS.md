@@ -2,13 +2,18 @@
 
 ## New features
 
-- Use actions:
+* Use actions:
   - `r-lib/setup-r-dependencies`
   - `r-lib/setup-tinytex`
   - `grimbough/bioc-actions/setup-bioc`
-- New workflow args:
+* New workflow args:
   - `timeout`
-- Update *rworkflows_static.yml*
+* Update *rworkflows_static.yml*
+* Remove unnecessary lines from *.Rbuildignore*, 
+  as this is now taken care of internally by `r-lib/setup-r-dependencies`
+  - `node_modules$`
+  - `package-lock\.json$`
+  - `package\.json$`
 
 ## Bug fixes
 

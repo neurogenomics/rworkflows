@@ -191,9 +191,13 @@ use_badges <- function(add_hex = TRUE,
     return(h)
   } else {
     #### Add a break after the first item (usually hex sticker) ####
-    hc <- paste(paste0(h[1],"<br><br>"),
-                paste(h[-1],collapse=sep), 
-                sep=sep) 
+    if(!is.null(h[["hex"]])){
+      hc <- paste(paste0(h["hex"],"<br><br>"),
+                  paste(h[names(h)!="hex"],collapse=sep), 
+                  sep=sep) 
+    } else {
+      hc <- paste(h,collapse=sep)
+    } 
     cat(hc)
     return(hc)
   }

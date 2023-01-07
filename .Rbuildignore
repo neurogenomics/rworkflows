@@ -7,6 +7,8 @@ install-r
 install-system
 rworkflows-merged
 ^reports
+^inst/hex$
+^hex$
 
 .*\.Rproj$
 ^\.Rproj\.user$
@@ -20,7 +22,3 @@ rworkflows-merged
 ^pkgdown$
 ^Dockerfile$
 ^LICENSE 
-
-^inst/hex$
-^hex$
-^test-document-deploy$
