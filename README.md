@@ -16,7 +16,7 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i> ¶
 </h4>
-<h4> ¶ README updated: <i>Jan-07-2023</i> ¶ </h4>
+<h4> ¶ README updated: <i>Jan-09-2023</i> ¶ </h4>
 
 ## Intro
 
@@ -163,10 +163,12 @@ Docker container.
 `bioconductor/bioconductor_docker` container will often lag behind the
 actual Bioconductor releases for up to several days, due to the time it
 takes to update the container. This means that sometimes “devel” in
-`Bioconductor/bioconductor_docker` is actually referring to the
-“release” version of Bioconductor. See this
-[Issue](https://github.com/Bioconductor/bioconductor_docker/issues/37)
-for details.
+`Bioconductor/bioconductor_docker` is actually referring to the current
+“release” version of Bioconductor (i.e. the previous Bioc version’s
+“devel”). For further details, see this
+[Issue](https://github.com/Bioconductor/bioconductor_docker/issues/37),
+and the [Bioconductor release
+schedule](https://www.bioconductor.org/about/release-announcements/).
 
 ### [`scFlow`](https://github.com/combiz/scFlow)
 
