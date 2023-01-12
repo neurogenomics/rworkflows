@@ -151,6 +151,11 @@ jobs:
       shell: pwsh
     - name: Setup R dependencies
       uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        pak-version: devel
+        extra-packages: |
+          any::rcmdcheck
+          any::BiocCheck
     - name: Install BiocGenerics
       if: inputs.has_runit == 'true'
       run: |
@@ -185,8 +190,9 @@ jobs:
         DISPLAY: 99.0
         AS_CRAN: ${{ inputs.as_cran }}
         run_vignettes: ${{ inputs.run_vignettes }}
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck")) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
         run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"
@@ -213,25 +219,20 @@ jobs:
         DISPLAY: 99.0
         RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
         run_vignettes: ${{ inputs.run_vignettes }}
-      run: |
-        options(crayon.enabled = TRUE)
-        if(!require("BiocManager")) install.packages("BiocManager")
-        if(!require("BiocCheck")) BiocManager::install("BiocCheck")
-        no_check_vignettes <- Sys.getenv("run_vignettes")=='true'
-        BiocCheck::BiocCheck(
-            dir('check', 'tar.gz$', full.names = TRUE),
-            `quit-with-status` = TRUE,
-            `no-check-R-ver` = TRUE,
-            `no-check-bioc-help` = TRUE,
-            `no-check-vignettes` = no_check_vignettes)
+        as_cran: ${{ inputs.as_cran }}
+        timeout: ${{ inputs.timeout }}
+      run: "options(crayon.enabled = TRUE, timeout=Sys.getenv(\"timeout\"))\n####
+        Install deps ####\nif(!require(\"BiocManager\")) install.packages(\"BiocManager\")\nif(!require(\"BiocCheck\"))
+        BiocManager::install(\"BiocCheck\")\n#### Allow for packages on CRAN ####\nno_check_vignettes
+        <- Sys.getenv(\"run_vignettes\")=='true'\nas_cran <- Sys.getenv(\"as_cran\")=='true'\n####
+        Run checks ####\nBiocCheck::BiocCheck(\n    dir('check', 'tar.gz$', full.names
+        = TRUE),\n    `quit-with-status` = TRUE,\n    `no-check-R-ver` = TRUE, \n
+        \   `no-check-vignettes` = no_check_vignettes,\n    `no-check-CRAN` = as_cran,\n
+        \   `no-check-bioc-help` = as_cran)\n"
       shell: Rscript {0}
     - name: Test coverage
       if: inputs.runner_os == 'Linux'
       uses: codecov/codecov-action@v3
-    - name: Install package
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      run: R CMD INSTALL .
-      shell: bash {0}
     - name: Get R package info
       if: inputs.runner_os == 'Linux'
       run: |
