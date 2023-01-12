@@ -33,11 +33,11 @@ jobs:
       fail-fast: ${{ false }}
       matrix:
         config:
-        - os: ubuntu-latest
-          bioc: devel
-          r: auto
-          cont: bioconductor/bioconductor_docker:devel
-          rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
+        # - os: ubuntu-latest
+        #   bioc: devel
+        #   r: auto
+        #   cont: bioconductor/bioconductor_docker:devel
+        #   rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
         - os: macOS-latest
           bioc: release
           r: auto
