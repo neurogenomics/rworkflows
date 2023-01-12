@@ -72,19 +72,19 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_authors</span><span class="op">(</span>add_html <span class="op">=</span> <span class="cn">FALSE</span>, file <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_authors</span><span class="op">(</span>ref <span class="op">=</span> <span class="cn">NULL</span>, add_html <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>add_html</dt>
+    <dl><dt>ref</dt>
+<dd><p>Reference for a GitHub repository. If <code>NULL</code>
+(the default), the reference is determined by the URL
+field in the DESCRIPTION file.</p></dd>
+
+
+<dt>add_html</dt>
 <dd><p>Add HTML styling to certain fields (e.g "authors").</p></dd>
-
-
-<dt>file</dt>
-<dd><p>DESCRIPTION file to use. By default the DESCRIPTION
-file of the current package (i.e. the package the working directory
-is part of) is used.</p></dd>
 
 </dl></div>
     <div id="value">

@@ -67,6 +67,31 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.6" id="rworkflows-0996">rworkflows 0.99.6<a class="anchor" aria-label="anchor" href="#rworkflows-0996"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-6">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-6"></a></h3>
+<ul><li>Improve code coverage.
+<ul><li>Remove <code>is_default</code> as it is never used. Document in gist for later use: <a href="https://gist.github.com/bschilder/f02a5b564977f52fd665728a22c0d005" class="external-link uri">https://gist.github.com/bschilder/f02a5b564977f52fd665728a22c0d005</a>
+</li>
+</ul></li>
+<li>
+<code>use_badges</code>:
+<ul><li>Pass up <code>pkg</code> arg for explicit package specification.</li>
+</ul></li>
+<li>New function:
+<ul><li><code>get_description</code></li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-6">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-6"></a></h3>
+<ul><li>
+<code>use_badges</code>:
+<ul><li>Enable alternative ways of getting DESCRIPTION.</li>
+<li>Use <code>ref</code> and <code>pkg</code> explicitly in relevant functions to avoid inference.</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.99.5" id="rworkflows-0995">rworkflows 0.99.5<a class="anchor" aria-label="anchor" href="#rworkflows-0995"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-99-5">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-5"></a></h3>
@@ -91,6 +116,7 @@
 <ul><li>Add <code>no-check-CRAN</code> arg to <code>BiocCheck</code> step to allow using bioc checks for packages already on CRAN.</li>
 <li>Remove redundant “Install package” step (now handled within Dockerfile).</li>
 <li>Fix <code>get_hex</code> in cases where multiple links in <em>DESCRIPTION</em> URL.</li>
+<li>Fix CodeCov checking and upload step.</li>
 </ul></div>
 </div>
     <div class="section level2">
