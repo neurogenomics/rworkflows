@@ -1,0 +1,14 @@
+test_that("get_yaml works", {
+  
+  testthat::expect_type(
+    rworkflows:::get_yaml(name = "rworkflows"),
+    "list"
+  )
+  testthat::expect_type(
+    rworkflows:::get_yaml(name = "rworkflows_static"),
+    "list"
+  )
+  testthat::expect_error(
+    rworkflows:::get_yaml(name = "TYPOOOOO")
+  )
+})

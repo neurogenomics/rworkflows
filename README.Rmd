@@ -10,7 +10,6 @@ output:
 pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 ```
 
-
 ## Intro
 
 [*GitHub Actions*](https://docs.github.com/en/actions) 

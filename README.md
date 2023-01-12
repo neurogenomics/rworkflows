@@ -6,7 +6,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.s
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
-[![](https://app.codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/rworkflows)
+[![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://www.r-pkg.org/badges/version/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)

@@ -54,16 +54,15 @@
 #' @param colors Colors to assign to each group of badges (when possible).
 #' @param hex_height Height of the hex sticker in pixels
 #' (when \code{add_hex=TRUE}).  
+#' @inheritParams badger::badge_last_commit
 #' @returns A named list of selected badges in markdown format.
 #' 
 #' @export
 #' @import badger
 #' @examples
-#' ## Causes issues bc examples can't find the  the DESCRIPTION file.
-#'  \dontrun{
-#'  rworkflows::use_badges() 
-#'  }
-use_badges <- function(add_hex = TRUE,
+#' badges <- rworkflows::use_badges(ref = "neurogenomics/rworkflows") 
+use_badges <- function(ref = NULL,
+                       add_hex = TRUE,
                        add_actions = "rworkflows",
                        add_doi = NULL, 
                        ## GitHub
@@ -94,19 +93,27 @@ use_badges <- function(add_hex = TRUE,
                                      "default"="blue"),
                        verbose = TRUE){
   # templateR:::source_all()
-  # templateR:::args2vars(use_badges)
+  # templateR:::args2vars(use_badges) 
+  
+  #### Get ref/pkg ####
+  currentGitHubRef <- utils::getFromNamespace("currentGitHubRef","badger") 
+  ref <- currentGitHubRef(ref = ref)
+  pkg <- if(!is.null(ref)) basename(ref) else NULL  
   
   h <- list() 
   #### Hex ####
   if(isTRUE(add_hex)){
-    h["hex"] <- get_hex(branch = branch, 
+    h["hex"] <- get_hex(ref = ref,
+                        branch = branch, 
                         hex_height = hex_height,
                         verbose = verbose)
   }
   #### GitHub ####
   if(isTRUE(add_github_version)){
     messager("Adding version.",v=verbose)
-    h["version"] <- badger::badge_github_version(color = colors$github)
+    ## needs ref, NOT pkg
+    h["version"] <- badger::badge_github_version(pkg = ref, 
+                                                 color = colors$github)
   }
   if(!is.null(add_actions) &&
      !isFALSE(add_actions) && 
@@ -114,25 +121,33 @@ use_badges <- function(add_hex = TRUE,
     messager("Adding actions.",v=verbose)
     for(action in add_actions){
       h[paste0("actions_",action)] <- 
-        badger::badge_github_actions(action = action)
+        badger::badge_github_actions(ref = ref,
+                                     action = action)
     } 
   }
   if(isTRUE(add_commit)){
     messager("Adding commit.",v=verbose)
-    h["commit"] <- badger::badge_last_commit(branch = branch)
+    h["commit"] <- badger::badge_last_commit(ref = ref,
+                                             branch = branch)
   }
   #### Other metadata ####
   if(isTRUE(add_code_size)){
     messager("Adding code size",v=verbose)
-    h["codesize"] <- badger::badge_code_size()
+    h["codesize"] <- badger::badge_code_size(ref = ref)
   }
   if(isTRUE(add_codecov)){
-    messager("Adding codecov.",v=verbose)
-    h["codecov"] <- badger::badge_codecov(branch = branch) 
+    messager("Adding codecov.",v=verbose) 
+    h["codecov"] <- gsub("app.codecov.io","codecov.io", ## fix domain name
+                         badger::badge_codecov(ref = ref,
+                                               branch = branch)
+                         )
   }
   if(isTRUE(add_license)){
     messager("Adding license.",v=verbose)
-    h["license"] <-  badger::badge_license(color = colors$default) 
+    d <- get_description(ref = ref)
+    license <- d$get_field("License")
+    h["license"] <-  badger::badge_license(license = license,
+                                           color = colors$default) 
   } 
   if(!is.null(add_doi)){
     messager("Adding DOI.",v=verbose)
@@ -142,49 +157,56 @@ use_badges <- function(add_hex = TRUE,
   #### Bioc-specific badges #####  
   if(isTRUE(add_bioc_release)){
     messager("Adding Bioconductor release version.",v=verbose)
-    h["bioc_release"] <-  badger::badge_bioc_release(color = colors$bioc)
+    h["bioc_release"] <-  badger::badge_bioc_release(pkg = pkg,
+                                                     color = colors$bioc)
   }  
   if(isTRUE(add_bioc_download_month)){
     messager("Adding Bioc downloads: by month",v=verbose)
     h["bioc_download_month"] <-  badger::badge_bioc_download(
+      pkg = pkg,
       by = "month",
       color = colors$bioc) 
   }  
   if(isTRUE(add_bioc_download_total)){
     messager("Adding Bioc downloads: by total",v=verbose)
     h["bioc_download_total"] <-  badger::badge_bioc_download(
+      pkg = pkg,
       by = "total",
       color = colors$bioc) 
   }  
   if(isTRUE(add_bioc_download_rank)){
     messager("Adding license.",v=verbose)
-    h["bioc_download_rank"] <-  badger::badge_bioc_download_rank() 
+    h["bioc_download_rank"] <-  badger::badge_bioc_download_rank(pkg = pkg) 
   }   
   #### CRAN-specific badges #####
   if(isTRUE(add_cran_release)){
     messager("Adding CRAN release version.",v=verbose)
-    h["cran_release"] <- badger::badge_cran_release(color = colors$cran) 
+    h["cran_release"] <- badger::badge_cran_release(pkg = pkg,
+                                                    color = colors$cran) 
   } 
   if(isTRUE(add_cran_checks)){
     messager("Adding CRAN checks.",v=verbose)
-    h["cran_checks"] <- badger::badge_cran_checks() 
+    h["cran_checks"] <- badger::badge_cran_checks(pkg = pkg) 
   } 
   if(isTRUE(add_cran_download_month)){
     messager("Adding CRAN downloads: last-month",v=verbose)
     h["cran_download_month"] <-  badger::badge_cran_download(
+      pkg = pkg,
       type = "last-month", 
       color = colors$cran) 
   } 
   if(isTRUE(add_cran_download_total)){
     messager("Adding CRAN downloads: grand-total",v=verbose)
     h["cran_download_total"] <-  badger::badge_cran_download(
+      pkg = pkg,
       type = "grand-total",
       color = colors$cran) 
   }  
   #### Authors ####
   if(isTRUE(add_authors)){
     messager("Adding authors.",v=verbose)
-    h["authors"] <- get_authors(add_html = TRUE)
+    h["authors"] <- get_authors(ref = ref,
+                                add_html = TRUE)
   }
   #### Return ####
   if(isTRUE(as_list)){

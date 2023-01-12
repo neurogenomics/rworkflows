@@ -4,14 +4,14 @@
 \alias{get_authors}
 \title{Get authors}
 \usage{
-get_authors(add_html = FALSE, file = ".")
+get_authors(ref = NULL, add_html = FALSE)
 }
 \arguments{
-\item{add_html}{Add HTML styling to certain fields (e.g "authors").}
+\item{ref}{Reference for a GitHub repository. If \code{NULL}
+(the default), the reference is determined by the URL
+field in the DESCRIPTION file.}
 
-\item{file}{DESCRIPTION file to use. By default the DESCRIPTION
-file of the current package (i.e. the package the working directory
-is part of) is used.}
+\item{add_html}{Add HTML styling to certain fields (e.g "authors").}
 }
 \value{
 Authors as a raw text or HTML string.

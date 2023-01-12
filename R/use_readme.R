@@ -19,6 +19,7 @@ use_readme <- function(save_dir=here::here(),
                        verbose=TRUE){
   
   #### Check if file exists already ####
+  path <- path[[1]]
   if(file.exists(path) &
      isFALSE(force_new)){
     messager("Using existing README file:",path,v=verbose)

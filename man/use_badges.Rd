@@ -5,6 +5,7 @@
 \title{Use badges}
 \usage{
 use_badges(
+  ref = NULL,
   add_hex = TRUE,
   add_actions = "rworkflows",
   add_doi = NULL,
@@ -31,6 +32,10 @@ use_badges(
 )
 }
 \arguments{
+\item{ref}{Reference for a GitHub repository. If \code{NULL}
+(the default), the reference is determined by the URL
+field in the DESCRIPTION file.}
+
 \item{add_hex}{Add a hex sticker. 
 If \code{add_hex=TRUE}, will assume the sticker is located at the following
  relative path: "inst/hex/hex.png". 
@@ -110,8 +115,5 @@ Uses the package
 \href{https://github.com/GuangchuangYu/badger}{\pkg{badger}}.
 }
 \examples{
-## Causes issues bc examples can't find the  the DESCRIPTION file.
- \dontrun{
- rworkflows::use_badges() 
- }
+badges <- rworkflows::use_badges(ref = "neurogenomics/rworkflows") 
 }

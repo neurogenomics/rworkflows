@@ -1,21 +1,27 @@
-get_hex <- function(branch,
-                    hex_height,
+get_hex <- function(ref=NULL,
+                    branch="master",
+                    hex_height=600,
                     check_url=TRUE,
                     add_html=TRUE,
                     verbose=TRUE){
   
-  wrn <- "URL key not found in DESCRIPTION file."
-  if("URL" %in% desc::desc_fields()){
-    URL <- desc::desc_get_field(key = "URL")
-    URL <- grep("git",strsplit(URL,",")[[1]],value = TRUE)
-    if(length(URL)==0) {
+  
+  if(is.null(ref)){
+    wrn <- "URL key not found in DESCRIPTION file."
+    if("URL" %in% desc::desc_fields()){
+      URL <- desc::desc_get_field(key = "URL")
+      URL <- grep("git",strsplit(URL,",")[[1]],value = TRUE)
+      if(length(URL)==0) {
+        warning(wrn)
+        return(NULL)
+      }
+    } else {
       warning(wrn)
       return(NULL)
-    } 
-  } else { 
-    warning(wrn)
-    return(NULL)
-  }
+    }
+  } else {
+    URL <- paste0("https://github.com/", ref)
+  } 
   hex_url <- paste(URL,"raw",branch,"inst/hex/hex.png",sep="/")
   #### Check that the file exists ####
   if(isTRUE(check_url) && 

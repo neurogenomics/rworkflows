@@ -1,3 +1,21 @@
+# rworkflows 0.99.6
+
+## New features
+
+* Improve code coverage.
+  - Remove `is_default` as it is never used. Document in gist for later use:
+    https://gist.github.com/bschilder/f02a5b564977f52fd665728a22c0d005
+* `use_badges`:
+  - Pass up `pkg` arg for explicit package specification.
+* New function:
+  - `get_description`
+
+## Bug fixes
+
+* `use_badges`:
+  - Enable alternative ways of getting DESCRIPTION. 
+  - Use `ref` and `pkg` explicitly in relevant functions to avoid inference.
+
 # rworkflows 0.99.5
 
 ## New features
@@ -13,7 +31,7 @@
   as this is now taken care of internally by `r-lib/setup-r-dependencies`
   - `node_modules$`
   - `package-lock\.json$`
-  - `package\.json$`
+  - `package\.json$` 
 
 ## Bug fixes
 
@@ -21,6 +39,7 @@
   packages already on CRAN.
 * Remove redundant "Install package" step (now handled within Dockerfile).
 * Fix `get_hex` in cases where multiple links in *DESCRIPTION* URL.
+* Fix CodeCov checking and upload step.
 
 # rworkflows 0.99.4
 

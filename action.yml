@@ -314,11 +314,7 @@ runs:
       if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
       run: |
         covr::codecov()
-      shell: Rscript {0}
-      
-    - name: Upload coverage
-      if: inputs.runner_os == 'Linux'
-      uses: codecov/codecov-action@v3  
+      shell: Rscript {0}   
       
     - name: Install package
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
