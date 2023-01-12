@@ -17,7 +17,7 @@ env:
   run_vignettes: ${{ true }}
   has_testthat: ${{ true }}
   run_covr: ${{ true }}
-  run_pkgdown: ${{ true }}
+  run_pkgdown: ${{ false }}
   has_runit: ${{ false }}
   has_latex: ${{ false }}
   GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
