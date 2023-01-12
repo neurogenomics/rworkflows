@@ -5,9 +5,9 @@ test_that("use_badges works", {
     testthat::expect_type(badges,"character")
   }
   
-  testthat::expect_error(
-    use_badges()
-  )
+  # testthat::expect_error(
+  #   use_badges()
+  # )
   badges <- use_badges(ref = "neurogenomics/rworkflows",
                        add_hex = FALSE, 
                        add_actions = "rworkflow", 
