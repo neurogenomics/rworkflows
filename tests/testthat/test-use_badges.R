@@ -9,7 +9,7 @@ test_that("use_badges works", {
   #   use_badges()
   # )
   badges <- use_badges(ref = "neurogenomics/rworkflows",
-                       add_hex = FALSE, 
+                       add_hex = TRUE, 
                        add_actions = "rworkflow", 
                        add_doi = "doi:000000",
                        add_github_version = TRUE, 
@@ -32,7 +32,8 @@ test_that("use_badges works", {
                         add_bioc_download_month = TRUE,
                         add_bioc_download_total = TRUE,
                         add_bioc_download_rank = TRUE,
-                        ### These only work if you have the DESCRIPTION file or a proper ref
+                        ## These only work if you have the DESCRIPTION file
+                        ## or a proper ref in the format owner/repo
                         add_github_version = FALSE,
                         add_license = FALSE, 
                         add_authors = FALSE,
