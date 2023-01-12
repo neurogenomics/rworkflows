@@ -80,11 +80,17 @@
 </ul></li>
 <li>Update <em>rworkflows_static.yml</em>
 </li>
+<li>Remove unnecessary lines from <em>.Rbuildignore</em>, as this is now taken care of internally by <code>r-lib/setup-r-dependencies</code>
+<ul><li><code>node_modules$</code></li>
+<li><code>package-lock\.json$</code></li>
+<li><code>package\.json$</code></li>
+</ul></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-5">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-5"></a></h3>
 <ul><li>Add <code>no-check-CRAN</code> arg to <code>BiocCheck</code> step to allow using bioc checks for packages already on CRAN.</li>
 <li>Remove redundant “Install package” step (now handled within Dockerfile).</li>
+<li>Fix <code>get_hex</code> in cases where multiple links in <em>DESCRIPTION</em> URL.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -210,7 +216,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Brian Schilder, Alan Murphy.</p>
+  <p></p><p>Developed by Brian Schilder, Alan Murphy, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">
