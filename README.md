@@ -16,7 +16,7 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=blue)](https://cran.r-project.org/package=rworkflows)
 ¶ <h4> ¶ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i> ¶
 </h4>
-<h4> ¶ README updated: <i>Jan-09-2023</i> ¶ </h4>
+<h4> ¶ README updated: <i>Jan-12-2023</i> ¶ </h4>
 
 ## Intro
 

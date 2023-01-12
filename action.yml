@@ -309,8 +309,14 @@ runs:
             `no-check-CRAN` = as_cran,
             `no-check-bioc-help` = as_cran)
       shell: Rscript {0}
-        
+    
     - name: Test coverage
+      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      run: |
+        covr::codecov()
+      shell: Rscript {0}
+      
+    - name: Upload coverage
       if: inputs.runner_os == 'Linux'
       uses: codecov/codecov-action@v3  
       
