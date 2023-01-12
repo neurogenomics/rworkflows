@@ -22,7 +22,7 @@ Authors@R:
 Description: Continuous integration for R packages. 
     Automates testing, documentation website building,
     and containerised deployment.
-URL: https://github.com/neurogenomics/rworkflows, https://cran.r-project.org/web/packages/rworkflows/index.html
+URL: https://github.com/neurogenomics/rworkflows, https://CRAN.R-project.org/package=rworkflows
 BugReports: https://github.com/neurogenomics/rworkflows/issues
 Encoding: UTF-8
 Depends: R (>= 4.1)
