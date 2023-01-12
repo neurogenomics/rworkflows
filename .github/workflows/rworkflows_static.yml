@@ -233,6 +233,10 @@ jobs:
     - name: Test coverage
       if: inputs.runner_os == 'Linux'
       uses: codecov/codecov-action@v3
+    - name: Install package
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      run: R CMD INSTALL .
+      shell: bash {0}
     - name: Get R package info
       if: inputs.runner_os == 'Linux'
       run: |
