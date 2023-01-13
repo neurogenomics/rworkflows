@@ -12,51 +12,65 @@ pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 
 ## Intro
 
-[*GitHub Actions*](https://docs.github.com/en/actions) 
+[**GitHub Actions**](https://docs.github.com/en/actions) 
 are a powerful way to automatically launch workflows 
 every time you push changes to a GitHub repository. 
-This is a form of [*Continuous Integration (CI)*](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
+This is a form of [**Continuous Integration (CI)**](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
 which helps ensure that your code is always working as expected 
 (without having to manually check each time).
 
-Here, we have designed a robust, reusable, and flexible *action* 
+Here, we have designed a robust, reusable, and flexible **action** 
 specifically for the development of R packages. 
-We also provide an R function to automatically generate a *workflow file* that 
+We also provide an R function to automatically generate a **workflow file** that 
 calls the `rworkflows` composite action:
 
-Currently, `rworkflows` *action* performs the following tasks:  
+Currently, `rworkflows` **action** performs the following tasks:  
 
 1. Builds a Docker container to run subsequent steps within. 
-2. Builds and checks your R package (with [CRAN](https://cran.r-project.org/)
-and/or [Bioconductor](https://bioconductor.org/) checks).  
+2. Builds and checks your R package (with [**CRAN**](https://cran.r-project.org/)
+and/or [**Bioconductor**](https://bioconductor.org/) checks).  
 3. Runs [units tests](https://testthat.r-lib.org/).  
 4. Runs [code coverage tests](https://covr.r-lib.org/) and uploads the results 
-to [*Codecov*](https://about.codecov.io/).  
+to [**Codecov**](https://about.codecov.io/).  
 5. (Re)builds and launches a documentation website for your R package.  
-6. Pushes an [*Rstudio*](https://posit.co/) 
-[*Docker*](https://www.docker.com/) container to 
-[*DockerHub*](https://hub.docker.com/) 
+6. Pushes an [**Rstudio**](https://posit.co/) 
+[**Docker**](https://www.docker.com/) container to 
+[**DockerHub**](https://hub.docker.com/) 
 with your R package and all its dependencies pre-installed.  
 
-Importantly, these *workflow files* and *action* are 
-designed to work with any R package out-of-the-box.
-This means you won't have to manually edit any yaml files, just run the `rworkflows::use_workflow()` function and you're ready to go!
+Importantly, this **workflow** is designed to work with any R package out-of-the-box.
+This means you won't have to manually edit any yaml files,
+just run the `rworkflows::use_workflow()` function and you're ready to go!
 
 ## Quickstart
 
 Install and create the workflow in your R package's project folder.
+
 ```R
 ## in R
-if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
+
+#### Install rworkflows R package ####
+### For the stable CRAN release
+if(!require("rworkflows")) install.packages("rworkflows")
+### Or, for the latest development version
+# if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
+
+### Create workflow file
 path <- rworkflows::use_workflow()
 ```
 Push to GitHub, and let everything else run automatically!
+You can check the status of your workflow by clicking on the *Actions* tab
+in your GitHub repo.
 ```bash
 ## in the Terminal
 git add .
-git commit -m "Added GHA workflow via rworkflows::use_workflow()"
+git commit -m "Added rworkflows"
 git push
 ```
+
+**Note**: If you want to skip running **GitHub Actions** on a particular push, 
+simply add "[skip ci]" somewhere in the commit message, e.g.:
+`git commit -m "Update README [skip ci]"`
 
 ## Documentation
 
@@ -78,7 +92,7 @@ Before pushing changes to your new R package, you will need to set up one or mor
 
 ### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
 
-Copy-and-paste instructions for creating a *Docker* or *Singularity* container
+Copy-and-paste instructions for creating a **Docker** or **Singularity** container
 with the `rworkflows` R package pre-installed.
 
 ### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph)
@@ -116,26 +130,26 @@ names that are likely to become outdated (e.g. `r: "4.0.1"`).
 
 ### [`actions/`](https://github.com/actions)
 
-A general set of GitHub Actions.
+A general set of **GitHub Actions**.
 
 ### [`r-lib/actions`](https://github.com/r-lib/actions)
 
-A set of GitHub Actions for R development.
+A set of **GitHub Actions** for R development.
 
 ### [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action)
 
-Builds and deploys the GitHub Pages documentation website
+Builds and deploys the **GitHub Pages** documentation website
 in the `rworkflows` GHA workflows.
 
 ### [`docker/build-push-action`](https://github.com/docker/build-push-action)
 
-A set of GitHub Actions for building/pushing Docker containers.
+A set of **GitHub Actions** for building/pushing **Docker** containers.
 
 ### [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker)
 
 Uses the official 
 [`bioconductor/bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker)
-Docker container.  
+**Docker** container.  
 
 **NOTE**: Whenever a new version of Bioconductor is released, 
 the `bioconductor/bioconductor_docker` container will often lag behind the actual Bioconductor releases 
@@ -145,17 +159,17 @@ For further details, see this [Issue](https://github.com/Bioconductor/bioconduct
 
 ### [`scFlow`](https://github.com/combiz/scFlow)
 
-This DockerFile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
+This Dockerfile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
 
 Unlike other Dockerfiles, this one
 **does not require any manual editing when applying to different R packages**. 
-This means that users who are unfamiliar with Docker do not have to troubleshoot
+This means that users who are unfamiliar with **Docker** do not have to troubleshoot
 making this file correctly. It also means that it will continue to work 
 even if your R package dependencies change. 
 
 ### [`act`](https://github.com/nektos/act)
 
-A very useful command line tool for testing *GitHub Actions* locally. 
+A very useful command line tool for testing **GitHub Actions** locally. 
 
 </details> 
 
