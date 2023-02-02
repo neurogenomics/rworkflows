@@ -94,27 +94,27 @@
 ¶ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i> ¶
 </h4>
 <h4>
-¶ README updated: <i>Jan-12-2023</i> ¶
+¶ README updated: <i>Feb-02-2023</i> ¶
 </h4>
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
 </h2>
-<p><a href="https://docs.github.com/en/actions" class="external-link"><em>GitHub Actions</em></a> are a powerful way to automatically launch workflows every time you push changes to a GitHub repository. This is a form of <a href="https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration" class="external-link"><em>Continuous Integration (CI)</em></a>, which helps ensure that your code is always working as expected (without having to manually check each time).</p>
-<p>Here, we have designed a robust, reusable, and flexible <em>action</em> specifically for the development of R packages. We also provide an R function to automatically generate a <em>workflow file</em> that calls the <code>rworkflows</code> composite action:</p>
-<p>Currently, <code>rworkflows</code> <em>action</em> performs the following tasks:</p>
+<p><a href="https://docs.github.com/en/actions" class="external-link"><strong>GitHub Actions</strong></a> are a powerful way to automatically launch workflows every time you push changes to a GitHub repository. This is a form of <a href="https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration" class="external-link"><strong>Continuous Integration (CI)</strong></a>, which helps ensure that your code is always working as expected (without having to manually check each time).</p>
+<p>Here, we have designed a robust, reusable, and flexible <strong>action</strong> specifically for the development of R packages. We also provide an R function to automatically generate a <strong>workflow file</strong> that calls the <code>rworkflows</code> composite action:</p>
+<p>Currently, <code>rworkflows</code> <strong>action</strong> performs the following tasks:</p>
 <ol style="list-style-type: decimal">
 <li>Builds a Docker container to run subsequent steps within.</li>
-<li>Builds and checks your R package (with <a href="https://cran.r-project.org/" class="external-link">CRAN</a> and/or <a href="https://bioconductor.org/" class="external-link">Bioconductor</a> checks).<br>
+<li>Builds and checks your R package (with <a href="https://cran.r-project.org/" class="external-link"><strong>CRAN</strong></a> and/or <a href="https://bioconductor.org/" class="external-link"><strong>Bioconductor</strong></a> checks).<br>
 </li>
 <li>Runs <a href="https://testthat.r-lib.org/" class="external-link">units tests</a>.<br>
 </li>
-<li>Runs <a href="https://covr.r-lib.org/" class="external-link">code coverage tests</a> and uploads the results to <a href="https://about.codecov.io/" class="external-link"><em>Codecov</em></a>.<br>
+<li>Runs <a href="https://covr.r-lib.org/" class="external-link">code coverage tests</a> and uploads the results to <a href="https://about.codecov.io/" class="external-link"><strong>Codecov</strong></a>.<br>
 </li>
 <li>(Re)builds and launches a documentation website for your R package.<br>
 </li>
-<li>Pushes an <a href="https://posit.co/" class="external-link"><em>Rstudio</em></a> <a href="https://www.docker.com/" class="external-link"><em>Docker</em></a> container to <a href="https://hub.docker.com/" class="external-link"><em>DockerHub</em></a> with your R package and all its dependencies pre-installed.</li>
+<li>Pushes an <a href="https://posit.co/" class="external-link"><strong>Rstudio</strong></a> <a href="https://www.docker.com/" class="external-link"><strong>Docker</strong></a> container to <a href="https://hub.docker.com/" class="external-link"><strong>DockerHub</strong></a> with your R package and all its dependencies pre-installed.</li>
 </ol>
-<p>Importantly, these <em>workflow files</em> and <em>action</em> are designed to work with any R package out-of-the-box. This means you won’t have to manually edit any yaml files, just run the <code><a href="reference/use_workflow.html">rworkflows::use_workflow()</a></code> function and you’re ready to go!</p>
+<p>Importantly, this <strong>workflow</strong> is designed to work with any R package out-of-the-box. This means you won’t have to manually edit any yaml files, just run the <code><a href="reference/use_workflow.html">rworkflows::use_workflow()</a></code> function and you’re ready to go!</p>
 </div>
 <div class="section level2">
 <h2 id="quickstart">Quickstart<a class="anchor" aria-label="anchor" href="#quickstart"></a>
@@ -122,13 +122,21 @@
 <p>Install and create the workflow in your R package’s project folder.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## in R</span></span>
-<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/neurogenomics/rworkflows" class="external-link">"rworkflows"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"neurogenomics/rworkflows"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#### Install rworkflows R package ####</span></span>
+<span><span class="co">### For the stable CRAN release</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/neurogenomics/rworkflows" class="external-link">"rworkflows"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rworkflows"</span><span class="op">)</span></span>
+<span><span class="co">### Or, for the latest development version</span></span>
+<span><span class="co"># if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")</span></span>
+<span></span>
+<span><span class="co">### Create workflow file</span></span>
 <span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="reference/use_workflow.html">use_workflow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Push to GitHub, and let everything else run automatically!</p>
+<p>Push to GitHub, and let everything else run automatically! You can check the status of your workflow by clicking on the <em>Actions</em> tab in your GitHub repo.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">## in the Terminal</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Added GHA workflow via rworkflows::use_workflow()"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Added rworkflows"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<p><strong>Note</strong>: If you want to skip running <strong>GitHub Actions</strong> on a particular push, simply add “[skip ci]” somewhere in the commit message, e.g.: <code>git commit -m "Update README [skip ci]"</code></p>
 </div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
@@ -155,7 +163,7 @@
 <h3 id="dockersingularity">
 <a href="https://neurogenomics.github.io/rworkflows/articles/docker" class="external-link">Docker/Singularity</a><a class="anchor" aria-label="anchor" href="#dockersingularity"></a>
 </h3>
-<p>Copy-and-paste instructions for creating a <em>Docker</em> or <em>Singularity</em> container with the <code>rworkflows</code> R package pre-installed.</p>
+<p>Copy-and-paste instructions for creating a <strong>Docker</strong> or <strong>Singularity</strong> container with the <code>rworkflows</code> R package pre-installed.</p>
 </div>
 <div class="section level3">
 <h3 id="dependency-graph">
@@ -199,45 +207,45 @@
 <h3 id="actions">
 <a href="https://github.com/actions" class="external-link"><code>actions/</code></a><a class="anchor" aria-label="anchor" href="#actions"></a>
 </h3>
-<p>A general set of GitHub Actions.</p>
+<p>A general set of <strong>GitHub Actions</strong>.</p>
 </div>
 <div class="section level3">
 <h3 id="r-libactions">
 <a href="https://github.com/r-lib/actions" class="external-link"><code>r-lib/actions</code></a><a class="anchor" aria-label="anchor" href="#r-libactions"></a>
 </h3>
-<p>A set of GitHub Actions for R development.</p>
+<p>A set of <strong>GitHub Actions</strong> for R development.</p>
 </div>
 <div class="section level3">
 <h3 id="jamesivesgithub-pages-deploy-action">
 <a href="https://github.com/JamesIves/github-pages-deploy-action" class="external-link"><code>JamesIves/github-pages-deploy-action</code></a><a class="anchor" aria-label="anchor" href="#jamesivesgithub-pages-deploy-action"></a>
 </h3>
-<p>Builds and deploys the GitHub Pages documentation website in the <code>rworkflows</code> GHA workflows.</p>
+<p>Builds and deploys the <strong>GitHub Pages</strong> documentation website in the <code>rworkflows</code> GHA workflows.</p>
 </div>
 <div class="section level3">
 <h3 id="dockerbuild-push-action">
 <a href="https://github.com/docker/build-push-action" class="external-link"><code>docker/build-push-action</code></a><a class="anchor" aria-label="anchor" href="#dockerbuild-push-action"></a>
 </h3>
-<p>A set of GitHub Actions for building/pushing Docker containers.</p>
+<p>A set of <strong>GitHub Actions</strong> for building/pushing <strong>Docker</strong> containers.</p>
 </div>
 <div class="section level3">
 <h3 id="bioconductor_docker">
 <a href="https://github.com/Bioconductor/bioconductor_docker" class="external-link"><code>bioconductor_docker</code></a><a class="anchor" aria-label="anchor" href="#bioconductor_docker"></a>
 </h3>
-<p>Uses the official <a href="https://github.com/Bioconductor/bioconductor_docker" class="external-link"><code>bioconductor/bioconductor_docker</code></a> Docker container.</p>
+<p>Uses the official <a href="https://github.com/Bioconductor/bioconductor_docker" class="external-link"><code>bioconductor/bioconductor_docker</code></a> <strong>Docker</strong> container.</p>
 <p><strong>NOTE</strong>: Whenever a new version of Bioconductor is released, the <code>bioconductor/bioconductor_docker</code> container will often lag behind the actual Bioconductor releases for up to several days, due to the time it takes to update the container. This means that sometimes “devel” in <code>Bioconductor/bioconductor_docker</code> is actually referring to the current “release” version of Bioconductor (i.e. the previous Bioc version’s “devel”). For further details, see this <a href="https://github.com/Bioconductor/bioconductor_docker/issues/37" class="external-link">Issue</a>, and the <a href="https://www.bioconductor.org/about/release-announcements/" class="external-link">Bioconductor release schedule</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="scflow">
 <a href="https://github.com/combiz/scFlow" class="external-link"><code>scFlow</code></a><a class="anchor" aria-label="anchor" href="#scflow"></a>
 </h3>
-<p>This DockerFile was partly adapted from the <a href="https://github.com/combiz/scFlow/blob/master/Dockerfile" class="external-link">scFlow Dockerfile</a>.</p>
-<p>Unlike other Dockerfiles, this one <strong>does not require any manual editing when applying to different R packages</strong>. This means that users who are unfamiliar with Docker do not have to troubleshoot making this file correctly. It also means that it will continue to work even if your R package dependencies change.</p>
+<p>This Dockerfile was partly adapted from the <a href="https://github.com/combiz/scFlow/blob/master/Dockerfile" class="external-link">scFlow Dockerfile</a>.</p>
+<p>Unlike other Dockerfiles, this one <strong>does not require any manual editing when applying to different R packages</strong>. This means that users who are unfamiliar with <strong>Docker</strong> do not have to troubleshoot making this file correctly. It also means that it will continue to work even if your R package dependencies change.</p>
 </div>
 <div class="section level3">
 <h3 id="act">
 <a href="https://github.com/nektos/act" class="external-link"><code>act</code></a><a class="anchor" aria-label="anchor" href="#act"></a>
 </h3>
-<p>A very useful command line tool for testing <em>GitHub Actions</em> locally.</p>
+<p>A very useful command line tool for testing <strong>GitHub Actions</strong> locally.</p>
 
 </div>
 </details>
@@ -247,7 +255,7 @@
 </h1></div>
 <details><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## R Under development (unstable) (2023-01-10 r83596)</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## R Under development (unstable) (2023-01-26 r83699)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Running under: Ubuntu 22.04.1 LTS</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
@@ -270,24 +278,23 @@
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="do">## other attached packages:</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.19</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.20</span></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="do">## loaded via a namespace (and not attached):</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.1        jsonlite_1.8.4      BiocManager_1.30.19</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  [4] dplyr_1.0.10        compiler_4.3.0      tidyselect_1.2.0   </span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] stringr_1.5.0       assertthat_0.2.1    rvcheck_0.2.1      </span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="do">## [10] scales_1.2.1        yaml_2.3.6          fastmap_1.1.0      </span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] here_1.0.1          ggplot2_3.4.0       R6_2.5.1           </span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] generics_0.1.3      knitr_1.41          yulab.utils_0.0.6  </span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [19] tibble_3.1.8        desc_1.4.2          dlstats_0.1.6      </span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [22] rprojroot_2.0.3     munsell_0.5.0       DBI_1.1.3          </span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="do">## [25] pillar_1.8.1        RColorBrewer_1.1-3  rlang_1.0.6        </span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="do">## [28] utf8_1.2.2          stringi_1.7.12      badger_0.2.2       </span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="do">## [31] xfun_0.36           cli_3.6.0           magrittr_2.0.3     </span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="do">## [34] rworkflows_0.99.5   digest_0.6.31       grid_4.3.0         </span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="do">## [37] lifecycle_1.0.3     vctrs_0.5.1         evaluate_0.19      </span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [40] glue_1.6.2          fansi_1.0.3         colorspace_2.0-3   </span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="do">## [43] tools_4.3.0         pkgconfig_2.0.3     htmltools_0.5.4</span></span></code></pre></div>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] vctrs_0.5.2         cli_3.6.0           knitr_1.42         </span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  [4] rlang_1.0.6         xfun_0.37           generics_0.1.3     </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [7] jsonlite_1.8.4      glue_1.6.2          colorspace_2.1-0   </span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="do">## [10] rprojroot_2.0.3     htmltools_0.5.4     scales_1.2.1       </span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] fansi_1.0.4         dlstats_0.1.6       grid_4.3.0         </span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [16] evaluate_0.20       munsell_0.5.0       tibble_3.1.8       </span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [19] fastmap_1.1.0       yaml_2.3.7          lifecycle_1.0.3    </span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [22] BiocManager_1.30.19 rvcheck_0.2.1       compiler_4.3.0     </span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="do">## [25] dplyr_1.1.0         RColorBrewer_1.1-3  pkgconfig_2.0.3    </span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="do">## [28] here_1.0.1          rworkflows_0.99.5   digest_0.6.31      </span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="do">## [31] R6_2.5.1            tidyselect_1.2.0    utf8_1.2.3         </span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="do">## [34] pillar_1.8.1        magrittr_2.0.3      tools_4.3.0        </span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="do">## [37] gtable_0.3.1        badger_0.2.3        desc_1.4.2         </span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [40] yulab.utils_0.0.6   ggplot2_3.4.0</span></span></code></pre></div>
 </details>
 </div>
 
