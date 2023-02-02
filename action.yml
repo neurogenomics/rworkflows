@@ -78,12 +78,12 @@ inputs:
       The maximum time to wait for long R processes like 
       dependency installations, downloads, and code checks.
     default: 2000
+# Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+permissions:
+  pages: write      # to deploy to Pages
+  id-token: write   # to verify the deployment originates from an appropriate source
 runs:
   using: 'composite'
-  # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-  permissions:
-    pages: write      # to deploy to Pages
-    id-token: write   # to verify the deployment originates from an appropriate source
   steps:
     - name: Set GitHub environment variables 
       run: |
