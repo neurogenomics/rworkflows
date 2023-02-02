@@ -86,10 +86,10 @@ use_badges <- function(ref = NULL,
                        branch = "master", 
                        as_list = FALSE,
                        sep = "\n",
-                       hex_height = 600,
+                       hex_height = 300,
                        colors = list("github"="black",
                                      "bioc"="green",
-                                     "cran"="blue",
+                                     "cran"="yellow",
                                      "default"="blue"),
                        verbose = TRUE){
   # templateR:::source_all()

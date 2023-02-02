@@ -352,14 +352,26 @@ runs:
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
-    - name: Deploy pkgdown site to GitHub pages 🚀
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: JamesIves/github-pages-deploy-action@releases/v4
+          - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        clean: false
-        branch: gh-pages
-        folder: docs
-        token: ${{ inputs.GITHUB_TOKEN }}
+        path: 'docs'
+        name: github-pages
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
+      with:
+        artifact_name: github-pages
+
+    # delete-artifact
+    - name: Clean
+      uses: geekyeggo/delete-artifact@v2
+      with:
+        name: github-pages
 
     - name: Upload check results
       if: failure()

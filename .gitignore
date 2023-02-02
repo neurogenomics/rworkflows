@@ -1,6 +1,7 @@
 inst/hex/*.pptx
 inst/hex/*.svg
 inst/hex/*.ai
+reports/rworkflows_depgraph_files
 # R project files
 *.Rproj
 .Rproj.user

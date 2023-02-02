@@ -12,7 +12,6 @@ vignette: >
 
 
 ```{r}
-requireNamespace("htmltools")
 library(data.table)
 ```
 

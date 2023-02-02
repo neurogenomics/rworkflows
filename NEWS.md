@@ -7,6 +7,8 @@
     https://gist.github.com/bschilder/f02a5b564977f52fd665728a22c0d005
 * `use_badges`:
   - Pass up `pkg` arg for explicit package specification.
+  - Make default hex height 300.
+  - Make CRAN badge color yellow.
 * New function:
   - `get_description`
 
@@ -15,6 +17,8 @@
 * `use_badges`:
   - Enable alternative ways of getting DESCRIPTION. 
   - Use `ref` and `pkg` explicitly in relevant functions to avoid inference.
+* Remove embedded HTML from *depgraph.Rmd* vignette, 
+  as it induces a NOTE in CRAN checks that the package is too large.
 
 # rworkflows 0.99.5
 

@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 0.99.5
+Version: 0.99.6
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -45,7 +45,6 @@ Suggests:
     covr,
     testthat (>= 3.0.0),
     hexSticker,
-    htmltools,
     data.table
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr

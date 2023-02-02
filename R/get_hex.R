@@ -1,6 +1,6 @@
 get_hex <- function(ref=NULL,
                     branch="master",
-                    hex_height=600,
+                    hex_height=300,
                     check_url=TRUE,
                     add_html=TRUE,
                     verbose=TRUE){
