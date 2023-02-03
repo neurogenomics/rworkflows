@@ -78,10 +78,6 @@ inputs:
       The maximum time to wait for long R processes like 
       dependency installations, downloads, and code checks.
     default: 2000
-# Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-permissions:
-  pages: write      # to deploy to Pages
-  id-token: write   # to verify the deployment originates from an appropriate source
 runs:
   using: 'composite'
   steps:
@@ -356,30 +352,14 @@ runs:
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
-    - name: Setup Pages
+    - name: Deploy pkgdown site to GitHub pages 🚀
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: actions/configure-pages@v3
-
-    - name: Upload artifact
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: actions/upload-pages-artifact@v1
+      uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
-        path: 'docs'
-        name: github-pages
-
-    - name: Deploy to GitHub Pages
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      id: deployment
-      uses: actions/deploy-pages@v1
-      with:
-        artifact_name: github-pages
-
-    # delete-artifact
-    - name: Clean
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: geekyeggo/delete-artifact@v2
-      with:
-        name: github-pages
+        clean: false
+        branch: gh-pages
+        folder: docs
+        token: ${{ inputs.GITHUB_TOKEN }}
 
     - name: Upload check results
       if: failure()
