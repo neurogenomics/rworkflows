@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -77,6 +77,8 @@
 <li>
 <code>use_badges</code>:
 <ul><li>Pass up <code>pkg</code> arg for explicit package specification.</li>
+<li>Make default hex height 300.</li>
+<li>Make CRAN badge color yellow.</li>
 </ul></li>
 <li>New function:
 <ul><li><code>get_description</code></li>
@@ -89,6 +91,7 @@
 <ul><li>Enable alternative ways of getting DESCRIPTION.</li>
 <li>Use <code>ref</code> and <code>pkg</code> explicitly in relevant functions to avoid inference.</li>
 </ul></li>
+<li>Remove embedded HTML from <em>depgraph.Rmd</em> vignette, as it induces a NOTE in CRAN checks that the package is too large.</li>
 </ul></div>
 </div>
     <div class="section level2">
