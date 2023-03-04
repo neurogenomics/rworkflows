@@ -235,7 +235,7 @@ runs:
         options(crayon.enabled = TRUE)
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         reps <- BiocManager::repositories()
-        remotes::install(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
       shell: Rscript {0}
 
     - name: Install RUnit (via BiocGenerics)
