@@ -4,7 +4,7 @@
 
 * New function: `fill_description`
 * New function: `infer_deps`
-* Add yaml file to test workflow *rworkflows_dev*
+* Add yaml file to test workflow *rworkflows_dev* 
 
 # rworkflows 0.99.6
 
