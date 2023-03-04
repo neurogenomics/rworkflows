@@ -34,6 +34,9 @@
     <loc>/reference/construct_runners.html</loc>
   </url>
   <url>
+    <loc>/reference/fill_description.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_authors.html</loc>
   </url>
   <url>
@@ -41,6 +44,9 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/infer_deps.html</loc>
   </url>
   <url>
     <loc>/reference/message_parallel.html</loc>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 <i>Brian Schilder, Alan Murphy, Nathan Skene</i> ¶ </h4></h4>
             
             <h4 data-toc-skip class="date"><h4> ¶ Vignette updated:
-<i>Feb-03-2023</i> ¶ </h4></h4>
+<i>Mar-04-2023</i> ¶ </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/rworkflows.Rmd" class="external-link"><code>vignettes/rworkflows.Rmd</code></a></small>
       <div class="hidden name"><code>rworkflows.Rmd</code></div>
@@ -140,7 +140,7 @@ action.</p>
 <span>                                     docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/Rtmpi0yIng/rworkflows.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/Rtmpo0lzEm/rworkflows.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="static-workflow">static workflow<a class="anchor" aria-label="anchor" href="#static-workflow"></a>
@@ -156,7 +156,7 @@ action.</p>
 <span>                                     docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/Rtmpi0yIng/rworkflows_static.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/Rtmpo0lzEm/rworkflows_static.yml</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -174,7 +174,7 @@ one is available), and author names.</p>
 <pre><code><span><span class="co">## Adding codecov.</span></span></code></pre>
 <pre><code><span><span class="co">## Adding license.</span></span></code></pre>
 <pre><code><span><span class="co">## Adding authors.</span></span></code></pre>
-<img src="https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png" height="300"><br><br><br><br><a href="https://github.com/neurogenomics/rworkflows" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.99.6-black.svg"></a>
+<img src="https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png" height="300"><br><br><br><br><a href="https://github.com/neurogenomics/rworkflows" class="external-link"><img src="https://img.shields.io/badge/devel%20version-0.99.7-black.svg"></a>
 <a href="https://github.com/neurogenomics/rworkflows/actions" class="external-link"><img src="https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg" alt="R build status"></a> <a href="https://github.com/neurogenomics/rworkflows/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg"></a>
 <a href="https://github.com/neurogenomics/rworkflows" class="external-link"><img src="https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg"></a>
 <a href="https://codecov.io/gh/neurogenomics/rworkflows" class="external-link"><img src="https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg"></a>
@@ -196,7 +196,7 @@ to create a template <em>Dockerfile</em> and then customise it further
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">dockerfile</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_dockerfile.html">use_dockerfile</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/Rtmpi0yIng/Dockerfile</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/Rtmpo0lzEm/Dockerfile</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="templates">Templates<a class="anchor" aria-label="anchor" href="#templates"></a>
@@ -214,7 +214,7 @@ README <em>markdown</em> file.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">readme</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_readme.html">use_readme</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/Rtmpi0yIng/README.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/Rtmpo0lzEm/README.Rmd</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in file.copy(from = template_path, to = path, overwrite = TRUE, :</span></span>
 <span><span class="co">## 'recursive' will be ignored as 'to' is not a single existing directory</span></span></code></pre>
 </div>
@@ -227,7 +227,7 @@ Requires additional editing to fill in examples.</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette1</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_getstarted.html">use_vignette_getstarted</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"mypackage"</span>,</span>
 <span>                                                 save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmpi0yIng/vignettes/mypackage.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmpo0lzEm/vignettes/mypackage.Rmd</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="vignette-docker">Vignette: docker<a class="anchor" aria-label="anchor" href="#vignette-docker"></a>
@@ -245,7 +245,7 @@ package, e.g. created with:</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette2</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_docker.html">use_vignette_docker</a></span><span class="op">(</span>docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                             save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmpi0yIng/vignettes/docker.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmpo0lzEm/vignettes/docker.Rmd</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -253,9 +253,9 @@ package, e.g. created with:</p>
 </h2>
 <details><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2023-01-26 r83699)</span></span>
+<pre><code><span><span class="co">## R Under development (unstable) (2023-03-02 r83926)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.1 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
@@ -276,28 +276,28 @@ package, e.g. created with:</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] rworkflows_0.99.6 BiocStyle_2.27.1 </span></span>
+<span><span class="co">## [1] rworkflows_0.99.7 BiocStyle_2.27.1 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] gtable_0.3.1        jsonlite_1.8.4      dplyr_1.1.0        </span></span>
-<span><span class="co">##  [4] compiler_4.3.0      BiocManager_1.30.19 tidyselect_1.2.0   </span></span>
-<span><span class="co">##  [7] stringr_1.5.0       jquerylib_0.1.4     rvcheck_0.2.1      </span></span>
-<span><span class="co">## [10] systemfonts_1.0.4   scales_1.2.1        textshaping_0.3.6  </span></span>
-<span><span class="co">## [13] yaml_2.3.7          fastmap_1.1.0       here_1.0.1         </span></span>
-<span><span class="co">## [16] ggplot2_3.4.0       R6_2.5.1            generics_0.1.3     </span></span>
-<span><span class="co">## [19] knitr_1.42          yulab.utils_0.0.6   tibble_3.1.8       </span></span>
-<span><span class="co">## [22] bookdown_0.32       desc_1.4.2          dlstats_0.1.6      </span></span>
-<span><span class="co">## [25] munsell_0.5.0       rprojroot_2.0.3     pillar_1.8.1       </span></span>
-<span><span class="co">## [28] bslib_0.4.2         RColorBrewer_1.1-3  rlang_1.0.6        </span></span>
-<span><span class="co">## [31] utf8_1.2.3          cachem_1.0.6        stringi_1.7.12     </span></span>
-<span><span class="co">## [34] badger_0.2.3        xfun_0.37           fs_1.6.0           </span></span>
-<span><span class="co">## [37] sass_0.4.5          memoise_2.0.1       cli_3.6.0          </span></span>
-<span><span class="co">## [40] pkgdown_2.0.7       magrittr_2.0.3      digest_0.6.31      </span></span>
-<span><span class="co">## [43] grid_4.3.0          lifecycle_1.0.3     vctrs_0.5.2        </span></span>
-<span><span class="co">## [46] evaluate_0.20       glue_1.6.2          ragg_1.2.5         </span></span>
-<span><span class="co">## [49] fansi_1.0.4         colorspace_2.1-0    rmarkdown_2.20     </span></span>
-<span><span class="co">## [52] purrr_1.0.1         pkgconfig_2.0.3     tools_4.3.0        </span></span>
-<span><span class="co">## [55] htmltools_0.5.4</span></span></code></pre>
+<span><span class="co">##  [1] gtable_0.3.1        jsonlite_1.8.4      renv_0.17.0        </span></span>
+<span><span class="co">##  [4] dplyr_1.1.0         compiler_4.3.0      BiocManager_1.30.20</span></span>
+<span><span class="co">##  [7] tidyselect_1.2.0    stringr_1.5.0       jquerylib_0.1.4    </span></span>
+<span><span class="co">## [10] rvcheck_0.2.1       systemfonts_1.0.4   scales_1.2.1       </span></span>
+<span><span class="co">## [13] textshaping_0.3.6   yaml_2.3.7          fastmap_1.1.1      </span></span>
+<span><span class="co">## [16] here_1.0.1          ggplot2_3.4.1       R6_2.5.1           </span></span>
+<span><span class="co">## [19] generics_0.1.3      knitr_1.42          yulab.utils_0.0.6  </span></span>
+<span><span class="co">## [22] tibble_3.1.8        bookdown_0.32       desc_1.4.2         </span></span>
+<span><span class="co">## [25] dlstats_0.1.6       munsell_0.5.0       rprojroot_2.0.3    </span></span>
+<span><span class="co">## [28] pillar_1.8.1        bslib_0.4.2         RColorBrewer_1.1-3 </span></span>
+<span><span class="co">## [31] rlang_1.0.6         utf8_1.2.3          cachem_1.0.7       </span></span>
+<span><span class="co">## [34] stringi_1.7.12      badger_0.2.3        xfun_0.37          </span></span>
+<span><span class="co">## [37] fs_1.6.1            sass_0.4.5          memoise_2.0.1      </span></span>
+<span><span class="co">## [40] cli_3.6.0           pkgdown_2.0.7       magrittr_2.0.3     </span></span>
+<span><span class="co">## [43] digest_0.6.31       grid_4.3.0          lifecycle_1.0.3    </span></span>
+<span><span class="co">## [46] vctrs_0.5.2         evaluate_0.20       glue_1.6.2         </span></span>
+<span><span class="co">## [49] ragg_1.2.5          fansi_1.0.4         colorspace_2.1-0   </span></span>
+<span><span class="co">## [52] rmarkdown_2.20      purrr_1.0.1         pkgconfig_2.0.3    </span></span>
+<span><span class="co">## [55] tools_4.3.0         htmltools_0.5.4</span></span></code></pre>
 </details><p><br></p>
 </div>
   </div>
