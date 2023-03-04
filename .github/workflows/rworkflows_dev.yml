@@ -1,4 +1,4 @@
-name: rworkflows
+name: rworkflows_dev
 'on':
   push:
     branches:
