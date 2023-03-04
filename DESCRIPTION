@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 0.99.6
+Version: 0.99.7
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -26,26 +26,25 @@ URL: https://github.com/neurogenomics/rworkflows, https://CRAN.R-project.org/pac
 BugReports: https://github.com/neurogenomics/rworkflows/issues
 Encoding: UTF-8
 Depends: R (>= 4.1)
-biocViews:
-    Genetics, FunctionalGenomics, SystemsBiology
 Imports:
     stats,
     here,
     yaml,
     utils,
     desc,
-    badger
+    badger,
+    renv
 Suggests:
     markdown,
     rmarkdown,
-    magick,
     remotes,
     knitr,
     BiocStyle,
+    biocViews,
     covr,
     testthat (>= 3.0.0),
-    hexSticker,
-    data.table
+    data.table,
+    htmltools
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 License: GPL-3

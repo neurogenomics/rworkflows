@@ -25,7 +25,9 @@ use_readme <- function(save_dir=here::here(),
     messager("Using existing README file:",path,v=verbose)
   } else {
     messager("Creating new README file ==>",path,v=verbose)
-    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+    suppressWarnings(
+      dir.create(dirname(path)[[1]], showWarnings = FALSE, recursive = TRUE)
+    )
     #### get the template ####
     template_path <- system.file("templates","README.Rmd",
                                  package = "rworkflows")

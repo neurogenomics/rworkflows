@@ -8,11 +8,12 @@
 #' 
 #' @export
 #' @importFrom desc desc
+#' @importFrom here here
 #' @importFrom utils packageDescription download.file
 #' @examples 
 #' d <- get_description(ref="neurogenomics/rworkflows")
 get_description <- function(ref=NULL,
-                            path="./DESCRIPTION"){
+                            path=here::here("DESCRIPTION")){
   
   wrn <- "Cannot find DESCRIPTION file."
   path_ <- file.path("..",path)

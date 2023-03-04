@@ -4,7 +4,7 @@
 \alias{get_description}
 \title{Get DESCRIPTION}
 \usage{
-get_description(ref = NULL, path = "./DESCRIPTION")
+get_description(ref = NULL, path = here::here("DESCRIPTION"))
 }
 \arguments{
 \item{ref}{Reference for a GitHub repository. If \code{NULL}

@@ -1,3 +1,10 @@
+# rworkflows 0.99.7
+
+## New features
+
+* New function: `fill_description`
+* New function: `infer_deps`
+
 # rworkflows 0.99.6
 
 ## New features
