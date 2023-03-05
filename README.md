@@ -18,7 +18,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/rworkflows)
 <br>
-<a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/sunburst.svg' width='200' height='50' style='vertical-align: top;'></a>  
+<a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' width='200' height='50' style='vertical-align: top;'></a>  
 <h4>  
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
