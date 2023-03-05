@@ -16,8 +16,19 @@
 #'  relative path: "inst/hex/hex.png". 
 #'  If \code{add_hex} is a character string, this will instead
 #' be used as the relative hex path (e.g. \code{"/images/mysticker.png"}). 
-#' @param add_codecov Add CodeCov status with
+#' @param add_codecov Add Codecov status with
 #' \link[badger]{badge_codecov}.
+#' See the \href{https://docs.codecov.com/docs/status-badges}{Codecov site} 
+#' for more information about these badges.
+#' @param add_codecov_graphs Add Codecov graphs visualising results of 
+#' code coverage tests. Options include:
+#' \itemize{
+#' \item{"sunburst"}
+#' \item{"tree"}
+#' \item{"icicle"}
+#' }
+#' See the \href{https://docs.codecov.com/docs/graphs}{Codecov site} 
+#' for more information about each plot type.
 #' @param add_code_size Add code size with
 #' \link[badger]{badge_code_size}.
 #' @param add_license Add license info with
@@ -54,6 +65,8 @@
 #' @param colors Colors to assign to each group of badges (when possible).
 #' @param hex_height Height of the hex sticker in pixels
 #' (when \code{add_hex=TRUE}).  
+#' @param codecov_graph_height Height of each Codecov graph in pixels
+#' (when \code{add_codecov_graph!=FALSE}).  
 #' @inheritParams badger::badge_last_commit
 #' @returns A named list of selected badges in markdown format.
 #' 
@@ -69,9 +82,11 @@ use_badges <- function(ref = NULL,
                        add_github_version = TRUE,
                        add_commit = TRUE,
                        add_code_size = TRUE,
-                       add_codecov = TRUE,
                        add_license = TRUE, 
                        add_authors = TRUE,
+                       ## Codecov 
+                       add_codecov = TRUE,
+                       add_codecov_graphs = FALSE,
                        ## Bioc-specific
                        add_bioc_release = FALSE,
                        add_bioc_download_month = FALSE,
@@ -87,6 +102,7 @@ use_badges <- function(ref = NULL,
                        as_list = FALSE,
                        sep = "\n",
                        hex_height = 300,
+                       codecov_graph_height = 50,
                        colors = list("github"="black",
                                      "bioc"="green",
                                      "cran"="black",
@@ -134,13 +150,6 @@ use_badges <- function(ref = NULL,
   if(isTRUE(add_code_size)){
     messager("Adding code size",v=verbose)
     h["codesize"] <- badger::badge_code_size(ref = ref)
-  }
-  if(isTRUE(add_codecov)){
-    messager("Adding codecov.",v=verbose) 
-    h["codecov"] <- gsub("app.codecov.io","codecov.io", ## fix domain name
-                         badger::badge_codecov(ref = ref,
-                                               branch = branch)
-                         )
   }
   if(isTRUE(add_license)){
     messager("Adding license.",v=verbose)
@@ -201,7 +210,27 @@ use_badges <- function(ref = NULL,
       pkg = pkg,
       type = "grand-total",
       color = colors$cran) 
-  }  
+  }   
+  #### Codecov ####
+  ## badge
+  if(isTRUE(add_codecov)){
+    messager("Adding codecov.",v=verbose) 
+    h["codecov_badge"] <- gsub(
+      "app.codecov.io","codecov.io", ## fix domain name
+      badger::badge_codecov(ref = ref,
+                            branch = branch)
+    )
+  }
+  ## graphs
+  if(!isFALSE(add_codecov_graphs)){
+    graphs <- codecov_graphs(ref = ref, 
+                             branch = branch, 
+                             types = add_codecov_graphs, 
+                             height = codecov_graph_height)
+    for(g in names(graphs)){
+      h[paste0("codecov_",g)] <- graphs[[g]]
+    } 
+  }
   #### Authors ####
   if(isTRUE(add_authors)){
     messager("Adding authors.",v=verbose)

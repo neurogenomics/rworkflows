@@ -1,6 +1,6 @@
 ---
 title: ""  
-author: "`r rworkflows::use_badges(add_actions=c('rworkflows','rworkflows_static','rworkflows_dev'), add_cran_release = TRUE, add_cran_checks = TRUE, add_cran_download_month=TRUE, add_cran_download_total=TRUE)`" 
+author: "`r rworkflows::use_badges(add_actions=c('rworkflows','rworkflows_static','rworkflows_dev'), add_cran_release = TRUE, add_cran_checks = TRUE, add_cran_download_month=TRUE, add_cran_download_total=TRUE, add_codecov_graphs='sunburst')`" 
 date: "<h4>README updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   github_document

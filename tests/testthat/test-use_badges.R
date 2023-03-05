@@ -16,6 +16,7 @@ test_that("use_badges works", {
                        add_commit = TRUE,
                        add_code_size = TRUE, 
                        add_codecov = TRUE, 
+                       add_codecov_graphs = TRUE,
                        add_license = TRUE, 
                        add_authors = TRUE,
                        add_cran_release = TRUE,

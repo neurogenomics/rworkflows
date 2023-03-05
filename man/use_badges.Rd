@@ -12,9 +12,10 @@ use_badges(
   add_github_version = TRUE,
   add_commit = TRUE,
   add_code_size = TRUE,
-  add_codecov = TRUE,
   add_license = TRUE,
   add_authors = TRUE,
+  add_codecov = TRUE,
+  add_codecov_graphs = FALSE,
   add_bioc_release = FALSE,
   add_bioc_download_month = FALSE,
   add_bioc_download_total = FALSE,
@@ -27,6 +28,7 @@ use_badges(
   as_list = FALSE,
   sep = "\\n",
   hex_height = 300,
+  codecov_graph_height = 50,
   colors = list(github = "black", bioc = "green", cran = "black", default = "blue"),
   verbose = TRUE
 )
@@ -58,14 +60,26 @@ associated with the package. Must be provided as a character string.}
 \item{add_code_size}{Add code size with
 \link[badger]{badge_code_size}.}
 
-\item{add_codecov}{Add CodeCov status with
-\link[badger]{badge_codecov}.}
-
 \item{add_license}{Add license info with
 \link[badger]{badge_license}.}
 
 \item{add_authors}{Add author names inferred from 
 the \code{DESCRIPTION} file.}
+
+\item{add_codecov}{Add Codecov status with
+\link[badger]{badge_codecov}.
+See the \href{https://docs.codecov.com/docs/status-badges}{Codecov site} 
+for more information about these badges.}
+
+\item{add_codecov_graphs}{Add Codecov graphs visualising results of 
+code coverage tests. Options include:
+\itemize{
+\item{"sunburst"}
+\item{"tree"}
+\item{"icicle"}
+}
+See the \href{https://docs.codecov.com/docs/graphs}{Codecov site} 
+for more information about each plot type.}
 
 \item{add_bioc_release}{Add Bioc release version with 
 \link[badger]{badge_bioc_release}.}
@@ -101,6 +115,9 @@ using \link[base]{paste}.}
 
 \item{hex_height}{Height of the hex sticker in pixels
 (when \code{add_hex=TRUE}).}
+
+\item{codecov_graph_height}{Height of each Codecov graph in pixels
+(when \code{add_codecov_graph!=FALSE}).}
 
 \item{colors}{Colors to assign to each group of badges (when possible).}
 

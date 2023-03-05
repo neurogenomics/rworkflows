@@ -8,6 +8,9 @@
 * Run `BiocCheck` in rworkflow yamls.
 * Make all `require()` calls in *action.yml* quiet.
 * Further increase code coverage.  
+* `use_badges`
+  - Add new arg for `add_codecov_graphs`
+  - Subfunction `codecov_graphs`
 
 ## Bug fixes
 
@@ -15,6 +18,7 @@
 * Try to fix *NEWS.md* formatting for all platforms.
 * Lengthen Description field.
 * `get_hex`: Remove extra breaks
+* Fix bad quotes in `if` statements when *rworkflows_static* gets saved.
 
 # rworkflows 0.99.6
 
