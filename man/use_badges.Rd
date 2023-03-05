@@ -15,7 +15,7 @@ use_badges(
   add_license = TRUE,
   add_authors = TRUE,
   add_codecov = TRUE,
-  add_codecov_graphs = FALSE,
+  add_codecov_graphs = "icicle",
   add_bioc_release = FALSE,
   add_bioc_download_month = FALSE,
   add_bioc_download_total = FALSE,
@@ -28,7 +28,7 @@ use_badges(
   as_list = FALSE,
   sep = "\\n",
   hex_height = 300,
-  codecov_graph_height = 50,
+  codecov_graph_width = 200,
   colors = list(github = "black", bioc = "green", cran = "black", default = "blue"),
   verbose = TRUE
 )
@@ -116,7 +116,7 @@ using \link[base]{paste}.}
 \item{hex_height}{Height of the hex sticker in pixels
 (when \code{add_hex=TRUE}).}
 
-\item{codecov_graph_height}{Height of each Codecov graph in pixels
+\item{codecov_graph_width}{Width of each Codecov graph in pixels
 (when \code{add_codecov_graph!=FALSE}).}
 
 \item{colors}{Colors to assign to each group of badges (when possible).}

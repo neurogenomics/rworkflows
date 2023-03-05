@@ -2,11 +2,12 @@ codecov_graphs <- function(ref,
                            branch,
                            types=c("sunburst","tree","icicle"),
                            add_html=TRUE,
-                           height=200,
+                           width=200,
                            style="vertical-align: top;",
                            token=NULL){
   # templateR:::args2vars(codecov_graphs)
-  # ref="neurogenomics/rworkflows";branch="master" 
+  # ref="neurogenomics/rworkflows";branch="master"
+  
   
   #### Get graph types ###
   if(isTRUE(types)){
@@ -27,7 +28,7 @@ codecov_graphs <- function(ref,
       paste0(
         "<a href=",shQuote(link)," target='_blank'>",
         "<img src=",shQuote(URL),
-        " height=",shQuote(height),
+        " width=",shQuote(width),
         " style=",shQuote(style),
         ">",
         "</a>"

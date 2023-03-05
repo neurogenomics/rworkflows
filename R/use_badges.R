@@ -65,7 +65,7 @@
 #' @param colors Colors to assign to each group of badges (when possible).
 #' @param hex_height Height of the hex sticker in pixels
 #' (when \code{add_hex=TRUE}).  
-#' @param codecov_graph_height Height of each Codecov graph in pixels
+#' @param codecov_graph_width Width of each Codecov graph in pixels
 #' (when \code{add_codecov_graph!=FALSE}).  
 #' @inheritParams badger::badge_last_commit
 #' @returns A named list of selected badges in markdown format.
@@ -86,7 +86,7 @@ use_badges <- function(ref = NULL,
                        add_authors = TRUE,
                        ## Codecov 
                        add_codecov = TRUE,
-                       add_codecov_graphs = FALSE,
+                       add_codecov_graphs = "icicle",
                        ## Bioc-specific
                        add_bioc_release = FALSE,
                        add_bioc_download_month = FALSE,
@@ -102,7 +102,7 @@ use_badges <- function(ref = NULL,
                        as_list = FALSE,
                        sep = "\n",
                        hex_height = 300,
-                       codecov_graph_height = 50,
+                       codecov_graph_width = 200,
                        colors = list("github"="black",
                                      "bioc"="green",
                                      "cran"="black",
@@ -226,7 +226,7 @@ use_badges <- function(ref = NULL,
     graphs <- codecov_graphs(ref = ref, 
                              branch = branch, 
                              types = add_codecov_graphs, 
-                             height = codecov_graph_height)
+                             width = codecov_graph_width)
     for(g in names(graphs)){
       h[paste0("codecov_",g)] <- graphs[[g]]
     } 
