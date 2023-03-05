@@ -84,9 +84,10 @@ Uses the package
 <span>  add_github_version <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_commit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_code_size <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  add_codecov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_license <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_authors <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_codecov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_codecov_graphs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_bioc_release <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_bioc_download_month <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_bioc_download_total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -99,6 +100,7 @@ Uses the package
 <span>  as_list <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  sep <span class="op">=</span> <span class="st">"\n"</span>,</span>
 <span>  hex_height <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>  codecov_graph_height <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>github <span class="op">=</span> <span class="st">"black"</span>, bioc <span class="op">=</span> <span class="st">"green"</span>, cran <span class="op">=</span> <span class="st">"black"</span>, default <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -146,11 +148,6 @@ associated with the package. Must be provided as a character string.</p></dd>
 <a href="https://rdrr.io/pkg/badger/man/badge_code_size.html" class="external-link">badge_code_size</a>.</p></dd>
 
 
-<dt>add_codecov</dt>
-<dd><p>Add CodeCov status with
-<a href="https://rdrr.io/pkg/badger/man/badge_codecov.html" class="external-link">badge_codecov</a>.</p></dd>
-
-
 <dt>add_license</dt>
 <dd><p>Add license info with
 <a href="https://rdrr.io/pkg/badger/man/badge_license.html" class="external-link">badge_license</a>.</p></dd>
@@ -159,6 +156,22 @@ associated with the package. Must be provided as a character string.</p></dd>
 <dt>add_authors</dt>
 <dd><p>Add author names inferred from 
 the <code>DESCRIPTION</code> file.</p></dd>
+
+
+<dt>add_codecov</dt>
+<dd><p>Add Codecov status with
+<a href="https://rdrr.io/pkg/badger/man/badge_codecov.html" class="external-link">badge_codecov</a>.
+See the <a href="https://docs.codecov.com/docs/status-badges" class="external-link">Codecov site</a> 
+for more information about these badges.</p></dd>
+
+
+<dt>add_codecov_graphs</dt>
+<dd><p>Add Codecov graphs visualising results of 
+code coverage tests. Options include:</p><ul><li><p>"sunburst"</p></li>
+<li><p>"tree"</p></li>
+<li><p>"icicle"</p></li>
+</ul><p>See the <a href="https://docs.codecov.com/docs/graphs" class="external-link">Codecov site</a> 
+for more information about each plot type.</p></dd>
 
 
 <dt>add_bioc_release</dt>
@@ -220,6 +233,11 @@ using <a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a
 (when <code>add_hex=TRUE</code>).</p></dd>
 
 
+<dt>codecov_graph_height</dt>
+<dd><p>Height of each Codecov graph in pixels
+(when <code>add_codecov_graph!=FALSE</code>).</p></dd>
+
+
 <dt>colors</dt>
 <dd><p>Colors to assign to each group of badges (when possible).</p></dd>
 
@@ -242,16 +260,16 @@ using <a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding actions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding commit.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding code size</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding codecov.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding license.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding codecov.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding authors.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '300' &gt;&lt;br&gt;&lt;br&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/neurogenomics/rworkflows)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![R build status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/rworkflows)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/rworkflows)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;h4&gt;Authors: &lt;i&gt;Brian Schilder, Alan Murphy, Nathan Skene&lt;/i&gt;&lt;/h4&gt;</span>
 </code></pre></div>
     </div>
