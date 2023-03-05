@@ -10,7 +10,7 @@
 * Further increase code coverage.  
 * `use_badges`
   - Add new arg for `add_codecov_graphs`
-  - Subfunction `codecov_graphs`
+  - Subfunction `codecov_graphs` 
 
 ## Bug fixes
 
