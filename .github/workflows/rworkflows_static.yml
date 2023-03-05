@@ -11,7 +11,7 @@ name: rworkflows_static
     - main
     - RELEASE_**
 env:
-  run_bioccheck: ${{ false }}
+  run_bioccheck: ${{ true }}
   run_rcmdcheck: ${{ true }}
   as_cran: ${{ true }}
   run_vignettes: ${{ true }}
@@ -149,19 +149,28 @@ jobs:
         framed enumitem parskip soul placeins footmisc changepage xstring caption
         mathtools \ntlmgr list --only-installed\n"
       shell: pwsh
-    - name: Setup R dependencies
-      uses: r-lib/actions/setup-r-dependencies@v2
-      with:
-        pak-version: devel
-        extra-packages: |
-          any::rcmdcheck
-          any::BiocCheck
-    - name: Install BiocGenerics
-      if: inputs.has_runit == 'true'
+    - name: Install dependencies pass 1
+      run: "options(crayon.enabled = TRUE)\n## For running the checks\nmessage(paste('****',
+        Sys.time(), 'installing rcmdcheck ****')) \ninstall.packages(c(\"rmarkdown\",\"BiocManager\",
+        dependencies = TRUE, repos = repos)\n\n## Speedup installation with AnVIL
+        \nrepos <- if(\n     .Platform$OS.type == \"unix\" && Sys.info()[\"sysname\"]
+        != \"Darwin\"\n ) c(\n     \"AnVIL\" = \"https://bioconductordocker.blob.core.windows.net/packages/3.16/bioc\",\n
+        \    BiocManager::repositories()\n     ) else BiocManager::repositories()\n\nmessage(paste('****',
+        Sys.time(), 'pass number 1 at installing dependencies****'))\nremotes::install_local(repos=repos,
+        dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)\n"
+      continue-on-error: ${{ true }}
+      shell: Rscript {0}
+    - name: Install dependencies pass 2
       run: |
-        ## Install BiocGenerics
         options(crayon.enabled = TRUE)
-        BiocManager::install("BiocGenerics")
+        message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
+        repos <- BiocManager::repositories()
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
+      shell: Rscript {0}
+    - name: Install RUnit (via BiocGenerics)
+      if: inputs.has_runit == 'true'
+      run: "options(crayon.enabled = TRUE)\nBiocManager::install(\"BiocGenerics\")
+        \n"
       shell: Rscript {0}
     - name: Install covr
       if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
@@ -176,7 +185,7 @@ jobs:
     - name: Session info
       run: |
         options(width = 100, crayon.enabled = TRUE)
-        pkgs <- installed.packages()[, "Package"]
+        pkgs <- installed.packages()[,"Package"]
         if(!require("sessioninfo")) install.packages("sessioninfo")
         tryCatch({
           sessioninfo::session_info(pkgs, include_base = TRUE)
@@ -207,7 +216,7 @@ jobs:
       run: |
         find . -name testthat.Rout -exec cat '{}' ';'
       shell: bash {0}
-    - name: Run RUnit tests
+    - name: Run RUnit tests (via BiocGenerics)
       if: inputs.has_runit == 'true'
       run: |
         options(crayon.enabled = TRUE)
@@ -267,14 +276,26 @@ jobs:
       run: |
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
-    - name: "Deploy pkgdown site to GitHub pages \U0001F680"
+    - name: Setup Pages
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: JamesIves/github-pages-deploy-action@releases/v4
+      uses: actions/configure-pages@v3
+    - name: Upload artifact
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      uses: actions/upload-pages-artifact@v1
       with:
-        clean: ${{ false }}
-        branch: gh-pages
-        folder: docs
-        token: ${{ inputs.GITHUB_TOKEN }}
+        path: docs
+        name: github-pages
+    - name: Deploy to GitHub Pages
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      id: deployment
+      uses: actions/deploy-pages@main
+      with:
+        artifact_name: github-pages
+    - name: Clean
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      uses: geekyeggo/delete-artifact@v2
+      with:
+        name: github-pages
     - name: Upload check results
       if: failure()
       uses: actions/upload-artifact@v3
