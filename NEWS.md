@@ -7,6 +7,7 @@
 * Add yaml file to test workflow *rworkflows_dev*  
 * Run `BiocCheck` in rworkflow yamls.
 * Make all `require()` calls in *action.yml* quiet.
+* Further increase code coverage.
 
 ## Bug fixes
 

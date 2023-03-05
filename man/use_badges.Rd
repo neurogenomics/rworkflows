@@ -27,7 +27,7 @@ use_badges(
   as_list = FALSE,
   sep = "\\n",
   hex_height = 300,
-  colors = list(github = "black", bioc = "green", cran = "yellow", default = "blue"),
+  colors = list(github = "black", bioc = "green", cran = "black", default = "blue"),
   verbose = TRUE
 )
 }

@@ -1,4 +1,19 @@
+#' Get hex
+#' 
+#' Get the URL of a hex sticker for a given R package (if one exists).
+#' @param check_url Check whether the URL actually exists.
+#' @param add_html Wrap the URL in an html "img" tag and
+#'  set its height with \code{hex_height}.
+#' @inheritParams use_badges
+#' @inheritParams get_description
+#' @returns URL
+#' 
+#' @export
+#' @import desc
+#' @examples 
+#' hex_url <- get_hex(ref="neurogenomics/rworkflows")
 get_hex <- function(ref=NULL,
+                    path=here::here("DESCRIPTION"),
                     branch="master",
                     hex_height=300,
                     check_url=TRUE,
@@ -6,10 +21,17 @@ get_hex <- function(ref=NULL,
                     verbose=TRUE){
   
   
-  if(is.null(ref)){
+  if(is.null(ref) ||
+     ref==basename(ref)){
     wrn <- "URL key not found in DESCRIPTION file."
-    if("URL" %in% desc::desc_fields()){
-      URL <- desc::desc_get_field(key = "URL")
+    d <- get_description(ref = ref,
+                         path = path)
+    if(is.null(d)){
+      warning(wrn)
+      return(NULL)
+    }
+    if(isTRUE(d$has_fields(keys = "URL"))){
+      URL <- d$get_field(key = "URL")
       URL <- grep("git",strsplit(URL,",")[[1]],value = TRUE)
       if(length(URL)==0) {
         warning(wrn)
@@ -32,7 +54,7 @@ get_hex <- function(ref=NULL,
   #### Add HTML ####
   if(isTRUE(add_html)){
     img <- paste("<img src=",shQuote(hex_url),
-                 "height=",shQuote(hex_height),"><br><br>")
+                 "height=",shQuote(hex_height),"><br>")
     return(img)
   } else {
     return(hex_url)

@@ -89,7 +89,7 @@ use_badges <- function(ref = NULL,
                        hex_height = 300,
                        colors = list("github"="black",
                                      "bioc"="green",
-                                     "cran"="yellow",
+                                     "cran"="black",
                                      "default"="blue"),
                        verbose = TRUE){
   # templateR:::source_all()

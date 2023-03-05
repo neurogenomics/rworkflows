@@ -19,5 +19,17 @@ test_that("infer_deps works", {
   suggests <- c("covr","knitr","markdown","remotes","rmarkdown","testthat")
   testthat::expect_true(all(suggests %in% deps$Suggests))
   
+  
+  #### Return just one output ####
+  deps2 <- infer_deps(which = "Imports")
+  testthat::expect_false(is.list(deps2))
   setwd(wd)
+  
+  
+  #### Conflicting inputs ####
+  testthat::expect_error(
+    deps <- infer_deps(imports = "markdown",
+                       suggests = "markdown")
+  )
+  
 })

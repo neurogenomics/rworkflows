@@ -9,11 +9,20 @@
 #' @export
 #' @importFrom desc desc
 #' @importFrom here here
-#' @importFrom utils packageDescription download.file
+#' @importFrom utils download.file
 #' @examples 
 #' d <- get_description(ref="neurogenomics/rworkflows")
 get_description <- function(ref=NULL,
                             path=here::here("DESCRIPTION")){
+  
+  try_desc <- function(package){
+    tryCatch({
+      desc::desc(package = package)
+    }, error=function(e){
+      messager("Cannot find DESCRIPTION for installed package:",package); 
+      NULL
+    })
+  }
   
   wrn <- "Cannot find DESCRIPTION file."
   path_ <- file.path("..",path)
@@ -29,11 +38,9 @@ get_description <- function(ref=NULL,
       tmp <- tempfile(fileext = "DESCRIPTION")
       utils::download.file(remote,tmp)
       d <- desc::desc(file = tmp)  
-    } else if (!all(is.na( 
-      suppressWarnings(utils::packageDescription(basename(ref)))
-      )) ){
-      d <- utils::packageDescription(basename(ref))
-      return(NULL)
+    } else if (!is.null(try_desc(basename(ref))) ){
+      d <- desc::desc(package = basename(ref))
+      return(d)
     } else {
       messager(wrn)
       return(NULL)
