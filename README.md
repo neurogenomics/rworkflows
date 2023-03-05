@@ -1,4 +1,4 @@
-<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '300' ><br><br>
+<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '300' ><br>
 [![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)

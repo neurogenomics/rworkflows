@@ -246,7 +246,7 @@ use_badges <- function(ref = NULL,
   } else {
     #### Add a break after the first item (usually hex sticker) ####
     if(!is.null(h[["hex"]])){
-      hc <- paste(paste0(h["hex"],"<br><br>"),
+      hc <- paste(paste0(h["hex"],"<br>"),
                   paste(h[names(h)!="hex"],collapse=sep), 
                   sep=sep) 
     } else {
