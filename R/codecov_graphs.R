@@ -29,7 +29,7 @@ codecov_graphs <- function(ref,
       paste0( 
         "<a href=",shQuote(link)," target='_blank'>",
         "<img src=",shQuote(URL),
-        " alt=",shQuote(paste("Codecov",ty,"graph")),
+        " title=",shQuote(paste("Codecov",ty,"graph")),
         " width=",shQuote(width),
         " height=",shQuote(height),
         " style=",shQuote(style),
