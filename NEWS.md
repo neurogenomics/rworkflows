@@ -14,6 +14,7 @@
 * Add `biocViews: WorkflowManagement`
 * Try to fix *NEWS.md* formatting for all platforms.
 * Lengthen Description field.
+* `get_hex`: Remove extra breaks
 
 # rworkflows 0.99.6
 

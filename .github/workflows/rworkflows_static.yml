@@ -186,7 +186,7 @@ jobs:
       run: |
         options(width = 100, crayon.enabled = TRUE)
         pkgs <- installed.packages()[,"Package"]
-        if(!require("sessioninfo")) install.packages("sessioninfo")
+        if(!require("sessioninfo", quietly=TRUE)) install.packages("sessioninfo")
         tryCatch({
           sessioninfo::session_info(pkgs, include_base = TRUE)
         }, error = function(x){utils::sessionInfo()})
@@ -202,7 +202,7 @@ jobs:
         timeout: ${{ inputs.timeout }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
-        if(!require("rcmdcheck")) install.packages("rcmdcheck")
+        if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
         run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"
         rcmdcheck::rcmdcheck(
@@ -231,13 +231,13 @@ jobs:
         as_cran: ${{ inputs.as_cran }}
         timeout: ${{ inputs.timeout }}
       run: "options(crayon.enabled = TRUE, timeout=Sys.getenv(\"timeout\"))\n####
-        Install deps ####\nif(!require(\"BiocManager\")) install.packages(\"BiocManager\")\nif(!require(\"BiocCheck\"))
-        BiocManager::install(\"BiocCheck\")\n#### Allow for packages on CRAN ####\nno_check_vignettes
-        <- Sys.getenv(\"run_vignettes\")=='true'\nas_cran <- Sys.getenv(\"as_cran\")=='true'\n####
-        Run checks ####\nBiocCheck::BiocCheck(\n    dir('check', 'tar.gz$', full.names
-        = TRUE),\n    `quit-with-status` = TRUE,\n    `no-check-R-ver` = TRUE, \n
-        \   `no-check-vignettes` = no_check_vignettes,\n    `no-check-CRAN` = as_cran,\n
-        \   `no-check-bioc-help` = as_cran)\n"
+        Install deps ####\nif(!require(\"BiocManager\", quietly=TRUE)) install.packages(\"BiocManager\")\nif(!require(\"BiocCheck\",
+        quietly=TRUE)) BiocManager::install(\"BiocCheck\")\n#### Allow for packages
+        on CRAN ####\nno_check_vignettes <- Sys.getenv(\"run_vignettes\")=='true'\nas_cran
+        <- Sys.getenv(\"as_cran\")=='true'\n#### Run checks ####\nBiocCheck::BiocCheck(\n
+        \   dir('check', 'tar.gz$', full.names = TRUE),\n    `quit-with-status` =
+        TRUE,\n    `no-check-R-ver` = TRUE, \n    `no-check-vignettes` = no_check_vignettes,\n
+        \   `no-check-CRAN` = as_cran,\n    `no-check-bioc-help` = as_cran)\n"
       shell: Rscript {0}
     - name: Test coverage
       if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
@@ -267,7 +267,7 @@ jobs:
       run: |
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
-          if(!require("rmarkdown")) install.packages("rmarkdown");
+          if(!require("rmarkdown", quietly=TRUE)) install.packages("rmarkdown");
           rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
         }
       shell: Rscript {0}
@@ -296,7 +296,7 @@ jobs:
         == 'true' && inputs.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
-        if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
+        if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
         path <- rworkflows::use_dockerfile()
       shell: Rscript {0}
     - name: Build and push to DockerHub

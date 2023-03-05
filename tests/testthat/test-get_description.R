@@ -20,5 +20,5 @@ test_that("get_description works", {
   testthat::expect_equal(d1,d4)
   testthat::expect_null(d5)
   testthat::expect_null(d6)
-  testthat::expect_null(d7)
+  testthat::expect_equal(d1,d7)
 })

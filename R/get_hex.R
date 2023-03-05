@@ -54,7 +54,7 @@ get_hex <- function(ref=NULL,
   #### Add HTML ####
   if(isTRUE(add_html)){
     img <- paste("<img src=",shQuote(hex_url),
-                 "height=",shQuote(hex_height),"><br>")
+                 "height=",shQuote(hex_height),">")
     return(img)
   } else {
     return(hex_url)

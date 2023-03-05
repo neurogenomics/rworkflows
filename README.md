@@ -1,4 +1,4 @@
-<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '300' ><br><br><br><br>
+<img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '300' ><br><br>
 [![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
@@ -11,16 +11,16 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-[![](https://www.r-pkg.org/badges/version/rworkflows?color=yellow)](https://cran.r-project.org/package=rworkflows)
+[![](https://www.r-pkg.org/badges/version/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
-[![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=yellow)](https://cran.r-project.org/package=rworkflows)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=yellow)](https://cran.r-project.org/package=rworkflows)  
+[![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)  
 <h4>  
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Mar-04-2023</i>  
+README updated: <i>Mar-05-2023</i>  
 </h4>
 
 ## Intro

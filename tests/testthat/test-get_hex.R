@@ -6,5 +6,5 @@ test_that("get_hex works", {
                   path=here::here("DESCRIPTION"))
   
   testthat::expect_equal(hex1, hex2)
-  testthat::expect_null(hex3)
+  testthat::expect_equal(hex1, hex3)
 })
