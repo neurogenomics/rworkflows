@@ -53,8 +53,9 @@ get_hex <- function(ref=NULL,
   }
   #### Add HTML ####
   if(isTRUE(add_html)){
-    img <- paste("<img src=",shQuote(hex_url),
-                 "height=",shQuote(hex_height),">")
+    img <- paste0("<img src=",shQuote(hex_url),
+                 " alt=",shQuote(paste("Hex sticker for",basename(ref))),
+                 " height=",shQuote(hex_height),">")
     return(img)
   } else {
     return(hex_url)
