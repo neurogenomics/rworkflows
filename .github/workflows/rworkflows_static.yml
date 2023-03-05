@@ -276,26 +276,14 @@ jobs:
       run: |
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
-    - name: Setup Pages
+    - name: "Deploy pkgdown site to GitHub pages \U0001F680"
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: actions/configure-pages@v3
-    - name: Upload artifact
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: actions/upload-pages-artifact@v1
+      uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
-        path: docs
-        name: github-pages
-    - name: Deploy to GitHub Pages
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      id: deployment
-      uses: actions/deploy-pages@main
-      with:
-        artifact_name: github-pages
-    - name: Clean
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: geekyeggo/delete-artifact@v2
-      with:
-        name: github-pages
+        clean: ${{ false }}
+        branch: gh-pages
+        folder: docs
+        token: ${{ inputs.GITHUB_TOKEN }}
     - name: Upload check results
       if: failure()
       uses: actions/upload-artifact@v3
