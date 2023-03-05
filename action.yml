@@ -210,20 +210,39 @@ runs:
         tlmgr list --only-installed
       shell: pwsh  
 
-    - name: Setup R dependencies 
-      uses: r-lib/actions/setup-r-dependencies@v2
-      with:
-        pak-version: devel
-        extra-packages: |
-          any::rcmdcheck
-          any::BiocCheck
+    - name: Install dependencies pass 1
+      run: |
+         options(crayon.enabled = TRUE)
+         ## For running the checks
+         message(paste('****', Sys.time(), 'installing rcmdcheck ****')) 
+         install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos)
+         
+         ## Speedup installation with AnVIL 
+         repos <- if(
+              .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
+          ) c(
+              "AnVIL" = "https://bioconductordocker.blob.core.windows.net/packages/3.16/bioc",
+              BiocManager::repositories()
+              ) else BiocManager::repositories()
+         
+         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
+      continue-on-error: true
+      shell: Rscript {0}
 
-    - name: Install BiocGenerics
+    - name: Install dependencies pass 2
+      run: |
+        options(crayon.enabled = TRUE)
+        message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
+        repos <- BiocManager::repositories()
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
+      shell: Rscript {0}
+
+    - name: Install RUnit (via BiocGenerics)
       if:  inputs.has_runit == 'true'
       run: |
-        ## Install BiocGenerics
         options(crayon.enabled = TRUE)
-        BiocManager::install("BiocGenerics")
+        BiocManager::install("BiocGenerics") 
       shell: Rscript {0}
 
     - name: Install covr
@@ -243,7 +262,7 @@ runs:
     - name: Session info
       run: |
         options(width = 100, crayon.enabled = TRUE)
-        pkgs <- installed.packages()[, "Package"]
+        pkgs <- installed.packages()[,"Package"]
         if(!require("sessioninfo")) install.packages("sessioninfo")
         tryCatch({
           sessioninfo::session_info(pkgs, include_base = TRUE)
@@ -277,7 +296,7 @@ runs:
         find . -name testthat.Rout -exec cat '{}' ';'
       shell: bash {0}
         
-    - name: Run RUnit tests
+    - name: Run RUnit tests (via BiocGenerics)
       if: inputs.has_runit == 'true'
       run: |
         options(crayon.enabled = TRUE)
@@ -352,14 +371,30 @@ runs:
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
-    - name: Deploy pkgdown site to GitHub pages 🚀
+    - name: Setup Pages
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      uses: JamesIves/github-pages-deploy-action@releases/v4
+      uses: actions/configure-pages@v3
+
+    - name: Upload artifact
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      uses: actions/upload-pages-artifact@v1
       with:
-        clean: false
-        branch: gh-pages
-        folder: docs
-        token: ${{ inputs.GITHUB_TOKEN }}
+        path: 'docs'
+        name: github-pages
+
+    - name: Deploy to GitHub Pages
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      id: deployment
+      uses: actions/deploy-pages@v1
+      with:
+        artifact_name: github-pages
+
+    # delete-artifact
+    - name: Clean
+      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      uses: geekyeggo/delete-artifact@v2
+      with:
+        name: github-pages
 
     - name: Upload check results
       if: failure()

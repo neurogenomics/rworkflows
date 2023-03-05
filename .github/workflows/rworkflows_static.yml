@@ -17,7 +17,7 @@ env:
   run_vignettes: ${{ true }}
   has_testthat: ${{ true }}
   run_covr: ${{ true }}
-  run_pkgdown: ${{ false }}
+  run_pkgdown: ${{ true }}
   has_runit: ${{ false }}
   has_latex: ${{ false }}
   GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
@@ -33,11 +33,11 @@ jobs:
       fail-fast: ${{ false }}
       matrix:
         config:
-        # - os: ubuntu-latest
-        #   bioc: devel
-        #   r: auto
-        #   cont: bioconductor/bioconductor_docker:devel
-        #   rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
+        - os: ubuntu-latest
+          bioc: devel
+          r: auto
+          cont: bioconductor/bioconductor_docker:devel
+          rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
         - os: macOS-latest
           bioc: release
           r: auto
@@ -231,8 +231,10 @@ jobs:
         \   `no-check-bioc-help` = as_cran)\n"
       shell: Rscript {0}
     - name: Test coverage
-      if: inputs.runner_os == 'Linux'
-      uses: codecov/codecov-action@v3
+      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      run: |
+        covr::codecov()
+      shell: Rscript {0}
     - name: Install package
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
       run: R CMD INSTALL .
@@ -275,7 +277,7 @@ jobs:
         token: ${{ inputs.GITHUB_TOKEN }}
     - name: Upload check results
       if: failure()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r
           }}-results
