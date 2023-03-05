@@ -3,6 +3,7 @@ codecov_graphs <- function(ref,
                            types=c("sunburst","tree","icicle"),
                            add_html=TRUE,
                            width=200,
+                           height=50,
                            style="vertical-align: top;",
                            token=NULL){
   # templateR:::args2vars(codecov_graphs)
@@ -25,15 +26,14 @@ codecov_graphs <- function(ref,
       link <- paste0(
         "https://app.codecov.io/gh/",ref,"/tree/",branch
       )
-      paste0(
-        "<table><tr><td valign='top'>",
+      paste0( 
         "<a href=",shQuote(link)," target='_blank'>",
         "<img src=",shQuote(URL),
         " width=",shQuote(width),
+        " height=",shQuote(height),
         " style=",shQuote(style),
         ">",
-        "</a>",
-        "</td></tr></table>"
+        "</a>"
         )
     } else {
       URL

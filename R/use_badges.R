@@ -225,6 +225,7 @@ use_badges <- function(ref = NULL,
     )
   }
   ## graphs
+  h["break_codecov_graphs"] <- "<br>"
   if(!isFALSE(add_codecov_graphs)){
     graphs <- codecov_graphs(ref = ref, 
                              branch = branch, 
