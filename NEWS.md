@@ -1,3 +1,11 @@
+# rworkflows 0.99.7
+
+## New features
+
+* New function: `fill_description`
+* New function: `infer_deps`
+* Add yaml file to test workflow *rworkflows_dev* 
+
 # rworkflows 0.99.6
 
 ## New features
