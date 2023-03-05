@@ -26,12 +26,14 @@ codecov_graphs <- function(ref,
         "https://app.codecov.io/gh/",ref,"/tree/",branch
       )
       paste0(
+        "<table><tr><td valign='top'>",
         "<a href=",shQuote(link)," target='_blank'>",
         "<img src=",shQuote(URL),
         " width=",shQuote(width),
         " style=",shQuote(style),
         ">",
-        "</a>"
+        "</a>",
+        "</td></tr></table>"
         )
     } else {
       URL
