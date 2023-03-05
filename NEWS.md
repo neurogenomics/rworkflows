@@ -6,11 +6,13 @@
 * New function: `infer_deps`
 * Add yaml file to test workflow *rworkflows_dev*  
 * Run `BiocCheck` in rworkflow yamls.
+* Make all `require()` calls in *action.yml* quiet.
 
 ## Bug fixes
 
 * Add `biocViews: WorkflowManagement`
 * Try to fix *NEWS.md* formatting for all platforms.
+* Lengthen Description field.
 
 # rworkflows 0.99.6
 

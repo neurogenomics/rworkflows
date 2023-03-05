@@ -19,9 +19,15 @@ Authors@R:
              email = "n.skene@imperial.ac.uk",
              comment = c(ORCID = "0000-0002-6807-3180")) 
              ) 
-Description: Continuous integration for R packages. 
-    Automates testing, documentation website building,
-    and containerised deployment.
+Description: Reproducibility is essential to the progress of research, 
+  yet achieving it remains elusive even in computational fields. 
+  Continuous Integration (CI) platforms offer a powerful way to launch automated workflows 
+  to check and document code, but often require considerable time, effort, 
+  and technical expertise to setup. We therefore developed the rworkflows suite 
+  to make robust CI workflows easy and freely accessible to all R package developers. 
+  rworkflows consists of 1) a CRAN/Bioconductor-compatible R package template, 
+  2) an R package to quickly implement a standardised workflow, and 
+  3) a centrally maintained GitHub Action. 
 URL: https://github.com/neurogenomics/rworkflows, https://CRAN.R-project.org/package=rworkflows
 BugReports: https://github.com/neurogenomics/rworkflows/issues
 Encoding: UTF-8
