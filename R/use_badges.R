@@ -202,6 +202,7 @@ use_badges <- function(ref = NULL,
     h["commit"] <- badger::badge_last_commit(ref = ref,
                                              branch = branch)
   }
+  h["break_github"] <- "<br>"
   #### GitHub Actions ####
   if(!is.null(add_actions) &&
      !isFALSE(add_actions) && 
@@ -213,7 +214,6 @@ use_badges <- function(ref = NULL,
                                      action = action)
     } 
   }
-  h["break_github"] <- "<br>"
   #### Codecov ####
   ## badge
   if(isTRUE(add_codecov)){
