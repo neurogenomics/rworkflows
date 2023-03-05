@@ -385,7 +385,7 @@ runs:
     - name: Deploy to GitHub Pages
       if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
       id: deployment
-      uses: actions/deploy-pages@v1
+      uses: actions/deploy-pages@main
       with:
         artifact_name: github-pages
 
