@@ -129,7 +129,8 @@ runs:
       shell: Rscript {0}
 
     - name: Restore R package cache
-      if: "!contains(github.event.head_commit.message, /nocache) && inputs.runner_os != Linux"
+      if: |
+        !contains(github.event.head_commit.message, /nocache) && inputs.runner_os != Linux
       uses: actions/cache@v3
       with:
         path: ${{ env.R_LIBS_USER }}
@@ -137,7 +138,8 @@ runs:
         restore-keys: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: Cache R packages on Linux
-      if: "!contains(github.event.head_commit.message, /nocache) && inputs.runner_os == Linux"
+      if: |
+        !contains(github.event.head_commit.message, /nocache) && inputs.runner_os == Linux
       uses: actions/cache@v3
       with:
         path: /home/runner/work/_temp/Library
@@ -389,7 +391,8 @@ runs:
         
     ## DockerHub steps
     - name: Create Docker file
-      if: "(!contains(github.event.head_commit.message, /nodocker)) && inputs.run_docker == 'true' && inputs.runner_os == Linux"
+      if: |
+        (!contains(github.event.head_commit.message, /nodocker)) && inputs.run_docker == 'true' && inputs.runner_os == Linux
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
@@ -397,7 +400,8 @@ runs:
       shell: Rscript {0} 
       
     - name: Build and push to DockerHub
-      if: "(!contains(github.event.head_commit.message, /nodocker)) && inputs.run_docker == 'true' && inputs.runner_os == Linux"
+      if: |
+        (!contains(github.event.head_commit.message, /nodocker)) && inputs.run_docker == 'true' && inputs.runner_os == Linux
       uses: docker/build-push-action@v1
       with:
         username: ${{ inputs.docker_user }}
