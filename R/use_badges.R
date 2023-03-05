@@ -215,10 +215,13 @@ use_badges <- function(ref = NULL,
   ## badge
   if(isTRUE(add_codecov)){
     messager("Adding codecov.",v=verbose) 
-    h["codecov_badge"] <- gsub(
-      "app.codecov.io","codecov.io", ## fix domain name
-      badger::badge_codecov(ref = ref,
-                            branch = branch)
+    h["codecov_badge"] <- paste0(
+      "<br>",
+      gsub(
+        "app.codecov.io","codecov.io", ## fix domain name
+        badger::badge_codecov(ref = ref,
+                              branch = branch)
+      )
     )
   }
   ## graphs
