@@ -5,7 +5,12 @@
 * New function: `fill_description`
 * New function: `infer_deps`
 * Add yaml file to test workflow *rworkflows_dev*  
-* Run BiocCheck in rworkflow yamls.
+* Run `BiocCheck` in rworkflow yamls.
+
+## Bug fixes
+
+* Add `biocViews: WorkflowManagement`
+* Try to fix *NEWS.md* formatting for all platforms.
 
 # rworkflows 0.99.6
 
@@ -61,10 +66,10 @@
 * New functions:
   - `use_issue_template`
 * Remove unnecessary *Suggests*:
-    - `rvest`
-    - `UpSetR`
-    - `githubinstall`
-    - `BiocManager`
+  - `rvest`
+  - `UpSetR`
+  - `githubinstall`
+  - `BiocManager`
     
 * Automatically synchronize R and Bioc versions:
   - `bioc_r_versions`
@@ -102,8 +107,6 @@
 * Only require R >4.1 (instead of 4.2) 
   bc that's when the native pipe `|>` was introduced.
 
-  
-
 ## Bug fixes
 
 * Make `badger` a *Import*
@@ -126,7 +129,6 @@
 * Removed unused args: `repository`
 * Add 'RELEASE_**' as one of the default trigger branches (for Bioconductor).
 * New function: `badge`
-
 
 ## Bug fixes
 
