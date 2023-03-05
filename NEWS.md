@@ -11,6 +11,8 @@
 * `use_badges`
   - Add new arg for `add_codecov_graphs`
   - Subfunction `codecov_graphs` 
+  - Rearrange badges in a logical order
+  - Add more breaks
 
 ## Bug fixes
 

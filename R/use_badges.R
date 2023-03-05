@@ -124,45 +124,6 @@ use_badges <- function(ref = NULL,
                         hex_height = hex_height,
                         verbose = verbose)
   }
-  #### GitHub ####
-  if(isTRUE(add_github_version)){
-    messager("Adding version.",v=verbose)
-    ## needs ref, NOT pkg
-    h["version"] <- badger::badge_github_version(pkg = ref, 
-                                                 color = colors$github)
-  }
-  if(!is.null(add_actions) &&
-     !isFALSE(add_actions) && 
-     is.character(add_actions)){
-    messager("Adding actions.",v=verbose)
-    for(action in add_actions){
-      h[paste0("actions_",action)] <- 
-        badger::badge_github_actions(ref = ref,
-                                     action = action)
-    } 
-  }
-  if(isTRUE(add_commit)){
-    messager("Adding commit.",v=verbose)
-    h["commit"] <- badger::badge_last_commit(ref = ref,
-                                             branch = branch)
-  }
-  #### Other metadata ####
-  if(isTRUE(add_code_size)){
-    messager("Adding code size",v=verbose)
-    h["codesize"] <- badger::badge_code_size(ref = ref)
-  }
-  if(isTRUE(add_license)){
-    messager("Adding license.",v=verbose)
-    d <- get_description(ref = ref)
-    license <- d$get_field("License")
-    h["license"] <-  badger::badge_license(license = license,
-                                           color = colors$default) 
-  } 
-  if(!is.null(add_doi)){
-    messager("Adding DOI.",v=verbose)
-    h["doi"] <-  badger::badge_doi(doi = add_doi,
-                                   color = colors$default) 
-  }  
   #### Bioc-specific badges #####  
   if(isTRUE(add_bioc_release)){
     messager("Adding Bioconductor release version.",v=verbose)
@@ -210,18 +171,57 @@ use_badges <- function(ref = NULL,
       pkg = pkg,
       type = "grand-total",
       color = colors$cran) 
-  }   
+  }
+  #### Other metadata ####
+  if(isTRUE(add_license)){
+    messager("Adding license.",v=verbose)
+    d <- get_description(ref = ref)
+    license <- d$get_field("License")
+    h["license"] <-  badger::badge_license(license = license,
+                                           color = colors$default) 
+  } 
+  if(!is.null(add_doi)){
+    messager("Adding DOI.",v=verbose)
+    h["doi"] <-  badger::badge_doi(doi = add_doi,
+                                   color = colors$default) 
+  }  
+  if(add_bioc_release|add_cran_release) h["break_bioc_cran"] <- "<br>"
+  #### GitHub ####
+  if(isTRUE(add_github_version)){
+    messager("Adding version.",v=verbose)
+    ## needs ref, NOT pkg
+    h["version"] <- badger::badge_github_version(pkg = ref, 
+                                                 color = colors$github)
+  }
+  if(isTRUE(add_code_size)){
+    messager("Adding code size",v=verbose)
+    h["codesize"] <- badger::badge_code_size(ref = ref)
+  }
+  if(isTRUE(add_commit)){
+    messager("Adding commit.",v=verbose)
+    h["commit"] <- badger::badge_last_commit(ref = ref,
+                                             branch = branch)
+  }
+  #### GitHub Actions ####
+  if(!is.null(add_actions) &&
+     !isFALSE(add_actions) && 
+     is.character(add_actions)){
+    messager("Adding actions.",v=verbose)
+    for(action in add_actions){
+      h[paste0("actions_",action)] <- 
+        badger::badge_github_actions(ref = ref,
+                                     action = action)
+    } 
+  }
+  h["break_github"] <- "<br>"
   #### Codecov ####
   ## badge
   if(isTRUE(add_codecov)){
     messager("Adding codecov.",v=verbose) 
-    h["codecov_badge"] <- paste0(
-      "<br>",
-      gsub(
-        "app.codecov.io","codecov.io", ## fix domain name
-        badger::badge_codecov(ref = ref,
-                              branch = branch)
-      )
+    h["codecov_badge"] <-  gsub(
+      "app.codecov.io","codecov.io", ## fix domain name
+      badger::badge_codecov(ref = ref,
+                            branch = branch)
     )
   }
   ## graphs
