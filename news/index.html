@@ -70,9 +70,13 @@
 <h2 class="page-header" data-toc-text="0.99.7" id="rworkflows-0997">rworkflows 0.99.7<a class="anchor" aria-label="anchor" href="#rworkflows-0997"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-99-7">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-7"></a></h3>
-<ul><li>New function: <code>fill_description</code>
+<ul><li>New functions: <code>fill_description</code>
 </li>
 <li>New function: <code>infer_deps</code>
+</li>
+<li>New function: <code>infer_biocviews</code>
+</li>
+<li>New function: <code>is_gha</code>
 </li>
 <li>Add yaml file to test workflow <em>rworkflows_dev</em><br></li>
 <li>Run <code>BiocCheck</code> in rworkflow yamls.</li>
@@ -83,6 +87,22 @@
 <ul><li>Add new arg for <code>add_codecov_graphs</code>
 </li>
 <li>Subfunction <code>codecov_graphs</code>
+</li>
+<li>Rearrange badges in a logical order</li>
+<li>Add more breaks</li>
+</ul></li>
+<li>
+<code>bioc_r_version</code>:
+<ul><li>Add new arg <code>depth</code> and internal func <code>parse_version</code>
+</li>
+</ul></li>
+<li>
+<code>get_hex</code> / <code>use_badges</code>
+<ul><li>When <code>add_hex</code> is a character string, interpret it as the hex path instead.</li>
+</ul></li>
+<li>
+<code>use_badges</code>
+<ul><li>Add <code>add_lifecycle</code>: <code><a href="https://rdrr.io/pkg/badger/man/badge_lifecycle.html" class="external-link">badger::badge_lifecycle()</a></code>
 </li>
 </ul></li>
 </ul></div>

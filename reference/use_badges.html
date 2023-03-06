@@ -81,13 +81,14 @@ Uses the package
 <span>  add_hex <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_actions <span class="op">=</span> <span class="st">"rworkflows"</span>,</span>
 <span>  add_doi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_lifecycle <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_github_version <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_commit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_code_size <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_license <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_authors <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_codecov <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  add_codecov_graphs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_codecov_graphs <span class="op">=</span> <span class="st">"icicle"</span>,</span>
 <span>  add_bioc_release <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_bioc_download_month <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_bioc_download_total <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -100,8 +101,9 @@ Uses the package
 <span>  as_list <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  sep <span class="op">=</span> <span class="st">"\n"</span>,</span>
 <span>  hex_height <span class="op">=</span> <span class="fl">300</span>,</span>
-<span>  codecov_graph_height <span class="op">=</span> <span class="fl">50</span>,</span>
-<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>github <span class="op">=</span> <span class="st">"black"</span>, bioc <span class="op">=</span> <span class="st">"green"</span>, cran <span class="op">=</span> <span class="st">"black"</span>, default <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span>,</span>
+<span>  codecov_graph_width <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>github <span class="op">=</span> <span class="st">"black"</span>, bioc <span class="op">=</span> <span class="st">"green"</span>, cran <span class="op">=</span> <span class="st">"black"</span>, default <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>    lifecycle <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -130,7 +132,20 @@ status for with <a href="https://rdrr.io/pkg/badger/man/badge_github_actions.htm
 
 <dt>add_doi</dt>
 <dd><p>Add the DOI of a given package or publication 
-associated with the package. Must be provided as a character string.</p></dd>
+associated with the package using <a href="https://rdrr.io/pkg/badger/man/badge_doi.html" class="external-link">badge_doi</a>. 
+Must be provided as a character string, e.g.: 
+<code>"10.1111/2041-210X.12628"</code></p></dd>
+
+
+<dt>add_lifecycle</dt>
+<dd><p>Add package lifecycle stage.
+If not <code>FALSE</code>, must be a character string indicating 
+one of the following valid lifecycle stage:</p><ul><li><p>"stable"</p></li>
+<li><p>"deprecated"</p></li>
+<li><p>"superseded"</p></li>
+<li><p>"experimental"</p></li>
+</ul><p>See <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link">
+lifecycle.r-lib.org</a> for further details.</p></dd>
 
 
 <dt>add_github_version</dt>
@@ -233,8 +248,8 @@ using <a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a
 (when <code>add_hex=TRUE</code>).</p></dd>
 
 
-<dt>codecov_graph_height</dt>
-<dd><p>Height of each Codecov graph in pixels
+<dt>codecov_graph_width</dt>
+<dd><p>Width of each Codecov graph in pixels
 (when <code>add_codecov_graph!=FALSE</code>).</p></dd>
 
 
@@ -256,20 +271,25 @@ using <a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">badges</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu">use_badges</span><span class="op">(</span>ref <span class="op">=</span> <span class="st">"neurogenomics/rworkflows"</span><span class="op">)</span> </span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding version.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding actions.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding commit.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding code size</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding license.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding lifecycle.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding version.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding code size</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding commit.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding actions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding codecov.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Adding authors.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img src= 'https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' height= '300' &gt;&lt;br&gt;&lt;br&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/neurogenomics/rworkflows)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [![R build status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;img src='https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' title='Hex sticker for rworkflows' height='300'&gt;&lt;br&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/badge/lifecycle-FALSE-.svg)](https://lifecycle.r-lib.org/articles/stages.html#FALSE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/badge/devel%20version-0.99.7-black.svg)](https://github.com/neurogenomics/rworkflows)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;br&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [![R build status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/rworkflows)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;br&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'&gt;&lt;img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'&gt;&lt;/a&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;h4&gt;Authors: &lt;i&gt;Brian Schilder, Alan Murphy, Nathan Skene&lt;/i&gt;&lt;/h4&gt;</span>
 </code></pre></div>
     </div>

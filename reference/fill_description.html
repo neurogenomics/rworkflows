@@ -98,7 +98,8 @@ to get certain behaviour:</p><ul><li><p><code>NULL</code>: Keeps the current val
 <span>  github_repo <span class="op">=</span> <span class="va">package</span>,</span>
 <span>  authors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/person.html" class="external-link">person</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"yourGivenName"</span>, family <span class="op">=</span> <span class="st">"yourFamilyName"</span>, role <span class="op">=</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cre"</span><span class="op">)</span>, email <span class="op">=</span> <span class="st">"yourEmail@email.com"</span>, comment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>ORCID <span class="op">=</span> <span class="st">"yourOrcidId"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  depends <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"R "</span>, <span class="st">"(&gt;="</span>, <span class="fu"><a href="bioc_r_versions.html">bioc_r_versions</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">release</span><span class="op">$</span><span class="va">r</span>, <span class="st">")"</span><span class="op">)</span>,</span>
+<span>  depends <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"R "</span>, <span class="st">"(&gt;="</span>, <span class="fu"><a href="bioc_r_versions.html">bioc_r_versions</a></span><span class="op">(</span>bioc_version <span class="op">=</span> <span class="st">"devel"</span>, depth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">r</span>,</span>
+<span>    <span class="st">")"</span><span class="op">)</span>,</span>
 <span>  imports <span class="op">=</span> <span class="fu"><a href="infer_deps.html">infer_deps</a></span><span class="op">(</span>which <span class="op">=</span> <span class="st">"Imports"</span><span class="op">)</span>,</span>
 <span>  suggests <span class="op">=</span> <span class="fu"><a href="infer_deps.html">infer_deps</a></span><span class="op">(</span>which <span class="op">=</span> <span class="st">"Suggests"</span><span class="op">)</span>,</span>
 <span>  remotes <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -106,7 +107,7 @@ to get certain behaviour:</p><ul><li><p><code>NULL</code>: Keeps the current val
 <span>  license <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  encoding <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  vignettebuilder <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  biocviews <span class="op">=</span> <span class="st">"recommended"</span>,</span>
+<span>  biocviews <span class="op">=</span> <span class="fu"><a href="infer_biocviews.html">infer_biocviews</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/"</span>, <span class="va">github_owner</span>, <span class="st">"/"</span>, <span class="va">github_repo</span><span class="op">)</span>,</span>
 <span>  bugreports <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">url</span>, <span class="st">"/issues"</span><span class="op">)</span>,</span>
 <span>  save_path <span class="op">=</span> <span class="va">path</span>,</span>
@@ -149,7 +150,7 @@ each provided as objects of class <a href="https://rdrr.io/r/utils/person.html" 
 <dt>depends</dt>
 <dd><p>R package Depends. 
 Defaults to the version of R that the current 
-Bioconductor release depends on.</p></dd>
+development version of Bioconductor depends on.</p></dd>
 
 
 <dt>imports</dt>
@@ -185,9 +186,12 @@ See <a href="https://choosealicense.com/" class="external-link">here for guidanc
 
 
 <dt>biocviews</dt>
-<dd><p>BiocViews fields for Bioconductor packages. 
-Defaults to "recommended", which will automatically recommend terms 
-based on your package contents via <a href="https://rdrr.io/pkg/biocViews/man/recommendBiocViews.html" class="external-link">recommendBiocViews</a>.</p></dd>
+<dd><p>Standardised 
+<a href="https://www.bioconductor.org/packages/release/BiocViews.html" class="external-link">
+biocViews</a> terms used to describe your package.
+Defaults to automatically recommending terms 
+using the <a href="infer_biocviews.html">infer_biocviews</a> function.
+Note that non-Bioconductor packages (e.g. CRAN) can also use this field.</p></dd>
 
 
 <dt>url</dt>
@@ -242,12 +246,12 @@ Defaults to overwriting the input file (<code>path</code>).</p></dd>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  github_owner <span class="op">=</span> <span class="st">"OwnerName"</span>,</span></span>
 <span class="r-in"><span>  biocviews <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Genetics"</span>, <span class="st">"SystemsBiology"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Finding R package dependencies ... [87/133] [88/133] [89/133] [90/133] [91/133] [92/133] [93/133] [94/133] [95/133] [96/133] [97/133] [98/133] [99/133] [100/133] [101/133] [102/133] [103/133] [104/133] [105/133] [106/133] [107/133] [108/133] [109/133] [110/133] [111/133] [112/133] [113/133] [114/133] [115/133] [116/133] [117/133] [118/133] [119/133] [120/133] [121/133] [122/133] [123/133] [124/133] [125/133] [126/133] [127/133] [128/133] [129/133] [130/133] [131/133] [132/133] [133/133] Done!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Finding R package dependencies ... [92/142] [93/142] [94/142] [95/142] [96/142] [97/142] [98/142] [99/142] [100/142] [101/142] [102/142] [103/142] [104/142] [105/142] [106/142] [107/142] [108/142] [109/142] [110/142] [111/142] [112/142] [113/142] [114/142] [115/142] [116/142] [117/142] [118/142] [119/142] [120/142] [121/142] [122/142] [123/142] [124/142] [125/142] [126/142] [127/142] [128/142] [129/142] [130/142] [131/142] [132/142] [133/142] [134/142] [135/142] [136/142] [137/142] [138/142] [139/142] [140/142] [141/142] [142/142] Done!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Package --&gt; MyPackageName</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Title --&gt; This Package Does Awesome Stuff</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Description --&gt; MyPackageName does several awesome things. Describe thing1. Describe thing2. Describe thing3.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Authors --&gt; yourGivenName yourFamilyName &lt;yourEmail@email.com&gt; [cre] (yourOrcidId)</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Depends --&gt; R (&gt;=4.2.0)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Depends --&gt; R (&gt;=4.3)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating Suggests --&gt; testthatUpdating Suggests --&gt; rmarkdownUpdating Suggests --&gt; remotesUpdating Suggests --&gt; covrUpdating Suggests --&gt; echodepsUpdating Suggests --&gt; igraphUpdating Suggests --&gt; knitrUpdating Suggests --&gt; markdown</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating biocViews --&gt; GeneticsUpdating biocViews --&gt; SystemsBiology</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Updating URL --&gt; https://github.com/OwnerName/MyPackageName</span>
