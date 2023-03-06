@@ -202,13 +202,12 @@ use_badges <- function(ref = NULL,
     h["doi"] <-  badger::badge_doi(doi = add_doi,
                                    color = colors$default) 
   }  
-  if(!is.null(add_lifecycle)){
+  if(!is.null(add_lifecycle) && 
+     !isFALSE(add_lifecycle)){
     messager("Adding lifecycle.",v=verbose)
     h["lifecycle"] <- badger::badge_lifecycle(stage = add_lifecycle,
                                               color = colors$lifecycle) 
   }  
-  
-  
   if(add_bioc_release|add_cran_release) h["break_bioc_cran"] <- "<br>"
   #### GitHub ####
   if(isTRUE(add_github_version)){
