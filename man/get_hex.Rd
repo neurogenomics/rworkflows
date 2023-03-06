@@ -7,6 +7,7 @@
 get_hex(
   ref = NULL,
   path = here::here("DESCRIPTION"),
+  hex_path = "inst/hex/hex.png",
   branch = "master",
   hex_height = 300,
   check_url = TRUE,
@@ -20,6 +21,8 @@ get_hex(
 field in the DESCRIPTION file.}
 
 \item{path}{Path to DESCRIPTION file of an R package.}
+
+\item{hex_path}{Path to hex sticker file.}
 
 \item{branch}{Name of the GitHub repository branch to use.}
 

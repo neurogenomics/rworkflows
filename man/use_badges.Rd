@@ -9,6 +9,7 @@ use_badges(
   add_hex = TRUE,
   add_actions = "rworkflows",
   add_doi = NULL,
+  add_lifecycle = FALSE,
   add_github_version = TRUE,
   add_commit = TRUE,
   add_code_size = TRUE,
@@ -29,7 +30,8 @@ use_badges(
   sep = "\\n",
   hex_height = 300,
   codecov_graph_width = 200,
-  colors = list(github = "black", bioc = "green", cran = "black", default = "blue"),
+  colors = list(github = "black", bioc = "green", cran = "black", default = "blue",
+    lifecycle = NULL),
   verbose = TRUE
 )
 }
@@ -49,7 +51,21 @@ status for with \link[badger]{badge_github_actions}
  (e.g. c("rworkflows","rworkflows_static")).}
 
 \item{add_doi}{Add the DOI of a given package or publication 
-associated with the package. Must be provided as a character string.}
+associated with the package using \link[badger]{badge_doi}. 
+Must be provided as a character string, e.g.: 
+\code{"10.1111/2041-210X.12628"}}
+
+\item{add_lifecycle}{Add package lifecycle stage.
+If not \code{FALSE}, must be a character string indicating 
+one of the following valid lifecycle stage:
+\itemize{
+\item{"stable"}
+\item{"deprecated"}
+\item{"superseded"}
+\item{"experimental"}
+}
+See \href{https://lifecycle.r-lib.org/articles/stages.html}{
+lifecycle.r-lib.org} for further details.}
 
 \item{add_github_version}{Add package version with 
 \link[badger]{badge_github_version}.}

@@ -13,7 +13,8 @@ fill_description(
   github_repo = package,
   authors = c(utils::person(given = "yourGivenName", family = "yourFamilyName", role =
     c("cre"), email = "yourEmail@email.com", comment = c(ORCID = "yourOrcidId"))),
-  depends = paste0("R ", "(>=", bioc_r_versions()$release$r, ")"),
+  depends = paste0("R ", "(>=", bioc_r_versions(bioc_version = "devel", depth = 2)$r,
+    ")"),
   imports = infer_deps(which = "Imports"),
   suggests = infer_deps(which = "Suggests"),
   remotes = NULL,
@@ -21,7 +22,7 @@ fill_description(
   license = NULL,
   encoding = NULL,
   vignettebuilder = NULL,
-  biocviews = "recommended",
+  biocviews = infer_biocviews(),
   url = paste0("https://github.com/", github_owner, "/", github_repo),
   bugreports = paste0(url, "/issues"),
   save_path = path,
@@ -47,7 +48,7 @@ each provided as objects of class \link[utils]{person}.}
 
 \item{depends}{R package Depends. 
 Defaults to the version of R that the current 
-Bioconductor release depends on.}
+development version of Bioconductor depends on.}
 
 \item{imports}{R package Imports.
 These dependencies will be automatically installed with your R package.}
@@ -67,9 +68,12 @@ See \href{https://choosealicense.com/}{here for guidance}.}
 
 \item{vignettebuilder}{R package VignetteBuilder.}
 
-\item{biocviews}{BiocViews fields for Bioconductor packages. 
-Defaults to "recommended", which will automatically recommend terms 
-based on your package contents via \link[biocViews]{recommendBiocViews}.}
+\item{biocviews}{Standardised 
+\href{https://www.bioconductor.org/packages/release/BiocViews.html}{
+biocViews} terms used to describe your package.
+Defaults to automatically recommending terms 
+using the \link[rworkflows]{infer_biocviews} function.
+Note that non-Bioconductor packages (e.g. CRAN) can also use this field.}
 
 \item{url}{URL where your R package is distributed from
  (e.g. GitHub repository, Bioconductor page, and/or CRAN page). 

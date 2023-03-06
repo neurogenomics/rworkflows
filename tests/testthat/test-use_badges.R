@@ -3,15 +3,12 @@ test_that("use_badges works", {
   run_tests <- function(badges){
     testthat::expect_length(badges,1)
     testthat::expect_type(badges,"character")
-  }
-  
-  # testthat::expect_error(
-  #   use_badges()
-  # )
+  } 
   badges <- use_badges(ref = "neurogenomics/rworkflows",
                        add_hex = TRUE, 
                        add_actions = "rworkflow", 
                        add_doi = "doi:000000",
+                       add_lifecycle = "experimental",
                        add_github_version = TRUE, 
                        add_commit = TRUE,
                        add_code_size = TRUE, 

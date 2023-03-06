@@ -41,14 +41,14 @@ Imports:
     utils,
     desc,
     badger,
-    renv
+    renv,
+    biocViews
 Suggests:
     markdown,
     rmarkdown,
     remotes,
     knitr,
     BiocStyle,
-    biocViews,
     covr,
     testthat (>= 3.0.0),
     data.table,

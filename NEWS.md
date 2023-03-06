@@ -2,8 +2,10 @@
 
 ## New features
 
-* New function: `fill_description`
+* New functions: `fill_description`
 * New function: `infer_deps`
+* New function: `infer_biocviews`
+* New function: `is_gha`
 * Add yaml file to test workflow *rworkflows_dev*  
 * Run `BiocCheck` in rworkflow yamls.
 * Make all `require()` calls in *action.yml* quiet.
@@ -13,6 +15,12 @@
   - Subfunction `codecov_graphs` 
   - Rearrange badges in a logical order
   - Add more breaks
+* `bioc_r_version`:
+  - Add new arg `depth` and internal func `parse_version`
+* `get_hex` / `use_badges`
+  - When `add_hex` is a character string, interpret it as the hex path instead.
+* `use_badges`
+  - Add `add_lifecycle`: `badger::badge_lifecycle()`
 
 ## Bug fixes
 

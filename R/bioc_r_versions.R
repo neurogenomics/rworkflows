@@ -10,24 +10,42 @@
 #' \item{<numeric>}{A specific Bioc version number (e.g. \code{3.16}).}
 #' \item{NULL}{Return info for all Bioc versions.}
 #' }
+#' @param depth How many levels deep into the R version to include.
+#' For example, is the R version number is "4.2.0", 
+#' the following depths would return:
+#' \itemize{
+#' \item{\code{depth=NULL}: }{"4.2.0"}
+#' \item{\code{depth=1}: }{"4"}
+#' \item{\code{depth=2}: }{"4.2"}
+#' \item{\code{depth=3}: }{"4.2.0"}
+#' }
 #' @returns Named list of Bioc/R versions
 #' 
 #' @export
 #' @importFrom yaml read_yaml
 #' @examples 
 #' ver <- bioc_r_versions(bioc_version="devel")
-bioc_r_versions <- function(bioc_version=NULL){
+bioc_r_versions <- function(bioc_version = NULL,
+                            depth = NULL){
+  # templateR:::args2vars(bioc_r_versions)
   
   yml <- yaml::read_yaml("https://bioconductor.org/config.yaml")
   info <- list(
     devel=list(
-      bioc=package_version(yml$devel_version), 
-      r=package_version(yml$r_version_associated_with_devel)),
+      bioc=parse_version(yml$devel_version), 
+      r=parse_version(yml$r_version_associated_with_devel, depth = depth)
+      ),
     release=list(
-      bioc=package_version(yml$release_version), 
-      r=package_version(yml$r_version_associated_with_release))
+      bioc=parse_version(yml$release_version), 
+      r=parse_version(yml$r_version_associated_with_release, depth = depth)
+      )
     )
-  info[["r_ver_for_bioc_ver"]] <- yml$r_ver_for_bioc_ver
+  ### Parse subversions ####
+  info[["r_ver_for_bioc_ver"]] <- lapply(yml$r_ver_for_bioc_ver, 
+                                         function(v){
+                                           parse_version(v, depth=depth)
+                                         }) 
+  #### Handler ####
   if(is.null(bioc_version)){
     return(info)
   } else if (bioc_version=="devel") {
@@ -40,11 +58,13 @@ bioc_r_versions <- function(bioc_version=NULL){
                            gsub("RELEASE_","",bioc_version,ignore.case = TRUE)
                            )
     }
-    return(list(bioc=package_version(bioc_version),
-                r=package_version(
-                  info$r_ver_for_bioc_ver[[as.character(bioc_version)]]
-                )
-                ))
+    info_v <- list(bioc=parse_version(bioc_version),
+                   r=parse_version(info$r_ver_for_bioc_ver[[
+                       as.character(bioc_version)
+                     ]],
+                     depth = depth)
+                 )
+    return(info_v)
   }
   # info[["r_latest"]] <- package_version(rversions::r_release()$version)
   # info[["r_devel"]] <- package_version(rversions::r_release()$version)

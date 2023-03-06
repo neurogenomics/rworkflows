@@ -20,7 +20,7 @@
 #' @param github_owner The owner of your R package's GitHub repository.
 #' @param depends R package Depends. 
 #' Defaults to the version of R that the current 
-#' Bioconductor release depends on.
+#' development version of Bioconductor depends on.
 #' @param imports R package Imports.
 #' These dependencies will be automatically installed with your R package.
 #' @param suggests R package Suggests.
@@ -32,9 +32,12 @@
 #'  See \href{https://choosealicense.com/}{here for guidance}.
 #' @param encoding R package Encoding.
 #' @param vignettebuilder R package VignetteBuilder.
-#' @param biocviews BiocViews fields for Bioconductor packages. 
-#' Defaults to "recommended", which will automatically recommend terms 
-#' based on your package contents via \link[biocViews]{recommendBiocViews}.
+#' @param biocviews Standardised 
+#' \href{https://www.bioconductor.org/packages/release/BiocViews.html}{
+#' biocViews} terms used to describe your package.
+#' Defaults to automatically recommending terms 
+#' using the \link[rworkflows]{infer_biocviews} function.
+#' Note that non-Bioconductor packages (e.g. CRAN) can also use this field.
 #' @param url URL where your R package is distributed from
 #'  (e.g. GitHub repository, Bioconductor page, and/or CRAN page). 
 #' Can be a single character string or a character vector.
@@ -85,7 +88,10 @@ fill_description <- function(path = here::here("DESCRIPTION"),
                                  comment = c(ORCID = "yourOrcidId"))
                              ), 
                              depends = paste0(
-                               "R ","(>=",bioc_r_versions()$release$r,")"
+                               "R ",
+                               "(>=",bioc_r_versions(bioc_version = "devel", 
+                                                     depth = 2)$r,
+                               ")"
                              ),
                              imports = infer_deps(which = "Imports"),
                              suggests = infer_deps(which = "Suggests"),
@@ -94,7 +100,7 @@ fill_description <- function(path = here::here("DESCRIPTION"),
                              license = NULL,
                              encoding = NULL,
                              vignettebuilder = NULL,
-                             biocviews = "recommended",  
+                             biocviews = infer_biocviews(),  
                              url = paste0("https://github.com/",
                                           github_owner,"/",github_repo),
                              bugreports = paste0(url,"/issues"),
@@ -109,15 +115,6 @@ fill_description <- function(path = here::here("DESCRIPTION"),
   force(github_repo)
   force(github_owner)
   
-  #### Get automatically recommended biocViews ####
-  if(all(biocviews=='recommended')){
-    messager("Finding recommended biocViews.",v=verbose)
-    requireNamespace("biocViews")
-    biocviews <- biocViews::recommendBiocViews(
-      pkgdir = here::here(), 
-      branch = c("Software", "AnnotationData", "ExperimentData")[1]
-    )$recommended
-  }
   #### Import DESCRIPTION file #####
   d <- get_description(path = path)
   #### Set each field #####

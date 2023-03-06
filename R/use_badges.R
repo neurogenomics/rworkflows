@@ -34,7 +34,20 @@
 #' @param add_license Add license info with
 #' \link[badger]{badge_license}.
 #' @param add_doi Add the DOI of a given package or publication 
-#' associated with the package. Must be provided as a character string.
+#' associated with the package using \link[badger]{badge_doi}. 
+#' Must be provided as a character string, e.g.: 
+#' \code{"10.1111/2041-210X.12628"}
+#' @param add_lifecycle Add package lifecycle stage.
+#' If not \code{FALSE}, must be a character string indicating 
+#' one of the following valid lifecycle stage:
+#' \itemize{
+#' \item{"stable"}
+#' \item{"deprecated"}
+#' \item{"superseded"}
+#' \item{"experimental"}
+#' }
+#' See \href{https://lifecycle.r-lib.org/articles/stages.html}{
+#' lifecycle.r-lib.org} for further details.
 #' @param add_authors Add author names inferred from 
 #' the \code{DESCRIPTION} file.
 #' 
@@ -78,6 +91,7 @@ use_badges <- function(ref = NULL,
                        add_hex = TRUE,
                        add_actions = "rworkflows",
                        add_doi = NULL, 
+                       add_lifecycle = FALSE,
                        ## GitHub
                        add_github_version = TRUE,
                        add_commit = TRUE,
@@ -106,7 +120,8 @@ use_badges <- function(ref = NULL,
                        colors = list("github"="black",
                                      "bioc"="green",
                                      "cran"="black",
-                                     "default"="blue"),
+                                     "default"="blue",
+                                     "lifecycle"=NULL),
                        verbose = TRUE){
   # templateR:::source_all()
   # templateR:::args2vars(use_badges) 
@@ -118,9 +133,11 @@ use_badges <- function(ref = NULL,
   
   h <- list() 
   #### Hex ####
-  if(isTRUE(add_hex)){
+  if(isTRUE(add_hex) || 
+     is.character(add_hex)){
     h["hex"] <- get_hex(ref = ref,
                         branch = branch, 
+                        hex_path = add_hex,
                         hex_height = hex_height,
                         verbose = verbose)
   }
@@ -185,6 +202,13 @@ use_badges <- function(ref = NULL,
     h["doi"] <-  badger::badge_doi(doi = add_doi,
                                    color = colors$default) 
   }  
+  if(!is.null(add_lifecycle)){
+    messager("Adding lifecycle.",v=verbose)
+    h["lifecycle"] <- badger::badge_lifecycle(stage = add_lifecycle,
+                                              color = colors$lifecycle) 
+  }  
+  
+  
   if(add_bioc_release|add_cran_release) h["break_bioc_cran"] <- "<br>"
   #### GitHub ####
   if(isTRUE(add_github_version)){

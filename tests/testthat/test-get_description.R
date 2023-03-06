@@ -15,10 +15,15 @@ test_that("get_description works", {
   d7 <- get_description(ref=NULL, 
                         path=here::here("DESCRIPTION"))
   
-  testthat::expect_equal(d1,d2)
-  testthat::expect_equal(d1,d3)
-  testthat::expect_equal(d1,d4)
+  testthat::expect_equal(d2,d1)
+  testthat::expect_equal(d3,d1)
+  testthat::expect_equal(d4,d1)
   testthat::expect_null(d5)
   testthat::expect_null(d6)
-  testthat::expect_equal(d1,d7)
+  if(is_gha()){
+    testthat::expect_equal(d7,d1)  
+  } else {
+    testthat::expect_null(d7)
+  }
+  
 })
