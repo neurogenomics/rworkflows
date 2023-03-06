@@ -1,13 +1,12 @@
 test_that("infer_biocviews works", {
-  
-  # wd <- getwd()
-  # setwd("../../")
-  # 
-  # # Don't run simply bc biocViews::recommendBiocViews is unable
-  # ## to find the DESCRIPTION file when running examples.
-  # biocviews1 <- infer_biocviews()
+
+ 
+
+  # Don't run simply bc biocViews::recommendBiocViews is unable
+  ## to find the DESCRIPTION file when running examples.
+  # biocviews1 <- infer_biocviews(pkgdir = "../../")
   # testthat::expect_equal(biocviews1,"Software")
-  # 
+
   # biocviews2 <- infer_biocviews(include_branch = FALSE)
   # testthat::expect_null(biocviews2)
   # 
@@ -23,5 +22,4 @@ test_that("infer_biocviews works", {
   #   infer_biocviews(type = "typo")
   # )
   # 
-  # setwd(wd)
 })

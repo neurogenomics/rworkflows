@@ -23,7 +23,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
   run_docker: ${{ false }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-  cache_version: cache-v1
+  cache_version: cache-v2
 jobs:
   rworkflows_static:
     runs-on: ${{ matrix.config.os }}
