@@ -2,6 +2,8 @@
 #' 
 #' Infer the best terms to fill the \code{biocViews} field in
 #'  your \emph{DESCRIPTION} file based on the code within your R package.
+#'  By default, also includes any \code{biocViews} that are already present in 
+#'  the \emph{DESCRIPTION} file.
 #' Please see the 
 #' \href{https://www.bioconductor.org/packages/release/BiocViews}{
 #' Bioconductor website} for more details.
@@ -12,7 +14,10 @@
 #' of the returned \code{biocViews}.
 #' @param biocviews User-supplied \code{biocViews} terms to include in
 #' addition to the automated recommendations. 
+#' @param keep_current Keep any \code{biocViews} terms that are already 
+#' included in the \emph{DESCRIPTION} file.
 #' @param verbose Print messages.
+#' @inheritParams infer_deps
 #' @inheritParams biocViews::recommendBiocViews
 #' 
 #' @export
@@ -31,10 +36,12 @@ infer_biocviews <- function(pkgdir=here::here(),
                             type = c("recommended",
                                      "current",
                                      "remove"),
+                            keep_current = TRUE,
                             include_branch = TRUE,
                             biocviews = NULL,
+                            add_newlines = FALSE,
                             verbose = TRUE){
-  # templateR:::args2vars(infer_biocviews)
+  # devoptera::args2vars(infer_biocviews)
   branch <- branch[1]
   type <- type[1]
   
@@ -59,12 +66,20 @@ infer_biocviews <- function(pkgdir=here::here(),
     pkgdir = pkgdir,
     branch = branch
   )
+  #### Remove any newlines or trailing spaces ####
+  bioc_recc <- lapply(bioc_recc, function(x){
+    if(nchar(x)==0) return(x)
+    trimws(gsub("\n","",strsplit(x,",")[[1]]))
+  })
   out <- unique(c(biocviews,bioc_recc[[type]]))
-  out <- out[out!=""]
+  if(isTRUE(keep_current)) {
+    out <- unique(c(out,bioc_recc$current))
+  }
   #### Add the name of the branch itself ####
   if(isTRUE(include_branch)){
     out <- unique(c(branch,out))
   }
+  out <- out[nchar(out)>0]
   #### Report ####
   if(length(out)==0) {
     messager("0 biocViews inferred. Returning NULL.",v=verbose)
@@ -73,6 +88,7 @@ infer_biocviews <- function(pkgdir=here::here(),
     messager(length(out),"biocViews inferred:",
              paste("\n -",out,collapse = ""),
              v=verbose)
+    if(isTRUE(add_newlines)) out <- paste0("\n  ",out)
     return(out)
   }
 }

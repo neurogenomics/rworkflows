@@ -56,8 +56,8 @@ construct_runners <- function(os=c("ubuntu-latest",
                               versions_explicit=FALSE
                               ){ 
   
-  # templateR:::source_all()
-  # templateR:::args2vars(construct_runners)
+  # devoptera::args2varssource_all()
+  # devoptera::args2vars(construct_runners)
   
   #### Check args ####
   construct_runners_check_args(os = os, 

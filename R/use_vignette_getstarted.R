@@ -19,9 +19,11 @@ use_vignette_getstarted <- function(package,
                                     path=file.path(save_dir,
                                                    "vignettes",
                                                    paste0(package,".Rmd")),
+                                    output="BiocStyle::html_document",
                                     force_new=FALSE,
                                     show=FALSE,
                                     verbose=TRUE){
+  # devoptera::args2vars(use_vignette_getstarted, reassign = TRUE)
   
   force(package)
   #### Check if file exists already ####
@@ -44,6 +46,8 @@ use_vignette_getstarted <- function(package,
     yml <- set_vignette_index(yml = yml,
                               pattern = "%\\VignetteIndexEntry{templateR}",
                               vignette_index_entry = vignette_index_entry)
+    #### output style ####
+    yml$output <- output
     #### Render to text ####
     yml_txt <- gsub("''","\"",yaml::as.yaml(yml))
     new_rmd <-c("---",strsplit(yml_txt,"\n")[[1]],"---",

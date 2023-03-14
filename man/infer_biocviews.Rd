@@ -8,8 +8,10 @@ infer_biocviews(
   pkgdir = here::here(),
   branch = c("Software", "AnnotationData", "ExperimentData")[1],
   type = c("recommended", "current", "remove"),
+  keep_current = TRUE,
   include_branch = TRUE,
   biocviews = NULL,
+  add_newlines = FALSE,
   verbose = TRUE
 )
 }
@@ -27,17 +29,25 @@ infer_biocviews(
 results list to return.
 If a vector is supplied, only the first value will be used.}
 
+\item{keep_current}{Keep any \code{biocViews} terms that are already 
+included in the \emph{DESCRIPTION} file.}
+
 \item{include_branch}{Whether to include the \code{branch} argument as one 
 of the returned \code{biocViews}.}
 
 \item{biocviews}{User-supplied \code{biocViews} terms to include in
 addition to the automated recommendations.}
 
+\item{add_newlines}{Prefix each package name with a newline character 
+and two spaces. This is useful for formatting \emph{DESCRIPTION} files.}
+
 \item{verbose}{Print messages.}
 }
 \description{
 Infer the best terms to fill the \code{biocViews} field in
  your \emph{DESCRIPTION} file based on the code within your R package.
+ By default, also includes any \code{biocViews} that are already present in 
+ the \emph{DESCRIPTION} file.
 Please see the 
 \href{https://www.bioconductor.org/packages/release/BiocViews}{
 Bioconductor website} for more details.

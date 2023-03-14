@@ -103,8 +103,8 @@ use_workflow <- function(## action-level args
                          force_new=FALSE,
                          preview=FALSE,
                          verbose=TRUE){
-  # templateR:::source_all()
-  # templateR:::args2vars(use_workflow) 
+  # devoptera::args2varssource_all()
+  # devoptera::args2vars(use_workflow) 
   # docker_org <- eval(docker_org)  
 
   #### Check for existing yaml ####

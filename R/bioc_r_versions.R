@@ -27,7 +27,7 @@
 #' ver <- bioc_r_versions(bioc_version="devel")
 bioc_r_versions <- function(bioc_version = NULL,
                             depth = NULL){
-  # templateR:::args2vars(bioc_r_versions)
+  # devoptera::args2vars(bioc_r_versions)
   
   yml <- yaml::read_yaml("https://bioconductor.org/config.yaml")
   info <- list(

@@ -147,4 +147,4 @@ utils::sessionInfo()
 
 </details>  
 
-<br>
+<hr>

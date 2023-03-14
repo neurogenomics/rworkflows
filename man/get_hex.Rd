@@ -5,10 +5,10 @@
 \title{Get hex}
 \usage{
 get_hex(
-  ref = NULL,
-  path = here::here("DESCRIPTION"),
+  refs = NULL,
+  paths = here::here("DESCRIPTION"),
   hex_path = "inst/hex/hex.png",
-  branch = "master",
+  branch = c("master", "main", "dev"),
   hex_height = 300,
   check_url = TRUE,
   add_html = TRUE,
@@ -16,11 +16,11 @@ get_hex(
 )
 }
 \arguments{
-\item{ref}{Reference for a GitHub repository. If \code{NULL}
-(the default), the reference is determined by the URL
-field in the DESCRIPTION file.}
+\item{refs}{Reference for one or more GitHub repository in owner/repo format
+ (e.g.\code{"neurogenomics/rworkflows"}), or an R package name 
+(e.g. \code{"rworkflows"}).}
 
-\item{path}{Path to DESCRIPTION file of an R package.}
+\item{paths}{Paths to \emph{DESCRIPTION} file(s)  R package(s).}
 
 \item{hex_path}{Path to hex sticker file.}
 
@@ -43,5 +43,6 @@ URL
 Get the URL of a hex sticker for a given R package (if one exists).
 }
 \examples{
-hex_url <- get_hex(ref="neurogenomics/rworkflows")
+hex_url <- get_hex(refs=c("neurogenomics/rworkflows",
+                          "neurogenomics/echolocatoR"))
 }

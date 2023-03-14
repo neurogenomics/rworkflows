@@ -1,52 +1,70 @@
 #' Get DESCRIPTION
 #' 
-#' Find the DESCRIPTION file for a package
-#'  through a variety of alternative methods.
-#' @param path Path to DESCRIPTION file of an R package.
-#' @inheritParams badger::badge_last_commit
-#' @returns \code{packageDescription} object
+#' The \href{https://en.wikipedia.org/wiki/Taken_(film)}{Liam Neeson}
+#'  of \emph{DESCRIPTION} file functions.
+#' \enumerate{
+#' \item{I will look for you,}
+#' \item{I will find you,}
+#' \item{...and I will import you into a neatly parsed R object.}
+#' }
+#' Uses a variety of alternative methods, including searching locally and on
+#' GitHub (whenever possible). Prioritises the fastest methods that do
+#' not involve downloading files first.
+#' @param refs Reference for one or more GitHub repository in owner/repo format
+#'  (e.g.\code{"neurogenomics/rworkflows"}), or an R package name 
+#' (e.g. \code{"rworkflows"}).
+#' @param paths Paths to \emph{DESCRIPTION} file(s)  R package(s).
+#' @param cache_dir Directory where to cache downloaded files.
+#' @param force_new Ignore cached files and re-download them instead.
+#' @param verbose Print messages.
+#' @param use_wd Search the local working directory (and the one above it)
+#' for \emph{DESCRIPTION} files.
+#' @param use_repos Use R standard R package repositories like CRAN and Bioc
+#' to find \emph{DESCRIPTION} files.
+#' @returns A named list of \code{packageDescription} objects.
 #' 
 #' @export
 #' @importFrom desc desc
 #' @importFrom here here
+#' @importFrom methods is
 #' @importFrom utils download.file
+#' @importFrom tools R_user_dir
 #' @examples 
-#' d <- get_description(ref="neurogenomics/rworkflows")
-get_description <- function(ref=NULL,
-                            path=here::here("DESCRIPTION")){
+#' d <- get_description(refs="neurogenomics/rworkflows")
+get_description <- function(refs=NULL,
+                            paths=here::here("DESCRIPTION"),
+                            cache_dir=tools::R_user_dir(package = "rworkflows",
+                                                        which = "cache"),
+                            force_new=FALSE,
+                            use_wd=TRUE,
+                            use_repos=TRUE,
+                            verbose=TRUE){
+  # devoptera::args2vars(get_description)
   
-  try_desc <- function(package){
-    tryCatch({
-      desc::desc(package = package)
-    }, error=function(e){
-      messager("Cannot find DESCRIPTION for installed package:",package); 
-      NULL
-    })
+  if(all(is.na(refs))) refs <- NULL
+  if(methods::is(refs[[1]],"description")) return(refs)
+  if(methods::is(paths[[1]],"description")) return(paths) 
+  #### Method 1 ####
+  dl1 <- get_description_manual(refs=refs,
+                                paths=paths,
+                                cache_dir=cache_dir,
+                                force_new=force_new,
+                                use_wd=use_wd,
+                                verbose=verbose)
+  dl1 <- get_description_check(dl = dl1)
+  if(!is.null(refs)){
+    if(all(basename(refs) %in% basename(names(dl1)))) {
+      return(dl1)
+    } 
+  }
+  if(isFALSE(use_repos) || is.null(refs)){
+    return(dl1)
+  } else {
+    #### Method 2 ####
+    dl2 <- get_description_repo(refs=refs,  
+                                verbose=verbose)
+    dl2 <- get_description_check(dl = dl2)
+    return(c(dl1,dl2))
   }
   
-  wrn <- "Cannot find DESCRIPTION file."
-  path_ <- file.path("..",path)
-  if(!is.null(path) && 
-     file.exists(path)){
-    d <- desc::desc(file = path)
-  } else if(!is.null(path) && 
-            file.exists(path_)){
-    d <- desc::desc(file = path_)
-  } else if(!is.null(ref)){
-    remote <- paste0("https://github.com/",ref,"/raw/master/DESCRIPTION")
-    if(url_exists(remote)){
-      tmp <- tempfile(fileext = "DESCRIPTION")
-      utils::download.file(remote,tmp)
-      d <- desc::desc(file = tmp)  
-    } else if (!is.null(try_desc(basename(ref))) ){
-      d <- desc::desc(package = basename(ref))
-      return(d)
-    } else {
-      messager(wrn)
-      return(NULL)
-    }
-  } else {
-    messager(wrn)
-    return(NULL)
-  } 
 }

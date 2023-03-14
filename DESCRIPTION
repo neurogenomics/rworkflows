@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 0.99.7
+Version: 0.99.8
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -42,7 +42,11 @@ Imports:
     desc,
     badger,
     renv,
-    biocViews
+    biocViews,
+    tools,
+    methods,
+    BiocPkgTools,
+    data.table
 Suggests:
     markdown,
     rmarkdown,
@@ -51,7 +55,6 @@ Suggests:
     BiocStyle,
     covr,
     testthat (>= 3.0.0),
-    data.table,
     htmltools
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr

@@ -6,7 +6,7 @@ codecov_graphs <- function(ref,
                            height=50,
                            style="vertical-align: top;",
                            token=NULL){
-  # templateR:::args2vars(codecov_graphs)
+  # devoptera::args2vars(codecov_graphs)
   # ref="neurogenomics/rworkflows";branch="master"
   
   

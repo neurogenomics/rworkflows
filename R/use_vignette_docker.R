@@ -14,6 +14,8 @@
 #' (default: \code{FALSE}).
 #' @param show Print the contents of the vignette file in the R console.
 #' @param verbose Print messages.
+#' @param output Vignette output style. 
+#' Defaults to \link[BiocStyle]{html_document}.
 #' @returns Path to vignette file.
 #' 
 #' @export
@@ -30,9 +32,11 @@ use_vignette_docker <- function(docker_org,
                                 path=file.path(save_dir,
                                                "vignettes",
                                                "docker.Rmd"),
+                                output="BiocStyle::html_document",
                                 force_new=FALSE,
                                 show=FALSE,
                                 verbose=TRUE){
+  # devoptera::args2vars(use_vignette_docker, reassign = TRUE)
   
   force(docker_org)
   #### Check if file exists already ####
@@ -57,6 +61,7 @@ use_vignette_docker <- function(docker_org,
     yml <- set_vignette_index(yml = yml,
                               pattern = "%\\VignetteIndexEntry{docker}",
                               vignette_index_entry = vignette_index_entry)
+    yml$output <- output
     #### Render to text ####
     yml_txt <- gsub("''","\"",yaml::as.yaml(yml))
     new_rmd <-c("---",strsplit(yml_txt,"\n")[[1]],"---",

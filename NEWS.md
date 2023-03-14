@@ -1,3 +1,19 @@
+# rworkflows 0.99.8
+
+## New features
+ 
+* `get_description`
+  - Supplying a `description` obj directly to any argument returns that obj.
+  - Reorder strategies so that local ones go first.
+  - Add Liam Neeson reference.
+  - Now caches DESCRIPTION files.
+  - Add validation step at the end.
+  - Upgrade to handle multiple `refs` at once 
+  - Add another subroutine for getting DESCRIPTION files from CRAN/Bioc 
+* `get_hex`
+  - Now iterable
+* Add `output` style arg to vignette functions.
+
 # rworkflows 0.99.7
 
 ## New features
@@ -29,6 +45,7 @@
 * Lengthen Description field.
 * `get_hex`: Remove extra breaks
 * Fix bad quotes in `if` statements when *rworkflows_static* gets saved.
+
 
 # rworkflows 0.99.6
 

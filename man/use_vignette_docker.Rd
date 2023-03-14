@@ -10,6 +10,7 @@ use_vignette_docker(
   vignette_index_entry = "docker",
   save_dir = here::here(),
   path = file.path(save_dir, "vignettes", "docker.Rmd"),
+  output = "BiocStyle::html_document",
   force_new = FALSE,
   show = FALSE,
   verbose = TRUE
@@ -27,6 +28,9 @@ which is used when creating the navigation bar in the \pkg{pkgdown} site.}
 \item{save_dir}{Directory to save the vignette file to.}
 
 \item{path}{Path to the vignette file.}
+
+\item{output}{Vignette output style. 
+Defaults to \link[BiocStyle]{html_document}.}
 
 \item{force_new}{If the file already exists, overwrite it 
 (default: \code{FALSE}).}

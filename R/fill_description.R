@@ -11,13 +11,20 @@
 #' \item{\code{NA}: }{Removes the field from the 
 #' \emph{DESCRIPTION} file entirely.}
 #' }
+#' @param path Path to the \emph{DESCRIPTION} file.
 #' @param package The name of your R package.
 #' @param title The title of your R package.
 #' @param description The description of your R package.
 #' @param authors A list of authors who contributed to your R package,
 #'  each provided as objects of class \link[utils]{person}.
+#' By default, if an \code{Authors} field already exists in the 
+#' \emph{DESCRIPTION} file, the original values are kept.
+#' Otherwise, a template \link[utils]{person} list is created using the 
+#' \link[rworkflows]{construct_authors}.
 #' @param github_repo The name of your R package's GitHub repository.
 #' @param github_owner The owner of your R package's GitHub repository.
+#' Can be inferred from the \code{URL} field in the \emph{DESCRIPTION} file if
+#' this has already been filled out.
 #' @param depends R package Depends. 
 #' Defaults to the version of R that the current 
 #' development version of Bioconductor depends on.
@@ -45,10 +52,11 @@
 #' if they encounter bugs or have feature requests.
 #' @param save_path Path to save the updated \emph{DESCRIPTION} file to.
 #' Defaults to overwriting the input file (\code{path}). 
+#' Set to \code{NULL} if you wish to only return the \link[desc]{description}
+#'  object without writing to any file.
 #' @param verbose Print messages.
 #' @param fields A named list of additional fields to fill the
 #'  \emph{DESCRIPTION} file with: e.g. \code{list(RoxygenNote=7.2.3)}
-#' @inheritParams get_description
 #' @returns An object of class \link[desc]{description}.
 #' 
 #' @export
@@ -57,7 +65,7 @@
 #' @examples
 #' #### Get example DESCRIPTION file ####
 #' url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION" 
-#' path <- tempfile(pattern = "DESCRIPTION")
+#' path <- tempfile(fileext = "DESCRIPTION")
 #' utils::download.file(url,path)
 #' 
 #' #### Fill out DESCRIPTION file ####
@@ -77,30 +85,26 @@ fill_description <- function(path = here::here("DESCRIPTION"),
                              package,
                              title,
                              description,
-                             github_owner,
+                             github_owner = NULL,
                              github_repo=package,
-                             authors =  c( 
-                               utils::person(
-                                 given = "yourGivenName",
-                                 family = "yourFamilyName",
-                                 role = c("cre"),
-                                 email = "yourEmail@email.com",
-                                 comment = c(ORCID = "yourOrcidId"))
-                             ), 
+                             authors = construct_authors(authors = NULL), 
                              depends = paste0(
                                "R ",
-                               "(>=",bioc_r_versions(bioc_version = "devel", 
+                               "(>= ",bioc_r_versions(bioc_version = "devel", 
                                                      depth = 2)$r,
                                ")"
                              ),
-                             imports = infer_deps(which = "Imports"),
-                             suggests = infer_deps(which = "Suggests"),
+                             imports = infer_deps(which = "Imports",
+                                                  add_newlines = TRUE),
+                             suggests = infer_deps(which = "Suggests",
+                                                   add_newlines = TRUE),
                              remotes = NULL,
                              version = NULL,
                              license = NULL,
                              encoding = NULL,
                              vignettebuilder = NULL,
-                             biocviews = infer_biocviews(),  
+                             biocviews = infer_biocviews(pkgdir = dirname(path),
+                                                         add_newlines = TRUE),  
                              url = paste0("https://github.com/",
                                           github_owner,"/",github_repo),
                              bugreports = paste0(url,"/issues"),
@@ -108,7 +112,9 @@ fill_description <- function(path = here::here("DESCRIPTION"),
                              verbose = TRUE,
                              fields = list()
                              ){
-  # templateR:::args2vars(fill_description); bugreports = paste0(url,"/issues")
+  # package="mypackage"; devoptera::args2vars(fill_description); 
+  # bugreports = paste0(url,"/issues"); description=NA;
+  
   force(authors)
   force(title)
   force(description)
@@ -116,7 +122,21 @@ fill_description <- function(path = here::here("DESCRIPTION"),
   force(github_owner)
   
   #### Import DESCRIPTION file #####
-  d <- get_description(path = path)
+  d <- get_description(paths = path[1], 
+                       use_repos = FALSE)[[1]]
+  if(is.null(d)) stop("Cannot import DESCRIPTION file.")
+  if(is.null(github_owner)){
+    stp <- paste(
+      "github_owner could not be inferred from URL field.",
+      "Please provide the github_owner argument directly."
+    )
+    URL <- grep("github.com",d$get_urls(), value = TRUE)[1]
+    if(is.na(URL)){ 
+      stop(stp)
+    } else {
+      github_owner <- basename(dirname(URL))
+    }
+  }
   #### Set each field #####
   field_list <- list(Package=package,
                      Title=title,
@@ -144,16 +164,30 @@ fill_description <- function(path = here::here("DESCRIPTION"),
         d$del(keys = f)
       #### Update field ####
       } else {
-        messager("Updating",f,"-->",val,v=verbose)
         if(f=="Authors"){
-          d$set_authors(authors = val)  
+          ## Don't overwrite Authors if it already exists AND
+          ## the user-provided value is the default template.
+          if(d$has_fields("Authors") &&
+             val==construct_authors()){
+            messager('Keeping existing Authors field.',v=verbose) 
+          } else {
+            messager("Updating:",f,"-->",paste(val,collapse = ","),v=verbose)
+            d$set_authors(authors = val)   
+          }
         } else {
+          messager("Updating:",f,"-->",paste(val,collapse = ", "),v=verbose)
           d$set_list(key = f,
                      list_value = val)
         } 
       }  
     }
   }   
+  #### Save new file ####
+  if(!is.null(save_path)){
+    messager("Saving updated file:",save_path,v=verbose)
+    dir.create(dirname(save_path),showWarnings = FALSE, recursive = TRUE)
+    d$write(save_path) 
+  }
   #### Return description obj ####
   return(d)
 } 

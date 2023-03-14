@@ -1,29 +1,50 @@
 test_that("get_description works", {
-   
-  d1 <- get_description(ref="neurogenomics/rworkflows") 
-  d2 <- get_description(ref="neurogenomics/rworkflows", 
-                        path=here::here("typo","DESCRIPTION")) 
   
-  d3 <- get_description(ref="neurogenomics/rworkflows", 
-                        path="typo")
-  d4 <- get_description(ref="rworkflows", 
-                        path="typo")
-  d5 <- get_description(ref="typoooo", 
-                        path="typo")
-  d6 <- get_description(ref=NULL, 
-                        path="typo")
-  d7 <- get_description(ref=NULL, 
-                        path=here::here("DESCRIPTION"))
-  
-  testthat::expect_equal(d2,d1)
-  testthat::expect_equal(d3,d1)
-  testthat::expect_equal(d4,d1)
-  testthat::expect_null(d5)
-  testthat::expect_null(d6)
-  if(is_gha()){
-    testthat::expect_equal(d7,d1)  
-  } else {
-    testthat::expect_null(d7)
+  run_tests <- function(dl){
+    for(i in seq_len(length(dl))){
+      d <- dl[[i]]
+      testthat::expect_true(methods::is(d,"description"))
+      testthat::expect_equal(basename(names(dl)[i]),
+                             d$get_field("Package"))
+    }
   }
+   
+  d1 <- get_description(refs="neurogenomics/rworkflows") 
+  d2 <- get_description(refs="neurogenomics/rworkflows", 
+                        paths=here::here("typo","DESCRIPTION")) 
+  
+  d3 <- get_description(refs="neurogenomics/rworkflows", 
+                        paths="typo")
+  d4 <- get_description(refs="rworkflows", 
+                        paths="typo")
+  d5 <- get_description(refs="typoooo", 
+                        paths="typo")
+  d6 <- get_description(refs=NULL, 
+                        paths="typo")
+  d7 <- get_description(refs=NULL, 
+                        paths=here::here("DESCRIPTION"))
+  d8 <- get_description(refs=c("stats","data.table","AnnotationDbi","Seurat"), 
+                        paths=NULL)
+  
+  run_tests(d1)
+  run_tests(d2)
+  run_tests(d3)
+  run_tests(d4) 
+  run_tests(d8) 
+  testthat::expect_equal(d2$`neurogenomics/rworkflows`,
+                         d1$`neurogenomics/rworkflows`) 
+  testthat::expect_equal(d3,d1)
+  testthat::expect_equal(d4$rworkflows,
+                         d1$`neurogenomics/rworkflows`)
+  testthat::expect_null(d5$typoooo)
+  testthat::expect_null(d6[[1]])
+  testthat::expect_null(d7[[1]])
+  
+  # if(is_gha()){
+  #   testthat::expect_null(d7[[1]])
+  # } else {
+  #   testthat::expect_equal(d7[[1]],
+  #                          d1[[1]])
+  # }
   
 })

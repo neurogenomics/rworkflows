@@ -11,6 +11,8 @@
 #' rule and are instead automatically assigned as Imports.
 #' @param suggests R packages that are exempt from the \code{suggests_thresh}
 #' rule and are instead automatically assigned as Suggests.
+#' @param add_newlines Prefix each package name with a newline character 
+#' and two spaces. This is useful for formatting \emph{DESCRIPTION} files.
 #' @inheritParams renv::dependencies 
 #' @returns A character vector of R package names.
 #' 
@@ -27,8 +29,9 @@ infer_deps <- function(path = here::here(),
                                     "knitr","remotes","knitr","covr"),
                        errors = c("reported", "fatal", "ignored"),
                        dev = FALSE,
-                       progress = TRUE){
-  # templateR:::args2vars(infer_deps)
+                       progress = TRUE,
+                       add_newlines = FALSE){
+  # devoptera::args2vars(infer_deps, reassign = TRUE)
   Package <- NULL;
   
   #### Check for packages that appear in multiple fields ####
@@ -53,7 +56,8 @@ infer_deps <- function(path = here::here(),
   #### Remove the names of the package itself ####
   if(length(dfile)>0){
     if(file.exists(dfile)){
-      pkg <- get_description(path = dfile)$get_field(key = "Package")  
+      pkg <- get_description(paths = dfile,
+                             use_repos = FALSE)[[1]]$get_field(key = "Package")  
     } else {
       pkg <- basename(dirname(dfile))
     } 
@@ -75,6 +79,9 @@ infer_deps <- function(path = here::here(),
   )
   deps <- list(Imports=imports_all, 
                Suggests=suggests_all)
+  if(isTRUE(add_newlines)){
+    deps <- lapply(deps, function(x){paste0("\n  ",x)})  
+  }
   #### Return ####
   if(length(which)==1){
     return(deps[[which]])

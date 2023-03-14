@@ -23,7 +23,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Mar-06-2023</i>  
+README updated: <i>Mar-13-2023</i>  
 </h4>
 
 ## Intro
@@ -231,23 +231,34 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] pillar_1.8.1        compiler_4.2.1      RColorBrewer_1.1-3 
-    ##  [4] BiocManager_1.30.20 bitops_1.0-7        yulab.utils_0.0.6  
-    ##  [7] tools_4.2.1         digest_0.6.31       jsonlite_1.8.4     
-    ## [10] evaluate_0.20       lifecycle_1.0.3     tibble_3.1.8       
-    ## [13] gtable_0.3.1        pkgconfig_2.0.3     rlang_1.0.6        
-    ## [16] graph_1.76.0        cli_3.6.0           rstudioapi_0.14    
-    ## [19] rvcheck_0.2.1       yaml_2.3.7          xfun_0.37          
-    ## [22] fastmap_1.1.0       dplyr_1.1.0         knitr_1.42         
-    ## [25] generics_0.1.3      desc_1.4.2          vctrs_0.5.2        
-    ## [28] dlstats_0.1.6       stats4_4.2.1        rprojroot_2.0.3    
-    ## [31] grid_4.2.1          tidyselect_1.2.0    here_1.0.1         
-    ## [34] Biobase_2.58.0      glue_1.6.2          R6_2.5.1           
-    ## [37] fansi_1.0.4         XML_3.99-0.13       RBGL_1.74.0        
-    ## [40] rmarkdown_2.20.1    ggplot2_3.4.1       badger_0.2.3       
-    ## [43] magrittr_2.0.3      BiocGenerics_0.44.0 biocViews_1.66.2   
-    ## [46] scales_1.2.1        htmltools_0.5.4     rworkflows_0.99.7  
-    ## [49] RUnit_0.4.32        colorspace_2.1-0    renv_0.17.0        
-    ## [52] utf8_1.2.3          RCurl_1.98-1.10     munsell_0.5.0
+    ##  [1] here_1.0.1          rprojroot_2.0.3     digest_0.6.31      
+    ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
+    ##  [7] stats4_4.2.1        RSQLite_2.3.0       evaluate_0.20      
+    ## [10] httr_1.4.5          ggplot2_3.4.1       pillar_1.8.1       
+    ## [13] yulab.utils_0.0.6   rworkflows_0.99.7   biocViews_1.66.3   
+    ## [16] rlang_1.0.6         curl_5.0.0          data.table_1.14.8  
+    ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.3         
+    ## [22] DT_0.27             RUnit_0.4.32        rmarkdown_2.20.1   
+    ## [25] desc_1.4.2          readr_2.1.4         stringr_1.5.0      
+    ## [28] htmlwidgets_1.6.1   dlstats_0.1.6       BiocPkgTools_1.16.1
+    ## [31] munsell_0.5.0       igraph_1.4.1        RCurl_1.98-1.10    
+    ## [34] bit_4.0.5           compiler_4.2.1      xfun_0.37          
+    ## [37] pkgconfig_2.0.3     BiocGenerics_0.44.0 rorcid_0.7.0       
+    ## [40] htmltools_0.5.4     tidyselect_1.2.0    tibble_3.2.0       
+    ## [43] httpcode_0.3.0      XML_3.99-0.13       fansi_1.0.4        
+    ## [46] dplyr_1.1.0         tzdb_0.3.0          dbplyr_2.3.1       
+    ## [49] bitops_1.0-7        rappdirs_0.3.3      crul_1.3           
+    ## [52] grid_4.2.1          RBGL_1.74.0         jsonlite_1.8.4     
+    ## [55] gtable_0.3.1        lifecycle_1.0.3     DBI_1.1.3          
+    ## [58] magrittr_2.0.3      scales_1.2.1        graph_1.76.0       
+    ## [61] cli_3.6.0           stringi_1.7.12      cachem_1.0.7       
+    ## [64] renv_0.17.0         fauxpas_0.5.0       xml2_1.3.3         
+    ## [67] rvcheck_0.2.1       ellipsis_0.3.2      filelock_1.0.2     
+    ## [70] generics_0.1.3      vctrs_0.5.2         gh_1.4.0           
+    ## [73] RColorBrewer_1.1-3  tools_4.2.1         bit64_4.0.5        
+    ## [76] Biobase_2.58.0      glue_1.6.2          hms_1.1.2          
+    ## [79] fastmap_1.1.1       yaml_2.3.7          colorspace_2.1-0   
+    ## [82] BiocManager_1.30.20 rvest_1.0.3         memoise_2.0.1      
+    ## [85] badger_0.2.3        knitr_1.42
 
 </details>

@@ -11,63 +11,90 @@
 #' 
 #' @export
 #' @import desc
-#' @examples 
-#' hex_url <- get_hex(ref="neurogenomics/rworkflows")
-get_hex <- function(ref=NULL,
-                    path=here::here("DESCRIPTION"),
+#' @examples
+#' hex_url <- get_hex(refs=c("neurogenomics/rworkflows",
+#'                           "neurogenomics/echolocatoR"))
+get_hex <- function(refs=NULL,
+                    paths=here::here("DESCRIPTION"),
                     hex_path="inst/hex/hex.png",
-                    branch="master",
+                    branch=c("master","main","dev"),
                     hex_height=300,
                     check_url=TRUE,
                     add_html=TRUE,
                     verbose=TRUE){
-  # templateR:::args2vars(get_hex)
+  # devoptera::args2vars(get_hex)
   
+  if(!is.null(refs)) {
+    messager("Finding hex sticker(s) for",
+             formatC(length(refs),big.mark = ","),"package(s).",v=verbose)
+  }
+  if(!is.null(refs)){
+    if(length((paths))!=length(refs)){
+      messager("When refs is provided, paths must have the same length",
+               "(or be set to NULL).","Setting paths=NULL.",v=verbose)
+      paths <- NULL
+    }
+  }
   if(isTRUE(hex_path)){
     hex_path <- "inst/hex/hex.png"
-  }
-  pkg <- NULL;
-  if(is.null(ref) ||
-     ref==basename(ref)){
-    wrn <- "URL key not found in DESCRIPTION file."
-    d <- get_description(ref = ref,
-                         path = path)
-    if(is.null(d)){
-      warning(wrn)
-      return(NULL)
-    }
-    if(isTRUE(d$has_fields(keys = "URL"))){
-      pkg <- d$get_field(key = "Package")
-      URL <- d$get_field(key = "URL")
-      URL <- grep("git",strsplit(URL,",")[[1]],value = TRUE)
-      if(length(URL)==0) {
-        warning(wrn)
-        return(NULL)
-      } else {
-        ref <- gsub("https://github.com/|[/]$","",URL)
-      }
-    } else {
-      warning(wrn)
-      return(NULL)
-    }
-  } else {
-    URL <- paste0("https://github.com/", ref)
   } 
-  hex_url <- paste(URL,"raw",branch,hex_path,sep="/")
-  #### Check that the file exists ####
-  if(isTRUE(check_url) && 
-     !url_exists(hex_url)){
-    messager("Hex URL does not exist. Returning NULL.",v=verbose)
-    return(NULL) 
-  }
-  if(is.null(pkg)) pkg <- gsub("[/]","",basename(URL))
-  #### Add HTML ####
-  if(isTRUE(add_html)){
-    img <- paste0("<img src=",shQuote(hex_url),
-                 " title=",shQuote(paste("Hex sticker for",pkg)),
-                 " height=",shQuote(hex_height),">")
-    return(img)
+  dl <- get_description(refs = refs,
+                        paths = paths)
+  #### Iterate over refs ####
+  hexes <- lapply(stats::setNames(seq_len(length(dl)),
+                                  names(dl)),
+                  function(i){
+    d <- dl[[i]]
+    ref <- refs[[i]]
+    if(!is.null(d)){
+      pkg <- d$get_field("Package")
+      URL <- get_github_url_desc(desc_file = d)
+    } else {
+      URL <- NULL
+    } 
+    #### Make a guess as a last resort ####
+    if(is.null(URL) && 
+       !is.null(ref) &&
+       ## Check if ref contains both owner/repo
+       length(strsplit(ref,"/")[[1]])>1){ 
+      URL <- paste0("https://github.com/", ref)
+    } else if(is.null(URL)){
+      messager("Cannot find hex URL domain name. Returning NULL.",
+               v=verbose)
+      return(NULL)
+    }
+    hex_url_opts <- paste(URL,"raw",branch,hex_path,sep="/")
+    if(isTRUE(check_url)){
+      hex_url <- NULL
+      for(h in hex_url_opts){
+        if(url_exists(h)){
+          hex_url <- h
+          break()
+        }
+      } 
+    } else {
+      hex_url <- hex_url_opts
+    }
+    #### Check that the file exists ####
+    if(is.null(hex_url)){
+      messager("Hex URL does not exist (or is not public).",
+               "Returning NULL.",v=verbose)
+      return(NULL) 
+    }
+    #### Add HTML ####
+    if(isTRUE(add_html)){
+      img <- paste0("<img src=",shQuote(hex_url),
+                    " title=",shQuote(paste("Hex sticker for",pkg)),
+                    " height=",shQuote(hex_height),">")
+      return(img)
+    } else {
+      return(hex_url)
+    }
+  })
+  if(length(hexes)==0) {
+    return(NULL)
   } else {
-    return(hex_url)
+    return(hexes)
   }
+ 
 }

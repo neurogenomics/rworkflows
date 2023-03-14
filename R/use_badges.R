@@ -123,8 +123,7 @@ use_badges <- function(ref = NULL,
                                      "default"="blue",
                                      "lifecycle"=NULL),
                        verbose = TRUE){
-  # templateR:::source_all()
-  # templateR:::args2vars(use_badges) 
+  # devoptera::args2vars(use_badges,reassign = TRUE )
   
   #### Get ref/pkg ####
   currentGitHubRef <- utils::getFromNamespace("currentGitHubRef","badger") 
@@ -135,7 +134,7 @@ use_badges <- function(ref = NULL,
   #### Hex ####
   if(isTRUE(add_hex) || 
      is.character(add_hex)){
-    h["hex"] <- get_hex(ref = ref,
+    h["hex"] <- get_hex(refs = ref,
                         branch = branch, 
                         hex_path = add_hex,
                         hex_height = hex_height,
@@ -192,7 +191,7 @@ use_badges <- function(ref = NULL,
   #### Other metadata ####
   if(isTRUE(add_license)){
     messager("Adding license.",v=verbose)
-    d <- get_description(ref = ref)
+    d <- get_description(refs = ref)[[1]]
     license <- d$get_field("License")
     h["license"] <-  badger::badge_license(license = license,
                                            color = colors$default) 

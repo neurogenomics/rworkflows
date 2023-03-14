@@ -9,20 +9,19 @@ fill_description(
   package,
   title,
   description,
-  github_owner,
+  github_owner = NULL,
   github_repo = package,
-  authors = c(utils::person(given = "yourGivenName", family = "yourFamilyName", role =
-    c("cre"), email = "yourEmail@email.com", comment = c(ORCID = "yourOrcidId"))),
-  depends = paste0("R ", "(>=", bioc_r_versions(bioc_version = "devel", depth = 2)$r,
+  authors = construct_authors(authors = NULL),
+  depends = paste0("R ", "(>= ", bioc_r_versions(bioc_version = "devel", depth = 2)$r,
     ")"),
-  imports = infer_deps(which = "Imports"),
-  suggests = infer_deps(which = "Suggests"),
+  imports = infer_deps(which = "Imports", add_newlines = TRUE),
+  suggests = infer_deps(which = "Suggests", add_newlines = TRUE),
   remotes = NULL,
   version = NULL,
   license = NULL,
   encoding = NULL,
   vignettebuilder = NULL,
-  biocviews = infer_biocviews(),
+  biocviews = infer_biocviews(pkgdir = dirname(path), add_newlines = TRUE),
   url = paste0("https://github.com/", github_owner, "/", github_repo),
   bugreports = paste0(url, "/issues"),
   save_path = path,
@@ -31,7 +30,7 @@ fill_description(
 )
 }
 \arguments{
-\item{path}{Path to DESCRIPTION file of an R package.}
+\item{path}{Path to the \emph{DESCRIPTION} file.}
 
 \item{package}{The name of your R package.}
 
@@ -39,12 +38,18 @@ fill_description(
 
 \item{description}{The description of your R package.}
 
-\item{github_owner}{The owner of your R package's GitHub repository.}
+\item{github_owner}{The owner of your R package's GitHub repository.
+Can be inferred from the \code{URL} field in the \emph{DESCRIPTION} file if
+this has already been filled out.}
 
 \item{github_repo}{The name of your R package's GitHub repository.}
 
 \item{authors}{A list of authors who contributed to your R package,
-each provided as objects of class \link[utils]{person}.}
+ each provided as objects of class \link[utils]{person}.
+By default, if an \code{Authors} field already exists in the 
+\emph{DESCRIPTION} file, the original values are kept.
+Otherwise, a template \link[utils]{person} list is created using the 
+\link[rworkflows]{construct_authors}.}
 
 \item{depends}{R package Depends. 
 Defaults to the version of R that the current 
@@ -83,7 +88,9 @@ Can be a single character string or a character vector.}
 if they encounter bugs or have feature requests.}
 
 \item{save_path}{Path to save the updated \emph{DESCRIPTION} file to.
-Defaults to overwriting the input file (\code{path}).}
+Defaults to overwriting the input file (\code{path}). 
+Set to \code{NULL} if you wish to only return the \link[desc]{description}
+ object without writing to any file.}
 
 \item{verbose}{Print messages.}
 
@@ -109,7 +116,7 @@ to get certain behaviour:
 \examples{
 #### Get example DESCRIPTION file ####
 url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION" 
-path <- tempfile(pattern = "DESCRIPTION")
+path <- tempfile(fileext = "DESCRIPTION")
 utils::download.file(url,path)
 
 #### Fill out DESCRIPTION file ####

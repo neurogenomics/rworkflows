@@ -4,22 +4,50 @@
 \alias{get_description}
 \title{Get DESCRIPTION}
 \usage{
-get_description(ref = NULL, path = here::here("DESCRIPTION"))
+get_description(
+  refs = NULL,
+  paths = here::here("DESCRIPTION"),
+  cache_dir = tools::R_user_dir(package = "rworkflows", which = "cache"),
+  force_new = FALSE,
+  use_wd = TRUE,
+  use_repos = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{ref}{Reference for a GitHub repository. If \code{NULL}
-(the default), the reference is determined by the URL
-field in the DESCRIPTION file.}
+\item{refs}{Reference for one or more GitHub repository in owner/repo format
+ (e.g.\code{"neurogenomics/rworkflows"}), or an R package name 
+(e.g. \code{"rworkflows"}).}
 
-\item{path}{Path to DESCRIPTION file of an R package.}
+\item{paths}{Paths to \emph{DESCRIPTION} file(s)  R package(s).}
+
+\item{cache_dir}{Directory where to cache downloaded files.}
+
+\item{force_new}{Ignore cached files and re-download them instead.}
+
+\item{use_wd}{Search the local working directory (and the one above it)
+for \emph{DESCRIPTION} files.}
+
+\item{use_repos}{Use R standard R package repositories like CRAN and Bioc
+to find \emph{DESCRIPTION} files.}
+
+\item{verbose}{Print messages.}
 }
 \value{
-\code{packageDescription} object
+A named list of \code{packageDescription} objects.
 }
 \description{
-Find the DESCRIPTION file for a package
- through a variety of alternative methods.
+The \href{https://en.wikipedia.org/wiki/Taken_(film)}{Liam Neeson}
+ of \emph{DESCRIPTION} file functions.
+\enumerate{
+\item{I will look for you,}
+\item{I will find you,}
+\item{...and I will import you into a neatly parsed R object.}
+}
+Uses a variety of alternative methods, including searching locally and on
+GitHub (whenever possible). Prioritises the fastest methods that do
+not involve downloading files first.
 }
 \examples{
-d <- get_description(ref="neurogenomics/rworkflows")
+d <- get_description(refs="neurogenomics/rworkflows")
 }

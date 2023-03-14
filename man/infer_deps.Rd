@@ -12,7 +12,8 @@ infer_deps(
   suggests = c("testthat", "rmarkdown", "markdown", "knitr", "remotes", "knitr", "covr"),
   errors = c("reported", "fatal", "ignored"),
   dev = FALSE,
-  progress = TRUE
+  progress = TRUE,
+  add_newlines = FALSE
 )
 }
 \arguments{
@@ -44,6 +45,9 @@ dependencies are returned.}
 
 \item{progress}{Boolean; report progress output while enumerating
 dependencies?}
+
+\item{add_newlines}{Prefix each package name with a newline character 
+and two spaces. This is useful for formatting \emph{DESCRIPTION} files.}
 }
 \value{
 A character vector of R package names.
