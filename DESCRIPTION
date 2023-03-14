@@ -46,6 +46,7 @@ Imports:
     tools,
     methods,
     BiocPkgTools,
+    BiocManager,
     data.table
 Suggests:
     markdown,

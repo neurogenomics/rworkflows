@@ -11,6 +11,7 @@
 #' 
 #' @keywords internal
 #' @import BiocPkgTools
+#' @importFrom BiocManager version
 get_description_repo <- function(refs = NULL,
                                  repo = c("BioCsoft", "BioCann", "BioCexp",
                                            "BioCworkflows", "CRAN"),

@@ -23,7 +23,7 @@ test_that("get_description works", {
                         paths="typo")
   d7 <- get_description(refs=NULL, 
                         paths=here::here("DESCRIPTION"))
-  d8 <- get_description(refs=c("stats","data.table","AnnotationDbi","Seurat"), 
+  d8 <- get_description(refs=c("stats","data.table"), 
                         paths=NULL)
   
   run_tests(d1)

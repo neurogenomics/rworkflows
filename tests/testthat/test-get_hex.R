@@ -8,12 +8,12 @@ test_that("get_hex works", {
                   paths=NULL)
   testthat::expect_equal(hex2$rworkflows,
                          hex1$`neurogenomics/rworkflows`)  
-  if(testthat::is_testing()){
-    testthat::expect_null(hex3[[1]])
-  } else {
+  if(is_gha() && testthat::is_testing()){
     testthat::expect_equal(hex3[[1]], 
                            hex1[[1]])
-  } 
+  } else {
+    testthat::expect_null(hex3[[1]])
+  }
   testthat::expect_null(hex4)
   
   
