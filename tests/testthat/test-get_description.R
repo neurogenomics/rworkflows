@@ -38,13 +38,12 @@ test_that("get_description works", {
                          d1$`neurogenomics/rworkflows`)
   testthat::expect_null(d5$typoooo)
   testthat::expect_null(d6[[1]])
-  testthat::expect_null(d7[[1]])
   
-  # if(is_gha()){
-  #   testthat::expect_null(d7[[1]])
-  # } else {
-  #   testthat::expect_equal(d7[[1]],
-  #                          d1[[1]])
-  # }
+  if(is_gha() && testthat::is_testing()){ 
+    testthat::expect_equal(d7[[1]],
+                           d1[[1]])
+  } else {
+    testthat::expect_null(d7[[1]])
+  }
   
 })
