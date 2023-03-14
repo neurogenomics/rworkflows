@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.8</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 <i>Brian Schilder, Alan Murphy, Nathan Skene</i> ¶ </h4></h4>
             
             <h4 data-toc-skip class="date"><h4> ¶ Vignette updated:
-<i>Mar-06-2023</i> ¶ </h4></h4>
+<i>Mar-14-2023</i> ¶ </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/docker.Rmd" class="external-link"><code>vignettes/docker.Rmd</code></a></small>
       <div class="hidden name"><code>docker.Rmd</code></div>
@@ -169,7 +169,7 @@ URL in any web browser: <em><a href="http://localhost:8787/" class="external-lin
 </h2>
 <details><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2023-03-02 r83926)</span></span>
+<pre><code><span><span class="co">## R Under development (unstable) (2023-03-09 r83957)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">## Running under: Ubuntu 22.04.2 LTS</span></span>
 <span><span class="co">## </span></span>
@@ -192,31 +192,40 @@ URL in any web browser: <em><a href="http://localhost:8787/" class="external-lin
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] rworkflows_0.99.7 BiocStyle_2.27.1 </span></span>
+<span><span class="co">## [1] rworkflows_0.99.8 BiocStyle_2.27.1 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] yulab.utils_0.0.6   sass_0.4.5          utf8_1.2.3         </span></span>
-<span><span class="co">##  [4] generics_0.1.3      renv_0.17.0         bitops_1.0-7       </span></span>
-<span><span class="co">##  [7] stringi_1.7.12      digest_0.6.31       magrittr_2.0.3     </span></span>
-<span><span class="co">## [10] evaluate_0.20       grid_4.3.0          RColorBrewer_1.1-3 </span></span>
-<span><span class="co">## [13] bookdown_0.32       fastmap_1.1.1       rprojroot_2.0.3    </span></span>
-<span><span class="co">## [16] jsonlite_1.8.4      graph_1.77.2        BiocManager_1.30.20</span></span>
-<span><span class="co">## [19] purrr_1.0.1         fansi_1.0.4         scales_1.2.1       </span></span>
-<span><span class="co">## [22] XML_3.99-0.13       textshaping_0.3.6   jquerylib_0.1.4    </span></span>
-<span><span class="co">## [25] cli_3.6.0           rlang_1.0.6         Biobase_2.59.0     </span></span>
-<span><span class="co">## [28] badger_0.2.3        munsell_0.5.0       cachem_1.0.7       </span></span>
-<span><span class="co">## [31] yaml_2.3.7          tools_4.3.0         memoise_2.0.1      </span></span>
-<span><span class="co">## [34] dplyr_1.1.0         colorspace_2.1-0    ggplot2_3.4.1      </span></span>
-<span><span class="co">## [37] here_1.0.1          BiocGenerics_0.45.0 RUnit_0.4.32       </span></span>
-<span><span class="co">## [40] vctrs_0.5.2         R6_2.5.1            stats4_4.3.0       </span></span>
-<span><span class="co">## [43] biocViews_1.67.2    lifecycle_1.0.3     stringr_1.5.0      </span></span>
-<span><span class="co">## [46] RBGL_1.75.0         fs_1.6.1            ragg_1.2.5         </span></span>
-<span><span class="co">## [49] pkgconfig_2.0.3     desc_1.4.2          pkgdown_2.0.7      </span></span>
-<span><span class="co">## [52] bslib_0.4.2         pillar_1.8.1        gtable_0.3.1       </span></span>
-<span><span class="co">## [55] glue_1.6.2          systemfonts_1.0.4   xfun_0.37          </span></span>
-<span><span class="co">## [58] tibble_3.1.8        rvcheck_0.2.1       tidyselect_1.2.0   </span></span>
-<span><span class="co">## [61] knitr_1.42          htmltools_0.5.4     rmarkdown_2.20     </span></span>
-<span><span class="co">## [64] dlstats_0.1.6       compiler_4.3.0      RCurl_1.98-1.10</span></span></code></pre>
+<span><span class="co">##  [1] tidyselect_1.2.0     dplyr_1.1.0          blob_1.2.3          </span></span>
+<span><span class="co">##  [4] filelock_1.0.2       bitops_1.0-7         fastmap_1.1.1       </span></span>
+<span><span class="co">##  [7] RCurl_1.98-1.10      gh_1.4.0             BiocFileCache_2.7.2 </span></span>
+<span><span class="co">## [10] BiocPkgTools_1.17.10 XML_3.99-0.13        digest_0.6.31       </span></span>
+<span><span class="co">## [13] lifecycle_1.0.3      ellipsis_0.3.2       RSQLite_2.3.0       </span></span>
+<span><span class="co">## [16] magrittr_2.0.3       compiler_4.3.0       rlang_1.1.0         </span></span>
+<span><span class="co">## [19] sass_0.4.5           tools_4.3.0          igraph_1.4.1        </span></span>
+<span><span class="co">## [22] utf8_1.2.3           yaml_2.3.7           data.table_1.14.8   </span></span>
+<span><span class="co">## [25] knitr_1.42           fauxpas_0.5.0        htmlwidgets_1.6.1   </span></span>
+<span><span class="co">## [28] bit_4.0.5            curl_5.0.0           here_1.0.1          </span></span>
+<span><span class="co">## [31] xml2_1.3.3           RColorBrewer_1.1-3   httpcode_0.3.0      </span></span>
+<span><span class="co">## [34] purrr_1.0.1          BiocGenerics_0.45.0  desc_1.4.2          </span></span>
+<span><span class="co">## [37] grid_4.3.0           stats4_4.3.0         fansi_1.0.4         </span></span>
+<span><span class="co">## [40] rorcid_0.7.0         colorspace_2.1-0     ggplot2_3.4.1       </span></span>
+<span><span class="co">## [43] scales_1.2.1         crul_1.3             cli_3.6.0           </span></span>
+<span><span class="co">## [46] rmarkdown_2.20       ragg_1.2.5           dlstats_0.1.6       </span></span>
+<span><span class="co">## [49] generics_0.1.3       httr_1.4.5           tzdb_0.3.0          </span></span>
+<span><span class="co">## [52] RUnit_0.4.32         DBI_1.1.3            cachem_1.0.7        </span></span>
+<span><span class="co">## [55] stringr_1.5.0        rvest_1.0.3          BiocManager_1.30.20 </span></span>
+<span><span class="co">## [58] yulab.utils_0.0.6    vctrs_0.5.2          jsonlite_1.8.4      </span></span>
+<span><span class="co">## [61] bookdown_0.33        hms_1.1.2            bit64_4.0.5         </span></span>
+<span><span class="co">## [64] RBGL_1.75.0          systemfonts_1.0.4    jquerylib_0.1.4     </span></span>
+<span><span class="co">## [67] glue_1.6.2           badger_0.2.3         pkgdown_2.0.7       </span></span>
+<span><span class="co">## [70] DT_0.27              gtable_0.3.1         stringi_1.7.12      </span></span>
+<span><span class="co">## [73] rvcheck_0.2.1        munsell_0.5.0        tibble_3.2.0        </span></span>
+<span><span class="co">## [76] pillar_1.8.1         htmltools_0.5.4      graph_1.77.2        </span></span>
+<span><span class="co">## [79] R6_2.5.1             dbplyr_2.3.1         textshaping_0.3.6   </span></span>
+<span><span class="co">## [82] rprojroot_2.0.3      evaluate_0.20        Biobase_2.59.0      </span></span>
+<span><span class="co">## [85] readr_2.1.4          memoise_2.0.1        renv_0.17.0         </span></span>
+<span><span class="co">## [88] bslib_0.4.2          whisker_0.4.1        xfun_0.37           </span></span>
+<span><span class="co">## [91] fs_1.6.1             biocViews_1.67.3     pkgconfig_2.0.3</span></span></code></pre>
 </details><p><br></p>
 </div>
   </div>

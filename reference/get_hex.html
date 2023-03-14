@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.8</span>
       </span>
     </div>
 
@@ -73,10 +73,10 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_hex</span><span class="op">(</span></span>
-<span>  ref <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span>,</span>
+<span>  refs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  paths <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"DESCRIPTION"</span><span class="op">)</span>,</span>
 <span>  hex_path <span class="op">=</span> <span class="st">"inst/hex/hex.png"</span>,</span>
-<span>  branch <span class="op">=</span> <span class="st">"master"</span>,</span>
+<span>  branch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"master"</span>, <span class="st">"main"</span>, <span class="st">"dev"</span><span class="op">)</span>,</span>
 <span>  hex_height <span class="op">=</span> <span class="fl">300</span>,</span>
 <span>  check_url <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  add_html <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -86,14 +86,14 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>ref</dt>
-<dd><p>Reference for a GitHub repository. If <code>NULL</code>
-(the default), the reference is determined by the URL
-field in the DESCRIPTION file.</p></dd>
+    <dl><dt>refs</dt>
+<dd><p>Reference for one or more GitHub repository in owner/repo format
+ (e.g.<code>"neurogenomics/rworkflows"</code>), or an R package name 
+(e.g. <code>"rworkflows"</code>).</p></dd>
 
 
-<dt>path</dt>
-<dd><p>Path to DESCRIPTION file of an R package.</p></dd>
+<dt>paths</dt>
+<dd><p>Paths to <em>DESCRIPTION</em> file(s)  R package(s).</p></dd>
 
 
 <dt>hex_path</dt>
@@ -131,7 +131,13 @@ set its height with <code>hex_height</code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">hex_url</span> <span class="op">&lt;-</span> <span class="fu">get_hex</span><span class="op">(</span>ref<span class="op">=</span><span class="st">"neurogenomics/rworkflows"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">hex_url</span> <span class="op">&lt;-</span> <span class="fu">get_hex</span><span class="op">(</span>refs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"neurogenomics/rworkflows"</span>,</span></span>
+<span class="r-in"><span>                          <span class="st">"neurogenomics/echolocatoR"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Finding hex sticker(s) for 2 package(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> When refs is provided, paths must have the same length (or be set to NULL). Setting paths=NULL.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cannot find DESCRIPTION for: echolocatoR</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cannot find DESCRIPTION file for: neurogenomics/echolocatoR</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Hex URL does not exist (or is not public). Returning NULL.</span>
 </code></pre></div>
     </div>
   </div>

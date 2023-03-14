@@ -31,7 +31,13 @@
     <loc>/reference/bioc_r_versions.html</loc>
   </url>
   <url>
+    <loc>/reference/construct_authors.html</loc>
+  </url>
+  <url>
     <loc>/reference/construct_runners.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dt_to_desc.html</loc>
   </url>
   <url>
     <loc>/reference/fill_description.html</loc>
@@ -41,6 +47,12 @@
   </url>
   <url>
     <loc>/reference/get_description.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_description_repo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_github_url_db.html</loc>
   </url>
   <url>
     <loc>/reference/get_hex.html</loc>
