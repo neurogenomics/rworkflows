@@ -10,11 +10,9 @@ vignette: >
     %\VignetteEngine{knitr::rmarkdown}
 ---
 
-
 ```{r}
 library(data.table)
 ```
-
 
 A dependency graph for all GitHub repos that use the `rworkflows` GitHub Action.
 
@@ -24,48 +22,34 @@ Here is the code for creating the plot.
 
 ## Install required packages
 
-```R 
+``` r
 if(!require("echodeps"))remotes::install_github("RajLabMSSM/echodeps",
                                                 dependencies = TRUE)
 ```
 
-## Create graph 
+## Create graph
 
-```R
+``` r
 res <- echodeps::dep_graph(pkg = "rworkflows",
-                           method = "github",
-                           shape = "hexagon",
+                           method_seed = "github", 
                            exclude = c("neurogenomics_rworkflows",
                                        "neurogenomics_r_workflows"),
                            node_size = "total_downloads",
+                           height="100%",
                            reverse = TRUE,
                            save_path = here::here("reports","rworkflows_depgraph.html"))
 ```
- 
+
 ## Save data
 
-```R
-dgc_out$metadata
-
-saveRDS(res, here::here("reports","dgc_out.rds"))
+``` r
+saveRDS(res, here::here("reports","dep_graph_res.rds"))
 ```
 
 ## Count stars/clones/views
 
-```R
-cols <- c("stargazers_count",
-          "clones_count","clones_uniques","indirect_clones_uniques",
-          "views_count","views_uniques","indirect_views_uniques",
-          "total_downloads","indirect_total_downloads",
-          echogithub::r_repos_opts())
-cols <- cols[cols %in% names(res$metadata)]
-
-metadata_counts <- data.frame(
-  total=res$metadata[repo!="rworkflows",
-                         lapply(.SD, sum, na.rm=TRUE),
-                         .SDcols=cols] |> t()
-  )
-metadata_counts
+``` r
+knitr::kable(res$report)
 ```
 
 # Show
@@ -76,30 +60,34 @@ Hover over each node to show additional metadata.
 htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.html")
 ```
 
-# Identify high-impact packages
+# Identify highly downloaded packages
 
-Identify the CRAN/Bioc R packages with the most number of downloads.
-This guides which packages would be the most useful
-to focus on implementing `rworkflows` in.
+Identify the CRAN/Bioc R packages with the most number of downloads. This guides which packages would be the most useful to focus on implementing `rworkflows` in.
 
-```R
-pkgs <- echogithub::r_repos_downloads(which = c("CRAN","Bioc"),
-                                      nThread = 10)
+```r
+pkgs <- echogithub::r_repos_downloads(which = c("CRAN","Bioc"))
 
-pkgs <- pkgs[!is.na(downloads),] 
-data.table::setkeyv(pkgs,c("r_repo","downloads"))
+#### Get top 10 per R repository ####
 pkgs_top <- pkgs[, tail(.SD, 10), by="r_repo"] 
 methods::show(pkgs_top)
 ```
 
-# Session Info 
+# Assess R repository usage
 
-<details> 
+This demonstrates the need for using `rworkflows`, as there are 25,000 R packages that are exclusively distributes via GitHub (which may or may not have code/documentation checks).
+
+```r
+r_repos_res <- echogithub::r_repos(save_path = here::here("reports","r_repos_upset.pdf"), width=12)
+```
+
+# Session Info
+
+<details>
 
 ```{r Session Info}
 utils::sessionInfo()
 ```
 
-</details>  
+</details>
 
-<br>
+<hr>
