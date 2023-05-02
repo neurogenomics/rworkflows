@@ -1,3 +1,9 @@
+# rworkflows 0.99.9
+
+## New features
+
+* Pass `timeout` arg to R package installation steps too.
+
 # rworkflows 0.99.8
 
 ## New features
@@ -13,6 +19,10 @@
 * `get_hex`
   - Now iterable
 * Add `output` style arg to vignette functions.
+* `use_vignette_docker`
+  - Let users select `port_in` and `port_out`
+  - Make default `port_out=8900` to align with the available 
+    Imperial Private Cloud ports (8900-9000).
 
 # rworkflows 0.99.7
 

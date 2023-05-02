@@ -57,7 +57,7 @@ docker run \
   -e PASSWORD="<your_password>" \
   -v ~/Desktop:/Desktop \
   -v /Volumes:/Volumes \
-  -p 8787:8787 \
+  -p 8900:8787 \
   `r docker_org`/`r pkg`
 ```  
 
@@ -86,7 +86,7 @@ singularity pull docker://`r docker_org`/`r pkg`
 
 Finally, launch the containerised Rstudio by entering the 
 following URL in any web browser:
-*http://localhost:8787/*
+*http://localhost:8900/*
 
 Login using the credentials set during the Installation steps.  
 

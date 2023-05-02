@@ -11,6 +11,8 @@ use_vignette_docker(
   save_dir = here::here(),
   path = file.path(save_dir, "vignettes", "docker.Rmd"),
   output = "BiocStyle::html_document",
+  port_in = 8787,
+  port_out = 8900,
   force_new = FALSE,
   show = FALSE,
   verbose = TRUE
@@ -31,6 +33,16 @@ which is used when creating the navigation bar in the \pkg{pkgdown} site.}
 
 \item{output}{Vignette output style. 
 Defaults to \link[BiocStyle]{html_document}.}
+
+\item{port_in}{Port number to route into the docker container.
+See the 
+\href{https://docs.docker.com/config/containers/container-networking/}{
+Docker docs} for further details.}
+
+\item{port_out}{Port number to route out of docker container.
+See the 
+\href{https://docs.docker.com/config/containers/container-networking/}{
+Docker docs} for further details.}
 
 \item{force_new}{If the file already exists, overwrite it 
 (default: \code{FALSE}).}

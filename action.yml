@@ -213,8 +213,10 @@ runs:
       shell: pwsh  
 
     - name: Install dependencies pass 1
+      env:
+        timeout: ${{ inputs.timeout }}
       run: |
-         options(crayon.enabled = TRUE)
+         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****')) 
          install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos)
@@ -233,8 +235,10 @@ runs:
       shell: Rscript {0}
 
     - name: Install dependencies pass 2
+      env:
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)

@@ -8,6 +8,14 @@
 #' @param title Title of vignette.
 #' @param vignette_index_entry Index entry of the vignette, 
 #' which is used when creating the navigation bar in the \pkg{pkgdown} site.
+#' @param port_in Port number to route into the docker container.
+#' See the 
+#' \href{https://docs.docker.com/config/containers/container-networking/}{
+#' Docker docs} for further details.
+#' @param port_out Port number to route out of docker container.
+#' See the 
+#' \href{https://docs.docker.com/config/containers/container-networking/}{
+#' Docker docs} for further details.
 #' @param save_dir Directory to save the vignette file to.
 #' @param path Path to the vignette file.
 #' @param force_new If the file already exists, overwrite it 
@@ -33,6 +41,8 @@ use_vignette_docker <- function(docker_org,
                                                "vignettes",
                                                "docker.Rmd"),
                                 output="BiocStyle::html_document",
+                                port_in=8787,
+                                port_out=8900,
                                 force_new=FALSE,
                                 show=FALSE,
                                 verbose=TRUE){
@@ -62,6 +72,9 @@ use_vignette_docker <- function(docker_org,
                               pattern = "%\\VignetteIndexEntry{docker}",
                               vignette_index_entry = vignette_index_entry)
     yml$output <- output
+    #### Change port numbers ####
+    l <- gsub("<port_in>",port_in,l)
+    l <- gsub("<port_out>",port_out,l)
     #### Render to text ####
     yml_txt <- gsub("''","\"",yaml::as.yaml(yml))
     new_rmd <-c("---",strsplit(yml_txt,"\n")[[1]],"---",
