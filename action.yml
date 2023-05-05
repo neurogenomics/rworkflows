@@ -219,7 +219,7 @@ runs:
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****')) 
-         install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos)
+         install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos))
          
          ## Speedup installation with AnVIL 
          repos <- if(
