@@ -11,7 +11,7 @@ name: rworkflows_static
     - main
     - RELEASE_**
 env:
-  run_bioccheck: ${{ true }}
+  run_bioccheck: ${{ false }}
   run_rcmdcheck: ${{ true }}
   as_cran: ${{ true }}
   run_vignettes: ${{ true }}
@@ -23,7 +23,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
   run_docker: ${{ false }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-  cache_version: cache-v2
+  cache_version: cache-v1
 jobs:
   rworkflows_static:
     runs-on: ${{ matrix.config.os }}
@@ -150,19 +150,21 @@ jobs:
         mathtools \ntlmgr list --only-installed\n"
       shell: pwsh
     - name: Install dependencies pass 1
-      run: "options(crayon.enabled = TRUE)\n## For running the checks\nmessage(paste('****',
-        Sys.time(), 'installing rcmdcheck ****')) \ninstall.packages(c(\"rmarkdown\",\"BiocManager\",
-        dependencies = TRUE, repos = repos)\n\n## Speedup installation with AnVIL
-        \nrepos <- if(\n     .Platform$OS.type == \"unix\" && Sys.info()[\"sysname\"]
-        != \"Darwin\"\n ) c(\n     \"AnVIL\" = \"https://bioconductordocker.blob.core.windows.net/packages/3.16/bioc\",\n
-        \    BiocManager::repositories()\n     ) else BiocManager::repositories()\n\nmessage(paste('****',
-        Sys.time(), 'pass number 1 at installing dependencies****'))\nremotes::install_local(repos=repos,
+      env:
+        timeout: ${{ inputs.timeout }}
+      run: "options(crayon.enabled = TRUE, timeout=Sys.getenv(\"timeout\"))\n## For
+        running the checks\nmessage(paste('****', Sys.time(), 'installing rcmdcheck
+        ****')) \ninstall.packages(c(\"rmarkdown\",\"BiocManager\", dependencies =
+        TRUE, repos = repos))\n \nmessage(paste('****', Sys.time(), 'pass number 1
+        at installing dependencies****'))\nrepos <- BiocManager::repositories()\nremotes::install_local(repos=repos,
         dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)\n"
       continue-on-error: ${{ true }}
       shell: Rscript {0}
     - name: Install dependencies pass 2
+      env:
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
@@ -218,8 +220,10 @@ jobs:
       shell: bash {0}
     - name: Run RUnit tests (via BiocGenerics)
       if: inputs.has_runit == 'true'
+      env:
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         BiocGenerics:::testPackage()
       shell: Rscript {0}
     - name: Run BiocCheck
