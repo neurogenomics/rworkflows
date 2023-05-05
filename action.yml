@@ -220,16 +220,9 @@ runs:
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****')) 
          install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos))
-         
-         ## Speedup installation with AnVIL 
-         repos <- if(
-              .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
-          ) c(
-              "AnVIL" = "https://bioconductordocker.blob.core.windows.net/packages/3.16/bioc",
-              BiocManager::repositories()
-              ) else BiocManager::repositories()
-         
+          
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
+         repos <- BiocManager::repositories()
          remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
       continue-on-error: true
       shell: Rscript {0}

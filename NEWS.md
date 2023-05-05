@@ -4,6 +4,10 @@
 
 * Pass `timeout` arg to R package installation steps too.
 
+## Bug fix
+
+* Remove explicit `AnVIL` usage, as the URLs are now deprecated and `BiocManager` uses the pre-compiled binaries by default.
+
 # rworkflows 0.99.8
 
 ## New features
