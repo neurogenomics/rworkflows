@@ -304,8 +304,10 @@ runs:
         
     - name: Run RUnit tests (via BiocGenerics)
       if: inputs.has_runit == 'true'
+      env:
+        timeout: ${{ inputs.timeout }}
       run: |
-        options(crayon.enabled = TRUE)
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         BiocGenerics:::testPackage()
       shell: Rscript {0}
         
