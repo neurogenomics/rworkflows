@@ -125,6 +125,7 @@ runs:
       run: |
         options(crayon.enabled = TRUE)
         install.packages('remotes')
+        remotes::install_github("r-lib/remotes")
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
 
