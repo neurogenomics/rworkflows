@@ -170,9 +170,9 @@ runs:
         ### libgit2 ###
         # For installing usethis's dependency gert
         ### xquartz --cask ###
-        # Required for tcltk 
+        # Required for tcltk
         ### libxfont ###
-        # Required for some ggplot2 functions  
+        # Required for some ggplot2 functions
         ### texlive ###
         # Required for rendering Sweave files (even with r-lib/actions/setup-tinytex)
         
@@ -180,16 +180,16 @@ runs:
         ### Install normally ###
         brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2 texlive
         ### Install via cask ###
-        brew install xquartz --cask 
+        brew install xquartz --cask
         ### Set up xml2 ###
-        echo "XML_CONFIG=/usr/local/opt/libxml2/bin/xml2-config" >> $GITHUB_ENV 
+        echo "XML_CONFIG=/usr/local/opt/libxml2/bin/xml2-config" >> $GITHUB_ENV
       shell: bash {0}
 
     - name: Install Windows system dependencies
       if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
       run: |
         #### npm ####
-        npm install curl 
+        npm install curl
       shell: pwsh {0}
       
     - name: Install latex
@@ -202,14 +202,14 @@ runs:
     - name: Install additional LaTeX packages (non-Windows)
       if: inputs.has_latex == 'true' && inputs.runner_os != 'Windows'
       run: |
-        tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools 
+        tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: bash {0} 
       
     - name: Install additional LaTeX packages (Windows)
       if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
       run: |
-        tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools 
+        tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: pwsh  
 
@@ -219,9 +219,8 @@ runs:
       run: |
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
          ## For running the checks
-         message(paste('****', Sys.time(), 'installing rcmdcheck ****')) 
+         message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
          install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos))
-          
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
          remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
@@ -242,14 +241,14 @@ runs:
       if:  inputs.has_runit == 'true'
       run: |
         options(crayon.enabled = TRUE)
-        BiocManager::install("BiocGenerics") 
+        BiocManager::install("BiocGenerics")
       shell: Rscript {0}
 
     - name: Install covr
       if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
-        install.packages("covr") 
+        install.packages("covr")
       shell: Rscript {0}
 
     - name: Install pkgdown
@@ -325,7 +324,7 @@ runs:
         BiocCheck::BiocCheck(
             dir('check', 'tar.gz$', full.names = TRUE),
             `quit-with-status` = TRUE,
-            `no-check-R-ver` = TRUE, 
+            `no-check-R-ver` = TRUE,
             `no-check-vignettes` = no_check_vignettes,
             `no-check-CRAN` = as_cran,
             `no-check-bioc-help` = as_cran)

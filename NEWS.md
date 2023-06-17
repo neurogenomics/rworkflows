@@ -7,6 +7,10 @@
 * Increase code coverage:
   - Expand `get_description` unit tests.
   - Add `construct_authors` unit tests.
+  
+## Bug fixes
+
+- Fixed parsing error when writing "rworkflows_static". #60
 
 # rworkflows 0.99.9
 
