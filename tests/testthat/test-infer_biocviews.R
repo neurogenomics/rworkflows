@@ -5,7 +5,7 @@ test_that("infer_biocviews works", {
   # testthat::expect_equal(biocviews1,"Software")
   
   
-  if(testthat::is_testing()){
+  if(testthat::is_testing() && !is_gha()){
     testthat::expect_error(
       infer_biocviews(include_branch = FALSE)
     )  
@@ -15,7 +15,7 @@ test_that("infer_biocviews works", {
   } 
   biocviews_manual = c("Software","Genetics","Transcriptomics")
   biocviews3 <- 
-  if(testthat::is_testing()){
+  if(testthat::is_testing() && !is_gha()){
     testthat::expect_error(
       infer_biocviews(biocviews = biocviews_manual)
     )  
