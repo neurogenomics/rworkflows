@@ -181,7 +181,7 @@ jobs:
         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
-      continue-on-error: 'TRUE'
+      continue-on-error: ${{ true }}
       shell: Rscript {0}
     - name: Install dependencies pass 2
       env:
@@ -222,9 +222,9 @@ jobs:
     - name: Run CMD check
       if: env.run_rcmdcheck == 'true'
       env:
-        _R_CHECK_CRAN_INCOMING_: 'FALSE'
+        _R_CHECK_CRAN_INCOMING_: ${{ false }}
         RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
-        DISPLAY: '99'
+        DISPLAY: 99.0
         AS_CRAN: ${{ env.as_cran }}
         run_vignettes: ${{ env.run_vignettes }}
         timeout: ${{ env.timeout }}
@@ -255,7 +255,7 @@ jobs:
     - name: Run BiocCheck
       if: env.run_bioccheck == 'true'
       env:
-        DISPLAY: '99'
+        DISPLAY: 99.0
         RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
         run_vignettes: ${{ env.run_vignettes }}
         as_cran: ${{ env.as_cran }}
@@ -301,7 +301,7 @@ jobs:
     - name: Render README
       if: env.run_pkgdown == 'true' && runner.os == 'Linux'
       env:
-        DISPLAY: '99'
+        DISPLAY: 99.0
       run: |
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
@@ -318,7 +318,7 @@ jobs:
       if: env.run_pkgdown == 'true' && runner.os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
-        clean: 'FALSE'
+        clean: ${{ false }}
         branch: gh-pages
         folder: docs
         token: ${{ env.GITHUB_TOKEN }}
@@ -345,7 +345,7 @@ jobs:
         username: ${{ env.docker_user }}
         password: ${{ env.DOCKER_TOKEN }}
         repository: ${{ env.docker_org }}/${{ env.packageName }}
-        tag_with_ref: 'TRUE'
-        tag_with_sha: 'FALSE'
+        tag_with_ref: ${{ true }}
+        tag_with_sha: ${{ false }}
         tags: ${{ env.packageVersion }},latest
         build_args: PKG=${{ env.packageNameOrig }}

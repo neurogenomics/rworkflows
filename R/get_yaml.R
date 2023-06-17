@@ -21,18 +21,19 @@ get_yaml <- function(name){
       action <- yaml::read_yaml(
         "https://github.com/neurogenomics/rworkflows/raw/master/action.yml")
       #### Add action steps to static workflow #### 
-      yml$jobs$rworkflows_static$steps <- 
-        lapply(action$runs$steps,function(step){
-        lapply(step, function(x){
-          ## Get args from 'env.' (for workflows)
-          ## instead of 'inputs.' (for actions) 
-          if(is.list(x)){
-            lapply(x,gsub,pattern = "inputs\\.",replacement = "env.")
-          } else {
-            gsub("inputs\\.","env.",x)
-          }
-        })
-      }) 
+      recurse <- function(x, 
+                          fun=function(x){
+                            gsub("inputs\\.","env.",x)
+                          }){
+        if(is.list(x)){
+          lapply(x, recurse, fun=fun) 
+        } else if(is.character(x)){
+          fun(x)
+        } else {
+          x
+        }
+      }
+      yml$jobs$rworkflows_static$steps <- recurse(action$runs$steps)
     } else {
       stp <- paste("`name` must be one of:",
                    paste("\n -",shQuote(workflow_nms),collapse = ""))

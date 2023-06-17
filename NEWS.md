@@ -7,6 +7,7 @@
 * Increase code coverage:
   - Expand `get_description` unit tests.
   - Add `construct_authors` unit tests.
+  - Fix (sort of) `infer_biocviews` tests.
   
 ## Bug fixes
 
