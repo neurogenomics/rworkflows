@@ -21,7 +21,7 @@ get_yaml <- function(name){
       action <- yaml::read_yaml(
         "https://github.com/neurogenomics/rworkflows/raw/master/action.yml")
       #### Add action steps to static workflow ####
-      action$runs$steps[[1]]$run <- cat(action$runs$steps[[1]]$run)
+      # action$runs$steps[[1]]$run <- capture.output(cat(action$runs$steps[[1]]$run))
       yml$jobs$rworkflows_static$steps <- action$runs$steps
     } else {
       stp <- paste("`name` must be one of:",

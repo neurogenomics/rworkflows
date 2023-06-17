@@ -58,11 +58,14 @@ jobs:
       RGL_USE_NULL: ${{ true }}
     steps:
     - name: Set GitHub environment variables
-      run: "echo \"GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}\" >> $GITHUB_ENV \necho \"GITHUB_TOKEN=${{
-        inputs.GITHUB_TOKEN }}\" >> $GITHUB_ENV \necho \"RGL_USE_NULL=TRUE\" >> $GITHUB_ENV
-        \necho \"R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}\" >> $GITHUB_ENV \necho
-        \"RSPM=${{ matrix.config.rspm }}\" >> $GITHUB_ENV\necho \"TZ=UTC\" >> $GITHUB_ENV\necho
-        \"NOT_CRAN=${{ !inputs.as_cran }}\" >> $GITHUB_ENV\n"
+      run: |
+        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
+        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
+        echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
+        echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV
+        echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
+        echo "TZ=UTC" >> $GITHUB_ENV
+        echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
     - name: Set R library home on Linux
       if: inputs.runner_os == 'Linux'
