@@ -55,20 +55,28 @@ jobs:
       RSPM: ${{ matrix.config.rspm }}
       TZ: UTC
       GITHUB_REPO: ${{ github.repository }}
-      RGL_USE_NULL: ${{ true }}
+      RGL_USE_NULL: ${{ true }}   
     steps:
     - name: Set GitHub environment variables
       run: |
-        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
-        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
+        echo "GITHUB_PAT=${{ env.GITHUB_TOKEN }}" >> $GITHUB_ENV
+        echo "GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
         echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
-        echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
+        echo "NOT_CRAN=${{ !env.as_cran }}" >> $GITHUB_ENV
+        if [[ "${{ matrix.config.os }}" == *"ubuntu"* ]]
+        then
+          echo "runner_os"="Linux" >> $GITHUB_ENV
+        elif [[ "${{ matrix.config.os }}" == *"macOS"* ]]
+          echo "runner_os"="macOS" >> $GITHUB_ENV
+        elif [[ "${{ matrix.config.os }}" == *"windows"* ]]
+          echo "runner_os"="macOS" >> $GITHUB_ENV
+        fi
       shell: bash {0}
     - name: Set R library home on Linux
-      if: inputs.runner_os == 'Linux'
+      if: env.runner_os == 'Linux'
       run: |
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
@@ -77,12 +85,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
     - name: Setup R and Bioconductor
-      if: inputs.runner_os != 'Linux'
+      if: env.runner_os != 'Linux'
       uses: grimbough/bioc-actions/setup-bioc@v1
-      with:
-        bioc-version: ${{ matrix.config.bioc }}
+      with: ${{ matrix.config.bioc }}
     - name: Setup pandoc from r-lib
-      if: inputs.runner_os != 'Linux'
+      if: env.runner_os != 'Linux'
       uses: r-lib/actions/setup-pandoc@v2
     - name: Query dependencies
       run: |
@@ -93,26 +100,26 @@ jobs:
       shell: Rscript {0}
     - name: Restore R package cache
       if: |
-        !contains(github.event.head_commit.message, '/nocache') && inputs.runner_os != 'Linux'
+        !contains(github.event.head_commit.message, '/nocache') && env.runner_os != 'Linux'
       uses: actions/cache@v3
       with:
-        path: ${{ env.R_LIBS_USER }}
-        key: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc
-          }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{
-          matrix.config.bioc }}-r-${{  matrix.config.r }}-
+      - ${{ env.R_LIBS_USER }}
+      - ${{ env.cache_version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc
+        }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+      - ${{ env.cache_version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc
+        }}-r-${{  matrix.config.r }}-
     - name: Cache R packages on Linux
       if: |
-        !contains(github.event.head_commit.message, '/nocache') && inputs.runner_os == 'Linux'
+        !contains(github.event.head_commit.message, '/nocache') && env.runner_os == 'Linux'
       uses: actions/cache@v3
       with:
-        path: /home/runner/work/_temp/Library
-        key: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc
-          }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{
-          matrix.config.bioc }}-r-${{  matrix.config.r }}-
+      - /home/runner/work/_temp/Library
+      - ${{ env.cache_version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc
+        }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+      - ${{ env.cache_version }}-${{ env.runner_os }}-biocversion-${{ matrix.config.bioc
+        }}-r-${{  matrix.config.r }}-
     - name: Install Linux system dependencies
-      if: inputs.runner_os == 'Linux'
+      if: env.runner_os == 'Linux'
       run: |
         sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
         echo $sysreqs
@@ -148,31 +155,29 @@ jobs:
         echo "XML_CONFIG=/usr/local/opt/libxml2/bin/xml2-config" >> $GITHUB_ENV
       shell: bash {0}
     - name: Install Windows system dependencies
-      if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
+      if: env.has_latex == 'true' && env.runner_os == 'Windows'
       run: |
         #### npm ####
         npm install curl
       shell: pwsh {0}
     - name: Install latex
-      if: inputs.has_latex == 'true'
+      if: env.has_latex == 'true'
       uses: r-lib/actions/setup-tinytex@v2
-      env:
-        TINYTEX_INSTALLER: TinyTeX
+      env: TinyTeX
     - name: Install additional LaTeX packages (non-Windows)
-      if: inputs.has_latex == 'true' && inputs.runner_os != 'Windows'
+      if: env.has_latex == 'true' && env.runner_os != 'Windows'
       run: |
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: bash {0}
     - name: Install additional LaTeX packages (Windows)
-      if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
+      if: env.has_latex == 'true' && env.runner_os == 'Windows'
       run: |
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: pwsh
     - name: Install dependencies pass 1
-      env:
-        timeout: ${{ inputs.timeout }}
+      env: ${{ env.timeout }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         ## For running the checks
@@ -181,11 +186,10 @@ jobs:
         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
-      continue-on-error: ${{ true }}
+      continue-on-error: 'TRUE'
       shell: Rscript {0}
     - name: Install dependencies pass 2
-      env:
-        timeout: ${{ inputs.timeout }}
+      env: ${{ env.timeout }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
@@ -193,19 +197,19 @@ jobs:
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)
       shell: Rscript {0}
     - name: Install RUnit (via BiocGenerics)
-      if: inputs.has_runit == 'true'
+      if: env.has_runit == 'true'
       run: |
         options(crayon.enabled = TRUE)
         BiocManager::install("BiocGenerics")
       shell: Rscript {0}
     - name: Install covr
-      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      if: env.run_covr == 'true' && env.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("covr")
       shell: Rscript {0}
     - name: Install pkgdown
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("pkgdown")
@@ -220,14 +224,14 @@ jobs:
         }, error = function(x){utils::sessionInfo()})
       shell: Rscript {0}
     - name: Run CMD check
-      if: inputs.run_rcmdcheck == 'true'
+      if: env.run_rcmdcheck == 'true'
       env:
-        _R_CHECK_CRAN_INCOMING_: ${{ false }}
-        RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
-        DISPLAY: 99.0
-        AS_CRAN: ${{ inputs.as_cran }}
-        run_vignettes: ${{ inputs.run_vignettes }}
-        timeout: ${{ inputs.timeout }}
+      - 'FALSE'
+      - ${{ env.RGL_USE_NULL }}
+      - '99'
+      - ${{ env.as_cran }}
+      - ${{ env.run_vignettes }}
+      - ${{ env.timeout }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
@@ -240,26 +244,25 @@ jobs:
             check_dir = "check")
       shell: Rscript {0}
     - name: Reveal testthat details
-      if: inputs.has_testthat == 'true'
+      if: env.has_testthat == 'true'
       run: |
         find . -name testthat.Rout -exec cat '{}' ';'
       shell: bash {0}
     - name: Run RUnit tests (via BiocGenerics)
-      if: inputs.has_runit == 'true'
-      env:
-        timeout: ${{ inputs.timeout }}
+      if: env.has_runit == 'true'
+      env: ${{ env.timeout }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         BiocGenerics:::testPackage()
       shell: Rscript {0}
     - name: Run BiocCheck
-      if: inputs.run_bioccheck == 'true'
+      if: env.run_bioccheck == 'true'
       env:
-        DISPLAY: 99.0
-        RGL_USE_NULL: ${{ env.RGL_USE_NULL }}
-        run_vignettes: ${{ inputs.run_vignettes }}
-        as_cran: ${{ inputs.as_cran }}
-        timeout: ${{ inputs.timeout }}
+      - '99'
+      - ${{ env.RGL_USE_NULL }}
+      - ${{ env.run_vignettes }}
+      - ${{ env.as_cran }}
+      - ${{ env.timeout }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         #### Install deps ####
@@ -278,16 +281,16 @@ jobs:
             `no-check-bioc-help` = as_cran)
       shell: Rscript {0}
     - name: Test coverage
-      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      if: env.run_covr == 'true' && env.runner_os == 'Linux'
       run: |
         covr::codecov()
       shell: Rscript {0}
     - name: Install package
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
       run: R CMD INSTALL .
       shell: bash {0}
     - name: Get R package info
-      if: inputs.runner_os == 'Linux'
+      if: env.runner_os == 'Linux'
       run: |
         #### DockerHub repos must be lowercase (,,) ####
         name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
@@ -299,9 +302,8 @@ jobs:
         echo $version
       shell: bash {0}
     - name: Render README
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
-      env:
-        DISPLAY: 99.0
+      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
+      env: '99'
       run: |
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
@@ -310,28 +312,28 @@ jobs:
         }
       shell: Rscript {0}
     - name: Build pkgdown site
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
       run: |
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
     - name: "Deploy pkgdown site to GitHub pages \U0001F680"
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: env.run_pkgdown == 'true' && env.runner_os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
-        clean: ${{ false }}
-        branch: gh-pages
-        folder: docs
-        token: ${{ inputs.GITHUB_TOKEN }}
+      - 'FALSE'
+      - gh-pages
+      - docs
+      - ${{ env.GITHUB_TOKEN }}
     - name: Upload check results
       if: failure()
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r
-          }}-results
-        path: check
+      - ${{ env.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r
+        }}-results
+      - check
     - name: Create Docker file
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'
+        (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && env.runner_os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
@@ -339,13 +341,13 @@ jobs:
       shell: Rscript {0}
     - name: Build and push to DockerHub
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'
+        (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && env.runner_os == 'Linux'
       uses: docker/build-push-action@v1
       with:
-        username: ${{ inputs.docker_user }}
-        password: ${{ inputs.DOCKER_TOKEN }}
-        repository: ${{ inputs.docker_org }}/${{ env.packageName }}
-        tag_with_ref: ${{ true }}
-        tag_with_sha: ${{ false }}
-        tags: ${{ env.packageVersion }},latest
-        build_args: PKG=${{ env.packageNameOrig }}
+      - ${{ env.docker_user }}
+      - ${{ env.DOCKER_TOKEN }}
+      - ${{ env.docker_org }}/${{ env.packageName }}
+      - 'TRUE'
+      - 'FALSE'
+      - ${{ env.packageVersion }},latest
+      - PKG=${{ env.packageNameOrig }}

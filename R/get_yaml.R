@@ -20,9 +20,16 @@ get_yaml <- function(name){
       ## Import the latest version of action.yml
       action <- yaml::read_yaml(
         "https://github.com/neurogenomics/rworkflows/raw/master/action.yml")
-      #### Add action steps to static workflow ####
-      # action$runs$steps[[1]]$run <- capture.output(cat(action$runs$steps[[1]]$run))
-      yml$jobs$rworkflows_static$steps <- action$runs$steps
+      #### Add action steps to static workflow #### 
+      yml$jobs$rworkflows_static$steps <- 
+        lapply(action$runs$steps,function(step){
+        lapply(step, function(x){
+          ## Get args from 'env.' (for workflows)
+          ## instead of 'inputs.' (for actions)
+          gsub("inputs.runner_os","${{ matrix.config.os }}",x)
+          gsub("inputs\\.","env.",x)
+        })
+      }) 
     } else {
       stp <- paste("`name` must be one of:",
                    paste("\n -",shQuote(workflow_nms),collapse = ""))

@@ -11,6 +11,7 @@
 ## Bug fixes
 
 - Fixed parsing error when writing "rworkflows_static". #60
+- Get args from 'env.' (for workflows) instead of 'inputs.' (for actions)
 
 # rworkflows 0.99.9
 

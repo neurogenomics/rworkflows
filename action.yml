@@ -95,7 +95,7 @@ runs:
     ## Set the R library to the directory matching the
     ## R packages cache step further below when running on Docker (Linux).
     - name: Set R library home on Linux 
-      if: inputs.runner_os == 'Linux'
+      if: runner.os == 'Linux'
       run: |
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
@@ -111,14 +111,14 @@ runs:
     ## R/Bioc are already installed on the Bioc Docker container, 
     ## and reinstalling them causes errors.
     - name: Setup R and Bioconductor
-      if: inputs.runner_os != 'Linux'
+      if: runner.os != 'Linux'
       uses: grimbough/bioc-actions/setup-bioc@v1
       with:
         bioc-version: ${{ matrix.config.bioc }}
 
     ## pandoc is already included in the Bioconductor docker images
     - name: Setup pandoc from r-lib
-      if: inputs.runner_os != 'Linux'
+      if: runner.os != 'Linux'
       uses: r-lib/actions/setup-pandoc@v2
 
     - name: Query dependencies
@@ -131,24 +131,24 @@ runs:
 
     - name: Restore R package cache
       if: |
-        !contains(github.event.head_commit.message, '/nocache') && inputs.runner_os != 'Linux'
+        !contains(github.event.head_commit.message, '/nocache') && runner.os != 'Linux'
       uses: actions/cache@v3
       with:
         path: ${{ env.R_LIBS_USER }}
-        key: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
+        key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+        restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: Cache R packages on Linux
       if: |
-        !contains(github.event.head_commit.message, '/nocache') && inputs.runner_os == 'Linux'
+        !contains(github.event.head_commit.message, '/nocache') && runner.os == 'Linux'
       uses: actions/cache@v3
       with:
         path: /home/runner/work/_temp/Library
-        key: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ inputs.cache_version }}-${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
+        key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+        restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: Install Linux system dependencies
-      if: inputs.runner_os == 'Linux'
+      if: runner.os == "Linux"
       run: |
         sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
         echo $sysreqs
@@ -157,7 +157,7 @@ runs:
       shell: bash {0}
 
     - name: Install macOS system dependencies
-      if: matrix.config.os == 'macOS-latest'
+      if: runner.os == "macOS"
       run: |
         #### --- Justifications for each package --- ####
         ### libxml2 ###
@@ -186,7 +186,7 @@ runs:
       shell: bash {0}
 
     - name: Install Windows system dependencies
-      if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
+      if: inputs.has_latex == 'true' && runner.os == 'Windows'
       run: |
         #### npm ####
         npm install curl
@@ -200,14 +200,14 @@ runs:
         TINYTEX_INSTALLER: TinyTeX
           
     - name: Install additional LaTeX packages (non-Windows)
-      if: inputs.has_latex == 'true' && inputs.runner_os != 'Windows'
+      if: inputs.has_latex == 'true' && runner.os != 'Windows'
       run: |
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: bash {0} 
       
     - name: Install additional LaTeX packages (Windows)
-      if: inputs.has_latex == 'true' && inputs.runner_os == 'Windows'
+      if: inputs.has_latex == 'true' && runner.os == 'Windows'
       run: |
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
@@ -245,14 +245,14 @@ runs:
       shell: Rscript {0}
 
     - name: Install covr
-      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_covr == 'true' && runner.os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("covr")
       shell: Rscript {0}
 
     - name: Install pkgdown
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         install.packages("pkgdown")
@@ -331,18 +331,18 @@ runs:
       shell: Rscript {0}
     
     - name: Test coverage
-      if: inputs.run_covr == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_covr == 'true' && runner.os == 'Linux'
       run: |
         covr::codecov()
       shell: Rscript {0} 
       
     - name: Install package
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       run: R CMD INSTALL .
       shell: bash {0}
 
     - name: Get R package info
-      if: inputs.runner_os == 'Linux'
+      if: runner.os == 'Linux'
       run: |
         #### DockerHub repos must be lowercase (,,) ####
         name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
@@ -355,7 +355,7 @@ runs:
       shell: bash {0}
 
     - name: Render README
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       env:
         DISPLAY: 99.0
       run: |
@@ -367,13 +367,13 @@ runs:
       shell: Rscript {0} 
         
     - name: Build pkgdown site
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       run: |
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
     - name: Deploy pkgdown site to GitHub pages 🚀
-      if: inputs.run_pkgdown == 'true' && inputs.runner_os == 'Linux'
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       uses: JamesIves/github-pages-deploy-action@releases/v4
       with:
         clean: false
@@ -385,13 +385,13 @@ runs:
       if: failure()
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ inputs.runner_os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
+        name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check 
         
     ## DockerHub steps
     - name: Create Docker file
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'
+        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
@@ -400,7 +400,7 @@ runs:
       
     - name: Build and push to DockerHub
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && inputs.runner_os == 'Linux'
+        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       uses: docker/build-push-action@v1
       with:
         username: ${{ inputs.docker_user }}
