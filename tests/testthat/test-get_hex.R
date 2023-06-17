@@ -11,7 +11,7 @@ test_that("get_hex works", {
   if(is_gha() && testthat::is_testing()){
     testthat::expect_equal(hex3[[1]], 
                            hex1[[1]])
-  } else {
+  } else{
     testthat::expect_null(hex3[[1]])
   }
   testthat::expect_null(hex4)

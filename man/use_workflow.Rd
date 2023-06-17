@@ -15,7 +15,7 @@ use_workflow(
   name = "rworkflows",
   tag = "@master",
   on = c("push", "pull_request"),
-  branches = c("master", "main", "RELEASE_**"),
+  branches = c("master", "main", "devel", "RELEASE_**"),
   runners = construct_runners(),
   run_bioccheck = FALSE,
   run_rcmdcheck = TRUE,

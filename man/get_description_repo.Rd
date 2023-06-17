@@ -16,14 +16,14 @@ get_description_repo(
  (e.g.\code{"neurogenomics/rworkflows"}), or an R package name 
 (e.g. \code{"rworkflows"}).}
 
-\item{repo}{The requested Bioconductor repository. The default will be the
+\item{repo}{The requested biooconductor repository. The default will be the
 Bioconductor software repository: BioCsoft. Available repos include:
 "BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
 that not all repos are available for all versions, particularly older
 versions (but who would use those, right?).}
 
 \item{version}{The requested Bioconductor version. Will
-default to use the BiocManager defaults (i.e., \code{version()}).}
+default to use the BiocManager defaults (ie., \code{version()}).}
 
 \item{verbose}{Print messages.}
 

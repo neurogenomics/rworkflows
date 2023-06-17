@@ -51,8 +51,9 @@ get_description <- function(refs=NULL,
                                 force_new=force_new,
                                 use_wd=use_wd,
                                 verbose=verbose)
-  dl1 <- get_description_check(dl = dl1)
-  if(!is.null(refs)){
+  dl1 <- get_description_check(dl = dl1,
+                               verbose=verbose)
+  if(!is.null(refs) && all(!sapply(dl1,is.null)) ){
     if(all(basename(refs) %in% basename(names(dl1)))) {
       return(dl1)
     } 
@@ -61,10 +62,14 @@ get_description <- function(refs=NULL,
     return(dl1)
   } else {
     #### Method 2 ####
-    dl2 <- get_description_repo(refs=refs,  
-                                verbose=verbose)
-    dl2 <- get_description_check(dl = dl2)
-    return(c(dl1,dl2))
+    missing_refs <- names(dl1)[unlist(lapply(dl1,is.null))]
+    for(ref in missing_refs){
+      dl2 <- get_description_repo(refs=refs,  
+                                  verbose=verbose)
+      dl2 <- get_description_check(dl = dl2)
+      dl1[[ref]] <- dl2[[ref]]
+    } 
+    return(dl1)
   }
   
 }

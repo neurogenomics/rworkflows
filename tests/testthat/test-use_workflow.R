@@ -31,4 +31,10 @@ test_that("use_workflow works", {
                        save_dir = tempdir())
   testthat::expect_equal(yml,yml2)
   
+  
+  #### Make table out of arguments ####
+  # defaults <- eval(formals(rworkflows::use_workflow))
+  # d <- data.table::data.table(arg=names(defaults), 
+  #                             default=as.character(defaults)) 
+  
 })

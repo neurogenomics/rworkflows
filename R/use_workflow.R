@@ -78,7 +78,7 @@ use_workflow <- function(## action-level args
                          name="rworkflows",
                          tag="@master",
                          on=c("push","pull_request"),
-                         branches=c("master","main","RELEASE_**"),
+                         branches=c("master","main","devel","RELEASE_**"),
                          runners=construct_runners(),
                          ## workflow-level args
                          run_bioccheck=FALSE,

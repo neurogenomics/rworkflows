@@ -1,3 +1,13 @@
+# rworkflows 0.99.10
+
+## New features
+
+* `use_workflow`
+  - Add "devel" as a new default trigger `branch` to align with [Bioc's recent changes to their standards](https://bioconductor.github.io/biocblog/posts/2023-03-01-transition-to-devel/).
+* Increase code coverage:
+  - Expand `get_description` unit tests.
+  - Add `construct_authors` unit tests.
+
 # rworkflows 0.99.9
 
 ## New features

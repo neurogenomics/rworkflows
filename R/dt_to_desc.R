@@ -22,7 +22,6 @@ dt_to_desc <- function(db,
   
   Package <- NULL;
   
-  
   db <- data.table::as.data.table(db)
   if(is.null(refs)){
     refs <- db$Package
@@ -45,7 +44,8 @@ dt_to_desc <- function(db,
              if(k %in% valid_fields &&
                 !all(is.na(vals))){ 
                d$set_list(key = k, 
-                          list_value = vals)   
+                          list_value = vals) |> 
+                 suppressWarnings() 
              }
            }
            d
