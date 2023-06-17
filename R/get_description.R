@@ -5,7 +5,7 @@
 #' \enumerate{
 #' \item{I will look for you,}
 #' \item{I will find you,}
-#' \item{...and I will import you into a neatly parsed R object.}
+#' \item{. . . and I will import you into a neatly parsed R object.}
 #' }
 #' Uses a variety of alternative methods, including searching locally and on
 #' GitHub (whenever possible). Prioritises the fastest methods that do

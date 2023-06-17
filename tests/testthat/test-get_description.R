@@ -22,7 +22,8 @@ test_that("get_description works", {
   d6 <- get_description(refs=NULL, 
                         paths="typo")
   d7 <- get_description(refs=NULL, 
-                        paths="DESCRIPTION")
+                        paths=here::here("DESCRIPTION")
+                        )
   d8 <- get_description(refs=c("stats","data.table"), 
                         paths=NULL)
   tmp <- tempfile()

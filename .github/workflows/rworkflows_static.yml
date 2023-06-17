@@ -4,11 +4,13 @@ name: rworkflows_static
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
   pull_request:
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
 env:
   run_bioccheck: ${{ false }}
@@ -17,7 +19,7 @@ env:
   run_vignettes: ${{ true }}
   has_testthat: ${{ true }}
   run_covr: ${{ true }}
-  run_pkgdown: ${{ true }}
+  run_pkgdown: ${{ false }}
   has_runit: ${{ false }}
   has_latex: ${{ false }}
   GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
@@ -83,6 +85,7 @@ jobs:
       run: |
         options(crayon.enabled = TRUE)
         install.packages('remotes')
+        remotes::install_github("r-lib/remotes")
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
     - name: Restore R package cache
