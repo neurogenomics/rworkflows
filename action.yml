@@ -148,7 +148,7 @@ runs:
         restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: Install Linux system dependencies
-      if: runner.os == "Linux"
+      if: runner.os == 'Linux'
       run: |
         sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
         echo $sysreqs
@@ -157,7 +157,7 @@ runs:
       shell: bash {0}
 
     - name: Install macOS system dependencies
-      if: runner.os == "macOS"
+      if: runner.os == 'macOS'
       run: |
         #### --- Justifications for each package --- ####
         ### libxml2 ###
