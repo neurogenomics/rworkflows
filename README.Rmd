@@ -29,7 +29,7 @@ Currently, `rworkflows` **action** performs the following tasks:
 1. Builds a Docker container to run subsequent steps within. 
 2. Builds and checks your R package (with [**CRAN**](https://cran.r-project.org/)
 and/or [**Bioconductor**](https://bioconductor.org/) checks).  
-3. Runs [units tests](https://testthat.r-lib.org/).  
+3. Runs [unit tests](https://testthat.r-lib.org/).  
 4. Runs [code coverage tests](https://covr.r-lib.org/) and uploads the results 
 to [**Codecov**](https://about.codecov.io/).  
 5. (Re)builds and launches a documentation website for your R package.  
