@@ -83,10 +83,10 @@ runs:
   steps:
     - name: Set GitHub environment variables 
       run: |
-        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV 
-        echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV 
-        echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV 
+        echo "GITHUB_PAT=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
+        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
+        echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
+        echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV

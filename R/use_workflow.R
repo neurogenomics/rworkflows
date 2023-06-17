@@ -103,9 +103,8 @@ use_workflow <- function(## action-level args
                          force_new=FALSE,
                          preview=FALSE,
                          verbose=TRUE){
-  # devoptera::args2varssource_all()
-  # devoptera::args2vars(use_workflow) 
-  # docker_org <- eval(docker_org)  
+  
+  # devoptera::args2vars(use_workflow);  docker_org <- eval(docker_org)   
 
   #### Check for existing yaml ####
   path <- file.path(save_dir,paste0(name,".yml"))
