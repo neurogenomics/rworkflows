@@ -25,9 +25,12 @@ get_yaml <- function(name){
         lapply(action$runs$steps,function(step){
         lapply(step, function(x){
           ## Get args from 'env.' (for workflows)
-          ## instead of 'inputs.' (for actions)
-          gsub("inputs.runner_os","${{ matrix.config.os }}",x)
-          gsub("inputs\\.","env.",x)
+          ## instead of 'inputs.' (for actions) 
+          if(is.list(x)){
+            lapply(x,gsub,pattern = "inputs\\.",replacement = "env.")
+          } else {
+            gsub("inputs\\.","env.",x)
+          }
         })
       }) 
     } else {
