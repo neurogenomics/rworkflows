@@ -31,7 +31,7 @@
 #' \code{BiocCheck::BiocCheck()}}. 
 #' Must pass in order to continue workflow.
 #' @param run_rcmdcheck Run R CMD checks using 
-#' \href{https://r-lib.github.io/rcmdcheck/}{\code{rcmdcheck::rcmdcheck()}}. 
+#' \href{https://rcmdcheck.r-lib.org/}{\code{rcmdcheck::rcmdcheck()}}. 
 #' Must pass in order to continue workflow.
 #' @param as_cran When running R CMD checks, 
 #' use the '--as-cran' flag to apply CRAN standards

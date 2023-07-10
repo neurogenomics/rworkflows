@@ -13,6 +13,8 @@
 
 - Fixed parsing error when writing "rworkflows_static". #60
 - Get args from 'env.' (for workflows) instead of 'inputs.' (for actions)
+- Update links with redirects
+- `codecov_graphs`: Fix link with redirect.
 
 # rworkflows 0.99.9
 

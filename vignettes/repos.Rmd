@@ -22,11 +22,11 @@ if(!require("echodeps"))remotes::install_github("RajLabMSSM/echogithub",
 ```R
 r_repos_res <- echogithub::r_repos(
   which = echogithub::r_repos_opts(exclude="local"),
-  save_path = here::here("reports","r_repos.pdf"),
+  save_path = here::here("reports","r_repos_upset.pdf"),
   width = 9)
 ```
 
-[!Upset plot](https://github.com/neurogenomics/rworkflows/raw/master/reports/r_repos.pdf)
+[!Upset plot](https://github.com/neurogenomics/rworkflows/raw/master/reports/r_repos_upset.pdf)
 
 ## Save results 
 

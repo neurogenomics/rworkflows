@@ -49,7 +49,7 @@ Infer the best terms to fill the \code{biocViews} field in
  By default, also includes any \code{biocViews} that are already present in 
  the \emph{DESCRIPTION} file.
 Please see the 
-\href{https://www.bioconductor.org/packages/release/BiocViews}{
+\href{https://www.bioconductor.org/packages/release/BiocViews.html}{
 Bioconductor website} for more details.
 }
 \examples{
