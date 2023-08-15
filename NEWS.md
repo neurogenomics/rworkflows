@@ -1,9 +1,15 @@
+# rworkflows 0.99.11
+
+## New features
+
+* Switch to using `bibentry` for CITATION.
+
 # rworkflows 0.99.10
 
 ## New features
 
 * `use_workflow`
-  - Add "devel" as a new default trigger `branch` to align with [Bioc's recent changes to their standards](https://bioconductor.github.io/biocblog/posts/2023-03-01-transition-to-devel/).
+  - Add "devel" as a new default trigger `branch` to align with [Bioc's recent changes to their standards](https://blog.bioconductor.org/posts/2023-03-01-transition-to-devel/).
 * Increase code coverage:
   - Expand `get_description` unit tests.
   - Add `construct_authors` unit tests.
