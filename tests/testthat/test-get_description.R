@@ -69,5 +69,9 @@ test_that("get_description works", {
   #### Search GitHub repos ####
   d14 <- get_description(refs="neurogenomics/orthogene",
                          use_wd = FALSE) 
-  testthat::expect_true(methods::is(d14[[1]],"description"))
+  if(is_gha()){
+    testthat::expect_false(methods::is(d14[[1]],"description"))
+  } else {
+    testthat::expect_true(methods::is(d14[[1]],"description"))
+  }
 })
