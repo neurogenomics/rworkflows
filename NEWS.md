@@ -10,6 +10,7 @@
   - More robust in general
 * `get_description`
   - Actually use `use_repos` arg.
+* Fix "Documented arguments not in \usage in documentation object 'get_description_repo': 'pkgs'""
 
 # rworkflows 0.99.11
 

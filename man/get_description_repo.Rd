@@ -26,8 +26,6 @@ versions (but who would use those, right?).}
 default to use the BiocManager defaults (i.e., \code{version()}).}
 
 \item{verbose}{Print messages.}
-
-\item{pkgs}{Packages to include.}
 }
 \value{
 Named list of \link[desc]{desc} objects.

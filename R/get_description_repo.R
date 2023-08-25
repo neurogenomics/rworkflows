@@ -4,7 +4,6 @@
 #'  \link[data.table]{data.table} format for all R packages 
 #' in standard R repositories (CRAN, Bioc).
 #'  Can return a subset of results for specific packages as well.
-#' @param pkgs Packages to include.
 #' @inheritParams get_description
 #' @inheritParams BiocPkgTools::biocPkgList
 #' @returns Named list of \link[desc]{desc} objects.
