@@ -6,6 +6,7 @@
 #' GitHub Actions docs}
 #' @param var Environmental variable to check.
 #' @param verbose Print messages.
+#' @returns Boolean
 #' 
 #' @export
 #' @examples 

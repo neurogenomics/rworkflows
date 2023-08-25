@@ -73,7 +73,7 @@ This function creates a banner containing badges,
 a hex sticker (if one is available), and author names.
 
 ```{r, results='asis'}
-badges <- rworkflows:: use_badges()
+badges <- rworkflows::use_badges()
 ```
 
 

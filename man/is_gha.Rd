@@ -15,6 +15,9 @@ is_gha(var = "GITHUB_ACTION", verbose = TRUE)
 
 \item{verbose}{Print messages.}
 }
+\value{
+Boolean
+}
 \description{
 Tests whether a function is currently being run within a GitHub Actions 
 workflow or not.

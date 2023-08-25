@@ -43,6 +43,9 @@ and two spaces. This is useful for formatting \emph{DESCRIPTION} files.}
 
 \item{verbose}{Print messages.}
 }
+\value{
+A character vector of biocviews.
+}
 \description{
 Infer the best terms to fill the \code{biocViews} field in
  your \emph{DESCRIPTION} file based on the code within your R package.

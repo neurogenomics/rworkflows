@@ -19,6 +19,7 @@
 #' @param verbose Print messages.
 #' @inheritParams infer_deps
 #' @inheritParams biocViews::recommendBiocViews
+#' @returns A character vector of biocviews.
 #' 
 #' @export
 #' @importFrom biocViews recommendBiocViews
