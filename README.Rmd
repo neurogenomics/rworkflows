@@ -77,9 +77,17 @@ simply add "[skip ci]" somewhere in the commit message, e.g.:
 
 ## Documentation
 
-### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
+### Vignettes
+#### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html) 
+Introductory vignette for using `rworkflows`.
 
-Introductory tutorial for using `rworkflows`.
+### Videos
+
+#### [rworkflows: taming the Wild West of R packages](https://youtu.be/nLIG2prEmCg) 
+Talk on the background, motivation, and utility of `rworkflows`.
+#### [Getting into the flow with rworkflows: an introductory tutorial]()
+Step-by-step tutorial showing how to use `rworkflows` in an R package.
+
 
 #### GitHub Secrets
 

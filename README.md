@@ -23,7 +23,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Aug-15-2023</i>  
+README updated: <i>Aug-16-2023</i>  
 </h4>
 
 ## Intro
@@ -108,9 +108,17 @@ push, simply add “\[skip ci\]” somewhere in the commit message, e.g.:
 
 ## Documentation
 
-### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
+### Vignettes
+
+#### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
 
 Introductory tutorial for using `rworkflows`.
+
+### Videos
+
+#### [rworkflows: taming the Wild West of R packages](https://youtu.be/nLIG2prEmCg)
+
+Talk on the background, motivation, and utility of `rworkflows`.
 
 #### GitHub Secrets
 

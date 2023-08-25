@@ -1,8 +1,16 @@
+# rworkflows 0.99.12
+
+## Bug fixes
+
+- CRAN's VMs are having issues. 
+
 # rworkflows 0.99.11
 
 ## New features
 
 * Switch to using `bibentry` for CITATION.
+
+To compensate for this had to modify `test-bioc_r_versions`.
 
 # rworkflows 0.99.10
 
