@@ -31,7 +31,7 @@ if(!require("echodeps"))remotes::install_github("RajLabMSSM/echodeps",
 
 ``` r
 res <- echodeps::dep_graph(pkg = "rworkflows",
-                           method_seed = "github", 
+                           method_seed = "github",
                            exclude = c("neurogenomics_rworkflows",
                                        "neurogenomics_r_workflows"),
                            node_size = "total_downloads",
@@ -54,11 +54,15 @@ knitr::kable(res$report)
 
 # Show
 
+![rworkflow depgraph](https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png)
+
 Hover over each node to show additional metadata.
 
-```{r fig.height=20, fig.width=20}
-htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.html")
-```
+
+<!-- ```{r fig.height=20, fig.width=20} -->
+<!-- htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.html") -->
+
+<!-- ``` -->
 
 # Identify highly downloaded packages
 

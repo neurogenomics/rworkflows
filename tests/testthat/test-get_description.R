@@ -57,7 +57,7 @@ test_that("get_description works", {
   if(is_gha() && testthat::is_testing()){ 
     testthat::expect_equal(d7[[1]],
                            d1[[1]])
-  } else if(testthat::is_testing()){
+  } else{
     testthat::expect_null(d7[[1]])
   }
   

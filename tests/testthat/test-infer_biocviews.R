@@ -4,25 +4,25 @@ test_that("infer_biocviews works", {
   # biocviews1 <- infer_biocviews(pkgdir = "../../")
   # testthat::expect_equal(biocviews1,"Software")
   
-  
-  if(testthat::is_testing() && !is_gha()){
+  # 
+  if(testthat::is_testing() &&
+     !is_gha()){
     testthat::expect_error(
       infer_biocviews(include_branch = FALSE)
-    )  
+    )
   } else {
     testthat::expect_equal(infer_biocviews(include_branch = FALSE),
                            "WorkflowManagement")  
-  } 
-  biocviews_manual = c("Software","Genetics","Transcriptomics")
-  biocviews3 <- 
+  }
+  biocviews_manual = c("Software","Genetics","Transcriptomics") 
   if(testthat::is_testing() && !is_gha()){
     testthat::expect_error(
       infer_biocviews(biocviews = biocviews_manual)
-    )  
+    )
   } else {
     testthat::expect_equal(infer_biocviews(biocviews = biocviews_manual),
                            c(biocviews_manual,"WorkflowManagement"))
-  } 
+  }
 
   #### Errors ####
   testthat::expect_error(

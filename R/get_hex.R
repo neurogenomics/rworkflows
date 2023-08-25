@@ -24,22 +24,14 @@ get_hex <- function(refs=NULL,
                     verbose=TRUE){
   # devoptera::args2vars(get_hex)
   
+  if(isTRUE(hex_path)) hex_path <- "inst/hex/hex.png"
+  dl <- get_description(refs = refs,
+                        paths = paths)
+  refs <- names(dl)
   if(!is.null(refs)) {
     messager("Finding hex sticker(s) for",
              formatC(length(refs),big.mark = ","),"package(s).",v=verbose)
-  }
-  if(!is.null(refs)){
-    if(length((paths))!=length(refs)){
-      messager("When refs is provided, paths must have the same length",
-               "(or be set to NULL).","Setting paths=NULL.",v=verbose)
-      paths <- NULL
-    }
-  }
-  if(isTRUE(hex_path)){
-    hex_path <- "inst/hex/hex.png"
   } 
-  dl <- get_description(refs = refs,
-                        paths = paths)
   #### Iterate over refs ####
   hexes <- lapply(stats::setNames(seq_len(length(dl)),
                                   names(dl)),

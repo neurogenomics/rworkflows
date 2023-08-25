@@ -2,7 +2,12 @@
 
 ## Bug fixes
 
-- CRAN's VMs are having issues. 
+* CRAN's VMs are having issues. 
+* Reduce `docs` size by rendering PNG instead of html in `depgraph` vignette.
+* Get code coverage back up to 91%+
+* Revamp `get_hex` and `get_description` 
+  - Use lists more consistently
+  - More robust in general
 
 # rworkflows 0.99.11
 

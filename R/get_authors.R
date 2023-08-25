@@ -10,9 +10,11 @@
 get_authors <- function(ref=NULL,
                         add_html=FALSE){
   
-  d <- get_description(refs = ref[1])[[1]] 
+  d <- get_description(refs = ref, 
+                       paths = NULL)[[1]]
+  if(is.list(d)) d <- d[[1]]
   if(is.null(d)) return(NULL)
-  field <- grep("Authors",d$fields(),value = TRUE)[[1]] 
+  field <- grep("Authors",d$fields(),value = TRUE)
   if(length(field)>0){
    authors <- d$get_field(field)
    auths <- eval(parse(text = gsub('person','c',authors)));

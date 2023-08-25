@@ -21,7 +21,7 @@ get_description_manual <- function(refs=NULL,
                          refs),
          function(i){
     ref <- refs[[i]]
-    path <- paths[[i]]
+    path <- if(length(unlist(paths))==0) NULL else paths[[i]]
     wrn <- if(is.null(ref)){
       paste("Cannot import DESCRIPTION file:",paths)
     } else{

@@ -41,9 +41,23 @@ get_description <- function(refs=NULL,
                             verbose=TRUE){
   # devoptera::args2vars(get_description)
   
+  paths <- check_paths(refs = refs,
+                       paths = paths, 
+                       verbose = verbose)
+  refs <- refs_to_list(refs = refs)
+  paths <- refs_to_list(refs = paths) 
+  if(methods::is(refs[[1]],"description")) {
+    refs <- get_description_check(dl = refs,
+                                  verbose = verbose) 
+    return(refs)
+  }
+  if(methods::is(paths[[1]],"description")) {
+    paths <- get_description_check(dl = paths,
+                                   verbose = verbose) 
+    return(paths) 
+  }
   if(all(is.na(refs))) refs <- NULL
-  if(methods::is(refs[[1]],"description")) return(refs)
-  if(methods::is(paths[[1]],"description")) return(paths) 
+  
   #### Method 1 ####
   dl1 <- get_description_manual(refs=refs,
                                 paths=paths,
@@ -52,13 +66,15 @@ get_description <- function(refs=NULL,
                                 use_wd=use_wd,
                                 verbose=verbose)
   dl1 <- get_description_check(dl = dl1,
-                               verbose=verbose)
-  if(!is.null(refs) && all(!sapply(dl1,is.null)) ){
-    if(all(basename(refs) %in% basename(names(dl1)))) {
+                               verbose=verbose) 
+  refs <- names(dl1)
+  if(!is.null(unlist(dl1))){
+    if(all(basename(unlist(refs)) %in% basename(names(dl1)))) {
       return(dl1)
     } 
   }
-  if(isFALSE(use_repos) || is.null(refs)){
+  if(isFALSE(use_repos) || 
+     is.null(refs)){
     return(dl1)
   } else {
     #### Method 2 ####
