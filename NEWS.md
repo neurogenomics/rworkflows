@@ -1,5 +1,9 @@
 # rworkflows 0.99.12
 
+## New features
+
+* Reduce clutter by removing subaction folders (will eventually come back to this idea).
+
 ## Bug fixes
 
 * CRAN's VMs are having issues. 
