@@ -220,7 +220,7 @@ runs:
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
-         install.packages(c("rmarkdown","BiocManager", dependencies = TRUE, repos = repos))
+         install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
          remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE)

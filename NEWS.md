@@ -16,6 +16,8 @@
   - Actually use `use_repos` arg.
 * Fix "Documented arguments not in \usage in documentation object 'get_description_repo': 'pkgs'""
 * Ensure all documented functions have `@returns` in Roxygen notes.
+* `action.yml`
+  - "Install dependencies pass 1" step was calling `repos` before it was defined.
 
 # rworkflows 0.99.11
 
