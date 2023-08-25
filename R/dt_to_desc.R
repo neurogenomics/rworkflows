@@ -14,7 +14,7 @@
 #' @importFrom  data.table as.data.table 
 #' @import desc
 #' @examples 
-#'  db <-   BiocPkgTools::biocPkgList()
+#'  db <- BiocPkgTools::biocPkgList()
 #'  dl <- dt_to_desc(db=db, refs="GenomicRanges")
 dt_to_desc <- function(db,
                        refs=NULL,
@@ -22,18 +22,20 @@ dt_to_desc <- function(db,
   
   Package <- NULL;
   
+  refs <- check_refs_names(refs)
   db <- data.table::as.data.table(db)
   if(is.null(refs)){
     refs <- db$Package
   }else{
-    refs <- refs[basename(refs) %in% db$Package]
+    refs <- refs[basename(names(refs)) %in% db$Package]
   }
   messager("Constructing DESCRIPTION files for",
-           formatC(length(refs),big.mark = ","),"R packages.",v=verbose)
-  valid_fields <-desc::cran_valid_fields
-  lapply(stats::setNames(basename(refs),
+           formatC(length(refs),big.mark = ","),"R package(s).",v=verbose)
+  valid_fields <- desc::cran_valid_fields
+  lapply(stats::setNames(names(refs),
                          refs),
          function(p){
+           p <- basename(p)
            messager("Constructing DESCRIPTION for:",p,v=verbose)
            db_sub <- db[Package==p,][1,]
            d <- desc::description$new("!new")

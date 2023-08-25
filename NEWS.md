@@ -8,6 +8,8 @@
 * Revamp `get_hex` and `get_description` 
   - Use lists more consistently
   - More robust in general
+* `get_description`
+  - Actually use `use_repos` arg.
 
 # rworkflows 0.99.11
 

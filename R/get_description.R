@@ -37,7 +37,7 @@ get_description <- function(refs=NULL,
                                                         which = "cache"),
                             force_new=FALSE,
                             use_wd=TRUE,
-                            use_repos=TRUE,
+                            use_repos=FALSE,
                             verbose=TRUE){
   # devoptera::args2vars(get_description)
   
@@ -47,45 +47,36 @@ get_description <- function(refs=NULL,
   refs <- refs_to_list(refs = refs)
   paths <- refs_to_list(refs = paths) 
   if(methods::is(refs[[1]],"description")) {
-    refs <- get_description_check(dl = refs,
-                                  verbose = verbose) 
+    refs <- check_refs_names(dl = refs) 
     return(refs)
   }
   if(methods::is(paths[[1]],"description")) {
-    paths <- get_description_check(dl = paths,
-                                   verbose = verbose) 
+    paths <- check_refs_names(dl = paths) 
     return(paths) 
   }
   if(all(is.na(refs))) refs <- NULL
-  
   #### Method 1 ####
-  dl1 <- get_description_manual(refs=refs,
-                                paths=paths,
-                                cache_dir=cache_dir,
-                                force_new=force_new,
-                                use_wd=use_wd,
-                                verbose=verbose)
-  dl1 <- get_description_check(dl = dl1,
-                               verbose=verbose) 
-  refs <- names(dl1)
-  if(!is.null(unlist(dl1))){
-    if(all(basename(unlist(refs)) %in% basename(names(dl1)))) {
-      return(dl1)
-    } 
-  }
   if(isFALSE(use_repos) || 
      is.null(refs)){
-    return(dl1)
-  } else {
-    #### Method 2 ####
-    missing_refs <- names(dl1)[unlist(lapply(dl1,is.null))]
-    for(ref in missing_refs){
-      dl2 <- get_description_repo(refs=refs,  
+    dl1 <- get_description_manual(refs=refs,
+                                  paths=paths,
+                                  cache_dir=cache_dir,
+                                  force_new=force_new,
+                                  use_wd=use_wd,
                                   verbose=verbose)
-      dl2 <- get_description_check(dl = dl2)
-      dl1[[ref]] <- dl2[[ref]]
-    } 
+    dl1 <- check_refs_names(dl = dl1) 
     return(dl1)
-  }
-  
+    refs <- names(dl1)
+    # if(!is.null(unlist(dl1))){
+    #   if(all(basename(unlist(refs)) %in% basename(names(dl1)))) {
+    #     return(dl1)
+    #   } 
+    # }
+  } else {
+  #### Method 2 #### 
+    dl2 <- get_description_repo(refs = refs,  
+                                verbose = verbose)
+    dl2 <- check_refs_names(dl = dl2) 
+    return(dl2)
+  } 
 }

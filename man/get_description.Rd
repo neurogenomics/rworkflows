@@ -10,7 +10,7 @@ get_description(
   cache_dir = tools::R_user_dir(package = "rworkflows", which = "cache"),
   force_new = FALSE,
   use_wd = TRUE,
-  use_repos = TRUE,
+  use_repos = FALSE,
   verbose = TRUE
 )
 }
