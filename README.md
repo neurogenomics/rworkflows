@@ -126,7 +126,7 @@ Before pushing changes to your new R package, you will need to set up
 one or more [GitHub
 Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 
-- `PAT_GITHUB` \[Required\]: Speeds up installations and gives access to
+- `PAT_GITHUB` \[Optional\]: Can grant access to
   private repos on GitHub Actions. You can generate your very own
   Personal Authentication Token with `usethis::create_github_token()`.
   See the [GitHub
