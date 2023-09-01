@@ -140,10 +140,10 @@ To use certain features of `rworkflows`, you may need to set up one or
 more [GitHub
 Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 
-- `PAT_GITHUB` \[Optional\]: Can grant access to private repos on GitHub
-  Actions. You can generate your very own Personal Authentication Token
-  with `usethis::create_github_token()`. See the [GitHub
-  docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+- `PAT_GITHUB` \[Optional\]: Can grant access to
+  private repos on GitHub Actions. You can generate your very own
+  Personal Authentication Token with `usethis::create_github_token()`.
+  See the [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
   [DockerHub](https://hub.docker.com) account.

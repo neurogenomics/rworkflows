@@ -27,7 +27,7 @@ use_workflow(
   has_runit = FALSE,
   has_latex = FALSE,
   run_docker = FALSE,
-  github_token = "${{ secrets.PAT_GITHUB }}",
+  github_token = "${{ secrets.GITHUB_TOKEN }}",
   docker_user = NULL,
   docker_org = docker_user,
   docker_token = "${{ secrets.DOCKER_TOKEN }}",
@@ -98,7 +98,11 @@ rendering Sweave (.rnw) and other documentation files.}
 \item{run_docker}{Whether to build and push a Docker container to DockerHub.}
 
 \item{github_token}{Token for the repo. 
-Can be passed in using {{ secrets.PAT_GITHUB }}.}
+Can be passed in using {{ secrets.PAT_GITHUB }}.
+By default, it uses {{ secrets.GITHUB_TOKEN }}
+which is automatically set up. Read 
+\href{https://docs.github.com/en/actions/security-guides/automatic-token-authentication}{
+here for more details}.}
 
 \item{docker_user}{DockerHub username.}
 
