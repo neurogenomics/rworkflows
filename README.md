@@ -114,16 +114,27 @@ push, simply add “\[skip ci\]” somewhere in the commit message, e.g.:
 
 Introductory vignette for using `rworkflows`.
 
+#### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
+
+Copy-and-paste instructions for creating a **Docker** or **Singularity**
+container with the `rworkflows` R package pre-installed.
+
+#### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph).
+
+Interactive graph showing all the GitHub repos that currently use the
+`rworkflows` action.
+
 ### [Videos](https://www.youtube.com/@NeurogenomicsLab)
 
 #### [rworkflows: taming the Wild West of R packages](https://youtu.be/nLIG2prEmCg)
 
-Talk on the background, motivation, and utility of `rworkflows`. \####
-[Getting into the flow with rworkflows: an introductory
-tutorial](https://youtu.be/vcpMsil3EAU) Step-by-step tutorial showing
-how to use `rworkflows` in an R package.
+Talk on the background, motivation, and utility of `rworkflows`.
 
-#### GitHub Secrets
+#### [Getting into the flow with rworkflows: an introductory tutorial](https://youtu.be/vcpMsil3EAU)
+
+Step-by-step tutorial showing how to use `rworkflows` in an R package.
+
+### GitHub Secrets
 
 To use certain features of `rworkflows`, you may need to set up one or
 more [GitHub
@@ -136,16 +147,6 @@ Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
   [DockerHub](https://hub.docker.com) account.
-
-### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
-
-Copy-and-paste instructions for creating a **Docker** or **Singularity**
-container with the `rworkflows` R package pre-installed.
-
-### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph)
-
-Interactive graph showing all the GitHub repos that currently use the
-`rworkflows` action.
 
 ## Citation
 
