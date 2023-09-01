@@ -6,8 +6,9 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
+[![](https://img.shields.io/badge/doi-https://doi.org/10.21203/rs.3.rs--2399015/v1-blue.svg)](https://doi.org/https://doi.org/10.21203/rs.3.rs-2399015/v1)
 <br>
-[![](https://img.shields.io/badge/devel%20version-0.99.12-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.13-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -140,10 +141,10 @@ To use certain features of `rworkflows`, you may need to set up one or
 more [GitHub
 Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 
-- `PAT_GITHUB` \[Optional\]: Can grant access to
-  private repos on GitHub Actions. You can generate your very own
-  Personal Authentication Token with `usethis::create_github_token()`.
-  See the [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+- `PAT_GITHUB` \[Optional\]: Can grant access to private repos on GitHub
+  Actions. You can generate your very own Personal Authentication Token
+  with `usethis::create_github_token()`. See the [GitHub
+  docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
   [DockerHub](https://hub.docker.com) account.
