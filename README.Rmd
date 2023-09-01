@@ -36,7 +36,7 @@ to [**Codecov**](https://about.codecov.io/).
 6. Pushes an [**Rstudio**](https://posit.co/) 
 [**Docker**](https://www.docker.com/) container to 
 [**DockerHub**](https://hub.docker.com/) 
-with your R package and all its dependencies pre-installed.  
+with your R package and all its dependencies pre-installed.   
 
 Importantly, this **workflow** is designed to work with any R package out-of-the-box.
 This means you won't have to manually edit any yaml files,
