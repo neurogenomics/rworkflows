@@ -267,7 +267,7 @@ utils::sessionInfo()
     ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
     ##  [7] stats4_4.2.1        RSQLite_2.3.1       evaluate_0.21      
     ## [10] httr_1.4.6          ggplot2_3.4.2       pillar_1.9.0       
-    ## [13] yulab.utils_0.0.6   rworkflows_0.99.12  biocViews_1.66.3   
+    ## [13] yulab.utils_0.0.6   rworkflows_0.99.13  biocViews_1.66.3   
     ## [16] rlang_1.1.1         curl_5.0.0          data.table_1.14.8  
     ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
     ## [22] DT_0.28             RUnit_0.4.32        rmarkdown_2.22     
