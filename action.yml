@@ -63,7 +63,9 @@ inputs:
       GitHub authentication token with permissions to push 
       to the R package's GitHub repository. 
       Also used to bypass GitHub download limits.
-      Can be passed in using {{ secrets.PAT_GITHUB }}.
+      Automatically set to {{ secrets.GITHUB_TOKEN }} by 
+      default, but can be changed to allow access to
+      specific scopes.
   cache_version: 
     description: >
       Which cache version to use. 

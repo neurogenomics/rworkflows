@@ -8,6 +8,8 @@ on:
 
 jobs:
   check_rworkflows-merged:
+    permissinos: 
+      contents: write
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
@@ -33,7 +35,7 @@ jobs:
           run_covr: true
           run_pkgdown: true
           has_runit: false 
-          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           run_docker: true
           docker_user: 'bschilder'
           docker_org: 'neurogenomicslab'
