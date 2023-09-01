@@ -6,8 +6,9 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
+[![](https://img.shields.io/badge/doi-https://doi.org/10.21203/rs.3.rs--2399015/v1-blue.svg)](https://doi.org/https://doi.org/10.21203/rs.3.rs-2399015/v1)
 <br>
-[![](https://img.shields.io/badge/devel%20version-0.99.12-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.13-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -114,38 +115,39 @@ push, simply add “\[skip ci\]” somewhere in the commit message, e.g.:
 
 Introductory vignette for using `rworkflows`.
 
+#### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
+
+Copy-and-paste instructions for creating a **Docker** or **Singularity**
+container with the `rworkflows` R package pre-installed.
+
+#### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph).
+
+Interactive graph showing all the GitHub repos that currently use the
+`rworkflows` action.
+
 ### [Videos](https://www.youtube.com/@NeurogenomicsLab)
 
 #### [rworkflows: taming the Wild West of R packages](https://youtu.be/nLIG2prEmCg)
 
-Talk on the background, motivation, and utility of `rworkflows`. \####
-[Getting into the flow with rworkflows: an introductory
-tutorial](https://youtu.be/vcpMsil3EAU) Step-by-step tutorial showing
-how to use `rworkflows` in an R package.
+Talk on the background, motivation, and utility of `rworkflows`.
 
-#### GitHub Secrets
+#### [Getting into the flow with rworkflows: an introductory tutorial](https://youtu.be/vcpMsil3EAU)
+
+Step-by-step tutorial showing how to use `rworkflows` in an R package.
+
+### GitHub Secrets
 
 To use certain features of `rworkflows`, you may need to set up one or
 more [GitHub
 Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 
-- `PAT_GITHUB` \[Optional\]: Can grant access to
-  private repos on GitHub Actions. You can generate your very own
-  Personal Authentication Token with `usethis::create_github_token()`.
-  See the [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+- `PAT_GITHUB` \[Optional\]: Can grant access to private repos on GitHub
+  Actions. You can generate your very own Personal Authentication Token
+  with `usethis::create_github_token()`. See the [GitHub
+  docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
   [DockerHub](https://hub.docker.com) account.
-
-### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)
-
-Copy-and-paste instructions for creating a **Docker** or **Singularity**
-container with the `rworkflows` R package pre-installed.
-
-### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph)
-
-Interactive graph showing all the GitHub repos that currently use the
-`rworkflows` action.
 
 ## Citation
 
@@ -265,7 +267,7 @@ utils::sessionInfo()
     ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
     ##  [7] stats4_4.2.1        RSQLite_2.3.1       evaluate_0.21      
     ## [10] httr_1.4.6          ggplot2_3.4.2       pillar_1.9.0       
-    ## [13] yulab.utils_0.0.6   rworkflows_0.99.12  biocViews_1.66.3   
+    ## [13] yulab.utils_0.0.6   rworkflows_0.99.13  biocViews_1.66.3   
     ## [16] rlang_1.1.1         curl_5.0.0          data.table_1.14.8  
     ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
     ## [22] DT_0.28             RUnit_0.4.32        rmarkdown_2.22     
