@@ -7,7 +7,7 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 <br>
-[![](https://img.shields.io/badge/devel%20version-0.99.11-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.12-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -23,7 +23,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Aug-16-2023</i>  
+README updated: <i>Sep-01-2023</i>  
 </h4>
 
 ## Intro
@@ -108,28 +108,30 @@ push, simply add “\[skip ci\]” somewhere in the commit message, e.g.:
 
 ## Documentation
 
-### Vignettes
+### [Vignettes](https://neurogenomics.github.io/rworkflows/articles)
 
 #### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html)
 
-Introductory tutorial for using `rworkflows`.
+Introductory vignette for using `rworkflows`.
 
-### Videos
+### [Videos](https://www.youtube.com/@NeurogenomicsLab)
 
 #### [rworkflows: taming the Wild West of R packages](https://youtu.be/nLIG2prEmCg)
 
-Talk on the background, motivation, and utility of `rworkflows`.
+Talk on the background, motivation, and utility of `rworkflows`. \####
+[Getting into the flow with rworkflows: an introductory
+tutorial](https://youtu.be/vcpMsil3EAU) Step-by-step tutorial showing
+how to use `rworkflows` in an R package.
 
 #### GitHub Secrets
 
-Before pushing changes to your new R package, you will need to set up
-one or more [GitHub
+To use certain features of `rworkflows`, you may need to set up one or
+more [GitHub
 Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 
-- `PAT_GITHUB` \[Required\]: Speeds up installations and gives access to
-  private repos on GitHub Actions. You can generate your very own
-  Personal Authentication Token with `usethis::create_github_token()`.
-  See the [GitHub
+- `PAT_GITHUB` \[Optional\]: Can grant access to private repos on GitHub
+  Actions. You can generate your very own Personal Authentication Token
+  with `usethis::create_github_token()`. See the [GitHub
   docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
@@ -263,7 +265,7 @@ utils::sessionInfo()
     ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
     ##  [7] stats4_4.2.1        RSQLite_2.3.1       evaluate_0.21      
     ## [10] httr_1.4.6          ggplot2_3.4.2       pillar_1.9.0       
-    ## [13] yulab.utils_0.0.6   rworkflows_0.99.10  biocViews_1.66.3   
+    ## [13] yulab.utils_0.0.6   rworkflows_0.99.12  biocViews_1.66.3   
     ## [16] rlang_1.1.1         curl_5.0.0          data.table_1.14.8  
     ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
     ## [22] DT_0.28             RUnit_0.4.32        rmarkdown_2.22     
