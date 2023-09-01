@@ -8,7 +8,7 @@
 
 ## New features
 
-* Reduce clutter by removing subaction folders (will eventually come back to this idea).
+* Reduce clutter by removing subaction folders (will eventually come back to this idea). 
 
 ## Bug fixes
 
