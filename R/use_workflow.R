@@ -45,6 +45,10 @@
 #' rendering Sweave (.rnw) and other documentation files.
 #' @param github_token Token for the repo. 
 #' Can be passed in using {{ secrets.PAT_GITHUB }}.
+#' By default, it uses {{ secrets.GITHUB_TOKEN }}
+#' which is automatically set up. Read 
+#' \href{https://docs.github.com/en/actions/security-guides/automatic-token-authentication}{
+#' here for more details}.
 #' @param docker_user DockerHub username.
 #' @param docker_org DockerHub organization name. 
 #' Is the same as \code{docker_user} by default.
@@ -92,7 +96,7 @@ use_workflow <- function(## action-level args
                          has_runit=FALSE, 
                          has_latex=FALSE,
                          run_docker=FALSE,  
-                         github_token="${{ secrets.PAT_GITHUB }}",
+                         github_token="${{ secrets.GITHUB_TOKEN }}",
                          docker_user=NULL,
                          docker_org=docker_user,
                          docker_token="${{ secrets.DOCKER_TOKEN }}",

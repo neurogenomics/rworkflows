@@ -8,7 +8,7 @@ author: 'Brian M. Schilder'
 inputs: 
   GITHUB_TOKEN:
     description: >
-      Token for the repo. Can be passed in using {{ secrets.PAT_GITHUB }} 
+      Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN}} 
   run_bioccheck:
     description: >
       Run Bioconductor checks. Must pass in order to continue workflow.

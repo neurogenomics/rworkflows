@@ -22,12 +22,14 @@ env:
   run_pkgdown: ${{ false }}
   has_runit: ${{ false }}
   has_latex: ${{ false }}
-  GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   run_docker: ${{ false }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   cache_version: cache-v1
 jobs:
   rworkflows_static:
+    permissions:
+      contents: write
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
@@ -59,7 +61,6 @@ jobs:
     steps:
     - name: Set GitHub environment variables
       run: |
-        echo "GITHUB_PAT=${{ env.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
         echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV
