@@ -46,7 +46,9 @@
 #' @param github_token Token for the repo. 
 #' Can be passed in using {{ secrets.PAT_GITHUB }}.
 #' By default, it uses {{ secrets.GITHUB_TOKEN }}
-#' automatically set up. 
+#' which is automatically set up. Read 
+#' \href{https://docs.github.com/en/actions/security-guides/automatic-token-authentication}{
+#' here for more details}.
 #' @param docker_user DockerHub username.
 #' @param docker_org DockerHub organization name. 
 #' Is the same as \code{docker_user} by default.

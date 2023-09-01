@@ -65,7 +65,7 @@ inputs:
       Also used to bypass GitHub download limits.
       Automatically set to {{ secrets.GITHUB_TOKEN }} by 
       default, but can be changed to allow access to
-      specific scopes.
+      specific scopes. 
   cache_version: 
     description: >
       Which cache version to use. 

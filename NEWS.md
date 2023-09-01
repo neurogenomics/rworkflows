@@ -1,3 +1,9 @@
+# rworkflows 0.99.13
+
+## New features
+
+* Merge PR #66 by @js2264 to eliminate the PAT_GITHUB secret setup step.
+
 # rworkflows 0.99.12
 
 ## New features
