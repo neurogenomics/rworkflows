@@ -49,7 +49,7 @@ inputs:
     description: >
       Which release of tinytex (bundles of LaTeX packages) to use.
       All options can be found here: https://github.com/rstudio/tinytex-releases/
-    default: 'TinyTeX-0'
+    default: 'TinyTeX-1'
   tinytex_version:
     description: >
       Which version of tinytext to use. 
