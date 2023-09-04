@@ -221,15 +221,9 @@ runs:
         install.packages("tinytex")
         extra_packages <- c("bera","nowidow","parnotes","marginfix","etoolbox",
         "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
-        "footmisc","changepage","xstring","caption","mathtools","fancyhdr")
-        # tinytex::install_tinytex(
-        # bundle = if(Sys.getenv("tinytex_installer")=="") "daily" else Sys.getenv("tinytex_installer"), 
-        # version = Sys.getenv("tinytex_version"),
-        # extra_packages = extra_packages, 
-        # force = TRUE
-        # )
+        "footmisc","changepage","xstring","caption","mathtools","fancyhdr",
+        "preprint")
         tinytex::tlmgr_install(pkgs = extra_packages)
-        tinytex::check_installed("bera")
       shell: Rscript {0} 
 
     - name: Install dependencies pass 1 🛠
