@@ -56,7 +56,7 @@ inputs:
       Which version of tinytext to use. 
       When set to '', uses the latest daily build.
       All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
-    default: 'daily'
+    default: ''
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
