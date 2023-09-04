@@ -49,12 +49,12 @@ inputs:
     description: >
       Which release of tinytex (bundles of LaTeX packages) to use.
       All options can be found here: https://github.com/rstudio/tinytex-releases/
-    default: 'TinyTeX-1'
+    default: 'TinyTeX-2'
   tinytex_version:
     description: >
       Which version of tinytext to use. 
       All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
-    default: '2022.12'
+    default: '2023.01'
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -213,8 +213,7 @@ runs:
     - name: Install additional LaTeX packages (non-Windows) 🛠
       if: inputs.has_latex == 'true' && runner.os != 'Windows'
       run: |
-        sudo apt-get install texlive-full texlive-fonts-extra
-        # tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
+        tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: bash {0} 
       
