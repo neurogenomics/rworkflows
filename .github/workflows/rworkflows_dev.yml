@@ -4,12 +4,14 @@ name: rworkflows_dev
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
     - dev
   pull_request:
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
     - dev
 jobs:
