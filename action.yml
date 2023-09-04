@@ -222,11 +222,13 @@ runs:
         extra_packages <- c("bera","nowidow","parnotes","marginfix","etoolbox",
         "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
         "footmisc","changepage","xstring","caption","mathtools")
-        tinytex::install_tinytex(
-        bundle = if(Sys.getenv("tinytex_installer")=="") "daily" else Sys.getenv("tinytex_installer"), 
-        version = Sys.getenv("tinytex_version"),
-        extra_packages = extra_packages
-        )
+        # tinytex::install_tinytex(
+        # bundle = if(Sys.getenv("tinytex_installer")=="") "daily" else Sys.getenv("tinytex_installer"), 
+        # version = Sys.getenv("tinytex_version"),
+        # extra_packages = extra_packages, 
+        # force = TRUE
+        # )
+        tinytex::tlmgr_install(pkgs = extra_packages)
         tinytex::check_installed("bera")
       shell: Rscript {0}
       
