@@ -222,7 +222,7 @@ runs:
         extra_packages <- c("bera","nowidow","parnotes","marginfix","etoolbox",
         "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
         "footmisc","changepage","xstring","caption","mathtools","fancyhdr",
-        "preprint")
+        "preprint","ragged2e")
         tinytex::tlmgr_install(pkgs = extra_packages)
       shell: Rscript {0} 
 
