@@ -209,6 +209,12 @@ runs:
       env:
         TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
         TINYTEX_VERSION: ${{ inputs.tinytex_version }}
+    
+    - name: Install latex 🛠
+      if: inputs.has_latex == 'true'
+      run: |
+        tinytex::tlmgr_install(pkgs = "bera")
+      shell: Rscript {0}
           
     - name: Install additional LaTeX packages (non-Windows) 🛠
       if: inputs.has_latex == 'true' && runner.os != 'Windows'
