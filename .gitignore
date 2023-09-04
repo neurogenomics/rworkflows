@@ -47,3 +47,10 @@ vignettes/*.R
 # R Environment Variables
 .Renviron 
 inst/doc
+# Sweave vignette outputs
+vignettes/*.bbl
+vignettes/*.log
+vignettes/*.pdf
+vignettes/*.gz
+vignettes/*.toc
+vignettes/*.tex
