@@ -221,7 +221,7 @@ runs:
         install.packages("tinytex")
         extra_packages <- c("bera","nowidow","parnotes","marginfix","etoolbox",
         "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
-        "footmisc","changepage","xstring","caption","mathtools")
+        "footmisc","changepage","xstring","caption","mathtools","fancyhdr")
         # tinytex::install_tinytex(
         # bundle = if(Sys.getenv("tinytex_installer")=="") "daily" else Sys.getenv("tinytex_installer"), 
         # version = Sys.getenv("tinytex_version"),
@@ -230,22 +230,7 @@ runs:
         # )
         tinytex::tlmgr_install(pkgs = extra_packages)
         tinytex::check_installed("bera")
-      shell: Rscript {0}
-      
-
-    # - name: Install additional LaTeX packages (non-Windows) 🛠
-    #   if: inputs.has_latex == 'true' && runner.os != 'Windows'
-    #   run: |
-    #     tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
-    #     tlmgr list --only-installed
-    #   shell: bash {0} 
-    #   
-    # - name: Install additional LaTeX packages (Windows) 🛠
-    #   if: inputs.has_latex == 'true' && runner.os == 'Windows'
-    #   run: | 
-    #     tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
-    #     tlmgr list --only-installed
-    #   shell: pwsh  
+      shell: Rscript {0} 
 
     - name: Install dependencies pass 1 🛠
       env:
