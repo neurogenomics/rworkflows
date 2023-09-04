@@ -207,27 +207,30 @@ runs:
       
     - name: Install latex 🛠
       if: inputs.has_latex == 'true'
+      uses: r-lib/actions/setup-tinytex@v2
+      env:
+        TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
+        TINYTEX_VERSION: ${{ inputs.tinytex_version }}
+
+    - name: Install latex 🛠
+      if: inputs.has_latex == 'true'
       env:
         tinytex_installer: ${{ inputs.tinytex_installer }}
         tinytex_version: ${{ inputs.tinytex_version }}
       run: | 
         install.packages("tinytex")
-        pkgs <- c("bera","nowidow","parnotes","marginfix","etoolbox","titlesec",
-        "sectsty","framed","enumitem","parskip","soul","placeins","footmisc",
-        "changepage","xstring","caption","mathtools")
+        extra_packages <- c("bera","nowidow","parnotes","marginfix","etoolbox",
+        "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
+        "footmisc","changepage","xstring","caption","mathtools")
         tinytex::install_tinytex(
         bundle = Sys.getenv("tinytex_installer"), 
-        version = Sys.getenv("tinytex_version")
+        version = Sys.getenv("tinytex_version"),
+        extra_packages = extra_packages
         )
+        tinytex::check_installed("bera")
       shell: Rscript {0}
       
-    # - name: Install latex 🛠
-    #   if: inputs.has_latex == 'true'
-    #   uses: r-lib/actions/setup-tinytex@v2 
-    #   env:
-    #     TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
-    #     TINYTEX_VERSION: ${{ inputs.tinytex_version }} 
-    #       
+
     # - name: Install additional LaTeX packages (non-Windows) 🛠
     #   if: inputs.has_latex == 'true' && runner.os != 'Windows'
     #   run: |
