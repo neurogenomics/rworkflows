@@ -21,7 +21,7 @@ env:
   run_covr: ${{ true }}
   run_pkgdown: ${{ false }}
   has_runit: ${{ false }}
-  has_latex: ${{ false }}
+  has_latex: ${{ true }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   run_docker: ${{ false }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
