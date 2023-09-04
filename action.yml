@@ -213,15 +213,14 @@ runs:
     - name: Install additional LaTeX packages (non-Windows) 🛠
       if: inputs.has_latex == 'true' && runner.os != 'Windows'
       run: |
-        sudo apt-get install texlive texlive-fonts-extra
+        sudo apt-get install texlive-full texlive-fonts-extra
         # tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: bash {0} 
       
     - name: Install additional LaTeX packages (Windows) 🛠
       if: inputs.has_latex == 'true' && runner.os == 'Windows'
-      run: |
-        npm install texlive
+      run: | 
         tlmgr install bera nowidow parnotes marginfix etoolbox titlesec sectsty framed enumitem parskip soul placeins footmisc changepage xstring caption mathtools
         tlmgr list --only-installed
       shell: pwsh  
