@@ -208,7 +208,7 @@ runs:
     - name: Install latex 🛠
       if: inputs.has_latex == 'true'
       uses: r-lib/actions/setup-tinytex@v2
-      env:
+      env: 
         TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
         TINYTEX_VERSION: ${{ inputs.tinytex_version }}
 
