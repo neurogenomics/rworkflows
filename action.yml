@@ -196,9 +196,6 @@ runs:
     - name: Install latex 🛠
       if: inputs.has_latex == 'true'
       uses: r-lib/actions/setup-tinytex@v2 
-      env:
-        # install full prebuilt version
-        TINYTEX_INSTALLER: TinyTeX
           
     - name: Install additional LaTeX packages (non-Windows) 🛠
       if: inputs.has_latex == 'true' && runner.os != 'Windows'
