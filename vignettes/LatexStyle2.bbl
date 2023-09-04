@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{Leisch2002}
+Friedrich Leisch.
+\newblock {\em Compstat: Proceedings in Computational Statistics}, chapter
+  Sweave: Dynamic Generation of Statistical Reports Using Literate Data
+  Analysis, pages 575--580.
+\newblock Physica-Verlag HD, Heidelberg, 2002.
+\newblock URL: \url{http://leisch.userweb.mwn.de/Sweave/}, \href
+  {http://dx.doi.org/10.1007/978-3-642-57489-4_89}
+  {\path{doi:10.1007/978-3-642-57489-4_89}}.
+
+\bibitem{Xie2014}
+Yihui Xie.
+\newblock knitr: A comprehensive tool for reproducible research in {R}.
+\newblock In Victoria Stodden, Friedrich Leisch, and Roger~D. Peng, editors,
+  {\em Implementing Reproducible Computational Research}. Chapman and Hall/CRC,
+  2014.
+\newblock ISBN 978-1466561595.
+\newblock URL: \url{http://www.crcpress.com/product/isbn/9781466561595}.
+
+\end{thebibliography}
