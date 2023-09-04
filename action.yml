@@ -47,9 +47,14 @@ inputs:
     default: false
   tinytex_installer:
     description: >
-      Which release of tinytex (bundles of packages for rendering latex) to use.
+      Which release of tinytex (bundles of LaTeX packages) to use.
       All options can be found here: https://github.com/rstudio/tinytex-releases/
     default: 'TinyTeX-0'
+  tinytex_version:
+    description: >
+      Which version of tinytext to use. 
+      All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
+    default: 'latest'
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -204,6 +209,7 @@ runs:
       env:
         # install full prebuilt version
         TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
+        TINYTEX_VERSION: ${{ inputs.tinytex_version }}
           
     - name: Install additional LaTeX packages (non-Windows) 🛠
       if: inputs.has_latex == 'true' && runner.os != 'Windows'
