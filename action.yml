@@ -49,12 +49,13 @@ inputs:
     description: >
       Which release of tinytex (bundles of LaTeX packages) to use.
       All options can be found here: https://github.com/rstudio/tinytex-releases/
+      Note, 'TinyTeX-2' is only available for 'tinytex_version: daily'.
     default: 'TinyTeX-2'
   tinytex_version:
     description: >
       Which version of tinytext to use. 
       All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
-    default: 'daily'
+    default: ''
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
