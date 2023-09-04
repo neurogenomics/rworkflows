@@ -49,7 +49,7 @@ inputs:
     description: >
       Which release of tinytex (bundles of packages for rendering latex) to use.
       All options can be found here: https://github.com/rstudio/tinytex-releases/
-     default: 'TinyTeX-0'
+    default: 'TinyTeX-0'
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
