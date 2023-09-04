@@ -54,7 +54,7 @@ inputs:
   tinytex_version:
     description: >
       Which version of tinytext to use. 
-      When set to 'daily', uses the latest daily build.
+      When set to '', uses the latest daily build.
       All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
     default: 'daily'
   run_docker: 
@@ -223,7 +223,7 @@ runs:
         "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
         "footmisc","changepage","xstring","caption","mathtools")
         tinytex::install_tinytex(
-        bundle = Sys.getenv("tinytex_installer"), 
+        bundle = if(Sys.getenv("tinytex_installer")=="") "daily" else Sys.getenv("tinytex_installer"), 
         version = Sys.getenv("tinytex_version"),
         extra_packages = extra_packages
         )
