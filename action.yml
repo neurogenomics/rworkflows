@@ -282,10 +282,11 @@ runs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
+        run_build_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--no-build-vignettes"
         run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"
         rcmdcheck::rcmdcheck(
             args = c("--no-manual", "--timings", as_cran, run_vignettes),
-            build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
+            build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data", run_build_vignettes),
             error_on = "warning",
             check_dir = "check")
       shell: Rscript {0}
