@@ -4,11 +4,13 @@ name: rworkflows
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
   pull_request:
     branches:
     - master
     - main
+    - devel
     - RELEASE_**
 jobs:
   rworkflows:
@@ -43,7 +45,7 @@ jobs:
         run_covr: ${{ true }}
         run_pkgdown: ${{ true }}
         has_runit: ${{ false }}
-        has_latex: ${{ false }}
+        has_latex: ${{ true }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         docker_user: bschilder

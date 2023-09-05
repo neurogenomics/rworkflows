@@ -2,9 +2,9 @@
 ## 'on' must be in quotes to avoid being evaulated as TRUE
 'on':
   push:
-    branches: [main, master, 'RELEASE_**']
+    branches: [main, master, devel, 'RELEASE_**']
   pull_request:
-    branches: [main, master, 'RELEASE_**']
+    branches: [main, master, devel, 'RELEASE_**']
 'jobs':
   rworkflows:
     permissions:

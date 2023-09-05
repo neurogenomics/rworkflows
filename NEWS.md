@@ -3,6 +3,11 @@
 ## New features
 
 * Merge PR #66 by @js2264 to eliminate the PAT_GITHUB secret setup step.
+* Add fun emojis to action.
+
+## Bug fixes
+
+* Add "devel" as trigger branch in all 3 workflows.
 
 # rworkflows 0.99.12
 
