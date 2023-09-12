@@ -3,11 +3,36 @@
 ## New features
 
 * Merge PR #66 by @js2264 to eliminate the PAT_GITHUB secret setup step.
+* Merge PR #71 by @js2264 to skip vignettes when building if `run_vignettes`.
 * Add fun emojis to action.
+* Add vignette for checking Sweave (.Rnw) files can be rendered.
+* *action.yml*
+  - Add new args to control latex: `tinytex_installer`, `tinytex_version`
+  - Install extra latex deps using one step for all OS via `tinytex` R package.
+* `construct_runners`
+  - Simplify arguments so that user doesn't have to pass OS names.
+  - When an arg like `bioc` is of length one, the same value is automatically
+    applied across all 3 OS.
+* *bioconductor.Rmd*
+  - Add vignette specifically for Bioconductor packages.
+* `use_workflow`
+  - Split `name` arg into two args: `name` + `template`, 
+    so that you can create multiple separate workflow files 
+    using the same template.
+  - Add new args to control latex: `tinytex_installer`, `tinytex_version`
+  - New internal subfunctions:
+    - `save_yaml`
+    - `check_bioc_version`
+  - New exported subfunction: `construct_cont`
+* Transition `BiocPkgTools` + `biocViews` to Suggests
+  - Based on recc from CRAN maintainers, as they do not consistently 
+    install/update Bioc packages on the CRAN server.
 
 ## Bug fixes
 
 * Add "devel" as trigger branch in all 3 workflows.
+* Harmonise `github_token` parameter docs between 
+  *action.yml* and `use_workflow`.
 
 # rworkflows 0.99.12
 

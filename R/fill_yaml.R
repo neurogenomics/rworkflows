@@ -1,6 +1,7 @@
 fill_yaml <- function(yml,
                       ## action-level args
                       name,
+                      template,
                       tag,
                       on,
                       branches,
@@ -15,6 +16,8 @@ fill_yaml <- function(yml,
                       run_pkgdown, 
                       has_runit, 
                       has_latex,
+                      tinytex_installer,
+                      tinytex_version,
                       run_docker,  
                       github_token,
                       docker_user,
@@ -33,11 +36,11 @@ fill_yaml <- function(yml,
     yml$jobs[[1]]$strategy$matrix$config <- runners 
   }
   #### static workflow vs. action ####
-  if(name=="rworkflows_static"){
+  if(template=="rworkflows_static"){
     with2 <- yml$env
-  } else if(name=="rworkflows"){
+  } else if(template=="rworkflows"){
     #### Set tag ####
-    yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",name,tag)   
+    yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",template,tag)   
     #### with: args #### 
     with2 <- yml$jobs[[1]]$steps[[2]]$with
     ### Enable running workflow locally with act ####
@@ -55,6 +58,8 @@ fill_yaml <- function(yml,
   with2$run_pkgdown <- run_pkgdown
   with2$has_runit <- has_runit 
   with2$has_latex <- has_latex 
+  with2$tinytex_installer <- tinytex_installer
+  with2$tinytex_version <- tinytex_version
   with2$GITHUB_TOKEN <- github_token 
   with2$run_docker <- run_docker 
   with2$docker_user <- docker_user 
@@ -62,9 +67,9 @@ fill_yaml <- function(yml,
   with2$DOCKER_TOKEN <- docker_token 
   with2$cache_version <- cache_version  
   #### static workflow vs. action ####
-  if(name=="rworkflows_static"){
+  if(template=="rworkflows_static"){
     yml$env <- with2
-  } else if(name=="rworkflows"){ 
+  } else if(template=="rworkflows"){ 
     #### replace with: args ####
     steps <- yml$jobs[[1]]$steps
     yml$jobs[[1]]$steps[[length(steps)]]$with <- with2

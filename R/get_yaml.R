@@ -1,17 +1,18 @@
-get_yaml <- function(name){
+get_yaml <- function(template){
   
-  workflow_nms <- c("rworkflows","rworkflows_static")
+  template_nms <- c("rworkflows","rworkflows_static")
+  ## Custom handler prevents "on" from being converted to TRUE
   handlers <- list('bool#yes' = function(x) { if (x == "on") x else TRUE})
-  #### Check name and read in #####
+  #### Check template and read in #####
   #### Dynamic action ####
-  if(is.null(name) || 
-     name=="rworkflows"){
+  if(is.null(template) || 
+     template=="rworkflows"){
       yml <- yaml::read_yaml(
         system.file("templates","rworkflows_template.yml",
                     package = "rworkflows"),
         handlers = handlers)
     #### Static workflow ####
-    } else if(name=="rworkflows_static"){
+    } else if(template=="rworkflows_static"){
       yml <- yaml::read_yaml(
         system.file("templates","rworkflows_template_static.yml",
                     package = "rworkflows"),
@@ -36,7 +37,7 @@ get_yaml <- function(name){
       yml$jobs$rworkflows_static$steps <- recurse(action$runs$steps)
     } else {
       stp <- paste("`name` must be one of:",
-                   paste("\n -",shQuote(workflow_nms),collapse = ""))
+                   paste("\n -",shQuote(template_nms),collapse = ""))
       stop(stp)
   } 
   return(yml)

@@ -21,6 +21,7 @@
 #' for \emph{DESCRIPTION} files.
 #' @param use_repos Use R standard R package repositories like CRAN and Bioc
 #' to find \emph{DESCRIPTION} files.
+#' @inheritParams get_description_repo
 #' @returns A named list of \code{packageDescription} objects.
 #' 
 #' @export
@@ -33,6 +34,7 @@
 #' d <- get_description(refs="neurogenomics/rworkflows")
 get_description <- function(refs=NULL,
                             paths=here::here("DESCRIPTION"),
+                            db=NULL,
                             cache_dir=tools::R_user_dir(package = "rworkflows",
                                                         which = "cache"),
                             force_new=FALSE,
@@ -74,7 +76,8 @@ get_description <- function(refs=NULL,
     # }
   } else {
   #### Method 2 #### 
-    dl2 <- get_description_repo(refs = refs,  
+    dl2 <- get_description_repo(refs = refs,
+                                db = db,   
                                 verbose = verbose)
     dl2 <- check_refs_names(dl = dl2) 
     return(dl2)

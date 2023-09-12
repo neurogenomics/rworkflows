@@ -42,22 +42,24 @@ Imports:
     desc,
     badger,
     renv,
-    biocViews,
     tools,
     methods,
-    BiocPkgTools,
     BiocManager,
     data.table
 Suggests:
     markdown,
     rmarkdown,
     remotes,
-    knitr,
-    BiocStyle,
+    knitr, 
     covr,
     testthat (>= 3.0.0),
-    htmltools
+    htmltools,
+    jsonlite,
+    BiocStyle,
+    BiocPkgTools,
+    biocViews
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
+LazyData: true

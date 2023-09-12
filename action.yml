@@ -56,7 +56,7 @@ inputs:
       Which version of tinytext to use. 
       When set to '', uses the latest daily build.
       All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
-    default: '2022.12'
+    default: ''
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -75,9 +75,12 @@ inputs:
       GitHub authentication token with permissions to push 
       to the R package's GitHub repository. 
       Also used to bypass GitHub download limits.
-      Automatically set to {{ secrets.GITHUB_TOKEN }} by 
-      default, but can be changed to allow access to
-      specific scopes. 
+      By default, uses {{ secrets.GITHUB_TOKEN }}
+      which is automatically set up by GitHub. 
+      However users can also choose to pass a custom GitHub secret variable
+      (e.g. {{ secrets.PAT_GITHUB }}) which allows access to private
+      repositories. Read here for more details: 
+      https://docs.github.com/en/actions/security-guides/automatic-token-authentication.
   cache_version: 
     description: >
       Which cache version to use. 

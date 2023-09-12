@@ -4,7 +4,7 @@
 \alias{bioc_r_versions}
 \title{Bioconductor / R versions}
 \usage{
-bioc_r_versions(bioc_version = NULL, depth = NULL)
+bioc_r_versions(bioc_version = NULL, depth = NULL, return_opts = FALSE)
 }
 \arguments{
 \item{bioc_version}{Version of Bioc to return info for.
@@ -25,6 +25,8 @@ the following depths would return:
 \item{\code{depth=2}: }{"4.2"}
 \item{\code{depth=3}: }{"4.2.0"}
 }}
+
+\item{return_opts}{Return a character vector of all valid Bioc version names.}
 }
 \value{
 Named list of Bioc/R versions
