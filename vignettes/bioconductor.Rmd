@@ -20,6 +20,12 @@ library(pkg, character.only = TRUE)
 library(`r pkg`)
 ```
 
+# Branch-specific workflows
+
+It may be desirable to set up multiple workflow files within the same repository.
+A common use case for this is Bioconductor packages, 
+which rely on version-controlled [release schedules](https://www.bioconductor.org/about/).
+
 ## `devel` branch
 
 Only use the `devel` version of Bioc when launching 

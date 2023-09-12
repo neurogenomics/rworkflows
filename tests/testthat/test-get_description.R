@@ -63,10 +63,15 @@ test_that("get_description works", {
   }
   
   #### Search CRAN/Bioc repos ####
-  d13 <- get_description(refs="neurogenomics/rworkflows", 
-                         use_repos = TRUE) 
-  testthat::expect_equal(d13[[1]],
-                         d1[[1]])
+  ## Don't run on CRAN due to issues on their server: 
+  ## https://github.com/neurogenomics/rworkflows/issues/65
+  if (identical(Sys.getenv("NOT_CRAN"),"true")) {
+    d13 <- get_description(refs="ABSSeq",
+                           db = rworkflows::biocpkgtools_db, 
+                           use_repos = TRUE) 
+    testthat::expect_equal(d13[[1]],
+                           d1[[1]])
+  }  
   #### Search GitHub repos ####
   d14 <- get_description(refs="neurogenomics/orthogene",
                          use_wd = FALSE) 

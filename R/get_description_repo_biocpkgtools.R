@@ -4,6 +4,7 @@ get_description_repo_biocpkgtools <- function(refs = NULL,
                                                        "BioCexp",
                                                        "BioCworkflows", 
                                                        "CRAN"), 
+                                              force_new = FALSE,
                                               verbose = TRUE){
   Package <- NULL;
   
@@ -16,7 +17,7 @@ get_description_repo_biocpkgtools <- function(refs = NULL,
     messager("Importing database:",x,v=verbose)
     #### Cache a local copy ####
     tmp <- file.path(tmp_dir,paste0(x,".rds"))
-    if(file.exists(tmp)){
+    if(file.exists(tmp) && isFALSE(force_new)){
       db_i <- readRDS(tmp)
     } else {
       db_i <- BiocPkgTools::biocPkgList(repo=x,

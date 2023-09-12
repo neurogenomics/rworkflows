@@ -12,7 +12,8 @@ check_bioc_version <- function(bioc){
   if(!bioc %in% opts){
     stopper(paste0("bioc=",shQuote(bioc)),
             "bioc version must be one of:",
-            paste("\n -",shQuote(opts),collapse = ""))
+            paste("\n -",shQuote(c('devel','release',opts)),
+                  collapse = ""))
   } else {
     return(bioc)
   }

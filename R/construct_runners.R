@@ -17,6 +17,7 @@
 #'  (e.g. \code{r: 4.2.0, bioc: 3.16}) 
 #'  as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).
 #' @param verbose Print messages. 
+#' @inheritParams construct_cont
 #' @returns Named list of configurations for each runner OS.
 #' 
 #' @export
@@ -33,7 +34,10 @@ construct_runners <- function(os=c("ubuntu-latest",
                                        "auto",
                                        "auto"),
                               versions_explicit = FALSE, 
-                              cont = construct_cont(default_tag = bioc[[1]]), 
+                              run_check_cont = FALSE,
+                              cont = construct_cont(
+                                default_tag = bioc[[1]],
+                                run_check_cont = run_check_cont), 
                               rspm = list(paste0(
                                 "https://packagemanager.rstudio.com/",
                                 "cran/__linux__/focal/release"
@@ -54,14 +58,21 @@ construct_runners <- function(os=c("ubuntu-latest",
     if(isTRUE(versions_explicit)){
       info <- bioc_r_versions(bioc_version = args$bioc[[o]])
     } else { 
-      info <- list(bioc=check_bioc_version(bioc=args$bioc[[o]]), 
-                   r=args$r[[o]])
+      info <- list(bioc=check_bioc_version(bioc = args$bioc[[o]]), 
+                   r=check_r_version(r = args$r[[o]])
+                   )
     } 
+    #### Check container settings ####
+    if(isTRUE(run_check_cont)){
+      cont <- check_cont(cont=cont, 
+                         verbose=verbose)
+    }
+    #### Construct new list ####
     list(os = o,
-         bioc=info$bioc,
-         r=info$r,
-         cont=args$cont[[o]],
-         rspm=args$rspm[[o]]
+         bioc = info$bioc,
+         r = info$r,
+         cont = args$cont[[o]],
+         rspm = args$rspm[[o]]
          )
   })
   return(runners) 

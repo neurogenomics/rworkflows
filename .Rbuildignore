@@ -30,3 +30,6 @@ vignettes/*.pdf
 vignettes/*.gz
 vignettes/*.toc
 vignettes/*.tex
+
+vignettes/*.bib
+vignettes/*.Rnw

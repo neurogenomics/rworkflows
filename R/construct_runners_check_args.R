@@ -18,7 +18,8 @@ construct_runners_check_args <- function(os,
              }
              return(args[[nm]])
            } else {
-             if(length(args[[nm]])==1){
+             if(is.null(names(args[[nm]])) &&
+                length(args[[nm]])==1){
                messager("Applying the same",shQuote(nm),
                         "parameter to all",length(os),"'os':",
                         shQuote(args[[nm]]),

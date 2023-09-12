@@ -9,7 +9,8 @@ construct_runners(
   bioc = list("devel", "release", "release"),
   r = list("auto", "auto", "auto"),
   versions_explicit = FALSE,
-  cont = construct_cont(default_tag = bioc[[1]]),
+  run_check_cont = FALSE,
+  cont = construct_cont(default_tag = bioc[[1]], run_check_cont = run_check_cont),
   rspm = list(paste0("https://packagemanager.rstudio.com/",
     "cran/__linux__/focal/release"), NULL, NULL),
   verbose = TRUE
@@ -26,6 +27,9 @@ See \link[rworkflows]{bioc_r_versions} documentation for all options.}
 \item{versions_explicit}{Specify R/Bioc versions explicitly
 (e.g. \code{r: 4.2.0, bioc: 3.16}) 
 as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).}
+
+\item{run_check_cont}{Check whether the requested container repo 
+(and the tag, if specified) exist using \link[rworkflows]{check_cont}.}
 
 \item{cont}{Which Docker container to use on each OS
 (\code{NULL} means no container will be used for that OS).
