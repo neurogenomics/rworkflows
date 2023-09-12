@@ -28,6 +28,9 @@
 * Transition `BiocPkgTools` + `biocViews` to Suggests
   - Based on recc from CRAN maintainers, as they do not consistently 
     install/update Bioc packages on the CRAN server.
+* `fill_yaml`
+  - Simplify code.
+  - Add subfunction `omit_if_default` to omit tinytex args from yaml.
 
 ## Bug fixes
 

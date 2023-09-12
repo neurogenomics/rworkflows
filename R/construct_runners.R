@@ -40,7 +40,7 @@ construct_runners <- function(os=c("ubuntu-latest",
                                 run_check_cont = run_check_cont), 
                               rspm = list(paste0(
                                 "https://packagemanager.rstudio.com/",
-                                "cran/__linux__/focal/release"
+                                "cran/__linux__/latest/release"
                               ),
                               NULL,
                               NULL), 
