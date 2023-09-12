@@ -23,6 +23,7 @@
   - New internal subfunctions:
     - `save_yaml`
     - `check_bioc_version`
+    - `check_r_version`
   - New exported subfunction: `construct_cont`
 * Transition `BiocPkgTools` + `biocViews` to Suggests
   - Based on recc from CRAN maintainers, as they do not consistently 

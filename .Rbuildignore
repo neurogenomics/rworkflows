@@ -24,12 +24,12 @@ rworkflows-merged
 ^Dockerfile$
 ^LICENSE 
 # Sweave vignette outputs
-vignettes/*.bbl
-vignettes/*.log
-vignettes/*.pdf
-vignettes/*.gz
-vignettes/*.toc
-vignettes/*.tex
+^vignettes/*\.bbl$
+^vignettes/*\.log$
+^vignettes/*\.pdf$
+^vignettes/*\.gz$
+^vignettes/*\.toc$
+^vignettes/*\.tex$
 
-vignettes/*.bib
-vignettes/*.Rnw
+^vignettes/*\.bib$
+^vignettes/*\.Rnw$
