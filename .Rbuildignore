@@ -30,6 +30,3 @@ rworkflows-merged
 ^vignettes/*\.gz$
 ^vignettes/*\.toc$
 ^vignettes/*\.tex$
-
-^vignettes/*\.bib$
-^vignettes/*\.Rnw$

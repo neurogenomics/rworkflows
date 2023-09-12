@@ -23,8 +23,13 @@ library(`r pkg`)
 # Branch-specific workflows
 
 It may be desirable to set up multiple workflow files within the same repository.
-A common use case for this is Bioconductor packages, 
-which rely on version-controlled [release schedules](https://www.bioconductor.org/about/).
+A common use case for this is for `Bioconductor` packages, 
+which rely on version-controlled
+[release schedules](https://www.bioconductor.org/about/).
+
+Because of the release schedule, you may want to have different 
+virtual machine (VM) setups for each version of your package 
+(which are stored on different branches of the same GitHub repository).
 
 ## `devel` branch
 
