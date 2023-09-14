@@ -7,7 +7,8 @@
 * Add fun emojis to action.
 * Add vignette for checking Sweave (.Rnw) files can be rendered.
 * *action.yml*
-  - Add new args to control latex: `tinytex_installer`, `tinytex_version`
+  - Add new args to control latex: 
+    `tinytex_installer`, `tinytex_version`, `pandoc_version`
   - Install extra latex deps using one step for all OS via `tinytex` R package.
 * `construct_runners`
   - Simplify arguments so that user doesn't have to pass OS names.

@@ -11,7 +11,6 @@
 get_github_url_db <- function(db,
                               return_dt=FALSE){
   
-  .SD <- NULL;
   # db <- rworkflows::biocpkgtools_db
   ## These fields sometimes contain >1 link.
   ## Find the one that's actually for the GitHub repo.
