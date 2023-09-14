@@ -135,12 +135,6 @@ Actions from the <code>devel</code> branch.</p>
 <span>                   save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># For demo only, use default in practice</span></span>
 <span>                   <span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Applying the same 'bioc' parameter to all 3 'os': 'devel'</span></span></code></pre>
-<pre><code><span><span class="co">## nm: tinytex_installer</span></span></code></pre>
-<pre><code><span><span class="co">## val: TinyTeX-1</span></span></code></pre>
-<pre><code><span><span class="co">## def: TinyTeX-1</span></span></code></pre>
-<pre><code><span><span class="co">## nm: tinytex_version</span></span></code></pre>
-<pre><code><span><span class="co">## val:</span></span></code></pre>
-<pre><code><span><span class="co">## def:</span></span></code></pre>
 <pre><code><span><span class="co">## name: rworkflows.devel</span></span>
 <span><span class="co">## 'on':</span></span>
 <span><span class="co">##   push:</span></span>
@@ -191,7 +185,7 @@ Actions from the <code>devel</code> branch.</p>
 <span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
 <span><span class="co">##         cache_version: cache-v1</span></span>
 <span><span class="co">##         enable_act: no</span></span></code></pre>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmppbYGXA/rworkflows.devel.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmpWCmoli/rworkflows.devel.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="release_3_17-branch">
@@ -199,7 +193,7 @@ Actions from the <code>devel</code> branch.</p>
 </h3>
 <p>Only use the <code>3.17</code> release version of Bioc when launching
 GitHub Actions from the <code>RELEASE_3_17</code> branch.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="st">"RELEASE_3_17"</span></span>
 <span><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/use_workflow.html">use_workflow</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"rworkflows"</span>,<span class="va">v</span>,sep<span class="op">=</span><span class="st">"."</span><span class="op">)</span>, </span>
 <span>                   branches <span class="op">=</span> <span class="va">v</span>, </span>
@@ -209,12 +203,6 @@ GitHub Actions from the <code>RELEASE_3_17</code> branch.</p>
 <span>                   save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># For demo only, use default in practice</span></span>
 <span>                   <span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## Applying the same 'bioc' parameter to all 3 'os': 'RELEASE_3_17'</span></span></code></pre>
-<pre><code><span><span class="co">## nm: tinytex_installer</span></span></code></pre>
-<pre><code><span><span class="co">## val: TinyTeX-1</span></span></code></pre>
-<pre><code><span><span class="co">## def: TinyTeX-1</span></span></code></pre>
-<pre><code><span><span class="co">## nm: tinytex_version</span></span></code></pre>
-<pre><code><span><span class="co">## val:</span></span></code></pre>
-<pre><code><span><span class="co">## def:</span></span></code></pre>
 <pre><code><span><span class="co">## name: rworkflows.RELEASE_3_17</span></span>
 <span><span class="co">## 'on':</span></span>
 <span><span class="co">##   push:</span></span>
@@ -265,15 +253,15 @@ GitHub Actions from the <code>RELEASE_3_17</code> branch.</p>
 <span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
 <span><span class="co">##         cache_version: cache-v1</span></span>
 <span><span class="co">##         enable_act: no</span></span></code></pre>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmppbYGXA/rworkflows.RELEASE_3_17.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmpWCmoli/rworkflows.RELEASE_3_17.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="release_-branches">
 <code>RELEASE_*</code> branches<a class="anchor" aria-label="anchor" href="#release_-branches"></a>
 </h3>
-<p>Only use the <code>latest</code> release version of Bioc when
+<p>Only use the latest <code>release</code> version of Bioc when
 launching GitHub Actions from any <code>RELEASE_*</code> branch.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="st">"RELEASE_*"</span></span>
 <span><span class="va">f3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/use_workflow.html">use_workflow</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"rworkflows"</span>,<span class="va">v</span>,sep<span class="op">=</span><span class="st">"."</span><span class="op">)</span>, </span>
 <span>                   branches <span class="op">=</span> <span class="va">v</span>, </span>
@@ -282,70 +270,12 @@ launching GitHub Actions from any <code>RELEASE_*</code> branch.</p>
 <span>                   force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                   save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># For demo only, use default in practice</span></span>
 <span>                   <span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Applying the same 'bioc' parameter to all 3 'os': 'RELEASE_*'</span></span></code></pre>
-<pre><code><span><span class="co">## nm: tinytex_installer</span></span></code></pre>
-<pre><code><span><span class="co">## val: TinyTeX-1</span></span></code></pre>
-<pre><code><span><span class="co">## def: TinyTeX-1</span></span></code></pre>
-<pre><code><span><span class="co">## nm: tinytex_version</span></span></code></pre>
-<pre><code><span><span class="co">## val:</span></span></code></pre>
-<pre><code><span><span class="co">## def:</span></span></code></pre>
-<pre><code><span><span class="co">## name: rworkflows.RELEASE_*</span></span>
-<span><span class="co">## 'on':</span></span>
-<span><span class="co">##   push:</span></span>
-<span><span class="co">##     branches: RELEASE_*</span></span>
-<span><span class="co">##   pull_request:</span></span>
-<span><span class="co">##     branches: RELEASE_*</span></span>
-<span><span class="co">## jobs:</span></span>
-<span><span class="co">##   rworkflows:</span></span>
-<span><span class="co">##     permissions:</span></span>
-<span><span class="co">##       contents: write</span></span>
-<span><span class="co">##     runs-on: ${{ matrix.config.os }}</span></span>
-<span><span class="co">##     name: ${{ matrix.config.os }} (${{ matrix.config.r }})</span></span>
-<span><span class="co">##     container: ${{ matrix.config.cont }}</span></span>
-<span><span class="co">##     strategy:</span></span>
-<span><span class="co">##       fail-fast: no</span></span>
-<span><span class="co">##       matrix:</span></span>
-<span><span class="co">##         config:</span></span>
-<span><span class="co">##         - os: ubuntu-latest</span></span>
-<span><span class="co">##           bioc: release</span></span>
-<span><span class="co">##           r: auto</span></span>
-<span><span class="co">##           cont: bioconductor/bioconductor_docker:RELEASE_*</span></span>
-<span><span class="co">##           rspm: ~</span></span>
-<span><span class="co">##         - os: macOS-latest</span></span>
-<span><span class="co">##           bioc: release</span></span>
-<span><span class="co">##           r: auto</span></span>
-<span><span class="co">##           cont: ~</span></span>
-<span><span class="co">##           rspm: ~</span></span>
-<span><span class="co">##         - os: windows-latest</span></span>
-<span><span class="co">##           bioc: release</span></span>
-<span><span class="co">##           r: auto</span></span>
-<span><span class="co">##           cont: ~</span></span>
-<span><span class="co">##           rspm: ~</span></span>
-<span><span class="co">##     steps:</span></span>
-<span><span class="co">##     - uses: neurogenomics/rworkflows@master</span></span>
-<span><span class="co">##       with:</span></span>
-<span><span class="co">##         run_bioccheck: no</span></span>
-<span><span class="co">##         run_rcmdcheck: yes</span></span>
-<span><span class="co">##         as_cran: yes</span></span>
-<span><span class="co">##         run_vignettes: yes</span></span>
-<span><span class="co">##         has_testthat: yes</span></span>
-<span><span class="co">##         run_covr: yes</span></span>
-<span><span class="co">##         run_pkgdown: yes</span></span>
-<span><span class="co">##         has_runit: no</span></span>
-<span><span class="co">##         has_latex: no</span></span>
-<span><span class="co">##         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span><span class="co">##         run_docker: no</span></span>
-<span><span class="co">##         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}</span></span>
-<span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
-<span><span class="co">##         cache_version: cache-v1</span></span>
-<span><span class="co">##         enable_act: no</span></span></code></pre>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmppbYGXA/rworkflows.RELEASE_*.yml</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<details><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<details><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
