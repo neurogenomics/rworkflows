@@ -83,9 +83,11 @@ jobs:
       uses: grimbough/bioc-actions/setup-bioc@v1
       with:
         bioc-version: ${{ matrix.config.bioc }}
-    - name: "Setup pandoc from r-lib \U0001F6E0"
-      if: runner.os != 'Linux'
+    - name: "Install Pandoc \U0001F6E0"
+      if: ${{ env.pandoc_version != 'default' }} | runner.os != 'Linux'
       uses: r-lib/actions/setup-pandoc@v2
+      with:
+        pandoc-version: ${{ env.pandoc_version }}
     - name: Query dependencies ❔
       run: |
         options(crayon.enabled = TRUE)
