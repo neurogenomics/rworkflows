@@ -56,11 +56,11 @@ inputs:
       Which version of tinytext to use. 
       When set to '', uses the latest daily build.
       All versions can be found here: https://github.com/rstudio/tinytex-releases/releases
-    default: '2022.01'
+    default: ''
   pandoc_version:
     description: >
       Which version of pandoc to use.
-    default: '2.17'
+    default: '2.19'
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
