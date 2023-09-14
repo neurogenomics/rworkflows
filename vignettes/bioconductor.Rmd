@@ -1,0 +1,92 @@
+---
+title: "Bioconductor" 
+author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
+date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
+output:
+  BiocStyle::html_document
+vignette: >
+    %\VignetteIndexEntry{Bioconductor} 
+    %\usepackage[utf8]{inputenc}
+    %\VignetteEngine{knitr::rmarkdown}
+---
+
+
+```{r, echo=FALSE, include=FALSE}
+pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
+library(pkg, character.only = TRUE)
+```
+
+```R
+library(`r pkg`)
+```
+
+# Branch-specific workflows
+
+It may be desirable to set up multiple workflow files within the same repository.
+A common use case for this is for `Bioconductor` packages, 
+which rely on version-controlled
+[release schedules](https://www.bioconductor.org/about/).
+
+Because of the release schedule, you may want to have different 
+virtual machine (VM) setups for each version of your package 
+(which are stored on different branches of the same GitHub repository).
+
+## `devel` branch
+
+Only use the `devel` version of Bioc when launching 
+GitHub Actions from the `devel` branch.
+
+```{r}
+v <- "devel"
+f1 <- use_workflow(name = paste("rworkflows",v,sep="."), 
+                   branches = v, 
+                   runners = construct_runners(bioc = v), 
+                   preview = TRUE,
+                   force_new = TRUE,
+                   save_dir = tempdir() # For demo only, use default in practice
+                   ) 
+```
+
+## `RELEASE_3_17` branch
+
+Only use the `3.17` release version of Bioc when launching 
+GitHub Actions from the `RELEASE_3_17` branch.
+
+```{r}
+v <- "RELEASE_3_17"
+f2 <- use_workflow(name = paste("rworkflows",v,sep="."), 
+                   branches = v, 
+                   runners = construct_runners(bioc = v), 
+                   preview = TRUE,
+                   force_new = TRUE,
+                   save_dir = tempdir() # For demo only, use default in practice
+                   ) 
+```
+
+## `RELEASE_*` branches
+
+Only use the `latest` release version of Bioc when launching 
+GitHub Actions from any `RELEASE_*` branch.
+
+```{r}
+v <- "RELEASE_*"
+f3 <- use_workflow(name = paste("rworkflows",v,sep="."), 
+                   branches = v, 
+                   runners = construct_runners(bioc = v), 
+                   preview = TRUE,
+                   force_new = TRUE,
+                   save_dir = tempdir() # For demo only, use default in practice
+                   ) 
+```
+
+# Session Info 
+
+<details> 
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>  
+
+<hr>

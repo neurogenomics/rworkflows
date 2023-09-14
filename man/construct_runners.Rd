@@ -6,13 +6,14 @@
 \usage{
 construct_runners(
   os = c("ubuntu-latest", "macOS-latest", "windows-latest"),
-  bioc = stats::setNames(list("devel", "release", "release"), os),
-  r = stats::setNames(list("auto", "auto", "auto"), os),
-  cont = stats::setNames(list(paste0("bioconductor/bioconductor_docker:", bioc[[1]]),
-    NULL, NULL), os),
-  rspm = stats::setNames(list(paste0("https://packagemanager.rstudio.com/",
-    "cran/__linux__/focal/release"), NULL, NULL), os),
-  versions_explicit = FALSE
+  bioc = list("devel", "release", "release"),
+  r = list("auto", "auto", "auto"),
+  versions_explicit = FALSE,
+  run_check_cont = FALSE,
+  cont = construct_cont(default_tag = bioc[[1]], run_check_cont = run_check_cont),
+  rspm = list(paste0("https://packagemanager.rstudio.com/",
+    "cran/__linux__/focal/release"), NULL, NULL),
+  verbose = TRUE
 )
 }
 \arguments{
@@ -23,6 +24,13 @@ See \link[rworkflows]{bioc_r_versions} documentation for all options.}
 
 \item{r}{Which R version to use on each OS.}
 
+\item{versions_explicit}{Specify R/Bioc versions explicitly
+(e.g. \code{r: 4.2.0, bioc: 3.16}) 
+as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).}
+
+\item{run_check_cont}{Check whether the requested container repo 
+(and the tag, if specified) exist using \link[rworkflows]{check_cont}.}
+
 \item{cont}{Which Docker container to use on each OS
 (\code{NULL} means no container will be used for that OS).
 See 
@@ -32,9 +40,7 @@ See
 \item{rspm}{Which R repository manager to use on each OS
 (\code{NULL} means the default will be used for that OS).}
 
-\item{versions_explicit}{Specify R/Bioc versions explicitly
-(e.g. \code{r: 4.2.0, bioc: 3.16}) 
-as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).}
+\item{verbose}{Print messages.}
 }
 \value{
 Named list of configurations for each runner OS.

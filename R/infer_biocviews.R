@@ -22,7 +22,6 @@
 #' @returns A character vector of biocviews.
 #' 
 #' @export
-#' @importFrom biocViews recommendBiocViews
 #' @importFrom here here
 #' @examples 
 #' ## Don't run simply bc biocViews::recommendBiocViews is unable 
@@ -43,9 +42,10 @@ infer_biocviews <- function(pkgdir=here::here(),
                             add_newlines = FALSE,
                             verbose = TRUE){
   # devoptera::args2vars(infer_biocviews)
-  branch <- branch[1]
-  type <- type[1]
   
+  requireNamespace("biocViews")
+  branch <- branch[1]
+  type <- type[1] 
   #### Check args ####
   ## branch_opts
   branch_opts <- eval(formals(biocViews::recommendBiocViews)$branch)

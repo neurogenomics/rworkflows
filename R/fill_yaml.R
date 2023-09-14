@@ -1,6 +1,7 @@
 fill_yaml <- function(yml,
                       ## action-level args
                       name,
+                      template,
                       tag,
                       on,
                       branches,
@@ -15,6 +16,8 @@ fill_yaml <- function(yml,
                       run_pkgdown, 
                       has_runit, 
                       has_latex,
+                      tinytex_installer,
+                      tinytex_version,
                       run_docker,  
                       github_token,
                       docker_user,
@@ -22,6 +25,8 @@ fill_yaml <- function(yml,
                       docker_token,
                       cache_version,
                       enable_act){
+  # devoptera::args2vars(use_workflow)
+  
   #### name ####
   yml$name <- name
   #### on ####
@@ -33,11 +38,11 @@ fill_yaml <- function(yml,
     yml$jobs[[1]]$strategy$matrix$config <- runners 
   }
   #### static workflow vs. action ####
-  if(name=="rworkflows_static"){
+  if(template=="rworkflows_static"){
     with2 <- yml$env
-  } else if(name=="rworkflows"){
+  } else if(template=="rworkflows"){
     #### Set tag ####
-    yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",name,tag)   
+    yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",template,tag)   
     #### with: args #### 
     with2 <- yml$jobs[[1]]$steps[[2]]$with
     ### Enable running workflow locally with act ####
@@ -46,25 +51,18 @@ fill_yaml <- function(yml,
     }  
   }
   #### Supply variables as "with:" or "env:" ####
-  with2$run_bioccheck <- run_bioccheck
-  with2$run_rcmdcheck <- run_rcmdcheck
-  with2$as_cran <- as_cran
-  with2$run_vignettes <- run_vignettes
-  with2$has_testthat <- has_testthat
-  with2$run_covr <- run_covr
-  with2$run_pkgdown <- run_pkgdown
-  with2$has_runit <- has_runit 
-  with2$has_latex <- has_latex 
-  with2$GITHUB_TOKEN <- github_token 
-  with2$run_docker <- run_docker 
-  with2$docker_user <- docker_user 
-  with2$docker_org <- docker_org 
-  with2$DOCKER_TOKEN <- docker_token 
-  with2$cache_version <- cache_version  
+  nonarg_list <- c("yml","name","template","tag","on","branches","runners")
+  args_list <- names(formals(fill_yaml))
+  args_list <- args_list[!args_list %in% nonarg_list]
+  omit_list <- c("tinytex_installer","tinytex_version")
+  for(a in args_list){
+    nm <- if(a %in% c("github_token","docker_token")) toupper(a) else a
+    with2[nm] <- if(a %in% omit_list) omit_if_default(arg = a) else get(a)
+  }   
   #### static workflow vs. action ####
-  if(name=="rworkflows_static"){
+  if(template=="rworkflows_static"){
     yml$env <- with2
-  } else if(name=="rworkflows"){ 
+  } else if(template=="rworkflows"){ 
     #### replace with: args ####
     steps <- yml$jobs[[1]]$steps
     yml$jobs[[1]]$steps[[length(steps)]]$with <- with2

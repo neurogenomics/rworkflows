@@ -19,6 +19,7 @@
 #' \item{\code{depth=2}: }{"4.2"}
 #' \item{\code{depth=3}: }{"4.2.0"}
 #' }
+#' @param return_opts Return a character vector of all valid Bioc version names.
 #' @returns Named list of Bioc/R versions
 #' 
 #' @export
@@ -26,7 +27,8 @@
 #' @examples 
 #' ver <- bioc_r_versions(bioc_version="devel")
 bioc_r_versions <- function(bioc_version = NULL,
-                            depth = NULL){
+                            depth = NULL,
+                            return_opts = FALSE){
   # devoptera::args2vars(bioc_r_versions)
   
   yml <- yaml::read_yaml("https://bioconductor.org/config.yaml")
@@ -46,7 +48,10 @@ bioc_r_versions <- function(bioc_version = NULL,
                                            parse_version(v, depth=depth)
                                          }) 
   #### Handler ####
-  if(is.null(bioc_version)){
+  if(isTRUE(return_opts)){
+    opts <- c(names(info)[seq(2)], rev(names(info$r_ver_for_bioc_ver)))
+    return(opts)
+  } else if(is.null(bioc_version)){
     return(info)
   } else if (bioc_version=="devel") {
     return(info$devel)
@@ -68,5 +73,5 @@ bioc_r_versions <- function(bioc_version = NULL,
   }
   # info[["r_latest"]] <- package_version(rversions::r_release()$version)
   # info[["r_devel"]] <- package_version(rversions::r_release()$version)
-  return(info)
+  return(info) 
 }

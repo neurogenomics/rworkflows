@@ -16,6 +16,8 @@
 #' @param versions_explicit Specify R/Bioc versions explicitly
 #'  (e.g. \code{r: 4.2.0, bioc: 3.16}) 
 #'  as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).
+#' @param verbose Print messages. 
+#' @inheritParams construct_cont
 #' @returns Named list of configurations for each runner OS.
 #' 
 #' @export
@@ -25,60 +27,52 @@
 construct_runners <- function(os=c("ubuntu-latest",
                                    "macOS-latest",
                                    "windows-latest"),
-                              bioc = stats::setNames(
-                                list("devel",
-                                     "release",
-                                     "release"),
-                                os
-                                ),
-                              r = stats::setNames(
-                                list("auto",
-                                     "auto",
-                                     "auto"),
-                                os
+                              bioc = list("devel",
+                                          "release",
+                                          "release"),
+                              r = list("auto",
+                                       "auto",
+                                       "auto"),
+                              versions_explicit = FALSE, 
+                              run_check_cont = FALSE,
+                              cont = construct_cont(
+                                default_tag = bioc[[1]],
+                                run_check_cont = run_check_cont), 
+                              rspm = list(paste0(
+                                "https://packagemanager.rstudio.com/",
+                                "cran/__linux__/latest/release"
                               ),
-                              cont = stats::setNames(
-                                list(paste0("bioconductor/bioconductor_docker:",
-                                            bioc[[1]]),
-                                     NULL,
-                                     NULL),
-                                os
-                              ), 
-                              rspm = stats::setNames(
-                                list(paste0(
-                                  "https://packagemanager.rstudio.com/",
-                                  "cran/__linux__/focal/release"
-                                ),
-                                     NULL,
-                                     NULL),
-                                os
-                              ),
-                              versions_explicit=FALSE
+                              NULL,
+                              NULL), 
+                              verbose = TRUE
                               ){ 
-  
-  # devoptera::args2varssource_all()
-  # devoptera::args2vars(construct_runners)
+  # devoptera::args2vars(construct_runners, reassign = TRUE)
   
   #### Check args ####
-  construct_runners_check_args(os = os, 
-                               bioc = bioc, 
-                               r = r, 
-                               cont = cont)
-  cont <- construct_runners_check_cont(cont = cont,
-                                       versions_explicit = versions_explicit)
-  #### Set runners  
+  args <- construct_runners_check_args(os = os, 
+                                       bioc = bioc, 
+                                       r = r, 
+                                       cont = cont)   
+  #### Set runners ####
   runners <- lapply(os, function(o){
     if(isTRUE(versions_explicit)){
-      info <- bioc_r_versions(bioc_version = bioc[[o]])
-    } else {
-      info <- list(bioc=bioc[[o]], 
-                   r=r[[o]])
+      info <- bioc_r_versions(bioc_version = args$bioc[[o]])
+    } else { 
+      info <- list(bioc=check_bioc_version(bioc = args$bioc[[o]]), 
+                   r=check_r_version(r = args$r[[o]])
+                   )
     } 
+    #### Check container settings ####
+    if(isTRUE(run_check_cont)){
+      cont <- check_cont(cont=cont, 
+                         verbose=verbose)
+    }
+    #### Construct new list ####
     list(os = o,
-         bioc=info$bioc,
-         r=info$r,
-         cont=cont[[o]],
-         rspm=rspm[[o]]
+         bioc = info$bioc,
+         r = info$r,
+         cont = args$cont[[o]],
+         rspm = args$rspm[[o]]
          )
   })
   return(runners) 

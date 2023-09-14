@@ -14,8 +14,11 @@
 #' @importFrom  data.table as.data.table 
 #' @import desc
 #' @examples 
-#'  db <- BiocPkgTools::biocPkgList()
-#'  dl <- dt_to_desc(db=db, refs="GenomicRanges")
+#' #### Updated data ####
+#' # db <- BiocPkgTools::biocPkgList()
+#' #### Static data ####
+#'  db <- rworkflows::biocpkgtools_db
+#'  dl <- dt_to_desc(db=db, refs="ABSSeq")
 dt_to_desc <- function(db,
                        refs=NULL,
                        verbose=TRUE){

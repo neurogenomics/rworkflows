@@ -23,3 +23,10 @@ rworkflows-merged
 ^pkgdown$
 ^Dockerfile$
 ^LICENSE 
+# Sweave vignette outputs
+^vignettes/*\.bbl$
+^vignettes/*\.log$
+^vignettes/*\.pdf$
+^vignettes/*\.gz$
+^vignettes/*\.toc$
+^vignettes/*\.tex$

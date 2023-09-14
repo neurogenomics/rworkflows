@@ -25,6 +25,9 @@ Convert \link[data.table]{data.table} containing the
  to \link[desc]{desc} format.
 }
 \examples{
- db <- BiocPkgTools::biocPkgList()
- dl <- dt_to_desc(db=db, refs="GenomicRanges")
+#### Updated data ####
+# db <- BiocPkgTools::biocPkgList()
+#### Static data ####
+ db <- rworkflows::biocpkgtools_db
+ dl <- dt_to_desc(db=db, refs="ABSSeq")
 }

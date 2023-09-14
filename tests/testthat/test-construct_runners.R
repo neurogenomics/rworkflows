@@ -10,13 +10,13 @@ test_that("construct_runners works", {
   run_tests(runners = runners)
   
   testthat::expect_error(
-    construct_runners(bioc=c("typo"="typo"))
+    construct_runners(bioc=list("typo"="typo"))
   ) 
   testthat::expect_error(
-    construct_runners(r=c("typo"="typo"))
+    construct_runners(r=list("typo"="typo"))
   )
   testthat::expect_error(
-    construct_runners(cont=c("typo"="typo"))
+    construct_runners(cont=list("typo"="typo"))
   )
   
   #### versions_explicit ####

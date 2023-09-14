@@ -12,7 +12,8 @@ Issue writing "on:" as "'as':"}
 }
 \usage{
 use_workflow(
-  name = "rworkflows",
+  template = "rworkflows",
+  name = template,
   tag = "@master",
   on = c("push", "pull_request"),
   branches = c("master", "main", "devel", "RELEASE_**"),
@@ -26,6 +27,8 @@ use_workflow(
   run_pkgdown = TRUE,
   has_runit = FALSE,
   has_latex = FALSE,
+  tinytex_installer = "TinyTeX-1",
+  tinytex_version = "",
   run_docker = FALSE,
   github_token = "${{ secrets.GITHUB_TOKEN }}",
   docker_user = NULL,
@@ -41,7 +44,7 @@ use_workflow(
 )
 }
 \arguments{
-\item{name}{Workflow name.
+\item{template}{Workflow template name.
 \itemize{
 \item{"rworkflows"}{A short workflow script that calls
  the GitHub action from the GitHub Marketplace.
@@ -52,6 +55,8 @@ explicitly copies all steps from the \pkg{rworkflows} action
 into a static file. Users may need to update this file themselves over time,
 though this does allow for a fully customisable workflow.}
 }}
+
+\item{name}{An arbitrary name to call the workflow.}
 
 \item{tag}{Which version of the \code{rworkflows} action to use. 
 Can be a branch name on the
@@ -95,12 +100,27 @@ build documentation website, and deploy to \emph{gh-pages} branch.}
 \item{has_latex}{Install a suite of LaTeX dependencies used for 
 rendering Sweave (.rnw) and other documentation files.}
 
+\item{tinytex_installer}{Which release of tinytex (bundles of LaTeX
+packages) to use. All options can be found 
+\href{https://github.com/rstudio/tinytex-releases/}{here}.
+Note, 'TinyTeX-2' is only available for \code{tinytex_version='daily'}.}
+
+\item{tinytex_version}{Which version of tinytext to use. 
+When set to '', uses the latest daily build.
+All versions can be found 
+\href{https://github.com/rstudio/tinytex-releases/releases}{here}.}
+
 \item{run_docker}{Whether to build and push a Docker container to DockerHub.}
 
-\item{github_token}{Token for the repo. 
-Can be passed in using \{\{ secrets.PAT_GITHUB \}\}.
-By default, it uses \{\{ secrets.GITHUB_TOKEN \}\}
-which is automatically set up. Read 
+\item{github_token}{GitHub authentication token with permissions to push 
+to the R package's GitHub repository. 
+Also used to bypass GitHub download limits.
+By default, uses \{\{ secrets.GITHUB_TOKEN \}\}
+which is automatically set up by GitHub. 
+However users can also choose to pass a custom GitHub secret variable
+(e.g. \{\{ secrets.PAT_GITHUB \}\}) which allows access to private
+ repositories.
+Read 
 \href{https://docs.github.com/en/actions/security-guides/automatic-token-authentication}{
 here for more details}.}
 
