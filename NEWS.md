@@ -7,7 +7,8 @@
 * Add fun emojis to action.
 * Add vignette for checking Sweave (.Rnw) files can be rendered.
 * *action.yml*
-  - Add new args to control latex: `tinytex_installer`, `tinytex_version`
+  - Add new args to control latex: 
+    `tinytex_installer`, `tinytex_version`, `pandoc_version`
   - Install extra latex deps using one step for all OS via `tinytex` R package.
 * `construct_runners`
   - Simplify arguments so that user doesn't have to pass OS names.
@@ -19,7 +20,8 @@
   - Split `name` arg into two args: `name` + `template`, 
     so that you can create multiple separate workflow files 
     using the same template.
-  - Add new args to control latex: `tinytex_installer`, `tinytex_version`
+  - Add new args to control latex: 
+    `tinytex_installer`, `tinytex_version`, `pandoc_version`
   - New internal subfunctions:
     - `save_yaml`
     - `check_bioc_version`
@@ -31,12 +33,23 @@
 * `fill_yaml`
   - Simplify code.
   - Add subfunction `omit_if_default` to omit tinytex args from yaml.
+* `is_rstudio`: new interal helper function.
+* Update *rworkflows_static.yml*
 
 ## Bug fixes
 
 * Add "devel" as trigger branch in all 3 workflows.
 * Harmonise `github_token` parameter docs between 
   *action.yml* and `use_workflow`.
+* CRAN checks:
+  - Downgrade `BiocPkgTools`/`biocViews` to Suggests to 
+    compensate for issues with the CRAN server: #65
+* `fill_yaml`:
+  - When `template="rworkflows_static"`, prevent `with2` from simplifying to vector.
+* `construct_runners`
+  - `rspm` wasn't getting added.
+* `get_github_url_db`
+  - Properly coalesce hits from multiple columns searched for GitHub URLs.
 
 # rworkflows 0.99.12
 

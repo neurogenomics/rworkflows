@@ -28,4 +28,24 @@ test_that("construct_runners works", {
   testthat::expect_true(
     package_version(runners[[1]]$bioc)>="3.17"
   ) 
+  
+  #### When only single opts given ####
+  runners <- construct_runners(bioc = "devel",
+                               versions_explicit = TRUE,
+                               run_check_cont = TRUE)
+  run_tests(runners = runners) 
+  testthat::expect_true(
+    package_version(runners[[1]]$r)>="4.3"
+  )
+  testthat::expect_true(
+    package_version(runners[[1]]$bioc)>="3.18"
+  ) 
+  
+  #### When incorrect OS names provided ####
+  testthat::expect_error(
+    construct_runners(bioc = list("ubuntu-latest"="devel",
+                                  "macOS-latest"="devel",
+                                  "typooo"="devel"))
+  )
+  
 })

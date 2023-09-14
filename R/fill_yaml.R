@@ -18,6 +18,7 @@ fill_yaml <- function(yml,
                       has_latex,
                       tinytex_installer,
                       tinytex_version,
+                      pandoc_version,
                       run_docker,  
                       github_token,
                       docker_user,
@@ -39,7 +40,7 @@ fill_yaml <- function(yml,
   }
   #### static workflow vs. action ####
   if(template=="rworkflows_static"){
-    with2 <- yml$env
+    with2 <- as.list(yml$env)
   } else if(template=="rworkflows"){
     #### Set tag ####
     yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",template,tag)   
@@ -54,10 +55,17 @@ fill_yaml <- function(yml,
   nonarg_list <- c("yml","name","template","tag","on","branches","runners")
   args_list <- names(formals(fill_yaml))
   args_list <- args_list[!args_list %in% nonarg_list]
-  omit_list <- c("tinytex_installer","tinytex_version")
+  omit_list <- c("tinytex_installer","tinytex_version","pandoc_version")
+  #### Omit certain variables when equal to default ####
+  ## Don't do this for rworkflows_static as this setup has no default values.
   for(a in args_list){
     nm <- if(a %in% c("github_token","docker_token")) toupper(a) else a
-    with2[nm] <- if(a %in% omit_list) omit_if_default(arg = a) else get(a)
+    with2[nm] <- if(a %in% omit_list &&
+                    template!="rworkflows_static") {
+      omit_if_default(arg = a)
+    } else {
+      get(a)
+    }
   }   
   #### static workflow vs. action ####
   if(template=="rworkflows_static"){

@@ -19,6 +19,10 @@ rworkflows-merged
 ^Meta$
 ^codecov\.yml$
 ^_pkgdown\.yml$
+^node_modules$
+^package-lock\.json$
+^package\.json$
+
 ^docs$
 ^pkgdown$
 ^Dockerfile$

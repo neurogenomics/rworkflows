@@ -65,10 +65,10 @@ f2 <- use_workflow(name = paste("rworkflows",v,sep="."),
 
 ## `RELEASE_*` branches
 
-Only use the `latest` release version of Bioc when launching 
+Only use the latest `release` version of Bioc when launching 
 GitHub Actions from any `RELEASE_*` branch.
 
-```{r}
+```r
 v <- "RELEASE_*"
 f3 <- use_workflow(name = paste("rworkflows",v,sep="."), 
                    branches = v, 

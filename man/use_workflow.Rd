@@ -29,6 +29,7 @@ use_workflow(
   has_latex = FALSE,
   tinytex_installer = "TinyTeX-1",
   tinytex_version = "",
+  pandoc_version = "2.19",
   run_docker = FALSE,
   github_token = "${{ secrets.GITHUB_TOKEN }}",
   docker_user = NULL,
@@ -105,10 +106,14 @@ packages) to use. All options can be found
 \href{https://github.com/rstudio/tinytex-releases/}{here}.
 Note, 'TinyTeX-2' is only available for \code{tinytex_version='daily'}.}
 
-\item{tinytex_version}{Which version of tinytext to use. 
+\item{tinytex_version}{Which version of tinytex to use. 
 When set to '', uses the latest daily build.
 All versions can be found 
 \href{https://github.com/rstudio/tinytex-releases/releases}{here}.}
+
+\item{pandoc_version}{Which version of pandoc to use.
+For details see  
+\href{https://github.com/r-lib/actions/tree/v2-branch/setup-pandoc}{here}.}
 
 \item{run_docker}{Whether to build and push a Docker container to DockerHub.}
 

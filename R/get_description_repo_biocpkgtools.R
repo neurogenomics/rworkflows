@@ -3,13 +3,15 @@ get_description_repo_biocpkgtools <- function(refs = NULL,
                                                        "BioCann", 
                                                        "BioCexp",
                                                        "BioCworkflows", 
-                                                       "CRAN"), 
+                                                       "CRAN"),
+                                              version = BiocManager::version(),
                                               force_new = FALSE,
                                               verbose = TRUE){
+  # devoptera::args2vars(get_description_repo_biocpkgtools)
   Package <- NULL;
+  requireNamespace("BiocPkgTools")
   
   #### Use updated file ####
-  requireNamespace("BiocPkgTools")
   tmp_dir <- file.path(tempdir(),"BiocPkgTools")
   dir.create(tmp_dir,showWarnings = FALSE, recursive = TRUE)
   #### Import each database ####

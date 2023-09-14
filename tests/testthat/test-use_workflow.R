@@ -32,6 +32,14 @@ test_that("use_workflow works", {
   testthat::expect_equal(yml,yml2)
   
   
+  #### Use rworkflows_static ####
+  yml3 <- use_workflow(template = "rworkflows_static",
+                       return_path = FALSE,
+                       force_new = TRUE,
+                       tinytex_installer = "TinyTeX",
+                       save_dir = tempdir())
+  
+  
   #### Make table out of arguments ####
   # defaults <- eval(formals(rworkflows::use_workflow))
   # d <- data.table::data.table(arg=names(defaults), 

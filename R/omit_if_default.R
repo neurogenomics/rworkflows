@@ -3,9 +3,9 @@ omit_if_default <- function(arg,
                             func="use_workflow",
                             omit_value=NULL){ 
   def <- eval(formals(get(func))[[arg]])
-  message("nm: ",arg)
-  message("val: ",val)
-  message("def: ",def) 
+  # message("nm: ",arg)
+  # message("val: ",val)
+  # message("def: ",def) 
   if(val == def){
     return(omit_value)
   } else {

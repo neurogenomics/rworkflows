@@ -48,10 +48,13 @@
 #'  packages) to use. All options can be found 
 #'  \href{https://github.com/rstudio/tinytex-releases/}{here}.
 #'  Note, 'TinyTeX-2' is only available for \code{tinytex_version='daily'}.
-#' @param tinytex_version  Which version of tinytext to use. 
+#' @param tinytex_version  Which version of tinytex to use. 
 #' When set to '', uses the latest daily build.
 #' All versions can be found 
 #' \href{https://github.com/rstudio/tinytex-releases/releases}{here}.
+#' @param pandoc_version Which version of pandoc to use.
+#' For details see  
+#' \href{https://github.com/r-lib/actions/tree/v2-branch/setup-pandoc}{here}.
 #' @param github_token GitHub authentication token with permissions to push 
 #' to the R package's GitHub repository. 
 #' Also used to bypass GitHub download limits.
@@ -112,6 +115,7 @@ use_workflow <- function(## action-level args
                          has_latex=FALSE,
                          tinytex_installer='TinyTeX-1',
                          tinytex_version='',
+                         pandoc_version='2.19',
                          run_docker=FALSE,  
                          github_token="${{ secrets.GITHUB_TOKEN }}",
                          docker_user=NULL,
@@ -168,6 +172,7 @@ use_workflow <- function(## action-level args
                    has_latex=has_latex,
                    tinytex_installer=tinytex_installer,
                    tinytex_version=tinytex_version,
+                   pandoc_version=pandoc_version,
                    run_docker=run_docker,  
                    github_token=github_token,
                    docker_user=docker_user,
