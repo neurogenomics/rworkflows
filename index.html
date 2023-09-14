@@ -61,6 +61,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/bioconductor.html">Bioconductor</a>
+    </li>
+    <li>
       <a href="articles/depgraph.html">Dependency graph</a>
     </li>
     <li>
@@ -99,7 +102,7 @@
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>
 </h4>
 <h4>
-README updated: <i>Sep-04-2023</i>
+README updated: <i>Sep-14-2023</i>
 </h4>
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
@@ -320,34 +323,22 @@ README updated: <i>Sep-04-2023</i>
 <span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="do">## [1] rmarkdown_2.24</span></span>
 <span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="do">## loaded via a namespace (and not attached):</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.4        ggplot2_3.4.3       xfun_0.40          </span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="do">##  [4] htmlwidgets_1.6.2   gh_1.4.0            Biobase_2.61.0     </span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="do">##  [7] tzdb_0.4.0          yulab.utils_0.0.9   vctrs_0.6.3        </span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="do">## [10] tools_4.3.1         bitops_1.0-7        generics_0.1.3     </span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="do">## [13] stats4_4.3.1        curl_5.0.2          RUnit_0.4.32       </span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="do">## [16] tibble_3.2.1        fansi_1.0.4         RSQLite_2.3.1      </span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="do">## [19] blob_1.2.4          pkgconfig_2.0.3     data.table_1.14.8  </span></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="do">## [22] RColorBrewer_1.1-3  dbplyr_2.3.3        desc_1.4.2         </span></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="do">## [25] graph_1.79.0        lifecycle_1.0.3     stringr_1.5.0      </span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="do">## [28] compiler_4.3.1      dlstats_0.1.7       munsell_0.5.0      </span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="do">## [31] biocViews_1.69.2    htmltools_0.5.6     RCurl_1.98-1.12    </span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="do">## [34] yaml_2.3.7          pillar_1.9.0        whisker_0.4.1      </span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="do">## [37] DT_0.29             cachem_1.0.8        rvest_1.0.3        </span></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="do">## [40] tidyselect_1.2.0    digest_0.6.33       stringi_1.7.12     </span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="do">## [43] dplyr_1.1.2         rprojroot_2.0.3     grid_4.3.1         </span></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="do">## [46] fastmap_1.1.1       here_1.0.1          colorspace_2.1-0   </span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="do">## [49] cli_3.6.1           magrittr_2.0.3      RBGL_1.77.1        </span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="do">## [52] XML_3.99-0.14       crul_1.4.0          utf8_1.2.3         </span></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="do">## [55] readr_2.1.4         scales_1.2.1        filelock_1.0.2     </span></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="do">## [58] bit64_4.0.5         httr_1.4.7          rvcheck_0.2.1      </span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="do">## [61] igraph_1.5.1        bit_4.0.5           hms_1.1.3          </span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="do">## [64] memoise_2.0.1       evaluate_0.21       knitr_1.43         </span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="do">## [67] rworkflows_0.99.13  BiocFileCache_2.9.1 rlang_1.1.1        </span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="do">## [70] BiocPkgTools_1.19.6 glue_1.6.2          DBI_1.1.3          </span></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="do">## [73] httpcode_0.3.0      renv_1.0.2          BiocManager_1.30.22</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="do">## [76] xml2_1.3.5          fauxpas_0.5.2       BiocGenerics_0.47.0</span></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="do">## [79] rorcid_0.7.0        rstudioapi_0.15.0   jsonlite_1.8.7     </span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="do">## [82] badger_0.2.3        R6_2.5.1</span></span></code></pre></div>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.4        jsonlite_1.8.7      renv_1.0.2         </span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="do">##  [4] dplyr_1.1.2         compiler_4.3.1      BiocManager_1.30.22</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="do">##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       </span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="do">## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         </span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="do">## [13] ggplot2_3.4.3       R6_2.5.1            generics_0.1.3     </span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="do">## [16] knitr_1.43          yulab.utils_0.0.9   tibble_3.2.1       </span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="do">## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.3    </span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="do">## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 </span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="do">## [25] rlang_1.1.1         utf8_1.2.3          cachem_1.0.8       </span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="do">## [28] badger_0.2.3        xfun_0.40           memoise_2.0.1      </span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="do">## [31] cli_3.6.1           magrittr_2.0.3      rworkflows_0.99.13 </span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="do">## [34] digest_0.6.33       grid_4.3.1          rstudioapi_0.15.0  </span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="do">## [37] lifecycle_1.0.3     vctrs_0.6.3         data.table_1.14.8  </span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="do">## [40] evaluate_0.21       glue_1.6.2          fansi_1.0.4        </span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="do">## [43] colorspace_2.1-0    tools_4.3.1         pkgconfig_2.0.3    </span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="do">## [46] htmltools_0.5.6</span></span></code></pre></div>
 </details>
 </div>
 

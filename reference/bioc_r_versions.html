@@ -36,6 +36,9 @@ Bioconductor."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/bioconductor.html">Bioconductor</a>
+    </li>
+    <li>
       <a href="../articles/depgraph.html">Dependency graph</a>
     </li>
     <li>
@@ -74,7 +77,7 @@ Bioconductor."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bioc_r_versions</span><span class="op">(</span>bioc_version <span class="op">=</span> <span class="cn">NULL</span>, depth <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bioc_r_versions</span><span class="op">(</span>bioc_version <span class="op">=</span> <span class="cn">NULL</span>, depth <span class="op">=</span> <span class="cn">NULL</span>, return_opts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -96,6 +99,10 @@ the following depths would return:</p><ul><li><p><code>depth=NULL</code>: "4.2.0
 <li><p><code>depth=2</code>: "4.2"</p></li>
 <li><p><code>depth=3</code>: "4.2.0"</p></li>
 </ul></dd>
+
+
+<dt>return_opts</dt>
+<dd><p>Return a character vector of all valid Bioc version names.</p></dd>
 
 </dl></div>
     <div id="value">

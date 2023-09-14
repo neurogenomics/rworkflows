@@ -37,6 +37,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/bioconductor.html">Bioconductor</a>
+    </li>
+    <li>
       <a href="../articles/depgraph.html">Dependency graph</a>
     </li>
     <li>
@@ -105,14 +108,13 @@ and each column is a field from the <em>DESCROPTION</em> file.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">BiocPkgTools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocPkgTools/man/biocPkgList.html" class="external-link">biocPkgList</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 'help("repositories", package = "BiocManager")' for details.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Replacement repositories:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
-<span class="r-in"><span> <span class="va">dl</span> <span class="op">&lt;-</span> <span class="fu">dt_to_desc</span><span class="op">(</span>db<span class="op">=</span><span class="va">db</span>, refs<span class="op">=</span><span class="st">"GenomicRanges"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#### Updated data ####</span></span></span>
+<span class="r-in"><span><span class="co"># db &lt;- BiocPkgTools::biocPkgList()</span></span></span>
+<span class="r-in"><span><span class="co">#### Static data ####</span></span></span>
+<span class="r-in"><span> <span class="va">db</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="va"><a href="biocpkgtools_db.html">biocpkgtools_db</a></span></span></span>
+<span class="r-in"><span> <span class="va">dl</span> <span class="op">&lt;-</span> <span class="fu">dt_to_desc</span><span class="op">(</span>db<span class="op">=</span><span class="va">db</span>, refs<span class="op">=</span><span class="st">"ABSSeq"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Constructing DESCRIPTION files for 1 R package(s).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Constructing DESCRIPTION for: GenomicRanges</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Constructing DESCRIPTION for: ABSSeq</span>
 </code></pre></div>
     </div>
   </div>

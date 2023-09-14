@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/bioconductor.html</loc>
+  </url>
+  <url>
     <loc>/articles/depgraph.html</loc>
   </url>
   <url>
@@ -31,7 +34,16 @@
     <loc>/reference/bioc_r_versions.html</loc>
   </url>
   <url>
+    <loc>/reference/biocpkgtools_db.html</loc>
+  </url>
+  <url>
+    <loc>/reference/check_cont.html</loc>
+  </url>
+  <url>
     <loc>/reference/construct_authors.html</loc>
+  </url>
+  <url>
+    <loc>/reference/construct_cont.html</loc>
   </url>
   <url>
     <loc>/reference/construct_runners.html</loc>
@@ -74,6 +86,9 @@
   </url>
   <url>
     <loc>/reference/messager.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stopper.html</loc>
   </url>
   <url>
     <loc>/reference/use_badges.html</loc>
