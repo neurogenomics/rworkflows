@@ -39,7 +39,7 @@ fill_yaml <- function(yml,
   }
   #### static workflow vs. action ####
   if(template=="rworkflows_static"){
-    with2 <- yml$env
+    with2 <- as.list(yml$env)
   } else if(template=="rworkflows"){
     #### Set tag ####
     yml$jobs[[1]]$steps[[2]]$uses <- paste0("neurogenomics/",template,tag)   

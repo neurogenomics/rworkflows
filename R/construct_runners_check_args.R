@@ -2,12 +2,13 @@ construct_runners_check_args <- function(os,
                                          bioc,
                                          r,
                                          cont,
+                                         rspm,
                                          versions_explicit=FALSE,
                                          verbose=TRUE){
   
   
   #### Fill names ####
-  args <- list(os=os, bioc=bioc, r=r, cont=cont)
+  args <- list(os=os, bioc=bioc, r=r, cont=cont, rspm=rspm)
   args2 <- lapply(stats::setNames(names(args),
                                   names(args)), 
          function(nm){
@@ -34,21 +35,12 @@ construct_runners_check_args <- function(os,
          } 
   )
   #### Check names #### 
-  if(!all(os %in% names(args2$bioc))){
-    stp <- paste(
-      "All `os` must be names of elements in `bioc_version` argument.")
-    stop(stp)
-  }
-  if(!all(os %in% names(args2$r))){
-    stp <- paste(
-      "All `os` must be names of elements in `r` argument.")
-    stop(stp)
-  }
-  if(!all(os %in% names(args2$cont))){
-    stp <- paste(
-      "All `os` must be names of elements in `cont` argument.")
-    stop(stp)
-  }
+  for(nm in names(args2)[-1]){
+    if(!all(os %in% names(args2[[nm]]))){
+      stopper("All `os` must be names of elements in",
+              paste0("`",nm,"`"),"argument.")
+    }
+  } 
   #### Return ####
   return(args2)
 }

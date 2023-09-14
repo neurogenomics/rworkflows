@@ -38,12 +38,12 @@ construct_runners <- function(os=c("ubuntu-latest",
                               cont = construct_cont(
                                 default_tag = bioc[[1]],
                                 run_check_cont = run_check_cont), 
-                              rspm = list(paste0(
+                              rspm = list(
+                                paste0(
                                 "https://packagemanager.rstudio.com/",
-                                "cran/__linux__/latest/release"
-                              ),
-                              NULL,
-                              NULL), 
+                                "cran/__linux__/latest/release"),
+                                NULL,
+                                NULL), 
                               verbose = TRUE
                               ){ 
   # devoptera::args2vars(construct_runners, reassign = TRUE)
@@ -52,7 +52,8 @@ construct_runners <- function(os=c("ubuntu-latest",
   args <- construct_runners_check_args(os = os, 
                                        bioc = bioc, 
                                        r = r, 
-                                       cont = cont)   
+                                       cont = cont,
+                                       rspm = rspm)   
   #### Set runners ####
   runners <- lapply(os, function(o){
     if(isTRUE(versions_explicit)){

@@ -65,7 +65,7 @@ test_that("get_description works", {
   #### Search CRAN/Bioc repos ####
   ## Don't run on CRAN due to issues on their server: 
   ## https://github.com/neurogenomics/rworkflows/issues/65
-  if (identical(Sys.getenv("NOT_CRAN"),"true")) {
+  if (is_gha() || is_rstudio()) {
     d13 <- get_description(refs="ABSSeq",
                            db = rworkflows::biocpkgtools_db, 
                            use_repos = TRUE) 

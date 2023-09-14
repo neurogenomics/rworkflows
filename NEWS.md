@@ -31,6 +31,7 @@
 * `fill_yaml`
   - Simplify code.
   - Add subfunction `omit_if_default` to omit tinytex args from yaml.
+* `is_rstudio`: new interal helper function.
 
 ## Bug fixes
 
@@ -40,6 +41,10 @@
 * CRAN checks:
   - Downgrade `BiocPkgTools`/`biocViews` to Suggests to 
     compensate for issues with the CRAN server: #65
+* `fill_yaml`:
+  - When `template="rworkflows_static"`, prevent `with2` from simplifying to vector.
+* `construct_runners`
+  - `rspm` wasn't getting added.
 
 # rworkflows 0.99.12
 
