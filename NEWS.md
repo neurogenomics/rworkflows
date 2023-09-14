@@ -5,7 +5,7 @@
 * Merge PR #66 by @js2264 to eliminate the PAT_GITHUB secret setup step.
 * Merge PR #71 by @js2264 to skip vignettes when building if `run_vignettes`.
 * Add fun emojis to action.
-* Add vignette for checking Sweave (.Rnw) files can be rendered.
+* Add vignette for checking Sweave (.Rnw) files can be rendered. 
 * *action.yml*
   - Add new args to control latex: 
     `tinytex_installer`, `tinytex_version`, `pandoc_version`
