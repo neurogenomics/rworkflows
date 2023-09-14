@@ -79,7 +79,7 @@
 <li>Add vignette for checking Sweave (.Rnw) files can be rendered.</li>
 <li>
 <em>action.yml</em>
-<ul><li>Add new args to control latex: <code>tinytex_installer</code>, <code>tinytex_version</code>
+<ul><li>Add new args to control latex: <code>tinytex_installer</code>, <code>tinytex_version</code>, <code>pandoc_version</code>
 </li>
 <li>Install extra latex deps using one step for all OS via <code>tinytex</code> R package.</li>
 </ul></li>
@@ -95,7 +95,7 @@
 <li>
 <code>use_workflow</code>
 <ul><li>Split <code>name</code> arg into two args: <code>name</code> + <code>template</code>, so that you can create multiple separate workflow files using the same template.</li>
-<li>Add new args to control latex: <code>tinytex_installer</code>, <code>tinytex_version</code>
+<li>Add new args to control latex: <code>tinytex_installer</code>, <code>tinytex_version</code>, <code>pandoc_version</code>
 </li>
 <li>New internal subfunctions:
 <ul><li><code>save_yaml</code></li>
@@ -115,6 +115,8 @@
 </ul></li>
 <li>
 <code>is_rstudio</code>: new interal helper function.</li>
+<li>Update <em>rworkflows_static.yml</em>
+</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-13">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-13"></a></h3>
@@ -131,6 +133,10 @@
 <code>construct_runners</code>
 <ul><li>
 <code>rspm</code> wasn’t getting added.</li>
+</ul></li>
+<li>
+<code>get_github_url_db</code>
+<ul><li>Properly coalesce hits from multiple columns searched for GitHub URLs.</li>
 </ul></li>
 </ul></div>
 </div>
