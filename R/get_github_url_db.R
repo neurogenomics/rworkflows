@@ -32,7 +32,7 @@ get_github_url_db <- function(db,
             trimws(whitespace="\n")
         } 
       }  
-    })
+    }) |> as.character()
   }
   #### Parse ####
   cols <- c("git_url","URL","BugReports")
