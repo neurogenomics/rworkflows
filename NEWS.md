@@ -20,7 +20,8 @@
   - Split `name` arg into two args: `name` + `template`, 
     so that you can create multiple separate workflow files 
     using the same template.
-  - Add new args to control latex: `tinytex_installer`, `tinytex_version`
+  - Add new args to control latex: 
+    `tinytex_installer`, `tinytex_version`, `pandoc_version`
   - New internal subfunctions:
     - `save_yaml`
     - `check_bioc_version`

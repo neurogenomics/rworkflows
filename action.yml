@@ -59,7 +59,8 @@ inputs:
     default: ''
   pandoc_version:
     description: >
-      Which version of pandoc to use.
+      Which version of pandoc to use. 
+      For details see here: https://github.com/r-lib/actions/tree/v2-branch/setup-pandoc
     default: '2.19'
   run_docker: 
     description: >

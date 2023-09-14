@@ -22,6 +22,9 @@ env:
   run_pkgdown: ${{ false }}
   has_runit: ${{ false }}
   has_latex: ${{ false }}
+  tinytex_installer: TinyTeX-1
+  tinytex_version: ''
+  pandoc_version: '2.19'
   run_docker: ${{ false }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
@@ -84,7 +87,7 @@ jobs:
       with:
         bioc-version: ${{ matrix.config.bioc }}
     - name: "Install Pandoc \U0001F6E0"
-      if: ${{ env.pandoc_version != 'default' }} | runner.os != 'Linux'
+      if: env.pandoc_version != 'false' && runner.os != 'Linux'
       uses: r-lib/actions/setup-pandoc@v2
       with:
         pandoc-version: ${{ env.pandoc_version }}
@@ -163,7 +166,7 @@ jobs:
       env:
         TINYTEX_INSTALLER: ${{ env.tinytex_installer }}
         TINYTEX_VERSION: ${{ env.tinytex_version }}
-    - name: "Install latex \U0001F6E0"
+    - name: "Install latex packages \U0001F6E0"
       if: env.has_latex == 'true'
       env:
         tinytex_installer: ${{ env.tinytex_installer }}
