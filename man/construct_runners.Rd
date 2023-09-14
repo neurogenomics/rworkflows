@@ -12,7 +12,7 @@ construct_runners(
   run_check_cont = FALSE,
   cont = construct_cont(default_tag = bioc[[1]], run_check_cont = run_check_cont),
   rspm = list(paste0("https://packagemanager.rstudio.com/",
-    "cran/__linux__/focal/release"), NULL, NULL),
+    "cran/__linux__/latest/release"), NULL, NULL),
   verbose = TRUE
 )
 }
