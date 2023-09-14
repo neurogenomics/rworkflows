@@ -58,6 +58,8 @@ Suggests:
     BiocStyle,
     BiocPkgTools,
     biocViews
+Remotes:
+  github::Bioconductor/BiocStyle
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
