@@ -11,4 +11,10 @@ test_that("check_cont works", {
       check_cont(cont = "bioconductor/bioconductor_typooooo")
     )
   )
+  testthat::expect_error(
+    check_cont(cont = "bioconductor/bioconductor_docker:typooo")
+  )
+  testthat::expect_error(
+    check_cont(cont = "typooooo")
+  )
 })

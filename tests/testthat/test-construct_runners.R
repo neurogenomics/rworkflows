@@ -31,7 +31,8 @@ test_that("construct_runners works", {
   
   #### When only single opts given ####
   runners <- construct_runners(bioc = "devel",
-                               versions_explicit = TRUE)
+                               versions_explicit = TRUE,
+                               run_check_cont = TRUE)
   run_tests(runners = runners) 
   testthat::expect_true(
     package_version(runners[[1]]$r)>="4.3"

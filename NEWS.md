@@ -32,6 +32,7 @@
   - Simplify code.
   - Add subfunction `omit_if_default` to omit tinytex args from yaml.
 * `is_rstudio`: new interal helper function.
+* Update *rworkflows_static.yml*
 
 ## Bug fixes
 
@@ -45,6 +46,8 @@
   - When `template="rworkflows_static"`, prevent `with2` from simplifying to vector.
 * `construct_runners`
   - `rspm` wasn't getting added.
+* `get_github_url_db`
+  - Properly coalesce hits from multiple columns searched for GitHub URLs.
 
 # rworkflows 0.99.12
 
