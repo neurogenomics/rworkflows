@@ -3,7 +3,8 @@ get_description_repo_biocpkgtools <- function(refs = NULL,
                                                        "BioCann", 
                                                        "BioCexp",
                                                        "BioCworkflows", 
-                                                       "CRAN"), 
+                                                       "CRAN"),
+                                              version = BiocManager::version(),
                                               force_new = FALSE,
                                               verbose = TRUE){
   Package <- NULL;

@@ -37,6 +37,9 @@
 * Add "devel" as trigger branch in all 3 workflows.
 * Harmonise `github_token` parameter docs between 
   *action.yml* and `use_workflow`.
+* CRAN checks:
+  - Downgrade `BiocPkgTools`/`biocViews` to Suggests to 
+    compensate for issues with the CRAN server: #65
 
 # rworkflows 0.99.12
 

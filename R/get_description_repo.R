@@ -31,6 +31,7 @@ get_description_repo <- function(refs = NULL,
   if(is.null(db)){
     db <- get_description_repo_biocpkgtools(refs = refs, 
                                             repo = repo,  
+                                            version = version,
                                             verbose = verbose) 
   }
   dt_to_desc(db = db,

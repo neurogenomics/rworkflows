@@ -59,7 +59,7 @@ construct_cont <- function(default_cont = "bioconductor/bioconductor_docker",
   })
   #### Check that the Dockerhub repo exists ####
   if(isTRUE(run_check_cont)){
-    check_cont(cont = cont, 
+    check_cont(cont = cont2, 
                verbose = verbose)
   }   
   #### Return ####

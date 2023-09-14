@@ -71,6 +71,12 @@ test_that("get_description works", {
                            use_repos = TRUE) 
     testthat::expect_equal(d13[[1]],
                            d1[[1]])
+    
+    d13 <- get_description(refs="ABSSeq",
+                           db = NULL, 
+                           use_repos = TRUE) 
+    testthat::expect_equal(d13[[1]],
+                           d1[[1]])
   }  
   #### Search GitHub repos ####
   d14 <- get_description(refs="neurogenomics/orthogene",
