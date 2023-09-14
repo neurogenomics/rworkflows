@@ -60,7 +60,7 @@ inputs:
   pandoc_version:
     description: >
       Which version of pandoc to use.
-    default: '2.19.2'
+    default: '2.17'
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -138,7 +138,7 @@ runs:
 
     ## pandoc is already included in the Bioconductor docker images
     - name: Install Pandoc 🛠
-      if: inputs.pandoc_version != 'false'
+      if: inputs.pandoc_version != 'false' && runner.os != 'Linux'
       uses: r-lib/actions/setup-pandoc@v2
       with: 
         pandoc-version: ${{ inputs.pandoc_version }} 
