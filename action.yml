@@ -60,7 +60,7 @@ inputs:
   pandoc_version:
     description: >
       Which version of pandoc to use.
-    default: ''
+    default: '2.19.2'
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
@@ -138,7 +138,7 @@ runs:
 
     ## pandoc is already included in the Bioconductor docker images
     - name: Install Pandoc 🛠
-      if: inputs.pandoc_version != '' || runner.os != 'Linux'
+      if: inputs.pandoc_version != 'false'
       uses: r-lib/actions/setup-pandoc@v2
       with: 
         pandoc-version: ${{ inputs.pandoc_version }} 
@@ -221,7 +221,7 @@ runs:
         TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
         TINYTEX_VERSION: ${{ inputs.tinytex_version }}
 
-    - name: Install latex 🛠
+    - name: Install latex packages 🛠
       if: inputs.has_latex == 'true'
       env:
         tinytex_installer: ${{ inputs.tinytex_installer }}
