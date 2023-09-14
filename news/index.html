@@ -113,6 +113,8 @@
 <ul><li>Simplify code.</li>
 <li>Add subfunction <code>omit_if_default</code> to omit tinytex args from yaml.</li>
 </ul></li>
+<li>
+<code>is_rstudio</code>: new interal helper function.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-13">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-13"></a></h3>
@@ -120,6 +122,15 @@
 <li>Harmonise <code>github_token</code> parameter docs between <em>action.yml</em> and <code>use_workflow</code>.</li>
 <li>CRAN checks:
 <ul><li>Downgrade <code>BiocPkgTools</code>/<code>biocViews</code> to Suggests to compensate for issues with the CRAN server: <a href="https://github.com/neurogenomics/rworkflows/issues/65" class="external-link">#65</a></li>
+</ul></li>
+<li>
+<code>fill_yaml</code>:
+<ul><li>When <code>template="rworkflows_static"</code>, prevent <code>with2</code> from simplifying to vector.</li>
+</ul></li>
+<li>
+<code>construct_runners</code>
+<ul><li>
+<code>rspm</code> wasn’t getting added.</li>
 </ul></li>
 </ul></div>
 </div>
