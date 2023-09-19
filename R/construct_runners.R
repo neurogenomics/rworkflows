@@ -13,6 +13,11 @@
 #'   for a list of all official Bioconductor Docker container versions.
 #' @param rspm Which R repository manager to use on each OS
 #'  (\code{NULL} means the default will be used for that OS).
+#' @param python_version Which python version to use on each OS.
+#'  (\code{NULL} means python will not be installed on that OS).
+#'  See 
+#'  \href{https://github.com/marketplace/actions/setup-miniconda}{here} for
+#'  details.
 #' @param versions_explicit Specify R/Bioc versions explicitly
 #'  (e.g. \code{r: 4.2.0, bioc: 3.16}) 
 #'  as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).
@@ -33,6 +38,9 @@ construct_runners <- function(os=c("ubuntu-latest",
                               r = list("auto",
                                        "auto",
                                        "auto"),
+                              python_version = list(NULL,
+                                                    NULL,
+                                                    NULL),
                               versions_explicit = FALSE, 
                               run_check_cont = FALSE,
                               cont = construct_cont(
@@ -53,7 +61,8 @@ construct_runners <- function(os=c("ubuntu-latest",
                                        bioc = bioc, 
                                        r = r, 
                                        cont = cont,
-                                       rspm = rspm)   
+                                       rspm = rspm,
+                                       python_version = python_version)   
   #### Set runners ####
   runners <- lapply(os, function(o){
     if(isTRUE(versions_explicit)){
@@ -65,16 +74,22 @@ construct_runners <- function(os=c("ubuntu-latest",
     } 
     #### Check container settings ####
     if(isTRUE(run_check_cont)){
-      cont <- check_cont(cont=cont, 
-                         verbose=verbose)
-    }
+      args$cont[[o]] <- check_cont(cont=args$cont[[o]], 
+                                   verbose=verbose)
+    } 
     #### Construct new list ####
-    list(os = o,
-         bioc = info$bioc,
-         r = info$r,
-         cont = args$cont[[o]],
-         rspm = args$rspm[[o]]
+    l <- list(os = o,
+              bioc = info$bioc,
+              r = info$r,
+              cont = args$cont[[o]],
+              rspm = args$rspm[[o]]
          )
+    #### Check python settings ####
+    python_version <- if(!is.null(args$python_version)){
+      l[["python-version"]] <- gha_python_versions(
+        python_version=args$python_version[[o]])
+    } 
+    return(l)
   })
   return(runners) 
 }

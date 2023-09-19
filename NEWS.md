@@ -1,3 +1,16 @@
+# rworkflows 0.99.14
+
+## New features
+
+* Add step to enable conda envs: #78
+  - Add subfunction: `gha_python_versions()` within `construct_runners`
+  - Add new *action.yml*:
+    - `miniforge_variant`
+    - `miniforge_version`
+    - `activate_environment`
+    - `environment_file`
+    - `channels`
+
 # rworkflows 0.99.13
 
 ## New features

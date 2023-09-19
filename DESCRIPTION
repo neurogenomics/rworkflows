@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 0.99.13
+Version: 0.99.14
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -58,8 +58,6 @@ Suggests:
     BiocStyle,
     BiocPkgTools,
     biocViews
-Remotes:
-  github::Bioconductor/BiocStyle
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

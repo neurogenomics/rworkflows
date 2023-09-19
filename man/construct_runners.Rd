@@ -8,6 +8,7 @@ construct_runners(
   os = c("ubuntu-latest", "macOS-latest", "windows-latest"),
   bioc = list("devel", "release", "release"),
   r = list("auto", "auto", "auto"),
+  python_version = list(NULL, NULL, NULL),
   versions_explicit = FALSE,
   run_check_cont = FALSE,
   cont = construct_cont(default_tag = bioc[[1]], run_check_cont = run_check_cont),
@@ -23,6 +24,12 @@ construct_runners(
 See \link[rworkflows]{bioc_r_versions} documentation for all options.}
 
 \item{r}{Which R version to use on each OS.}
+
+\item{python_version}{Which python version to use on each OS.
+(\code{NULL} means python will not be installed on that OS).
+See 
+\href{https://github.com/marketplace/actions/setup-miniconda}{here} for
+details.}
 
 \item{versions_explicit}{Specify R/Bioc versions explicitly
 (e.g. \code{r: 4.2.0, bioc: 3.16}) 

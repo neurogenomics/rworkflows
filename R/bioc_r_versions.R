@@ -53,9 +53,9 @@ bioc_r_versions <- function(bioc_version = NULL,
     return(opts)
   } else if(is.null(bioc_version)){
     return(info)
-  } else if (bioc_version=="devel") {
+  } else if (bioc_version %in% c("devel","dev")) {
     return(info$devel)
-  } else if (bioc_version=="release") {
+  } else if (bioc_version %in% c("release","latest")) {
     return(info$release)
   } else if (bioc_version %in% names(info$r_ver_for_bioc_ver)){ 
     if(grepl("RELEASE_",bioc_version,ignore.case = TRUE)){

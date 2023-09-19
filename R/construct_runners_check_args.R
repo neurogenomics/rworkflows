@@ -3,12 +3,14 @@ construct_runners_check_args <- function(os,
                                          r,
                                          cont,
                                          rspm,
+                                         python_version,
                                          versions_explicit=FALSE,
                                          verbose=TRUE){
   
   
   #### Fill names ####
-  args <- list(os=os, bioc=bioc, r=r, cont=cont, rspm=rspm)
+  args <- list(os=os, bioc=bioc, r=r, cont=cont, rspm=rspm, 
+               python_version=python_version)
   args2 <- lapply(stats::setNames(names(args),
                                   names(args)), 
          function(nm){

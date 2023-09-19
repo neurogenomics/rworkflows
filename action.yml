@@ -100,10 +100,56 @@ inputs:
       The maximum time to wait for long R processes like 
       dependency installations, downloads, and code checks.
     default: 2000
+  miniforge_variant:
+    description: >
+      If provided, this variant of Miniforge will be downloaded and installed.
+      If `miniforge_variant=false`, Miniforge will not be instaled at all.
+      If `miniforge_variant=""`, the "Miniforge3" variant will be installed.
+      If `miniforge_version` is not provided, the `latest` version will be used.
+      Currently-known values: - Miniforge3 (default) - Miniforge-pypy3 -
+      Mambaforge - Mambaforge-pypy3 Visit
+      https://github.com/conda-forge/miniforge/releases/ for more information on
+      available variants.
+    default: false
+   miniforge_version:
+    description: >
+      If provided, this version of the given Miniforge variant will be
+      downloaded and installed. If `miniforge_variant` is not provided,
+      `Miniforge3` will be used. Visit
+      https://github.com/conda-forge/miniforge/releases/ for more information on
+      available versions.
+    default: ""
+  activate_environment:
+    description: >
+      Environment name (or path) to activate on all shells. Default is `test`
+      which will be created in `$CONDA/envs/test`. If an empty string is used,
+      no environment is activated by default (For `base` activation see the
+      `auto-activate-base` option). If the environment does not exist, it will
+      be created and activated. If `environment-file` is used and you want that
+      to be the environment used, you need to explicitely provide the name of
+      that environment on `activate-environment`. If using sh/bash/cmd.exe
+      shells please read the IMPORTANT! section on the README.md! to properly
+      activate conda environments on these shells.
+    default: "test"
+  environment_file: 
+    description: >
+      Path or URL to a .yml file to build the conda environment with. 
+      For more information see: 
+      https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file
+    default:
+      ""
+  channels: 
+    description: >
+      Conda configuration. Comma separated list of channels to use in order of
+      priority. See
+      https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/
+      for more information.
+    default:
+      "" 
 runs:
   using: 'composite'
   steps:
-    - name: Set GitHub environment variables 🏞️
+    - name: Set GitHub environment variables ️🌎
       run: | 
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
@@ -112,6 +158,19 @@ runs:
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
+    
+    ## Setup Miniconda 🐍
+    - name: Setup Miniconda
+      if: inputs.miniforge_variant != 'false'
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: false
+        python-version: ${{ matrix.python-version }}
+        miniforge-variant: ${{ inputs.miniforge_variant }}
+        miniforge-version: ${{ inputs.miniforge_version }}
+        activate-environment: ${{ inputs.activate_environment }}
+        environment-file: ${{ inputs.environment_file }}
+        channels: ${{ inputs.channels }}
     
     ## Set the R library to the directory matching the
     ## R packages cache step further below when running on Docker (Linux).
