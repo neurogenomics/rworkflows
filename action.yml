@@ -118,7 +118,7 @@ inputs:
       `Miniforge3` will be used. Visit
       https://github.com/conda-forge/miniforge/releases/ for more information on
       available versions.
-    default: ""
+    default: ''
   activate_environment:
     description: >
       Environment name (or path) to activate on all shells. Default is `test`
@@ -136,16 +136,14 @@ inputs:
       Path or URL to a .yml file to build the conda environment with. 
       For more information see: 
       https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file
-    default:
-      ""
+    default: ''
   channels: 
     description: >
       Conda configuration. Comma separated list of channels to use in order of
       priority. See
       https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/
       for more information.
-    default:
-      "" 
+    default: '' 
 runs:
   using: 'composite'
   steps:
