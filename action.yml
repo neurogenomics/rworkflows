@@ -111,7 +111,7 @@ inputs:
       https://github.com/conda-forge/miniforge/releases/ for more information on
       available variants.
     default: false
-   miniforge_version:
+  miniforge_version:
     description: >
       If provided, this version of the given Miniforge variant will be
       downloaded and installed. If `miniforge_variant` is not provided,
