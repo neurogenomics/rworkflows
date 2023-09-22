@@ -12,6 +12,7 @@ get_description(
   force_new = FALSE,
   use_wd = TRUE,
   use_repos = FALSE,
+  repo = c("BioCsoft", "BioCann", "BioCexp", "BioCworkflows", "CRAN"),
   verbose = TRUE
 )
 }
@@ -34,6 +35,12 @@ for \emph{DESCRIPTION} files.}
 
 \item{use_repos}{Use R standard R package repositories like CRAN and Bioc
 to find \emph{DESCRIPTION} files.}
+
+\item{repo}{The requested Bioconductor repository. The default will be the
+Bioconductor software repository: BioCsoft. Available repos include:
+"BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
+that not all repos are available for all versions, particularly older
+versions (but who would use those, right?).}
 
 \item{verbose}{Print messages.}
 }

@@ -82,6 +82,41 @@
 #' @param enable_act Whether to add extra lines to the yaml to 
 #' enable local workflow checking with 
 #' \href{https://github.com/nektos/act}{act}.
+#' @param miniforge_variant If provided, this variant of Miniforge will be
+#'  downloaded and installed. If \code{miniforge_variant=false}, 
+#'  Miniforge will not be installed at all.
+#'  If \code{miniforge_variant=""}, the "Miniforge3" variant will be installed.
+#'  If \code{miniforge_version} is not provided, the \code{latest} 
+#'  version will be used.
+#'  Currently-known values: - "Miniforge3" (default) - "Miniforge-pypy3" -
+#'  "Mambaforge" - "Mambaforge-pypy3".
+#'  Visit
+#'  https://github.com/conda-forge/miniforge/releases/ for more information on
+#'  available variants.
+#' @param miniforge_version If provided, this version of the given Miniforge
+#'  variant will be downloaded and installed. If \code{miniforge_variant} is 
+#'  not provided, "Miniforge3" will be used. Visit
+#'  https://github.com/conda-forge/miniforge/releases/ for more information on
+#'  available versions.
+#' @param activate_environment Environment name (or path) to activate on all 
+#' shells. Default is "test" which will be created in \emph{$CONDA/envs/test}. 
+#' If an empty string is used, no environment is activated by default 
+#' (For "base" activation see the \code{auto-activate-base} option). 
+#' If the environment does not exist, it will
+#' be created and activated. If \code{environment-file} is used and you want 
+#' that to be the environment used, you need to explicitly provide the name of
+#' that environment on \code{activate-environment}. 
+#' If using \code{sh/bash/cmd.exe}
+#' shells please read the IMPORTANT! section on the README.md! to properly
+#' activate conda environments on these shells.
+#' @param environment_file Path or URL to a .yml file to build the 
+#' conda environment with. For more information see
+#' \href{https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file}{
+#' here}.
+#' @param channels  Conda configuration. Comma separated list of channels 
+#' to use in order of priority. See
+#' \href{https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/}{here}
+#' for more information.
 #' @param preview Print the yaml file to the R console.
 #' @param verbose Print messages.
 #' @returns Path or yaml object.
@@ -104,25 +139,36 @@ use_workflow <- function(## action-level args
                          branches=c("master","main","devel","RELEASE_**"),
                          runners=construct_runners(),
                          ## workflow-level args
+                         ### General
+                         github_token="${{ secrets.GITHUB_TOKEN }}",
+                         cache_version="cache-v1",
+                         enable_act=FALSE,
+                         ### Checks
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
                          as_cran=TRUE,
                          run_vignettes=TRUE,
                          has_testthat=TRUE, 
+                         has_runit=FALSE,
                          run_covr=TRUE, 
-                         run_pkgdown=TRUE, 
-                         has_runit=FALSE, 
+                         ### Latex
                          has_latex=FALSE,
                          tinytex_installer='TinyTeX-1',
-                         tinytex_version='',
+                         tinytex_version=NULL, 
                          pandoc_version='2.19',
+                         ### Site 
+                         run_pkgdown=TRUE,   
+                         ### Container
                          run_docker=FALSE,  
-                         github_token="${{ secrets.GITHUB_TOKEN }}",
                          docker_user=NULL,
                          docker_org=docker_user,
                          docker_token="${{ secrets.DOCKER_TOKEN }}",
-                         cache_version="cache-v1",
-                         enable_act=FALSE,
+                         ### Miniconda
+                         miniforge_variant=FALSE,
+                         miniforge_version=NULL,
+                         activate_environment="test",
+                         environment_file=NULL,
+                         channels=NULL,
                          ## function-level args
                          save_dir=here::here(".github","workflows"),
                          return_path=TRUE,
@@ -132,9 +178,15 @@ use_workflow <- function(## action-level args
   
   # devoptera::args2vars(use_workflow);  docker_org <- eval(docker_org)   
 
+  #### Construct yaml path ####
+  path <-if(is.null(save_dir)){
+    NULL
+  } else {
+    file.path(save_dir,paste0(name,".yml"))
+  }
   #### Check for existing yaml ####
-  path <- file.path(save_dir,paste0(name,".yml"))
-  if(file.exists(path) &&
+  if(!is.null(path) && 
+     file.exists(path) &&
      isFALSE(force_new)){
     messager("Using existing workflow file:",path,v=verbose) 
     yml <- yaml::read_yaml(path)
@@ -178,25 +230,21 @@ use_workflow <- function(## action-level args
                    docker_user=docker_user,
                    docker_org=docker_org,
                    docker_token=docker_token,
+                   miniforge_variant=miniforge_variant,
+                   miniforge_version=miniforge_version,
+                   activate_environment=activate_environment,
+                   environment_file=environment_file,
+                   channels=channels,
                    cache_version=cache_version,
                    enable_act=enable_act)
   #### Preview ####
   if(isTRUE(preview)){
-    cat(yaml::as.yaml(yml)) 
+    preview_yaml(yml=yml) 
   }
-  #### Write to disk ####
-  if(!is.null(save_dir)){  
-    save_yaml(yml=yml,
-              path=path,
-              verbose=verbose)
-    #### Return ####
-    if(isTRUE(return_path)){
-      return(path)
-    } else {
-      yml <- yaml::read_yaml(path)
-      return(yml)
-    }
-  } else {
-    return(yml)
-  }
+  #### Save yaml #### 
+  path_or_yaml <- return_yaml(yml=yml,
+                              path=path,
+                              return_path=return_path,
+                              verbose=verbose)
+  return(path_or_yaml)
 }

@@ -22,6 +22,7 @@
 #' @param use_repos Use R standard R package repositories like CRAN and Bioc
 #' to find \emph{DESCRIPTION} files.
 #' @inheritParams get_description_repo
+#' @inheritParams BiocPkgTools::biocPkgList
 #' @returns A named list of \code{packageDescription} objects.
 #' 
 #' @export
@@ -40,6 +41,11 @@ get_description <- function(refs=NULL,
                             force_new=FALSE,
                             use_wd=TRUE,
                             use_repos=FALSE,
+                            repo = c("BioCsoft", 
+                                     "BioCann", 
+                                     "BioCexp",
+                                     "BioCworkflows", 
+                                     "CRAN"), 
                             verbose=TRUE){
   # devoptera::args2vars(get_description)
   
@@ -78,6 +84,7 @@ get_description <- function(refs=NULL,
   #### Method 2 #### 
     dl2 <- get_description_repo(refs = refs,
                                 db = db,   
+                                repo = repo,
                                 verbose = verbose)
     dl2 <- check_refs_names(dl = dl2) 
     return(dl2)

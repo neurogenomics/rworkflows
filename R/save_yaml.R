@@ -1,9 +1,9 @@
 save_yaml <- function(yml,
                       path,
-                      verbose){
+                      verbose=TRUE){
   
   dir.create(dirname(path),showWarnings = FALSE, recursive = TRUE)
-  messager("Saving workflow ==>",path,v=verbose)
+  messager("Saving yaml ==>",path,v=verbose)
   #### Write bools as true/false rather than yes/no (default) ####
   handlers2 <- list('bool#yes' = function(x){"${{ true }}"},
                     'bool#no' = function(x){"${{ false }}"})

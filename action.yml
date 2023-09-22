@@ -103,13 +103,13 @@ inputs:
   miniforge_variant:
     description: >
       If provided, this variant of Miniforge will be downloaded and installed.
-      If `miniforge_variant=false`, Miniforge will not be instaled at all.
+      If `miniforge_variant=false`, Miniforge will not be installed at all.
       If `miniforge_variant=""`, the "Miniforge3" variant will be installed.
       If `miniforge_version` is not provided, the `latest` version will be used.
-      Currently-known values: - Miniforge3 (default) - Miniforge-pypy3 -
-      Mambaforge - Mambaforge-pypy3 Visit
-      https://github.com/conda-forge/miniforge/releases/ for more information on
-      available variants.
+      Currently-known values: - "Miniforge3" (default) - "Miniforge-pypy3" -
+      "Mambaforge" - "Mambaforge-pypy3".
+      Visit https://github.com/conda-forge/miniforge/releases/ for more 
+      information on available variants.
     default: false
   miniforge_version:
     description: >

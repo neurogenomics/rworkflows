@@ -18,18 +18,26 @@ construct_runners(
 )
 }
 \arguments{
-\item{os}{Which OS to launch GitHub Actions on.}
+\item{os}{Which OS to launch GitHub Actions on. 
+See \href{https://github.com/actions/runner-images}{here for all options}.}
 
 \item{bioc}{Which Bioconductor version to use on each OS. 
 See \link[rworkflows]{bioc_r_versions} documentation for all options.}
 
 \item{r}{Which R version to use on each OS.}
 
-\item{python_version}{Which python version to use on each OS.
+\item{python_version}{Which python version to use on each OS
+(e.g. "3.10", "3.7.5", or "3.x").
 (\code{NULL} means python will not be installed on that OS).
 See 
+\href{https://github.com/actions/python-versions}{here} 
+or  \code{rworkflows:::gha_python_versions()} for all available 
+python versions. 
+See 
 \href{https://github.com/marketplace/actions/setup-miniconda}{here} for
-details.}
+details on the \code{actions/setup-miniconda} action.
+See \href{https://github.com/actions/setup-python}{here} for details on 
+the \code{actions/setup-python} action.}
 
 \item{versions_explicit}{Specify R/Bioc versions explicitly
 (e.g. \code{r: 4.2.0, bioc: 3.16}) 

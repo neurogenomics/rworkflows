@@ -28,12 +28,15 @@ jobs:
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
           rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release
+          python-version: 3.11
         - os: macOS-latest
           r: latest
           bioc: release
+          python-version: 3.11
         - os: windows-latest
           r: latest
           bioc: release
+          python-version: 3.11
     steps:
     - uses: neurogenomics/rworkflows@master
       with:

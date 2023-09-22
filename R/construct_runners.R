@@ -3,6 +3,7 @@
 #' Construct runner configurations across multiple Operating Systems (OS)
 #'  for GitHub Actions workflow. 
 #' @param os Which OS to launch GitHub Actions on. 
+#' See \href{https://github.com/actions/runner-images}{here for all options}. 
 #' @param bioc Which Bioconductor version to use on each OS. 
 #' See \link[rworkflows]{bioc_r_versions} documentation for all options.
 #' @param r Which R version to use on each OS. 
@@ -13,11 +14,18 @@
 #'   for a list of all official Bioconductor Docker container versions.
 #' @param rspm Which R repository manager to use on each OS
 #'  (\code{NULL} means the default will be used for that OS).
-#' @param python_version Which python version to use on each OS.
+#' @param python_version Which python version to use on each OS
+#'  (e.g. "3.10", "3.7.5", or "3.x").
 #'  (\code{NULL} means python will not be installed on that OS).
 #'  See 
+#'  \href{https://github.com/actions/python-versions}{here} 
+#'  or  \code{rworkflows:::gha_python_versions()} for all available 
+#'  python versions. 
+#'  See 
 #'  \href{https://github.com/marketplace/actions/setup-miniconda}{here} for
-#'  details.
+#'  details on the \code{actions/setup-miniconda} action.
+#'  See \href{https://github.com/actions/setup-python}{here} for details on 
+#'  the \code{actions/setup-python} action.
 #' @param versions_explicit Specify R/Bioc versions explicitly
 #'  (e.g. \code{r: 4.2.0, bioc: 3.16}) 
 #'  as opposed to flexibly (e.g. \code{r: "latest", bioc: "release"}).
@@ -85,9 +93,11 @@ construct_runners <- function(os=c("ubuntu-latest",
               rspm = args$rspm[[o]]
          )
     #### Check python settings ####
-    python_version <- if(!is.null(args$python_version)){
+    if(!is.null(args$python_version[[o]])){
       l[["python-version"]] <- gha_python_versions(
-        python_version=args$python_version[[o]])
+        python_version=args$python_version[[o]],
+        verbose=verbose>1
+        )
     } 
     return(l)
   })

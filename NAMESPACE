@@ -2,6 +2,7 @@
 
 export(bioc_r_versions)
 export(construct_authors)
+export(construct_conda_yml)
 export(construct_cont)
 export(construct_runners)
 export(dt_to_desc)

@@ -10,6 +10,10 @@
     - `activate_environment`
     - `environment_file`
     - `channels`
+  - New function to construct conda env yaml files:
+    - `construct_conda_yml`
+* `fill_yaml` 
+  - Add subfunction `is_default`
 
 # rworkflows 0.99.13
 

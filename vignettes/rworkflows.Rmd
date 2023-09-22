@@ -46,6 +46,7 @@ workflow <- rworkflows::use_workflow(run_bioccheck = FALSE,
                                      run_docker = TRUE,
                                      docker_user = "bschilder",
                                      docker_org = "neurogenomicslab",
+                                     force_new = TRUE,
                                      ## Use default save_dir in practice
                                      save_dir = tempdir())
 ```
@@ -62,6 +63,7 @@ workflow_static <- rworkflows::use_workflow(name = "rworkflows_static",
                                      run_docker = TRUE,
                                      docker_user = "bschilder",
                                      docker_org = "neurogenomicslab",
+                                     force_new = TRUE,
                                      ## Use default save_dir in practice
                                      save_dir = tempdir())
 ```
@@ -135,6 +137,81 @@ rworkflows::use_workflow(run_docker = TRUE,
 vignette2 <- rworkflows::use_vignette_docker(docker_org = "neurogenomicslab",
                                              save_dir = tempdir())
 ```
+
+# Adding Python
+
+If your R package depends on python (e.g. via `reticulate`), 
+the `rworkflows` action can also automatically install python for you.
+
+## Using Python
+
+You can instruct GitHub Actions to install a version of python, with whatever level of versioning specificiy you want (e.g. "3.10.11", "3.10", or even just "3").
+
+If you supply one `python_version`, it will be applied to all runners. 
+You also assign a different `python_version` to each `os`, as we do here:
+
+```{r}
+runners <- rworkflows::construct_runners(
+  python_version = list("ubuntu-latest"="3.10.11",
+                        "macOS-latest"="3.9",
+                        "windows-latest"="3.9.1"))
+workflow <- rworkflows::use_workflow(runners = runners,
+                                     preview = TRUE,
+                                     force_new = TRUE,
+                                     ## Use default save_dir in practice
+                                     save_dir = tempdir())
+```
+
+
+## Using conda
+
+Optionally, you can tell it to create and activate a conda environment to use.
+`rworkflows::construct_conda_yml` is a helper function to create conda yaml 
+files for you.
+
+Here we construct our yaml file that specifies what we want in our conda env.
+Make sure you write the yaml to your project directory, 
+so that it gets pushed to GitHub (and thus can be found after 
+checking out your repo on  GitHub Actions).
+
+See [here](https://github.com/RajLabMSSM/echoconda/tree/main/inst/conda) 
+for some examples of 
+```{r}
+environment_file <- construct_conda_yml(name = "myenv", 
+                                        channels = c("conda-forge",
+                                                     "bioconda"),
+                                        dependencies = c("python>=3.7",
+                                                         "scanpy",
+                                                         "anndata"), 
+                                        pip = c("scarches",
+                                                "magic-impute"),
+                                        preview = TRUE)
+```
+
+You could also simply provide a URL to a publicly accessible 
+conda yaml file stored elsewhere.
+```r
+environment_file <- "https://github.com/RajLabMSSM/echoconda/raw/main/inst/conda/scanpy.yml"
+```
+
+Now we can supply the conda `environment_file` path, and Miniconda will 
+automatically be installed to build the conda env on all of 
+your GitHub Actions runners. 
+```{r} 
+workflow <- rworkflows::use_workflow(environment_file = environment_file, 
+                                     preview = TRUE, 
+                                     force_new = TRUE,
+                                     ## Use default save_dir in practice
+                                     save_dir = tempdir())
+```
+ 
+
+
+```{r}
+## Cleanup files
+try({file.remove(environment_file)})
+```
+
 
 # Session Info 
 
