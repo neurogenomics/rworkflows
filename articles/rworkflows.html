@@ -98,7 +98,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i><br>
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Vignette updated: <i>Sep-19-2023</i><br>
+Vignette updated: <i>Oct-11-2023</i><br>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/rworkflows.Rmd" class="external-link"><code>vignettes/rworkflows.Rmd</code></a></small>
@@ -145,9 +145,10 @@ action.</p>
 <span>                                     run_docker <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                     docker_user <span class="op">=</span> <span class="st">"bschilder"</span>,</span>
 <span>                                     docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
+<span>                                     force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmpRqbsHO/rworkflows.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpdLkqEb/rworkflows.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="static-workflow">static workflow<a class="anchor" aria-label="anchor" href="#static-workflow"></a>
@@ -161,9 +162,10 @@ action.</p>
 <span>                                     run_docker <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                     docker_user <span class="op">=</span> <span class="st">"bschilder"</span>,</span>
 <span>                                     docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
+<span>                                     force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving workflow ==&gt; /tmp/RtmpRqbsHO/rworkflows_static.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpdLkqEb/rworkflows_static.yml</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -205,7 +207,7 @@ to create a template <em>Dockerfile</em> and then customise it further
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">dockerfile</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_dockerfile.html">use_dockerfile</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/RtmpRqbsHO/Dockerfile</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/RtmpdLkqEb/Dockerfile</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="templates">Templates<a class="anchor" aria-label="anchor" href="#templates"></a>
@@ -223,7 +225,7 @@ README <em>markdown</em> file.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">readme</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_readme.html">use_readme</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/RtmpRqbsHO/README.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/RtmpdLkqEb/README.Rmd</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="vignette-get-started">Vignette: Get started<a class="anchor" aria-label="anchor" href="#vignette-get-started"></a>
@@ -234,7 +236,7 @@ Requires additional editing to fill in examples.</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette1</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_getstarted.html">use_vignette_getstarted</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"mypackage"</span>,</span>
 <span>                                                 save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpRqbsHO/vignettes/mypackage.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpdLkqEb/vignettes/mypackage.Rmd</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="vignette-docker">Vignette: docker<a class="anchor" aria-label="anchor" href="#vignette-docker"></a>
@@ -252,13 +254,218 @@ package, e.g. created with:</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette2</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_docker.html">use_vignette_docker</a></span><span class="op">(</span>docker_org <span class="op">=</span> <span class="st">"neurogenomicslab"</span>,</span>
 <span>                                             save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpRqbsHO/vignettes/docker.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpdLkqEb/vignettes/docker.Rmd</span></span></code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2 id="adding-python">Adding Python<a class="anchor" aria-label="anchor" href="#adding-python"></a>
+</h2>
+<p>If your R package depends on python (e.g. via
+<code>reticulate</code>), the <code>rworkflows</code> action can also
+automatically install python for you.</p>
+<div class="section level3">
+<h3 id="using-python">Using Python<a class="anchor" aria-label="anchor" href="#using-python"></a>
+</h3>
+<p>You can instruct GitHub Actions to install a version of python, with
+whatever level of versioning specificiy you want (e.g. “3.10.11”,
+“3.10”, or even just “3”).</p>
+<p>If you supply one <code>python_version</code>, it will be applied to
+all runners. You also assign a different <code>python_version</code> to
+each <code>os</code>, as we do here:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">runners</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/construct_runners.html">construct_runners</a></span><span class="op">(</span></span>
+<span>  python_version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"ubuntu-latest"</span><span class="op">=</span><span class="st">"3.10.11"</span>,</span>
+<span>                        <span class="st">"macOS-latest"</span><span class="op">=</span><span class="st">"3.9"</span>,</span>
+<span>                        <span class="st">"windows-latest"</span><span class="op">=</span><span class="st">"3.9.1"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">workflow</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_workflow.html">use_workflow</a></span><span class="op">(</span>runners <span class="op">=</span> <span class="va">runners</span>,</span>
+<span>                                     preview <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                     force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                     <span class="co">## Use default save_dir in practice</span></span>
+<span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## name: rworkflows</span></span>
+<span><span class="co">## 'on':</span></span>
+<span><span class="co">##   push:</span></span>
+<span><span class="co">##     branches:</span></span>
+<span><span class="co">##     - master</span></span>
+<span><span class="co">##     - main</span></span>
+<span><span class="co">##     - devel</span></span>
+<span><span class="co">##     - RELEASE_**</span></span>
+<span><span class="co">##   pull_request:</span></span>
+<span><span class="co">##     branches:</span></span>
+<span><span class="co">##     - master</span></span>
+<span><span class="co">##     - main</span></span>
+<span><span class="co">##     - devel</span></span>
+<span><span class="co">##     - RELEASE_**</span></span>
+<span><span class="co">## jobs:</span></span>
+<span><span class="co">##   rworkflows:</span></span>
+<span><span class="co">##     permissions:</span></span>
+<span><span class="co">##       contents: write</span></span>
+<span><span class="co">##     runs-on: ${{ matrix.config.os }}</span></span>
+<span><span class="co">##     name: ${{ matrix.config.os }} (${{ matrix.config.r }})</span></span>
+<span><span class="co">##     container: ${{ matrix.config.cont }}</span></span>
+<span><span class="co">##     strategy:</span></span>
+<span><span class="co">##       fail-fast: no</span></span>
+<span><span class="co">##       matrix:</span></span>
+<span><span class="co">##         config:</span></span>
+<span><span class="co">##         - os: ubuntu-latest</span></span>
+<span><span class="co">##           bioc: devel</span></span>
+<span><span class="co">##           r: auto</span></span>
+<span><span class="co">##           cont: bioconductor/bioconductor_docker:devel</span></span>
+<span><span class="co">##           rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release</span></span>
+<span><span class="co">##           python-version: 3.10.11</span></span>
+<span><span class="co">##         - os: macOS-latest</span></span>
+<span><span class="co">##           bioc: release</span></span>
+<span><span class="co">##           r: auto</span></span>
+<span><span class="co">##           cont: ~</span></span>
+<span><span class="co">##           rspm: ~</span></span>
+<span><span class="co">##           python-version: '3.9'</span></span>
+<span><span class="co">##         - os: windows-latest</span></span>
+<span><span class="co">##           bioc: release</span></span>
+<span><span class="co">##           r: auto</span></span>
+<span><span class="co">##           cont: ~</span></span>
+<span><span class="co">##           rspm: ~</span></span>
+<span><span class="co">##           python-version: 3.9.1</span></span>
+<span><span class="co">##     steps:</span></span>
+<span><span class="co">##     - uses: neurogenomics/rworkflows@master</span></span>
+<span><span class="co">##       with:</span></span>
+<span><span class="co">##         run_bioccheck: no</span></span>
+<span><span class="co">##         run_rcmdcheck: yes</span></span>
+<span><span class="co">##         as_cran: yes</span></span>
+<span><span class="co">##         run_vignettes: yes</span></span>
+<span><span class="co">##         has_testthat: yes</span></span>
+<span><span class="co">##         run_covr: yes</span></span>
+<span><span class="co">##         run_pkgdown: yes</span></span>
+<span><span class="co">##         has_runit: no</span></span>
+<span><span class="co">##         has_latex: no</span></span>
+<span><span class="co">##         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span><span class="co">##         run_docker: no</span></span>
+<span><span class="co">##         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}</span></span>
+<span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
+<span><span class="co">##         cache_version: cache-v1</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpdLkqEb/rworkflows.yml</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="using-conda">Using conda<a class="anchor" aria-label="anchor" href="#using-conda"></a>
+</h3>
+<p>Optionally, you can tell it to create and activate a conda
+environment to use. <code><a href="../reference/construct_conda_yml.html">rworkflows::construct_conda_yml</a></code> is a
+helper function to create conda yaml files for you.</p>
+<p>Here we construct our yaml file that specifies what we want in our
+conda env. Make sure you write the yaml to your project directory, so
+that it gets pushed to GitHub (and thus can be found after checking out
+your repo on GitHub Actions).</p>
+<p>See <a href="https://github.com/RajLabMSSM/echoconda/tree/main/inst/conda" class="external-link">here</a>
+for some examples of</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">environment_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/construct_conda_yml.html">construct_conda_yml</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"myenv"</span>, </span>
+<span>                                        channels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"conda-forge"</span>,</span>
+<span>                                                     <span class="st">"bioconda"</span><span class="op">)</span>,</span>
+<span>                                        dependencies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"python&gt;=3.7"</span>,</span>
+<span>                                                         <span class="st">"scanpy"</span>,</span>
+<span>                                                         <span class="st">"anndata"</span><span class="op">)</span>, </span>
+<span>                                        pip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scarches"</span>,</span>
+<span>                                                <span class="st">"magic-impute"</span><span class="op">)</span>,</span>
+<span>                                        preview <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## name: myenv</span></span>
+<span><span class="co">## channels:</span></span>
+<span><span class="co">## - conda-forge</span></span>
+<span><span class="co">## - bioconda</span></span>
+<span><span class="co">## dependencies:</span></span>
+<span><span class="co">## - python&gt;=3.7</span></span>
+<span><span class="co">## - scanpy</span></span>
+<span><span class="co">## - anndata</span></span>
+<span><span class="co">## - pip</span></span>
+<span><span class="co">## - pip:</span></span>
+<span><span class="co">##   - scarches</span></span>
+<span><span class="co">##   - magic-impute</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /__w/rworkflows/rworkflows/myenv_conda.yml</span></span></code></pre>
+<p>You could also simply provide a URL to a publicly accessible conda
+yaml file stored elsewhere.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">environment_file</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/RajLabMSSM/echoconda/raw/main/inst/conda/scanpy.yml"</span></span></code></pre></div>
+<p>Now we can supply the conda <code>environment_file</code> path, and
+Miniconda will automatically be installed to build the conda env on all
+of your GitHub Actions runners.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">workflow</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_workflow.html">use_workflow</a></span><span class="op">(</span>environment_file <span class="op">=</span> <span class="va">environment_file</span>, </span>
+<span>                                     preview <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                                     force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                     <span class="co">## Use default save_dir in practice</span></span>
+<span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## environment_file supplied. Enabling miniforge.</span></span></code></pre>
+<pre><code><span><span class="co">## python-version not set for runner os='ubuntu-latest'. Using default.</span></span></code></pre>
+<pre><code><span><span class="co">## python-version not set for runner os='macOS-latest'. Using default.</span></span></code></pre>
+<pre><code><span><span class="co">## python-version not set for runner os='windows-latest'. Using default.</span></span></code></pre>
+<pre><code><span><span class="co">## name: rworkflows</span></span>
+<span><span class="co">## 'on':</span></span>
+<span><span class="co">##   push:</span></span>
+<span><span class="co">##     branches:</span></span>
+<span><span class="co">##     - master</span></span>
+<span><span class="co">##     - main</span></span>
+<span><span class="co">##     - devel</span></span>
+<span><span class="co">##     - RELEASE_**</span></span>
+<span><span class="co">##   pull_request:</span></span>
+<span><span class="co">##     branches:</span></span>
+<span><span class="co">##     - master</span></span>
+<span><span class="co">##     - main</span></span>
+<span><span class="co">##     - devel</span></span>
+<span><span class="co">##     - RELEASE_**</span></span>
+<span><span class="co">## jobs:</span></span>
+<span><span class="co">##   rworkflows:</span></span>
+<span><span class="co">##     permissions:</span></span>
+<span><span class="co">##       contents: write</span></span>
+<span><span class="co">##     runs-on: ${{ matrix.config.os }}</span></span>
+<span><span class="co">##     name: ${{ matrix.config.os }} (${{ matrix.config.r }})</span></span>
+<span><span class="co">##     container: ${{ matrix.config.cont }}</span></span>
+<span><span class="co">##     strategy:</span></span>
+<span><span class="co">##       fail-fast: no</span></span>
+<span><span class="co">##       matrix:</span></span>
+<span><span class="co">##         config:</span></span>
+<span><span class="co">##         - os: ubuntu-latest</span></span>
+<span><span class="co">##           bioc: devel</span></span>
+<span><span class="co">##           r: auto</span></span>
+<span><span class="co">##           cont: bioconductor/bioconductor_docker:devel</span></span>
+<span><span class="co">##           rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release</span></span>
+<span><span class="co">##         - os: macOS-latest</span></span>
+<span><span class="co">##           bioc: release</span></span>
+<span><span class="co">##           r: auto</span></span>
+<span><span class="co">##           cont: ~</span></span>
+<span><span class="co">##           rspm: ~</span></span>
+<span><span class="co">##         - os: windows-latest</span></span>
+<span><span class="co">##           bioc: release</span></span>
+<span><span class="co">##           r: auto</span></span>
+<span><span class="co">##           cont: ~</span></span>
+<span><span class="co">##           rspm: ~</span></span>
+<span><span class="co">##     steps:</span></span>
+<span><span class="co">##     - uses: neurogenomics/rworkflows@master</span></span>
+<span><span class="co">##       with:</span></span>
+<span><span class="co">##         run_bioccheck: no</span></span>
+<span><span class="co">##         run_rcmdcheck: yes</span></span>
+<span><span class="co">##         as_cran: yes</span></span>
+<span><span class="co">##         run_vignettes: yes</span></span>
+<span><span class="co">##         has_testthat: yes</span></span>
+<span><span class="co">##         run_covr: yes</span></span>
+<span><span class="co">##         run_pkgdown: yes</span></span>
+<span><span class="co">##         has_runit: no</span></span>
+<span><span class="co">##         has_latex: no</span></span>
+<span><span class="co">##         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span><span class="co">##         run_docker: no</span></span>
+<span><span class="co">##         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}</span></span>
+<span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
+<span><span class="co">##         cache_version: cache-v1</span></span>
+<span><span class="co">##         miniforge_variant: ''</span></span>
+<span><span class="co">##         environment_file: /__w/rworkflows/rworkflows/myenv_conda.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpdLkqEb/rworkflows.yml</span></span></code></pre>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Cleanup files</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">environment_file</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
-<details><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<details><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.3.1 (2023-06-16)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
@@ -286,12 +493,12 @@ package, e.g. created with:</p>
 <span><span class="co">## [1] rworkflows_0.99.14 BiocStyle_2.29.2  </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] yulab.utils_0.0.9   sass_0.4.7          utf8_1.2.3         </span></span>
+<span><span class="co">##  [1] yulab.utils_0.1.0   sass_0.4.7          utf8_1.2.3         </span></span>
 <span><span class="co">##  [4] generics_0.1.3      renv_1.0.3          stringi_1.7.12     </span></span>
-<span><span class="co">##  [7] digest_0.6.33       magrittr_2.0.3      evaluate_0.21      </span></span>
+<span><span class="co">##  [7] digest_0.6.33       magrittr_2.0.3      evaluate_0.22      </span></span>
 <span><span class="co">## [10] grid_4.3.1          RColorBrewer_1.1-3  bookdown_0.35      </span></span>
 <span><span class="co">## [13] fastmap_1.1.1       rprojroot_2.0.3     jsonlite_1.8.7     </span></span>
-<span><span class="co">## [16] BiocManager_1.30.22 purrr_1.0.2         fansi_1.0.4        </span></span>
+<span><span class="co">## [16] BiocManager_1.30.22 purrr_1.0.2         fansi_1.0.5        </span></span>
 <span><span class="co">## [19] scales_1.2.1        textshaping_0.3.6   jquerylib_0.1.4    </span></span>
 <span><span class="co">## [22] cli_3.6.1           rlang_1.1.1         badger_0.2.3       </span></span>
 <span><span class="co">## [25] munsell_0.5.0       cachem_1.0.8        yaml_2.3.7         </span></span>
@@ -303,7 +510,7 @@ package, e.g. created with:</p>
 <span><span class="co">## [43] bslib_0.5.1         pillar_1.9.0        gtable_0.3.4       </span></span>
 <span><span class="co">## [46] glue_1.6.2          data.table_1.14.8   systemfonts_1.0.4  </span></span>
 <span><span class="co">## [49] xfun_0.40           tibble_3.2.1        rvcheck_0.2.1      </span></span>
-<span><span class="co">## [52] tidyselect_1.2.0    knitr_1.44          htmltools_0.5.6    </span></span>
+<span><span class="co">## [52] tidyselect_1.2.0    knitr_1.44          htmltools_0.5.6.1  </span></span>
 <span><span class="co">## [55] rmarkdown_2.25      dlstats_0.1.7       compiler_4.3.1</span></span></code></pre>
 </details><hr>
 </div>

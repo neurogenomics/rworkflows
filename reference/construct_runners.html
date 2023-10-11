@@ -94,7 +94,8 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>os</dt>
-<dd><p>Which OS to launch GitHub Actions on.</p></dd>
+<dd><p>Which OS to launch GitHub Actions on. 
+See <a href="https://github.com/actions/runner-images" class="external-link">here for all options</a>.</p></dd>
 
 
 <dt>bioc</dt>
@@ -107,11 +108,18 @@ See <a href="bioc_r_versions.html">bioc_r_versions</a> documentation for all opt
 
 
 <dt>python_version</dt>
-<dd><p>Which python version to use on each OS.
+<dd><p>Which python version to use on each OS
+(e.g. "3.10", "3.7.5", or "3.x").
 (<code>NULL</code> means python will not be installed on that OS).
 See 
+<a href="https://github.com/actions/python-versions" class="external-link">here</a> 
+or  <code>rworkflows:::gha_python_versions()</code> for all available 
+python versions. 
+See 
 <a href="https://github.com/marketplace/actions/setup-miniconda" class="external-link">here</a> for
-details.</p></dd>
+details on the <code>actions/setup-miniconda</code> action.
+See <a href="https://github.com/actions/setup-python" class="external-link">here</a> for details on 
+the <code>actions/setup-python</code> action.</p></dd>
 
 
 <dt>versions_explicit</dt>

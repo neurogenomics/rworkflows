@@ -40,7 +40,13 @@
     <loc>/reference/check_cont.html</loc>
   </url>
   <url>
+    <loc>/reference/check_miniconda_args.html</loc>
+  </url>
+  <url>
     <loc>/reference/construct_authors.html</loc>
+  </url>
+  <url>
+    <loc>/reference/construct_conda_yml.html</loc>
   </url>
   <url>
     <loc>/reference/construct_cont.html</loc>
@@ -68,6 +74,9 @@
   </url>
   <url>
     <loc>/reference/get_hex.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gha_python_versions.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>

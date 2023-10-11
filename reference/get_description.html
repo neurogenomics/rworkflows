@@ -96,6 +96,7 @@ not involve downloading files first.</p>
 <span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use_wd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  use_repos <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  repo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BioCsoft"</span>, <span class="st">"BioCann"</span>, <span class="st">"BioCexp"</span>, <span class="st">"BioCworkflows"</span>, <span class="st">"CRAN"</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -133,6 +134,14 @@ for <em>DESCRIPTION</em> files.</p></dd>
 <dt>use_repos</dt>
 <dd><p>Use R standard R package repositories like CRAN and Bioc
 to find <em>DESCRIPTION</em> files.</p></dd>
+
+
+<dt>repo</dt>
+<dd><p>The requested Bioconductor repository. The default will be the
+Bioconductor software repository: BioCsoft. Available repos include:
+"BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
+that not all repos are available for all versions, particularly older
+versions (but who would use those, right?).</p></dd>
 
 
 <dt>verbose</dt>

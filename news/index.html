@@ -74,15 +74,36 @@
 <div class="section level3">
 <h3 id="new-features-0-99-14">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-14"></a></h3>
 <ul><li>Add step to enable conda envs: <a href="https://github.com/neurogenomics/rworkflows/issues/78" class="external-link">#78</a>
-<ul><li>Add subfunction: <code>gha_python_versions()</code> within <code>construct_runners</code>
+<ul><li>Add subfunction: <code><a href="../reference/gha_python_versions.html">gha_python_versions()</a></code> within <code>construct_runners</code>
 </li>
-<li>Add new <em>action.yml</em>:
+<li>Add new <em>action.yml</em> args:
 <ul><li><code>miniforge_variant</code></li>
 <li><code>miniforge_version</code></li>
 <li><code>activate_environment</code></li>
 <li><code>environment_file</code></li>
 <li><code>channels</code></li>
 </ul></li>
+<li>New function to construct conda env yaml files:
+<ul><li><code>construct_conda_yml</code></li>
+</ul></li>
+<li>New unit tests to test <code>construct_conda_yml</code> and building conda envs from the generated yamls.</li>
+</ul></li>
+<li>
+<code>fill_yaml</code>
+<ul><li>Add subfunction <code>is_default</code>
+</li>
+</ul></li>
+<li>
+<em>actions.yml</em>:
+<ul><li>Add <code>force=TRUE</code> to the <code><a href="https://remotes.r-lib.org/reference/install_local.html" class="external-link">remotes::install_local</a></code> steps. <a href="https://github.com/neurogenomics/rworkflows/issues/86" class="external-link">#86</a></li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-14">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-14"></a></h3>
+<ul><li>
+<code>no visible global function definition for internal function check_miniconda_args</code>
+<ul><li>This weird error only came up during Rstudio R CMD checks. The function <code>check_miniconda_args</code> was clearly defined in its own file. The only way to fix it was copying the function into the same one where it was called <code>fill_yaml</code>.</li>
+<li>Thought it might be a permissions issues with <em>check_miniconda_args.R</em> but the permissions are identical with all the others.</li>
 </ul></li>
 </ul></div>
 </div>
