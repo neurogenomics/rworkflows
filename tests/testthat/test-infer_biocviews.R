@@ -12,7 +12,7 @@ test_that("infer_biocviews works", {
     )
   } else {
     testthat::expect_equal(infer_biocviews(include_branch = FALSE),
-                           c("`Software","WorkflowManagement"))  
+                           c("Software","WorkflowManagement"))  
   }
   biocviews_manual = c("Software","Genetics","Transcriptomics") 
   if(testthat::is_testing() && !is_gha()){

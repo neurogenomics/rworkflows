@@ -4,7 +4,7 @@
 
 * Add step to enable conda envs: #78
   - Add subfunction: `gha_python_versions()` within `construct_runners`
-  - Add new *action.yml*:
+  - Add new *action.yml* args:
     - `miniforge_variant`
     - `miniforge_version`
     - `activate_environment`
@@ -16,6 +16,8 @@
   from the generated yamls.
 * `fill_yaml` 
   - Add subfunction `is_default`
+* *actions.yml*:
+  - Add `force=TRUE` to the `remotes::install_local` steps. #86
 
 ## Bug fixes
 
