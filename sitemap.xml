@@ -43,6 +43,9 @@
     <loc>/reference/check_miniconda_args.html</loc>
   </url>
   <url>
+    <loc>/reference/check_registry.html</loc>
+  </url>
+  <url>
     <loc>/reference/conda_export.html</loc>
   </url>
   <url>

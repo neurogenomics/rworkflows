@@ -76,6 +76,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">construct_cont</span><span class="op">(</span></span>
+<span>  default_registry <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ghcr.io/"</span>, <span class="st">"docker.io/"</span>, <span class="st">"mcr.microsoft.com/"</span><span class="op">)</span>,</span>
 <span>  default_cont <span class="op">=</span> <span class="st">"bioconductor/bioconductor_docker"</span>,</span>
 <span>  default_tag <span class="op">=</span> <span class="st">"devel"</span>,</span>
 <span>  cont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">default_cont</span>, <span class="va">default_tag</span>, sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span><span class="op">)</span>,</span>
@@ -87,7 +88,15 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>default_cont</dt>
+    <dl><dt>default_registry</dt>
+<dd><p>The default container registry to use.
+Options include:</p><ul><li><p>"ghcr.io/" : <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" class="external-link">GitHub Container Registry</a></p></li>
+<li><p>"docker.io/" : <a href="https://hub.docker.com/" class="external-link">DockerHub</a></p></li>
+<li><p>"mcr.microsoft.com/" : <a href="https://github.com/microsoft/ContainerRegistry" class="external-link">Microsoft Container Registry</a></p></li>
+</ul></dd>
+
+
+<dt>default_cont</dt>
 <dd><p>The DockerHub container to default to.
 Used when it's detected that only the tag has been given in one or more 
 <code>cont</code> entry.</p></dd>
