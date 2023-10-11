@@ -157,6 +157,10 @@ runs:
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
     
+    - name: Collect Workflow Telemetry 🔭
+      uses: runforesight/workflow-telemetry-action@v1
+      continue-on-error: true
+    
     ## Setup Miniconda 🐍
     - name: Setup Miniconda
       if: inputs.miniforge_variant != 'false'

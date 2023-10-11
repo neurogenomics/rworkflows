@@ -35,6 +35,7 @@ test_that("construct_conda_yml works", {
     if(condaenv_exists(envname)){
       reticulate::conda_remove(envname = envname)
     }
+    #### From conda yaml ####
     path2 <- construct_conda_yml(name=envname,
                                  dependencies=list("python"),
                                  pip=list("requests"),
@@ -47,6 +48,20 @@ test_that("construct_conda_yml works", {
     testthat::expect_true(file.exists(out))
     testthat::expect_equal(basename(out),"python")
     testthat::expect_equal(basename(dirname(dirname(out))),envname)
+    
+    
+    #### From requirements.txt ####
+    ## Currently fails due to error:
+    ## Error: Error creating conda environment [exit code 1]
+    # envname2 <- "testenv2" 
+    # req_txt <- conda_export(name = envname, 
+    #                         preview = TRUE)   
+    # out <- reticulate::conda_create(environment = req_txt,  
+    #                                 # channel = c("conda-forge","bioconda"),
+    #                                 envname = envname2) 
+    # testthat::expect_true(file.exists(out))
+    # testthat::expect_equal(basename(out),"python")
+    # testthat::expect_equal(basename(dirname(dirname(out))),envname)
   }
   
 })

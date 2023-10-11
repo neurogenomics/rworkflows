@@ -18,6 +18,7 @@
   - Add subfunction `is_default`
 * *actions.yml*:
   - Add `force=TRUE` to the `remotes::install_local` steps. #86
+  - Add `runforesight/workflow-telemetry-action` step.
 
 ## Bug fixes
 
