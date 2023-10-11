@@ -15,7 +15,7 @@ construct_cont(
 )
 }
 \arguments{
-\item{default_registry}{The default container registr to use.
+\item{default_registry}{The default container registry to use.
 Options include:
 \itemize{
  \item{"ghcr.io/" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry}}

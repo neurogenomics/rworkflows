@@ -82,8 +82,6 @@ inputs:
   DOCKER_TOKEN:
     description: >
       DockerHub authentication token.
-    default:
-      '${{ secrets.DOCKER_TOKEN }}'
   GITHUB_TOKEN:
     description: >
       GitHub authentication token with permissions to push 
@@ -95,8 +93,6 @@ inputs:
       (e.g. {{ secrets.PAT_GITHUB }}) which allows access to private
       repositories. Read here for more details: 
       https://docs.github.com/en/actions/security-guides/automatic-token-authentication.
-    default:
-      '${{ secrets.GITHUB_TOKEN }}'
   cache_version: 
     description: >
       Which cache version to use. 
