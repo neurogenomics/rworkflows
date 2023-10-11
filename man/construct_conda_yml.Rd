@@ -43,7 +43,9 @@ Construct a yaml file to be used for building a given \code{conda}
 environment.
 }
 \examples{
-yml <- construct_conda_yml(name="sc_env",
+yml <- construct_conda_yml(name="myenv",
                            dependencies=c("anndata","scanpy"),
-                           return_path = FALSE)
+                           return_path = FALSE,  
+                           ## Writing to temp only for example
+                           save_path=tempfile(fileext="myenv_conda.yml"))
 }

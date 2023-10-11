@@ -1,11 +1,15 @@
 return_yaml <- function(yml,
                         path,
                         return_path,
-                        verbose=TRUE){
+                        handlers=NULL,
+                        verbose=TRUE, 
+                        ...){
   if(!is.null(path)){  
     save_yaml(yml=yml,
               path=path,
-              verbose=verbose)
+              handlers=handlers,
+              verbose=verbose,
+              ...)
     #### Return ####
     if(isTRUE(return_path)){
       return(path)

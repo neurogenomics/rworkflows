@@ -242,9 +242,12 @@ use_workflow <- function(## action-level args
     preview_yaml(yml=yml) 
   }
   #### Save yaml #### 
+  handlers <- list('bool#yes' = function(x){"${{ true }}"},
+                   'bool#no' = function(x){"${{ false }}"})
   path_or_yaml <- return_yaml(yml=yml,
                               path=path,
                               return_path=return_path,
+                              handlers=handlers,
                               verbose=verbose)
   return(path_or_yaml)
 }

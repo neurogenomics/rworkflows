@@ -17,9 +17,11 @@
 #' @export
 #' @importFrom yaml read_yaml
 #' @examples
-#' yml <- construct_conda_yml(name="sc_env",
+#' yml <- construct_conda_yml(name="myenv",
 #'                            dependencies=c("anndata","scanpy"),
-#'                            return_path = FALSE)
+#'                            return_path = FALSE,  
+#'                            ## Writing to temp only for example
+#'                            save_path=tempfile(fileext="myenv_conda.yml"))
 construct_conda_yml <- function(name = "test",
                                 channels = list("conda-forge", 
                                                 "nodefaults"),
@@ -34,13 +36,16 @@ construct_conda_yml <- function(name = "test",
                                 ){
   # devoptera::args2vars(construct_conda_yml) 
   
+  if(is.vector(dependencies)) dependencies <- as.list(dependencies)
+  if(is.vector(pip)) pip <- as.list(pip)
   yml <- list(
     name=name,
     channels=channels,
     dependencies=dependencies
   )
   if(!is.null(pip)){
-    yml[["pip"]] <- pip
+    yml[["dependencies"]] <- c(unique(c(yml[["dependencies"]],"pip")),
+                               list(list(pip=pip))) 
   }
   #### Preview ####
   if(isTRUE(preview)){
@@ -50,6 +55,7 @@ construct_conda_yml <- function(name = "test",
   path_or_yaml <- return_yaml(yml=yml,
                               path=save_path,
                               return_path=return_path,
-                              verbose=verbose)
+                              verbose=verbose, 
+                              indent.mapping.sequence = TRUE)
   return(path_or_yaml)
 }

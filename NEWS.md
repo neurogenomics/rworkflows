@@ -12,8 +12,20 @@
     - `channels`
   - New function to construct conda env yaml files:
     - `construct_conda_yml`
+  - New unit tests to test `construct_conda_yml` and building conda envs 
+  from the generated yamls.
 * `fill_yaml` 
   - Add subfunction `is_default`
+
+## Bug fixes
+
+* `no visible global function definition for internal function check_miniconda_args`
+  - This weird error only came up during Rstudio R CMD checks. 
+  The function `check_miniconda_args` was clearly defined in its own file. 
+  The only way to fix it was copying the function into the same one where it
+  was called `fill_yaml`.
+  - Thought it might be a permissions issues with *check_miniconda_args.R* but 
+  the permissions are identical with all the others.
 
 # rworkflows 0.99.13
 
