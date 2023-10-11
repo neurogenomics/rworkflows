@@ -58,7 +58,8 @@ Suggests:
     BiocStyle,
     BiocPkgTools,
     biocViews,
-    reticulate
+    reticulate,
+    rvest
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

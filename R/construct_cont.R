@@ -7,6 +7,7 @@
 #' \itemize{
 #'  \item{"ghcr.io/" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry}}
 #'  \item{"docker.io/" : }{\href{https://hub.docker.com/}{DockerHub}}
+#'  \item{"mcr.microsoft.com/" : }{\href{https://github.com/microsoft/ContainerRegistry}{Microsoft Container Registry}}
 #' }
 #' @param default_cont The DockerHub container to default to.
 #' Used when it's detected that only the tag has been given in one or more 
@@ -20,7 +21,8 @@
 #' @examples
 #' cont <- construct_cont() 
 construct_cont <- function(default_registry = c("ghcr.io/",
-                                                "docker.io/"),
+                                                "docker.io/",
+                                                "mcr.microsoft.com/"),
                            default_cont = "bioconductor/bioconductor_docker",
                            default_tag = "devel",
                            cont = list(

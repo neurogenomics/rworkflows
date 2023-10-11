@@ -4,11 +4,7 @@
 \alias{check_cont}
 \title{Check containers exist}
 \usage{
-check_cont(
-  cont,
-  domain = "https://hub.docker.com/v2/repositories/",
-  verbose = TRUE
-)
+check_cont(cont, verbose = TRUE)
 }
 \arguments{
 \item{cont}{Which Docker container to use on each OS
@@ -17,12 +13,12 @@ See
 \href{https://hub.docker.com/r/bioconductor/bioconductor_docker/tags}{here}
  for a list of all official Bioconductor Docker container versions.}
 
-\item{domain}{Container repository API domain.}
-
 \item{verbose}{Print messages.}
+
+\item{domain}{Container repository API domain.}
 }
 \value{
-NUll
+Null
 }
 \description{
 Check that a list of containers are valid.

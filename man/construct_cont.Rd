@@ -5,7 +5,7 @@
 \title{Construct containers list}
 \usage{
 construct_cont(
-  default_registry = c("ghcr.io/", "docker.io/"),
+  default_registry = c("ghcr.io/", "docker.io/", "mcr.microsoft.com/"),
   default_cont = "bioconductor/bioconductor_docker",
   default_tag = "devel",
   cont = list(paste(default_cont, default_tag, sep = ":"), NULL, NULL),
@@ -20,6 +20,7 @@ Options include:
 \itemize{
  \item{"ghcr.io/" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry}}
  \item{"docker.io/" : }{\href{https://hub.docker.com/}{DockerHub}}
+ \item{"mcr.microsoft.com/" : }{\href{https://github.com/microsoft/ContainerRegistry}{Microsoft Container Registry}}
 }}
 
 \item{default_cont}{The DockerHub container to default to.
