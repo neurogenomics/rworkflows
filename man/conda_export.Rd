@@ -17,7 +17,11 @@ conda_export(
 \arguments{
 \item{name}{Name of conda environment.}
 
-\item{save_path}{Path to save the requirements file.}
+\item{save_path}{Path to save the requirements file. 
+If the file ends with .yml or .yaml, a conda-style 
+yaml file will be generated.
+If the file ends with requirements.txt, a pip-style requirements.txt file
+ will be generated.}
 
 \item{preview}{Print the requirements file to the R console.}
 

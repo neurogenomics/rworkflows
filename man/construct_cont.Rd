@@ -5,6 +5,7 @@
 \title{Construct containers list}
 \usage{
 construct_cont(
+  default_registry = c("ghcr.io/", "docker.io/"),
   default_cont = "bioconductor/bioconductor_docker",
   default_tag = "devel",
   cont = list(paste(default_cont, default_tag, sep = ":"), NULL, NULL),
@@ -14,6 +15,13 @@ construct_cont(
 )
 }
 \arguments{
+\item{default_registry}{The default container registr to use.
+Options include:
+\itemize{
+ \item{"ghcr.io/" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry}}
+ \item{"docker.io/" : }{\href{https://hub.docker.com/}{DockerHub}}
+}}
+
 \item{default_cont}{The DockerHub container to default to.
 Used when it's detected that only the tag has been given in one or more 
 \code{cont} entry.}

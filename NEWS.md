@@ -19,6 +19,10 @@
 * *actions.yml*:
   - Add `force=TRUE` to the `remotes::install_local` steps. #86
   - Add `runforesight/workflow-telemetry-action` step.
+* `construct_cont`:
+  - Make registry explicit.
+  - New arg: `default_registry`
+  - New subfunction: `check_registry`
 
 ## Bug fixes
 
