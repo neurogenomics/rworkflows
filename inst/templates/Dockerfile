@@ -18,7 +18,7 @@
 # and you can set the password to whatever you like,
 #
 # This DockerFile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
-FROM bioconductor/bioconductor_docker:devel
+FROM $CONT
 RUN apt-get update && \
     apt-get install -y \
     git-core \
@@ -29,13 +29,13 @@ RUN apt-get update && \
     make pandoc \
     pandoc-citeproc \
     zlib1g-dev \
-	xfonts-100dpi \
-	xfonts-75dpi \
-	biber \
-	libsbml5-dev \
-	qpdf \
-	cmake \
-	&& apt-get clean \
+  	xfonts-100dpi \
+  	xfonts-75dpi \
+  	biber \
+  	libsbml5-dev \
+  	qpdf \
+  	cmake \
+  	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 # Create a buildzone folder named after the R package
 # BiocCheck requires the buildzone to have the same name as the R package
