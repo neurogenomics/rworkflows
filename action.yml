@@ -481,15 +481,6 @@ runs:
         name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check 
         
-  - name: 🛠 Install Docker (within Docker container) ️
-    if : |
-      (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
-    run: |
-      curl -fsSL https://get.docker.com -o get-docker.sh
-      chmod +x get-docker.sh
-      sh get-docker.sh
-    shell: bash {0}
-    
     #### Docker registry steps ####
     # - name: 🐳🛠 Set up Docker Buildx
     #   if: |
