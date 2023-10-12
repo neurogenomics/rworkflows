@@ -444,6 +444,7 @@ runs:
         version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
         echo "packageVersion=${version}" >> $GITHUB_ENV
         echo $version
+        echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
       shell: bash {0}
 
     - name: 📦 Render README 
@@ -524,4 +525,4 @@ runs:
           latest
         build_args: |
           PKG=${{ env.packageNameOrig }},
-          BASE_IMAGE=${{ matrix.config.cont }}
+          BASE_IMAGE=${{ env.BASE_IMAGE }}
