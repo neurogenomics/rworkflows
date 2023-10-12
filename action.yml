@@ -499,7 +499,7 @@ runs:
         username: ${{ github.repository_owner }}
         password: ${{ env.GITHUB_TOKEN }}
         registry: ${{ inputs.docker_registry }}
-        repository: ${{ github.repository_owner }}/${{ github.repository }}
+        repository: ${{ github.repository }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
@@ -507,7 +507,7 @@ runs:
           latest
         build_args: |
           PKG=${{ env.packageNameOrig }},
-          CONT=${{ matrix.config.cont }}
+          BASE_IMAGE=${{ matrix.config.cont }}
           
     - name: 🐳🚀 Build and push to DockerHub 
       if: |
@@ -524,4 +524,4 @@ runs:
           latest
         build_args: |
           PKG=${{ env.packageNameOrig }},
-          CONT=${{ matrix.config.cont }}
+          BASE_IMAGE=${{ matrix.config.cont }}
