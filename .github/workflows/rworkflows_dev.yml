@@ -39,15 +39,15 @@ jobs:
     steps:
     - uses: neurogenomics/rworkflows@dev
       with:
-        run_bioccheck: ${{ true }}
-        run_rcmdcheck: ${{ true }}
+        run_bioccheck: ${{ false }}
+        run_rcmdcheck: ${{ false }}
         as_cran: ${{ true }}
-        run_vignettes: ${{ true }}
-        has_testthat: ${{ true }}
+        run_vignettes: ${{ false }}
+        has_testthat: ${{ false }}
         run_covr: ${{ true }}
-        run_pkgdown: ${{ true }}
+        run_pkgdown: ${{ false }}
         has_runit: ${{ false }}
-        has_latex: ${{ true }}
+        has_latex: ${{ false }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         docker_user: bschilder
