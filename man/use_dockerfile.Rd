@@ -7,6 +7,7 @@
 use_dockerfile(
   save_dir = here::here(),
   path = file.path(save_dir, "Dockerfile"),
+  base_image = construct_cont()[[1]],
   force_new = FALSE,
   show = FALSE,
   verbose = TRUE
@@ -16,6 +17,8 @@ use_dockerfile(
 \item{save_dir}{Directory to save the Docker file to.}
 
 \item{path}{Path to the Docker file.}
+
+\item{base_image}{Base Docker image to use.}
 
 \item{force_new}{If a Docker file already exists, overwrite it 
 (default: \code{FALSE}).}
