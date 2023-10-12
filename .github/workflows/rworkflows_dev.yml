@@ -28,12 +28,7 @@ jobs:
         - os: ubuntu-latest
           r: devel
           bioc: devel
-          cont: 
-            image: ghcr.io/bioconductor/bioconductor_docker:devel
-            volumes: 
-              - /usr/local/bin/docker:/usr/bin/docker
-              - /var/run/docker.sock:/var/run/docker.sock
-            
+          cont: ghcr.io/bioconductor/bioconductor_docker:devel
           rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release
         - os: macOS-latest
           r: latest
