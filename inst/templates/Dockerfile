@@ -18,7 +18,7 @@
 # and you can set the password to whatever you like,
 #
 # This DockerFile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
-FROM $CONT
+FROM $BASE_IMAGE
 RUN apt-get update && \
     apt-get install -y \
     git-core \
