@@ -162,6 +162,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: 💾 Free Disk Space
+      if: inputs.free_diskspace == 'true' && runner.os != 'Linux'
+      uses: jlumbroso/free-disk-space@main
+      
     - name: 🌎 Set environment variables 
       run: | 
         echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
@@ -175,10 +179,6 @@ runs:
     - name: 🔭 Collect Workflow Telemetry 
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: true
-      
-    - name: 💾 Free Disk Space
-      if: inputs.free_diskspace == 'true' && runner.os != 'Linux'
-      uses: jlumbroso/free-disk-space@main
     
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'
