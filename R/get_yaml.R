@@ -1,4 +1,5 @@
-get_yaml <- function(template){
+get_yaml <- function(template,
+                     action_branch="master"){
   
   template_nms <- c("rworkflows","rworkflows_static")
   ## Custom handler prevents "on" from being converted to TRUE
@@ -20,7 +21,8 @@ get_yaml <- function(template){
       #### Read in action to avoid code redundancy ####
       ## Import the latest version of action.yml
       action <- yaml::read_yaml(
-        "https://github.com/neurogenomics/rworkflows/raw/master/action.yml")
+        paste0("https://github.com/neurogenomics/rworkflows/raw/",
+               action_branch,"/action.yml"))
       #### Add action steps to static workflow #### 
       recurse <- function(x, 
                           fun=function(x){

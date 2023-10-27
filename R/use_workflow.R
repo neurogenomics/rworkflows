@@ -13,6 +13,9 @@
 #' explicitly copies all steps from the \pkg{rworkflows} action
 #' into a static file. Users may need to update this file themselves over time,
 #' though this does allow for a fully customisable workflow.}
+#' Optionally, you can include the suffix ":<branch>" to specify which branch 
+#' you would like to download the "action.yml" file from to create the 
+#' static workflow template.
 #' }
 #' @param name An arbitrary name to call the workflow.
 #' @param tag Which version of the \code{rworkflows} action to use. 
@@ -189,6 +192,14 @@ use_workflow <- function(## action-level args
   
   # devoptera::args2vars(use_workflow);  docker_org <- eval(docker_org)   
 
+  #### Extract branch name from template arg ####
+  if(grepl(":",template)){
+    action_branch <- gsub(".*:","",template)
+    template <- gsub(":.*","",template)
+    name <- gsub("[:]","_",name)
+  } else {
+    action_branch <- "master"
+  }
   #### Construct yaml path ####
   path <-if(is.null(save_dir)){
     NULL
@@ -213,7 +224,8 @@ use_workflow <- function(## action-level args
     }
   }
   #### Read yaml template ####
-  yml <- get_yaml(template = template)
+  yml <- get_yaml(template = template, 
+                  action_branch = action_branch)
   #### Fill yaml template ####
   yml <- fill_yaml(yml=yml,
                    ## action-level args

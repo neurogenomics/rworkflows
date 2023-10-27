@@ -61,6 +61,9 @@ so users do not need to worry about maintaining it.}
 explicitly copies all steps from the \pkg{rworkflows} action
 into a static file. Users may need to update this file themselves over time,
 though this does allow for a fully customisable workflow.}
+Optionally, you can include the suffix ":<branch>" to specify which branch 
+you would like to download the "action.yml" file from to create the 
+static workflow template.
 }}
 
 \item{name}{An arbitrary name to call the workflow.}

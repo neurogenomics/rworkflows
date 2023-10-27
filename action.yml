@@ -177,7 +177,7 @@ runs:
       continue-on-error: true
       
     - name: 💾 Free Disk Space
-      if: inputs.free_diskspace == 'true'
+      if: inputs.free_diskspace == 'true' && runner.os != 'Linux'
       uses: jlumbroso/free-disk-space@main
     
     - name: 🐍 Setup Miniconda

@@ -35,6 +35,9 @@
 * New arg `free_diskspace`
   - *actions.yml*
   - `use_workflow`
+* `use_workflow`
+  - `template` arg can now be "rworkflows_static:dev" to use the "dev" branch's 
+  version of *action.yml* as a workflow template.
 
 ## Bug fixes
 
