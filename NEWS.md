@@ -32,6 +32,9 @@
   - Improve logic to catch more GH URLs.
 * *vignettes/depgraph.Rmd*
   - Update plots with new data and resave PNG.
+* New arg `free_diskspace`
+  - *actions.yml*
+  - `use_workflow`
 
 ## Bug fixes
 

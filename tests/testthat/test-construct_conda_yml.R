@@ -50,6 +50,12 @@ test_that("construct_conda_yml works", {
     testthat::expect_equal(basename(dirname(dirname(out))),envname)
     
     
+    ### Test conda_export
+    exported_yml <- conda_export(envname)
+    testthat::expect_true(file.exists(exported_yml))
+    testthat::expect_gte(length(readLines(exported_yml)),20)
+    
+    
     #### From requirements.txt ####
     ## Currently fails due to error:
     ## Error: Error creating conda environment [exit code 1]

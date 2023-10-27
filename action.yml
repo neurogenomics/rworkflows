@@ -154,6 +154,11 @@ inputs:
       https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/
       for more information.
     default: '' 
+  free_diskspace:
+    description: >
+      Free up additional disk space by deleting non-essential sofwares.
+    default: false
+
 runs:
   using: 'composite'
   steps:
@@ -167,12 +172,15 @@ runs:
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
     
-    - name: Collect Workflow Telemetry 🔭
+    - name: 🔭 Collect Workflow Telemetry 
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: true
+      
+    - name: 💾 Free Disk Space
+      if: inputs.free_diskspace == 'true'
+      uses: jlumbroso/free-disk-space@v1
     
-    ## 🐍 Setup Miniconda 
-    - name: Setup Miniconda
+    - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'
       uses: conda-incubator/setup-miniconda@v2
       with:

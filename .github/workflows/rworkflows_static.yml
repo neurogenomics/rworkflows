@@ -19,17 +19,18 @@ env:
   run_vignettes: ${{ true }}
   has_testthat: ${{ true }}
   run_covr: ${{ true }}
-  run_pkgdown: ${{ false }}
+  run_pkgdown: ${{ true }}
   has_runit: ${{ false }}
   has_latex: ${{ false }}
   tinytex_installer: TinyTeX-1
-  tinytex_version: ''
   pandoc_version: '2.19'
   run_docker: ${{ false }}
+  docker_registry: ghcr.io
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   cache_version: cache-v1
-  enable_act: ${{ false }}
+  miniforge_variant: ${{ false }}
+  activate_environment: test
 jobs:
   rworkflows_static:
     permissions: write-all
@@ -43,7 +44,7 @@ jobs:
         - os: ubuntu-latest
           bioc: devel
           r: auto
-          cont: bioconductor/bioconductor_docker:devel
+          cont: ghcr.io/bioconductor/bioconductor_docker:devel
           rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release
         - os: macOS-latest
           bioc: release

@@ -38,7 +38,38 @@ test_that("use_workflow works", {
                        force_new = TRUE,
                        tinytex_installer = "TinyTeX",
                        save_dir = tempdir())
+  testthat::expect_equal(yml$on,yml3$on)
+  testthat::expect_equal(length(yml$jobs[[1]]$steps),1)
+  testthat::expect_gte(length(yml3$jobs[[1]]$steps),20)
   
+  #### Modify conda args ####
+  environment_file <- construct_conda_yml(dependencies = c("python>=3.9","anndata"),
+                      preview = TRUE, 
+                      save_path = file.path(tempdir(),"conda.yml"))
+  miniforge_variant <- "Mambaforge"
+  yml4 <- use_workflow(return_path = FALSE,
+                       force_new = TRUE,
+                       miniforge_variant = miniforge_variant,
+                       environment_file = environment_file,
+                       save_dir = tempdir())
+  testthat::expect_equal(yml$on,yml4$on)
+  testthat::expect_null(yml$jobs$rworkflows$steps[[1]]$with$miniforge_variant)
+  testthat::expect_equal(yml4$jobs$rworkflows$steps[[1]]$with$miniforge_variant,
+                         miniforge_variant)
+  testthat::expect_equal(yml4$jobs$rworkflows$steps[[1]]$with$environment_file,
+                         environment_file)
+  
+  miniforge_variant <- TRUE
+  yml5 <- use_workflow(return_path = FALSE,
+                       force_new = TRUE,
+                       miniforge_variant = miniforge_variant,
+                       environment_file = environment_file,
+                       save_dir = tempdir())
+  testthat::expect_equal(yml$on,yml5$on)
+  testthat::expect_equal(yml5$jobs$rworkflows$steps[[1]]$with$miniforge_variant,
+                         "")
+  testthat::expect_equal(yml5$jobs$rworkflows$steps[[1]]$with$environment_file,
+                         environment_file)
   
   #### Make table out of arguments ####
   # defaults <- eval(formals(rworkflows::use_workflow))
