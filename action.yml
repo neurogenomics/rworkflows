@@ -164,7 +164,7 @@ runs:
   steps:
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true' && runner.os == 'Linux'
-      uses: jlumbroso/free-disk-space@main
+      uses: easimon/maximize-build-space@master
       
     - name: 🌎 Set environment variables 
       run: | 
