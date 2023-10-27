@@ -178,7 +178,7 @@ runs:
       
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true'
-      uses: jlumbroso/free-disk-space@v1
+      uses: jlumbroso/free-disk-space@main
     
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'
