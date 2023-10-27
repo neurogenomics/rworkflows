@@ -1,4 +1,8 @@
 conda_installed <- function(){
-  requireNamespace("reticulate")
-  utils::getFromNamespace("conda_installed","reticulate")()
+  if(is_gha()){
+    Sys.getenv("CONDA")!=""
+  } else {
+    requireNamespace("reticulate")
+    utils::getFromNamespace("conda_installed","reticulate")()
+  }
 }
