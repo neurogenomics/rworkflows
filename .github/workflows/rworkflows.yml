@@ -14,8 +14,7 @@ name: rworkflows
     - RELEASE_**
 jobs:
   rworkflows:
-    permissions:
-      contents: write
+    permissions: write-all
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}

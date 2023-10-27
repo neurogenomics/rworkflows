@@ -31,6 +31,7 @@ fill_yaml <- function(## function-level args
                       tinytex_version,
                       pandoc_version,
                       run_docker,  
+                      docker_registry,
                       github_token,
                       docker_user,
                       docker_org,
@@ -43,6 +44,7 @@ fill_yaml <- function(## function-level args
                       channels){
   # devoptera::args2vars(use_workflow)
   
+  docker_registry <- docker_registry[1]
   #### name ####
   yml$name <- name
   #### on ####

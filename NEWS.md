@@ -23,6 +23,15 @@
   - Make registry explicit.
   - New arg: `default_registry`
   - New subfunction: `check_registry`
+* Add `docker_registry` arg to let users choose which registry to push to. 
+  Defaults to "ghcr.io" instead of "docker.io" so that no additional credentials 
+  are needed.
+  - *actions.yml*
+  - `use_workflow`
+* `get_github_url_desc`
+  - Improve logic to catch more GH URLs.
+* *vignettes/depgraph.Rmd*
+  - Update plots with new data and resave PNG.
 
 ## Bug fixes
 

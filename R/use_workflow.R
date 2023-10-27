@@ -41,7 +41,6 @@
 #' @param run_pkgdown Knit the \emph{README.Rmd} (if available), 
 #' build documentation website, and deploy to \emph{gh-pages} branch.
 #' @param has_runit Run R Unit tests.
-#' @param run_docker Whether to build and push a Docker container to DockerHub.
 #' @param has_latex Install a suite of LaTeX dependencies used for 
 #' rendering Sweave (.rnw) and other documentation files.
 #' @param tinytex_installer  Which release of tinytex (bundles of LaTeX
@@ -66,13 +65,24 @@
 #' Read 
 #' \href{https://docs.github.com/en/actions/security-guides/automatic-token-authentication}{
 #' here for more details}.
-#' @param docker_user DockerHub username.
-#' @param docker_org DockerHub organization name. 
+#' @param run_docker Whether to build and push a Docker container to DockerHub.
+#' @param docker_registry Docker container registry to push to. 
+#' Options include:
+#' \itemize{
+#'  \item{"ghcr.io"} : \href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
+#'  GitHub Container Registry}
+#'  \item{"docker.io"} : \href{https://hub.docker.com/}{DockerHub} 
+#' }
+#' @param docker_user Docker registry username.
+#' Not used when \code{docker_registry="ghcr.io"}.
+#' @param docker_org Docker registry organization name. 
 #' Is the same as \code{docker_user} by default.
-#' @param docker_token DockerHub token.
+#' Not used when \code{docker_registry="ghcr.io"}.
+#' @param docker_token Docker registry token.
+#' Not used when \code{docker_registry="ghcr.io"}.
+#' 
 #' @param force_new If the GHA workflow yaml already exists, 
 #' overwrite with new one (default: \code{FALSE}).
-#' 
 #' @param save_dir Directory to save workflow to.
 #' @param return_path Return the path to the saved \emph{yaml} workflow file
 #' (default: \code{TRUE}), or return the \emph{yaml} object directly.
@@ -160,6 +170,7 @@ use_workflow <- function(## action-level args
                          run_pkgdown=TRUE,   
                          ### Container
                          run_docker=FALSE,  
+                         docker_registry="ghcr.io",
                          docker_user=NULL,
                          docker_org=docker_user,
                          docker_token="${{ secrets.DOCKER_TOKEN }}",
@@ -213,6 +224,7 @@ use_workflow <- function(## action-level args
                    branches=branches,
                    runners=runners,
                    ## workflow-level args
+                   github_token=github_token,
                    run_bioccheck=run_bioccheck,
                    run_rcmdcheck=run_rcmdcheck, 
                    as_cran=as_cran,
@@ -226,7 +238,7 @@ use_workflow <- function(## action-level args
                    tinytex_version=tinytex_version,
                    pandoc_version=pandoc_version,
                    run_docker=run_docker,  
-                   github_token=github_token,
+                   docker_registry=docker_registry,
                    docker_user=docker_user,
                    docker_org=docker_org,
                    docker_token=docker_token,

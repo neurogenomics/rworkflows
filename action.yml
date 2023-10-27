@@ -68,20 +68,23 @@ inputs:
     default: false
   docker_registry: 
     description: >
-      Docker container registry. 
+      Docker container registry to push to. 
       Options include:
-      - ghcr.io : [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry)
-      - docker.io : [DockerHub](https://hub.docker.com/) 
+      - ghcr.io : GitHub Container Registry (https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+      - docker.io : DockerHub (https://hub.docker.com/) 
     default: 'ghcr.io'
   docker_user: 
     description: >
-      DockerHub username. 
+      Docker registry username. 
+      Not used when `docker_registry="ghcr.io"`.
   docker_org: 
     description: >
-      DockerHub organization name. Can be the same as Docker username.
+      Docker registry organization name. Can be the same as `docker_user`.
+      Not used when `docker_registry="ghcr.io"`.
   DOCKER_TOKEN:
     description: >
-      DockerHub authentication token.
+      Docker registry authentication token.
+      Not used when `docker_registry="ghcr.io"`.
   GITHUB_TOKEN:
     description: >
       GitHub authentication token with permissions to push 

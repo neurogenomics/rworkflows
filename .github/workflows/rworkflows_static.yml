@@ -32,8 +32,7 @@ env:
   enable_act: ${{ false }}
 jobs:
   rworkflows_static:
-    permissions:
-      contents: write
+    permissions: write-all
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}

@@ -34,6 +34,7 @@ use_workflow(
   pandoc_version = "2.19",
   run_pkgdown = TRUE,
   run_docker = FALSE,
+  docker_registry = "ghcr.io",
   docker_user = NULL,
   docker_org = docker_user,
   docker_token = "${{ secrets.DOCKER_TOKEN }}",
@@ -141,12 +142,23 @@ build documentation website, and deploy to \emph{gh-pages} branch.}
 
 \item{run_docker}{Whether to build and push a Docker container to DockerHub.}
 
-\item{docker_user}{DockerHub username.}
+\item{docker_registry}{Docker container registry to push to. 
+Options include:
+\itemize{
+ \item{"ghcr.io"} : \href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
+ GitHub Container Registry}
+ \item{"docker.io"} : \href{https://hub.docker.com/}{DockerHub} 
+}}
 
-\item{docker_org}{DockerHub organization name. 
-Is the same as \code{docker_user} by default.}
+\item{docker_user}{Docker registry username.
+Not used when \code{docker_registry="ghcr.io"}.}
 
-\item{docker_token}{DockerHub token.}
+\item{docker_org}{Docker registry organization name. 
+Is the same as \code{docker_user} by default.
+Not used when \code{docker_registry="ghcr.io"}.}
+
+\item{docker_token}{Docker registry token.
+Not used when \code{docker_registry="ghcr.io"}.}
 
 \item{miniforge_variant}{If provided, this variant of Miniforge will be
 downloaded and installed. If \code{miniforge_variant=false}, 
