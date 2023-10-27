@@ -3,8 +3,8 @@
 #' Creates a vignette rmarkdown file demonstrates how to create a
 #'  Docker/Singularity image from a container stored in 
 #' \href{https://hub.docker.com/}{Dockerhub}.
-#' @param docker_org DockerHub organization name. 
-#' Can simply be your Dockerhub username instead.
+#' @param docker_org Docker registry organization name. 
+#' Can simply be your registry username instead.
 #' @param title Title of vignette.
 #' @param vignette_index_entry Index entry of the vignette, 
 #' which is used when creating the navigation bar in the \pkg{pkgdown} site.
@@ -24,16 +24,18 @@
 #' @param verbose Print messages.
 #' @param output Vignette output style. 
 #' Defaults to \link[BiocStyle]{html_document}.
+#' @inheritParams use_workflow
 #' @returns Path to vignette file.
 #' 
 #' @export
 #' @importFrom yaml read_yaml as.yaml
 #' @importFrom here here
 #' @examples
-#' path <- use_vignette_docker(docker_org = "neurogenomicslab",
+#' path <- use_vignette_docker(docker_org = "neurogenomics",
 #'                             ## use default save_dir in practice
 #'                             save_dir = tempdir())
 use_vignette_docker <- function(docker_org,
+                                docker_registry="ghcr.io",
                                 title="Docker/Singularity Containers",
                                 vignette_index_entry="docker",
                                 save_dir=here::here(),
@@ -64,10 +66,14 @@ use_vignette_docker <- function(docker_org,
     yml_lines <- seq(grep("---",l)[1],
                      rev(grep("---",l))[1] ) 
     yml <- yaml::read_yaml(text = l[yml_lines])
-    ## docker_user
+    #### Set params ####
+    ## docker_registry
+    yml$params$docker_registry$value <- docker_registry
+    ## docker_org
     yml$params$docker_org$value <- docker_org
     ## vignette title
     yml$title <- title
+    ## vignette index entry
     yml <- set_vignette_index(yml = yml,
                               pattern = "%\\VignetteIndexEntry{docker}",
                               vignette_index_entry = vignette_index_entry)

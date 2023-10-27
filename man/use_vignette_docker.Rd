@@ -6,6 +6,7 @@
 \usage{
 use_vignette_docker(
   docker_org,
+  docker_registry = "ghcr.io",
   title = "Docker/Singularity Containers",
   vignette_index_entry = "docker",
   save_dir = here::here(),
@@ -19,8 +20,16 @@ use_vignette_docker(
 )
 }
 \arguments{
-\item{docker_org}{DockerHub organization name. 
-Can simply be your Dockerhub username instead.}
+\item{docker_org}{Docker registry organization name. 
+Can simply be your registry username instead.}
+
+\item{docker_registry}{Docker container registry to push to. 
+Options include:
+\itemize{
+ \item{"ghcr.io"} : \href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
+ GitHub Container Registry}
+ \item{"docker.io"} : \href{https://hub.docker.com/}{DockerHub} 
+}}
 
 \item{title}{Title of vignette.}
 

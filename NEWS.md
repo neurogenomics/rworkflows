@@ -86,6 +86,7 @@
   - Add subfunction `omit_if_default` to omit tinytex args from yaml.
 * `is_rstudio`: new interal helper function.
 * Update *rworkflows_static.yml*
+* Sync Docker vignettes with registry #99
 
 ## Bug fixes
 
