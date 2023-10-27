@@ -163,7 +163,7 @@ runs:
   using: 'composite'
   steps:
     - name: 💾 Free Disk Space
-      if: inputs.free_diskspace == 'true' && runner.os != 'Linux'
+      if: inputs.free_diskspace == 'true' && runner.os == 'Linux'
       uses: jlumbroso/free-disk-space@main
       
     - name: 🌎 Set environment variables 
