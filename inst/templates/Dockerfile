@@ -47,7 +47,7 @@ WORKDIR /$PKG
 #### Install package dependencies ####
 RUN Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE, timeout=2000); \
                 if(!require("BiocManager")) install.packages("BiocManager"); \
-                if(!require("remotes")) install.packages("remotes");
-                repos <- BiocManager::repositories()
+                if(!require("remotes")) install.packages("remotes"); \
+                repos <- BiocManager::repositories() \
                 remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE)'
 RUN rm -rf /$PKG
