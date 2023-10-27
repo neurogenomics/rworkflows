@@ -12,10 +12,21 @@ pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 
 ## Intro
 
+`rworkflows` is a suite of tools to make it easy for R developers to implement
+reproducible best practices on GitHub. 
+
+It includes three main components:  
+1. [**`templateR` template**](https://github.com/neurogenomics/templateR): a `CRAN`/`Bioc`-compatible R package template that automatically generates essential documentation using package metadata.  
+2. [**`rworkflows` R package**](https://github.com/neurogenomics/rworkflows/blob/master/DESCRIPTION): a lightweight `CRAN` package to automatically 
+set up short, customisable workflows that trigger the `rworkflows` action.  
+3. [**`rworkflows` action**](https://github.com/neurogenomics/rworkflows/blob/master/action.yml): an open-source action available on the [GitHub Actions  Marketplace](https://github.com/marketplace/actions/rworkflows). 
+
+### `rworkflows` action steps 
+
 [**GitHub Actions**](https://docs.github.com/en/actions) 
 are a powerful way to automatically launch workflows 
 every time you push changes to a GitHub repository. 
-This is a form of [**Continuous Integration (CI)**](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
+This is a form of [**Continuous Integration/Deployment (CI/CD)**](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
 which helps ensure that your code is always working as expected 
 (without having to manually check each time).
 
@@ -24,23 +35,29 @@ specifically for the development of R packages.
 We also provide an R function to automatically generate a **workflow file** that 
 calls the `rworkflows` composite action:
 
-Currently, `rworkflows` **action** performs the following tasks:  
+Currently, `rworkflows` **action** can perform the following tasks
+(with options to enable/disable/modify each step):  
 
-1. Builds a Docker container to run subsequent steps within. 
-2. Builds and checks your R package (with [**CRAN**](https://cran.r-project.org/)
+1. 🐳 Builds a Docker container to run subsequent steps within. 
+2. 🐍 Builds and/or activates a custom `conda` environment.
+3. 🛠️ Installs system dependencies
+4. 🛠️ Installs LaTeX dependencies.
+5. 🛠 Installs R dependencies.
+6. ✅ Builds and checks your R package (with [**CRAN**](https://cran.r-project.org/)
 and/or [**Bioconductor**](https://bioconductor.org/) checks).  
-3. Runs [unit tests](https://testthat.r-lib.org/).  
-4. Runs [code coverage tests](https://covr.r-lib.org/) and uploads the results 
+7. 📋 Runs [unit tests](https://testthat.r-lib.org/).  
+8. 📋 Runs [code coverage tests](https://covr.r-lib.org/) and uploads the results 
 to [**Codecov**](https://about.codecov.io/).  
-5. (Re)builds and launches a documentation website for your R package.  
-6. Pushes an [**Rstudio**](https://posit.co/) 
-[**Docker**](https://www.docker.com/) container to 
-[**DockerHub**](https://hub.docker.com/) 
-with your R package and all its dependencies pre-installed.   
+9. 🚀 (Re)builds and launches a documentation website for your R package.  
+10. 🐳 Pushes a [**Docker**](https://www.docker.com/) container (with [**Rstudio**](https://posit.co/) and all dependencies pre-installed) to 
+your choice of container registry (e.g. [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),  [**DockerHub**](https://hub.docker.com/)). 
+11. 🎖 Updates relevant badges added to your README 
+with `rworkflows::use_badges()`.
 
 Importantly, this **workflow** is designed to work with any R package out-of-the-box.
 This means you won't have to manually edit any yaml files,
-just run the `rworkflows::use_workflow()` function and you're ready to go!
+just run the `rworkflows::use_workflow()` function 
+and you're ready to go within seconds!
 
 > **Note**: `rworkflows` uses, was inspired by, and benefits from the work of many other projects, especially:  
 [`biocthis`](https://github.com/lcolladotor/biocthis), [`usethis`](https://github.com/r-lib/usethis), [`actions/`](https://github.com/actions), [`r-lib/actions`](https://github.com/r-lib/actions), [`bioc-actions`](https://github.com/grimbough/bioc-actions), [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action), [`docker/build-push-action`](https://github.com/docker/build-push-action), [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker). For more details on how these projects relate to `rworkflows`, please see [below](#acknowledgments).
@@ -55,6 +72,7 @@ Install and create the workflow in your R package's project folder.
 #### Install rworkflows R package ####
 ### For the stable CRAN release
 if(!require("rworkflows")) install.packages("rworkflows")
+
 ### Or, for the latest development version
 # if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
 
