@@ -80,6 +80,7 @@ distributed by <span class="pkg">rworkflows</span>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_dockerfile</span><span class="op">(</span></span>
 <span>  save_dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">save_dir</span>, <span class="st">"Dockerfile"</span><span class="op">)</span>,</span>
+<span>  base_image <span class="op">=</span> <span class="fu"><a href="construct_cont.html">construct_cont</a></span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -94,6 +95,10 @@ distributed by <span class="pkg">rworkflows</span>.</p>
 
 <dt>path</dt>
 <dd><p>Path to the Docker file.</p></dd>
+
+
+<dt>base_image</dt>
+<dd><p>Base Docker image to use.</p></dd>
 
 
 <dt>force_new</dt>
@@ -119,7 +124,7 @@ distributed by <span class="pkg">rworkflows</span>.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_dockerfile</span><span class="op">(</span>save_dir<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating new Docker file ==&gt; /tmp/Rtmp71gVYm/Dockerfile</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating new Docker file ==&gt; /tmp/RtmprR0AJe/Dockerfile</span>
 </code></pre></div>
     </div>
   </div>

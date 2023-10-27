@@ -98,7 +98,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i><br>
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Vignette updated: <i>Oct-12-2023</i><br>
+Vignette updated: <i>Oct-27-2023</i><br>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/depgraph.Rmd" class="external-link"><code>vignettes/depgraph.Rmd</code></a></small>
@@ -131,16 +131,19 @@ Vignette updated: <i>Oct-12-2023</i><br>
 <span>                           method_seed <span class="op">=</span> <span class="st">"github"</span>,</span>
 <span>                           exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"neurogenomics_rworkflows"</span>,</span>
 <span>                                       <span class="st">"neurogenomics_r_workflows"</span><span class="op">)</span>,</span>
-<span>                           node_size <span class="op">=</span> <span class="st">"total_downloads"</span>,</span>
-<span>                           height<span class="op">=</span><span class="st">"100%"</span>,</span>
+<span>                           <span class="co">#node_size = "total_downloads", </span></span>
 <span>                           reverse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                           save_path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"reports"</span>,<span class="st">"rworkflows_depgraph.html"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                           save_path <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"reports"</span>,<span class="st">"rworkflows_depgraph.html"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="save-data">Save data<a class="anchor" aria-label="anchor" href="#save-data"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">res</span>, <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"reports"</span>,<span class="st">"dep_graph_res.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Save network plot as PNG</span></span>
+<span><span class="fu">echodeps</span><span class="fu">::</span><span class="fu">visnet_save</span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">save_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Save all data and plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">res</span>, <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"reports"</span>,<span class="st">"dep_graph_res.rds"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="count-starsclonesviews">Count stars/clones/views<a class="anchor" aria-label="anchor" href="#count-starsclonesviews"></a>
@@ -210,18 +213,18 @@ there are 25,000 R packages that are exclusively distributes via GitHub
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] data.table_1.14.8 BiocStyle_2.29.2 </span></span>
+<span><span class="co">## [1] data.table_1.14.8 BiocStyle_2.30.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] vctrs_0.6.3         cli_3.6.1           knitr_1.44         </span></span>
+<span><span class="co">##  [1] vctrs_0.6.4         cli_3.6.1           knitr_1.44         </span></span>
 <span><span class="co">##  [4] rlang_1.1.1         xfun_0.40           stringi_1.7.12     </span></span>
-<span><span class="co">##  [7] purrr_1.0.2         textshaping_0.3.6   jsonlite_1.8.7     </span></span>
+<span><span class="co">##  [7] purrr_1.0.2         textshaping_0.3.7   jsonlite_1.8.7     </span></span>
 <span><span class="co">## [10] glue_1.6.2          rprojroot_2.0.3     htmltools_0.5.6.1  </span></span>
-<span><span class="co">## [13] ragg_1.2.5          sass_0.4.7          rmarkdown_2.25     </span></span>
+<span><span class="co">## [13] ragg_1.2.6          sass_0.4.7          rmarkdown_2.25     </span></span>
 <span><span class="co">## [16] evaluate_0.22       jquerylib_0.1.4     fastmap_1.1.1      </span></span>
 <span><span class="co">## [19] lifecycle_1.0.3     yaml_2.3.7          memoise_2.0.1      </span></span>
-<span><span class="co">## [22] bookdown_0.35       BiocManager_1.30.22 stringr_1.5.0      </span></span>
-<span><span class="co">## [25] compiler_4.3.1      fs_1.6.3            systemfonts_1.0.4  </span></span>
+<span><span class="co">## [22] bookdown_0.36       BiocManager_1.30.22 stringr_1.5.0      </span></span>
+<span><span class="co">## [25] compiler_4.3.1      fs_1.6.3            systemfonts_1.0.5  </span></span>
 <span><span class="co">## [28] digest_0.6.33       R6_2.5.1            magrittr_2.0.3     </span></span>
 <span><span class="co">## [31] bslib_0.5.1         tools_4.3.1         pkgdown_2.0.7      </span></span>
 <span><span class="co">## [34] cachem_1.0.8        desc_1.4.2</span></span></code></pre>

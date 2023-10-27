@@ -102,30 +102,45 @@
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>
 </h4>
 <h4>
-README updated: <i>Oct-12-2023</i>
+README updated: <i>Oct-27-2023</i>
 </h4>
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
 </h2>
-<p><a href="https://docs.github.com/en/actions" class="external-link"><strong>GitHub Actions</strong></a> are a powerful way to automatically launch workflows every time you push changes to a GitHub repository. This is a form of <a href="https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration" class="external-link"><strong>Continuous Integration (CI)</strong></a>, which helps ensure that your code is always working as expected (without having to manually check each time).</p>
+<p><code>rworkflows</code> is a suite of tools to make it easy for R developers to implement reproducible best practices on GitHub.</p>
+<p>It includes three main components:<br>
+1. <a href="https://github.com/neurogenomics/templateR" class="external-link"><strong><code>templateR</code> template</strong></a>: a <code>CRAN</code>/<code>Bioc</code>-compatible R package template that automatically generates essential documentation using package metadata.<br>
+2. <a href="https://github.com/neurogenomics/rworkflows/blob/master/DESCRIPTION" class="external-link"><strong><code>rworkflows</code> R package</strong></a>: a lightweight <code>CRAN</code> package to automatically set up short, customisable workflows that trigger the <code>rworkflows</code> action.<br>
+3. <a href="https://github.com/neurogenomics/rworkflows/blob/master/action.yml" class="external-link"><strong><code>rworkflows</code> action</strong></a>: an open-source action available on the <a href="https://github.com/marketplace/actions/rworkflows" class="external-link">GitHub Actions Marketplace</a>.</p>
+<div class="section level3">
+<h3 id="rworkflows-action-steps">
+<code>rworkflows</code> action steps<a class="anchor" aria-label="anchor" href="#rworkflows-action-steps"></a>
+</h3>
+<p><a href="https://docs.github.com/en/actions" class="external-link"><strong>GitHub Actions</strong></a> are a powerful way to automatically launch workflows every time you push changes to a GitHub repository. This is a form of <a href="https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration" class="external-link"><strong>Continuous Integration/Deployment (CI/CD)</strong></a>, which helps ensure that your code is always working as expected (without having to manually check each time).</p>
 <p>Here, we have designed a robust, reusable, and flexible <strong>action</strong> specifically for the development of R packages. We also provide an R function to automatically generate a <strong>workflow file</strong> that calls the <code>rworkflows</code> composite action:</p>
-<p>Currently, <code>rworkflows</code> <strong>action</strong> performs the following tasks:</p>
+<p>Currently, <code>rworkflows</code> <strong>action</strong> can perform the following tasks (with options to enable/disable/modify each step):</p>
 <ol style="list-style-type: decimal">
-<li>Builds a Docker container to run subsequent steps within.</li>
-<li>Builds and checks your R package (with <a href="https://cran.r-project.org/" class="external-link"><strong>CRAN</strong></a> and/or <a href="https://bioconductor.org/" class="external-link"><strong>Bioconductor</strong></a> checks).<br>
+<li>🐳 Builds a Docker container to run subsequent steps within.</li>
+<li>🐍 Builds and/or activates a custom <code>conda</code> environment.</li>
+<li>🛠️ Installs system dependencies</li>
+<li>🛠️ Installs LaTeX dependencies.</li>
+<li>🛠 Installs R dependencies.</li>
+<li>✅ Builds and checks your R package (with <a href="https://cran.r-project.org/" class="external-link"><strong>CRAN</strong></a> and/or <a href="https://bioconductor.org/" class="external-link"><strong>Bioconductor</strong></a> checks).<br>
 </li>
-<li>Runs <a href="https://testthat.r-lib.org/" class="external-link">unit tests</a>.<br>
+<li>📋 Runs <a href="https://testthat.r-lib.org/" class="external-link">unit tests</a>.<br>
 </li>
-<li>Runs <a href="https://covr.r-lib.org/" class="external-link">code coverage tests</a> and uploads the results to <a href="https://about.codecov.io/" class="external-link"><strong>Codecov</strong></a>.<br>
+<li>📋 Runs <a href="https://covr.r-lib.org/" class="external-link">code coverage tests</a> and uploads the results to <a href="https://about.codecov.io/" class="external-link"><strong>Codecov</strong></a>.<br>
 </li>
-<li>(Re)builds and launches a documentation website for your R package.<br>
+<li>🚀 (Re)builds and launches a documentation website for your R package.<br>
 </li>
-<li>Pushes an <a href="https://posit.co/" class="external-link"><strong>Rstudio</strong></a> <a href="https://www.docker.com/" class="external-link"><strong>Docker</strong></a> container to <a href="https://hub.docker.com/" class="external-link"><strong>DockerHub</strong></a> with your R package and all its dependencies pre-installed.</li>
+<li>🐳 Pushes a <a href="https://www.docker.com/" class="external-link"><strong>Docker</strong></a> container (with <a href="https://posit.co/" class="external-link"><strong>Rstudio</strong></a> and all dependencies pre-installed) to your choice of container registry (e.g. <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" class="external-link">GitHub Container Registry</a>, <a href="https://hub.docker.com/" class="external-link"><strong>DockerHub</strong></a>).</li>
+<li>🎖 Updates relevant badges added to your README with <code><a href="reference/use_badges.html">rworkflows::use_badges()</a></code>.</li>
 </ol>
-<p>Importantly, this <strong>workflow</strong> is designed to work with any R package out-of-the-box. This means you won’t have to manually edit any yaml files, just run the <code><a href="reference/use_workflow.html">rworkflows::use_workflow()</a></code> function and you’re ready to go!</p>
+<p>Importantly, this <strong>workflow</strong> is designed to work with any R package out-of-the-box. This means you won’t have to manually edit any yaml files, just run the <code><a href="reference/use_workflow.html">rworkflows::use_workflow()</a></code> function and you’re ready to go within seconds!</p>
 <blockquote>
 <p><strong>Note</strong>: <code>rworkflows</code> uses, was inspired by, and benefits from the work of many other projects, especially:<br><a href="https://github.com/lcolladotor/biocthis" class="external-link"><code>biocthis</code></a>, <a href="https://github.com/r-lib/usethis" class="external-link"><code>usethis</code></a>, <a href="https://github.com/actions" class="external-link"><code>actions/</code></a>, <a href="https://github.com/r-lib/actions" class="external-link"><code>r-lib/actions</code></a>, <a href="https://github.com/grimbough/bioc-actions" class="external-link"><code>bioc-actions</code></a>, <a href="https://github.com/JamesIves/github-pages-deploy-action" class="external-link"><code>JamesIves/github-pages-deploy-action</code></a>, <a href="https://github.com/docker/build-push-action" class="external-link"><code>docker/build-push-action</code></a>, <a href="https://github.com/Bioconductor/bioconductor_docker" class="external-link"><code>bioconductor_docker</code></a>. For more details on how these projects relate to <code>rworkflows</code>, please see <a href="#acknowledgments">below</a>.</p>
 </blockquote>
+</div>
 </div>
 <div class="section level2">
 <h2 id="quickstart">Quickstart<a class="anchor" aria-label="anchor" href="#quickstart"></a>
@@ -137,6 +152,7 @@ README updated: <i>Oct-12-2023</i>
 <span><span class="co">#### Install rworkflows R package ####</span></span>
 <span><span class="co">### For the stable CRAN release</span></span>
 <span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/neurogenomics/rworkflows" class="external-link">"rworkflows"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rworkflows"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">### Or, for the latest development version</span></span>
 <span><span class="co"># if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")</span></span>
 <span></span>
@@ -339,15 +355,15 @@ README updated: <i>Oct-12-2023</i>
 <span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="do">##  [4] dplyr_1.1.3         compiler_4.3.1      BiocManager_1.30.22</span></span>
 <span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="do">##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       </span></span>
 <span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="do">## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         </span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="do">## [13] ggplot2_3.4.3       R6_2.5.1            generics_0.1.3     </span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="do">## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     </span></span>
 <span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="do">## [16] knitr_1.44          yulab.utils_0.1.0   tibble_3.2.1       </span></span>
 <span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="do">## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.3    </span></span>
 <span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="do">## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 </span></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="do">## [25] rlang_1.1.1         utf8_1.2.3          cachem_1.0.8       </span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="do">## [25] rlang_1.1.1         utf8_1.2.4          cachem_1.0.8       </span></span>
 <span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="do">## [28] badger_0.2.3        xfun_0.40           fs_1.6.3           </span></span>
 <span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="do">## [31] memoise_2.0.1       cli_3.6.1           magrittr_2.0.3     </span></span>
 <span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="do">## [34] rworkflows_0.99.14  digest_0.6.33       grid_4.3.1         </span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="do">## [37] rstudioapi_0.15.0   lifecycle_1.0.3     vctrs_0.6.3        </span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="do">## [37] rstudioapi_0.15.0   lifecycle_1.0.3     vctrs_0.6.4        </span></span>
 <span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="do">## [40] data.table_1.14.8   evaluate_0.22       glue_1.6.2         </span></span>
 <span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="do">## [43] fansi_1.0.5         colorspace_2.1-0    tools_4.3.1        </span></span>
 <span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="do">## [46] pkgconfig_2.0.3     htmltools_0.5.6.1</span></span></code></pre></div>
