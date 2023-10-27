@@ -76,7 +76,7 @@ jobs:
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: ${{ true }}
     - name: "\U0001F4BE Free Disk Space"
-      if: env.free_diskspace == 'true'
+      if: env.free_diskspace == 'true' && runner.os != 'Linux'
       uses: jlumbroso/free-disk-space@main
     - name: "\U0001F40D Setup Miniconda"
       if: env.miniforge_variant != 'false'
