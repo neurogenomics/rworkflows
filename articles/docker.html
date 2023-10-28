@@ -98,7 +98,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i><br>
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Vignette updated: <i>Oct-27-2023</i><br>
+Vignette updated: <i>Oct-28-2023</i><br>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/docker.Rmd" class="external-link"><code>vignettes/docker.Rmd</code></a></small>
@@ -109,15 +109,11 @@ Vignette updated: <i>Oct-27-2023</i><br>
     
     
 <div class="section level2">
-<h2 id="dockerhub">DockerHub<a class="anchor" aria-label="anchor" href="#dockerhub"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>rworkflows is now available via <a href="https://hub.docker.com/repository/docker/neurogenomicslab/rworkflows" class="external-link">DockerHub</a>
-as a containerised environment with Rstudio and all necessary
-dependencies pre-installed.</p>
-<div class="section level3">
-<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h3>
-</div>
+<p>rworkflows is now available via <a href="https://ghcr.io/ghcr.io/neurogenomics/rworkflows" class="external-link">ghcr.io</a> as a
+containerised environment with Rstudio and all necessary dependencies
+pre-installed.</p>
 <div class="section level3">
 <h3 id="method-1-via-docker">Method 1: via Docker<a class="anchor" aria-label="anchor" href="#method-1-via-docker"></a>
 </h3>
@@ -125,7 +121,7 @@ dependencies pre-installed.</p>
 Docker</a> if you have not already.</p>
 <p>Create an image of the <a href="https://www.docker.com/" class="external-link">Docker</a>
 container in command line:</p>
-<pre><code>docker pull neurogenomicslab/rworkflows</code></pre>
+<pre><code>docker pull ghcr.io/neurogenomics/rworkflows</code></pre>
 <p>Once the image has been created, you can launch it with:</p>
 <pre><code>docker run \
   -d \
@@ -134,7 +130,7 @@ container in command line:</p>
   -v ~/Desktop:/Desktop \
   -v /Volumes:/Volumes \
   -p 8900:8787 \
-  neurogenomicslab/rworkflows</code></pre>
+  ghcr.io/neurogenomics/rworkflows</code></pre>
 <div class="section level4">
 <h4 id="notes">NOTES<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h4>
@@ -161,15 +157,17 @@ Desktop</a> to easily manage your containers.</li>
 <p>If you are using a system that does not allow Docker (as is the case
 for many institutional computing clusters), you can instead <a href="https://docs.sylabs.io/guides/2.6/user-guide/singularity_and_docker.html" class="external-link">install
 Docker images via Singularity</a>.</p>
-<pre><code>singularity pull docker://neurogenomicslab/rworkflows</code></pre>
+<pre><code>singularity pull docker://ghcr.io/neurogenomics/rworkflows</code></pre>
+<p>For troubleshooting, see the <a href="https://docs.sylabs.io/guides/latest/user-guide/singularity_and_docker.html#github-container-registry" class="external-link">Singularity
+documentation</a>.</p>
 </div>
-<div class="section level3">
-<h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h3>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>Finally, launch the containerised Rstudio by entering the following
 URL in any web browser: <em><a href="http://localhost:8900/" class="external-link uri">http://localhost:8900/</a></em></p>
 <p>Login using the credentials set during the Installation steps.</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="session-info">Session Info<a class="anchor" aria-label="anchor" href="#session-info"></a>
