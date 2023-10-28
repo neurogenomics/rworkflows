@@ -225,6 +225,8 @@ runs:
         pandoc-version: ${{ inputs.pandoc_version }} 
 
     - name: ❔ Query dependencies 
+      env: 
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
         install.packages('remotes')
@@ -319,6 +321,7 @@ runs:
     - name: 🛠 Install dependencies pass 1 
       env:
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
          ## For running the checks
@@ -333,6 +336,7 @@ runs:
     - name: 🛠 Install dependencies pass 2 
       env:
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
@@ -500,6 +504,7 @@ runs:
         (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       env:
         BASE_IMAGE: ${{ matrix.config.cont }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
@@ -510,6 +515,8 @@ runs:
       if: |
         (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'ghcr.io'
       uses: docker/build-push-action@v1
+      env: 
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       with:
         username: ${{ github.repository_owner }}
         password: ${{ inputs.GITHUB_TOKEN }}
@@ -528,6 +535,8 @@ runs:
       if: |
         (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'docker.io'
       uses: docker/build-push-action@v1
+      env: 
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       with:
         username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}
