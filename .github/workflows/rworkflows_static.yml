@@ -45,7 +45,6 @@ jobs:
           bioc: devel
           r: auto
           cont: ghcr.io/bioconductor/bioconductor_docker:devel
-          rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release
         - os: macOS-latest
           bioc: release
           r: auto
@@ -63,23 +62,22 @@ jobs:
       GITHUB_REPO: ${{ github.repository }}
       RGL_USE_NULL: ${{ true }}
     steps:
+    - name: "\U0001F52D Collect Workflow Telemetry"
+      uses: runforesight/workflow-telemetry-action@v1
+      continue-on-error: ${{ true }}
+      with:
+        github_token: ${{ env.GITHUB_TOKEN }}
     - name: "\U0001F4BE Free Disk Space"
       if: env.free_diskspace == 'true' && runner.os == 'Linux'
       uses: jlumbroso/free-disk-space@main
-      with:
-        docker-images: ${{ false }}
     - name: "\U0001F30E Set environment variables"
       run: |
-        echo "GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
         echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !env.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
-    - name: "\U0001F52D Collect Workflow Telemetry"
-      uses: runforesight/workflow-telemetry-action@v1
-      continue-on-error: ${{ true }}
     - name: "\U0001F40D Setup Miniconda"
       if: env.miniforge_variant != 'false'
       uses: conda-incubator/setup-miniconda@v2
@@ -111,6 +109,8 @@ jobs:
       with:
         pandoc-version: ${{ env.pandoc_version }}
     - name: ❔ Query dependencies
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
         install.packages('remotes')
@@ -201,6 +201,7 @@ jobs:
     - name: "\U0001F6E0 Install dependencies pass 1"
       env:
         timeout: ${{ env.timeout }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         ## For running the checks
@@ -214,6 +215,7 @@ jobs:
     - name: "\U0001F6E0 Install dependencies pass 2"
       env:
         timeout: ${{ env.timeout }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
@@ -365,6 +367,7 @@ jobs:
         (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && runner.os == 'Linux'
       env:
         BASE_IMAGE: ${{ matrix.config.cont }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
@@ -374,6 +377,8 @@ jobs:
       if: |
         (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && runner.os == 'Linux' && env.docker_registry == 'ghcr.io'
       uses: docker/build-push-action@v1
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       with:
         username: ${{ github.repository_owner }}
         password: ${{ env.GITHUB_TOKEN }}
@@ -391,6 +396,8 @@ jobs:
       if: |
         (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && runner.os == 'Linux' && env.docker_registry == 'docker.io'
       uses: docker/build-push-action@v1
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       with:
         username: ${{ env.docker_user }}
         password: ${{ env.DOCKER_TOKEN }}

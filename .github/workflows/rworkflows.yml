@@ -26,7 +26,6 @@ jobs:
           r: devel
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
-          rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release
           python-version: 3.11
         - os: macOS-latest
           r: latest

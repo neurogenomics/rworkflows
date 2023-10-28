@@ -69,7 +69,7 @@ Creates a vignette rmarkdown file demonstrates how to create a
 \href{https://hub.docker.com/}{Dockerhub}.
 }
 \examples{
-path <- use_vignette_docker(docker_org = "neurogenomicslab",
+path <- use_vignette_docker(docker_org = "neurogenomics",
                             ## use default save_dir in practice
                             save_dir = tempdir())
 }
