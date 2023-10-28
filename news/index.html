@@ -135,6 +135,12 @@
 <ul><li>This weird error only came up during Rstudio R CMD checks. The function <code>check_miniconda_args</code> was clearly defined in its own file. The only way to fix it was copying the function into the same one where it was called <code>fill_yaml</code>.</li>
 <li>Thought it might be a permissions issues with <em>check_miniconda_args.R</em> but the permissions are identical with all the others.</li>
 </ul></li>
+<li>
+<em>action.yml</em>
+<ul><li>Remove unnecessary export:<code>echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" &gt;&gt; $GITHUB_ENV</code>
+</li>
+<li>Fix <code>runforesight/workflow-telemetry-action</code> step and move to top.</li>
+</ul></li>
 </ul></div>
 </div>
     <div class="section level2">
