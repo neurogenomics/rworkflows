@@ -19,6 +19,7 @@
 * *actions.yml*:
   - Add `force=TRUE` to the `remotes::install_local` steps. #86
   - Add `runforesight/workflow-telemetry-action` step.
+  - Avoid setting `rspm` explicitly by default.
 * `construct_cont`:
   - Make registry explicit.
   - New arg: `default_registry`
