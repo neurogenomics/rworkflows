@@ -165,8 +165,6 @@ runs:
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true' && runner.os == 'Linux'
       uses: jlumbroso/free-disk-space@main
-      with:
-        docker-images: false
       
     - name: 🌎 Set environment variables 
       run: | 

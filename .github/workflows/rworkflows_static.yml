@@ -63,6 +63,11 @@ jobs:
       GITHUB_REPO: ${{ github.repository }}
       RGL_USE_NULL: ${{ true }}
     steps:
+    - name: "\U0001F4BE Free Disk Space"
+      if: env.free_diskspace == 'true' && runner.os == 'Linux'
+      uses: jlumbroso/free-disk-space@main
+      with:
+        docker-images: ${{ false }}
     - name: "\U0001F30E Set environment variables"
       run: |
         echo "GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}" >> $GITHUB_ENV
@@ -75,9 +80,6 @@ jobs:
     - name: "\U0001F52D Collect Workflow Telemetry"
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: ${{ true }}
-    - name: "\U0001F4BE Free Disk Space"
-      if: env.free_diskspace == 'true' && runner.os != 'Linux'
-      uses: jlumbroso/free-disk-space@main
     - name: "\U0001F40D Setup Miniconda"
       if: env.miniforge_variant != 'false'
       uses: conda-incubator/setup-miniconda@v2
