@@ -24,7 +24,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Oct-27-2023</i>  
+README updated: <i>Oct-28-2023</i>  
 </h4>
 
 ## Intro
@@ -82,7 +82,10 @@ options to enable/disable/modify each step):
     to your choice of container registry (e.g. [GitHub Container
     Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
     [**DockerHub**](https://hub.docker.com/)).
-11. 🎖 Updates relevant badges added to your README with
+11. 🔭 Generates [workflow
+    telemetry](https://github.com/runforesight/workflow-telemetry-action)
+    report.
+12. 🎖 Updates relevant badges added to your README with
     `rworkflows::use_badges()`.
 
 Importantly, this **workflow** is designed to work with any R package
@@ -287,7 +290,7 @@ utils::sessionInfo()
 
     ## R version 4.3.1 (2023-06-16)
     ## Platform: aarch64-apple-darwin20 (64-bit)
-    ## Running under: macOS Sonoma 14.0
+    ## Running under: macOS Sonoma 14.1
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 

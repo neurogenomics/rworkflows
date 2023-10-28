@@ -51,7 +51,8 @@ to [**Codecov**](https://about.codecov.io/).
 9. 🚀 (Re)builds and launches a documentation website for your R package.  
 10. 🐳 Pushes a [**Docker**](https://www.docker.com/) container (with [**Rstudio**](https://posit.co/) and all dependencies pre-installed) to 
 your choice of container registry (e.g. [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),  [**DockerHub**](https://hub.docker.com/)). 
-11. 🎖 Updates relevant badges added to your README 
+11. 🔭 Generates [workflow telemetry](https://github.com/runforesight/workflow-telemetry-action) report.  
+12. 🎖 Updates relevant badges added to your README 
 with `rworkflows::use_badges()`.
 
 Importantly, this **workflow** is designed to work with any R package out-of-the-box.
