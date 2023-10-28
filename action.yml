@@ -162,25 +162,24 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: 🔭 Collect Workflow Telemetry 
+      uses: runforesight/workflow-telemetry-action@v1
+      continue-on-error: true
+      with:
+        github_token: ${{ inputs.GITHUB_TOKEN }}
+        
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true' && runner.os == 'Linux'
       uses: jlumbroso/free-disk-space@main
       
     - name: 🌎 Set environment variables 
       run: | 
-        echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV
         echo "RGL_USE_NULL=TRUE" >> $GITHUB_ENV
         echo "R_REMOTES_NO_ERRORS_FROM_WARNINGS=${{ true }}" >> $GITHUB_ENV
         echo "RSPM=${{ matrix.config.rspm }}" >> $GITHUB_ENV
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
-    
-    - name: 🔭 Collect Workflow Telemetry 
-      uses: runforesight/workflow-telemetry-action@v1
-      continue-on-error: true
-      with:
-        github_token: ${{ inputs.GITHUB_TOKEN }}
     
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'
@@ -513,7 +512,7 @@ runs:
       uses: docker/build-push-action@v1
       with:
         username: ${{ github.repository_owner }}
-        password: ${{ env.GITHUB_TOKEN }}
+        password: ${{ inputs.GITHUB_TOKEN }}
         registry: ${{ inputs.docker_registry }}
         repository: ${{ github.repository }}
         tag_with_ref: true

@@ -48,6 +48,9 @@
   was called `fill_yaml`.
   - Thought it might be a permissions issues with *check_miniconda_args.R* but 
   the permissions are identical with all the others.
+* *action.yml*
+  - Remove unnecessary  export:`echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV`
+  - Fix `runforesight/workflow-telemetry-action` step and move to top.
 
 # rworkflows 0.99.13
 
