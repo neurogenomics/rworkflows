@@ -179,6 +179,8 @@ runs:
     - name: 🔭 Collect Workflow Telemetry 
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: true
+      with:
+        github_token: ${{ inputs.GITHUB_TOKEN }}
     
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'

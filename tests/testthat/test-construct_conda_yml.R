@@ -30,7 +30,9 @@ test_that("construct_conda_yml works", {
   
   
   #### Construct an actual conda env ####
-  if(conda_installed() && is_gha()){ 
+  if(conda_installed() && 
+     is_gha() &&
+     .Platform$OS.type != "windows"){ 
     envname <- "testenv"
     if(condaenv_exists(envname)){
       reticulate::conda_remove(envname = envname)
