@@ -167,6 +167,7 @@ runs:
       continue-on-error: true
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
+        comment_on_pr: false
         
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true' && runner.os == 'Linux'
