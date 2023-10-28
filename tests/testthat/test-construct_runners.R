@@ -1,11 +1,13 @@
 test_that("construct_runners works", {
   
+  #### Set up tests ####  
   run_tests <- function(runners){
     testthat::expect_length(runners,3)
     for (r in runners){
       testthat::expect_true(all(c("os","bioc","r") %in% names(r)))
     }
   }
+  #### Defaults ####
   runners <- construct_runners()
   run_tests(runners = runners)
   
@@ -46,6 +48,17 @@ test_that("construct_runners works", {
     construct_runners(bioc = list("ubuntu-latest"="devel",
                                   "macOS-latest"="devel",
                                   "typooo"="devel"))
+  )
+  
+  #### When python versions passed ####
+  python_version <- "3.9"
+  runners <- construct_runners(python_version = python_version)
+  run_tests(runners = runners) 
+  testthat::expect_true(
+    all(sapply(runners, function(x)x$r=="auto"))
+  )
+  testthat::expect_true(
+    all(sapply(runners, function(x)x$`python-version`==python_version))
   )
   
 })

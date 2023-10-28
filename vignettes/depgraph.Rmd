@@ -34,15 +34,18 @@ res <- echodeps::dep_graph(pkg = "rworkflows",
                            method_seed = "github",
                            exclude = c("neurogenomics_rworkflows",
                                        "neurogenomics_r_workflows"),
-                           node_size = "total_downloads",
-                           height="100%",
+                           #node_size = "total_downloads", 
                            reverse = TRUE,
-                           save_path = here::here("reports","rworkflows_depgraph.html"))
+                           save_path = here::here("reports","rworkflows_depgraph.html")) 
 ```
 
 ## Save data
 
 ``` r
+## Save network plot as PNG
+echodeps::visnet_save(res$save_path)
+
+## Save all data and plots
 saveRDS(res, here::here("reports","dep_graph_res.rds"))
 ```
 

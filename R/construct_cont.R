@@ -2,6 +2,13 @@
 #' 
 #' @param run_check_cont Check whether the requested container repo 
 #' (and the tag, if specified) exist using \link[rworkflows]{check_cont}.
+#' @param default_registry The default container registry to use.
+#' Options include:
+#' \itemize{
+#'  \item{"ghcr.io/" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry}}
+#'  \item{"docker.io/" : }{\href{https://hub.docker.com/}{DockerHub}}
+#'  \item{"mcr.microsoft.com/" : }{\href{https://github.com/microsoft/ContainerRegistry}{Microsoft Container Registry}}
+#' }
 #' @param default_cont The DockerHub container to default to.
 #' Used when it's detected that only the tag has been given in one or more 
 #' \code{cont} entry. 
@@ -13,7 +20,10 @@
 #' @importFrom stats setNames
 #' @examples
 #' cont <- construct_cont() 
-construct_cont <- function(default_cont = "bioconductor/bioconductor_docker",
+construct_cont <- function(default_registry = c("ghcr.io/",
+                                                "docker.io/",
+                                                "mcr.microsoft.com/"),
+                           default_cont = "bioconductor/bioconductor_docker",
                            default_tag = "devel",
                            cont = list(
                              paste(default_cont,default_tag,sep=":"),
@@ -24,6 +34,7 @@ construct_cont <- function(default_cont = "bioconductor/bioconductor_docker",
                            verbose = TRUE){
   # devoptera::args2vars(construct_cont)
   
+  default_registry <- check_registry(registry = default_registry)
   #### Remove any trailing : (e.g. when default_tag=NULL) ####
   cont <- lapply(cont, function(x){
     if(is.null(x)) NULL else trimws(x,whitespace = ":")
@@ -57,6 +68,19 @@ construct_cont <- function(default_cont = "bioconductor/bioconductor_docker",
     } 
     return(co)    
   })
+  #### Add registry ####
+  if(!is.null(default_registry)){
+    opts <- eval(formals(construct_cont)$default_registry)
+    cont2 <- lapply(cont2, function(co){
+      if(is.null(co)){
+        return(NULL)
+      } else if(!grepl(paste(paste0("^",opts),collapse = "|"),co)){
+        return(paste0(default_registry,co))
+      } else {
+        return(co)
+      }
+    })
+  } 
   #### Check that the Dockerhub repo exists ####
   if(isTRUE(run_check_cont)){
     check_cont(cont = cont2, 

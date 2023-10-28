@@ -16,8 +16,7 @@ name: rworkflows_dev
     - dev
 jobs:
   rworkflows:
-    permissions:
-      contents: write
+    permissions: write-all
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
@@ -28,8 +27,7 @@ jobs:
         - os: ubuntu-latest
           r: devel
           bioc: devel
-          cont: bioconductor/bioconductor_docker:devel
-          rspm: https://packagemanager.rstudio.com/cran/__linux__/focal/release
+          cont: ghcr.io/bioconductor/bioconductor_docker:devel
         - os: macOS-latest
           r: latest
           bioc: release
@@ -39,15 +37,15 @@ jobs:
     steps:
     - uses: neurogenomics/rworkflows@dev
       with:
-        run_bioccheck: ${{ true }}
-        run_rcmdcheck: ${{ true }}
+        run_bioccheck: ${{ false }}
+        run_rcmdcheck: ${{ false }}
         as_cran: ${{ true }}
-        run_vignettes: ${{ true }}
-        has_testthat: ${{ true }}
-        run_covr: ${{ true }}
-        run_pkgdown: ${{ true }}
+        run_vignettes: ${{ false }}
+        has_testthat: ${{ false }}
+        run_covr: ${{ false }}
+        run_pkgdown: ${{ false }}
         has_runit: ${{ false }}
-        has_latex: ${{ true }}
+        has_latex: ${{ false }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         docker_user: bschilder
@@ -55,3 +53,4 @@ jobs:
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         runner_os: ${{ runner.os }}
         cache_version: cache-v1
+        free_diskspace: ${{ true }}

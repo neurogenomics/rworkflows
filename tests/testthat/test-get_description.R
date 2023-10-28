@@ -87,7 +87,8 @@ test_that("get_description works", {
     #### Gather remote data ####
     d13c <- get_description(refs="ABSSeq",
                             db = NULL, 
-                            use_repos = TRUE) 
+                            use_repos = TRUE, 
+                            repo = "BioCsoft") 
     testthat::expect_equal(d13c[[1]],
                            d1[[1]])
   }  

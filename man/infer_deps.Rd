@@ -17,9 +17,9 @@ infer_deps(
 )
 }
 \arguments{
-\item{path}{The path to a (possibly multi-mode) \R file, or a directory
-containing such files. By default, all files within the current working
-directory are checked, recursively.}
+\item{path}{The path to a \code{.R}, \code{.Rmd}, \code{.qmd}, \code{DESCRIPTION}, a directory
+containing such files, or an R function. The default uses all files
+found within the current working directory and its children.}
 
 \item{which}{Which types of dependencies to return.}
 
@@ -36,12 +36,23 @@ rule and are instead automatically assigned as Imports.}
 rule and are instead automatically assigned as Suggests.}
 
 \item{errors}{How should errors that occur during dependency enumeration be
-handled? See \strong{Errors} for more details.}
+handled?
+\itemize{
+\item \code{"reported"} (the default): errors are reported to the user, but
+otherwise ignored.
+\item \code{"fatal"}: errors are fatal and stop execution.
+\item \code{"ignored"}: errors are ignored and not reported to the user.
+}}
 
-\item{dev}{Boolean; include 'development' dependencies as well? That is,
-packages which may be required during development but are unlikely to be
-required during runtime for your project. By default, only runtime
-dependencies are returned.}
+\item{dev}{Boolean; include development dependencies? These packages are
+typically required when developing the project, but not when running it
+(i.e. you want them installed when humans are working on the project but
+not when computers are deploying it).
+
+Development dependencies include packages listed in the \code{Suggests} field
+of a \code{DESCRIPTION} found in the project root, and roxygen2 or devtools if
+their use is implied by other project metadata. They also include packages
+used in \verb{~/.Rprofile} if \code{config$user.profile()} is \code{TRUE}.}
 
 \item{progress}{Boolean; report progress output while enumerating
 dependencies?}

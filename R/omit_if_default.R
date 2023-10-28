@@ -2,11 +2,7 @@ omit_if_default <- function(arg,
                             val=get(arg, envir = parent.frame()),
                             func="use_workflow",
                             omit_value=NULL){ 
-  def <- eval(formals(get(func))[[arg]])
-  # message("nm: ",arg)
-  # message("val: ",val)
-  # message("def: ",def) 
-  if(val == def){
+  if(is_default(arg=arg, val=val,func=func)){
     return(omit_value)
   } else {
     return(val)

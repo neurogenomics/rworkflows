@@ -18,7 +18,7 @@
 # and you can set the password to whatever you like,
 #
 # This DockerFile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
-FROM bioconductor/bioconductor_docker:devel
+FROM {BASE_IMAGE}
 RUN apt-get update && \
     apt-get install -y \
     git-core \
@@ -29,13 +29,13 @@ RUN apt-get update && \
     make pandoc \
     pandoc-citeproc \
     zlib1g-dev \
-	xfonts-100dpi \
-	xfonts-75dpi \
-	biber \
-	libsbml5-dev \
-	qpdf \
-	cmake \
-	&& apt-get clean \
+  	xfonts-100dpi \
+  	xfonts-75dpi \
+  	biber \
+  	libsbml5-dev \
+  	qpdf \
+  	cmake \
+  	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 # Create a buildzone folder named after the R package
 # BiocCheck requires the buildzone to have the same name as the R package
@@ -44,22 +44,10 @@ RUN echo $PKG
 RUN mkdir -p /$PKG
 ADD . /$PKG
 WORKDIR /$PKG
-# Install dependencies with AnVil (faster)
+#### Install package dependencies ####
 RUN Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE, timeout=2000); \
                 if(!require("BiocManager")) install.packages("BiocManager"); \
-                if(!require("AnVIL"))  {BiocManager::install("AnVIL", ask = FALSE)}; \
-                AnVIL::install(c("remotes","devtools")); \
-                try({remotes::install_github("bergant/rapiclient")}); \
-                bioc_ver <- BiocManager::version(); \
-                options(repos = c(AnVIL::repositories(),\
-                                  AnVIL = file.path("https://bioconductordocker.blob.core.windows.net/packages",bioc_ver,"bioc"),\
-                                  CRAN = "https://cran.rstudio.com/"),\
-                                  download.file.method = "libcurl", Ncpus = 2); \
-                deps <- remotes::dev_package_deps(dependencies = TRUE)$package; \
-                AnVIL::install(pkgs = deps,  ask = FALSE); \
-                deps_left <- deps[!deps %in% rownames(installed.packages())]; \
-                if(length(deps_left)>0) devtools::install_dev_deps(dependencies = TRUE, upgrade = "never");' 
-# Install R package from source
-RUN R -e 'options(crayon.enabled = TRUE); \
-          remotes::install_local(upgrade="never")'
+                if(!require("remotes")) install.packages("remotes"); \
+                repos <- BiocManager::repositories(); \
+                remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE);'
 RUN rm -rf /$PKG

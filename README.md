@@ -8,7 +8,7 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.21203/rs.3.rs--2399015/v1-blue.svg)](https://doi.org/https://doi.org/10.21203/rs.3.rs-2399015/v1)
 <br>
-[![](https://img.shields.io/badge/devel%20version-0.99.13-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-0.99.14-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -24,15 +24,35 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Sep-14-2023</i>  
+README updated: <i>Oct-28-2023</i>  
 </h4>
 
 ## Intro
 
+`rworkflows` is a suite of tools to make it easy for R developers to
+implement reproducible best practices on GitHub.
+
+It includes three main components:  
+1. [**`templateR`
+template**](https://github.com/neurogenomics/templateR): a
+`CRAN`/`Bioc`-compatible R package template that automatically generates
+essential documentation using package metadata.  
+2. [**`rworkflows` R
+package**](https://github.com/neurogenomics/rworkflows/blob/master/DESCRIPTION):
+a lightweight `CRAN` package to automatically set up short, customisable
+workflows that trigger the `rworkflows` action.  
+3. [**`rworkflows`
+action**](https://github.com/neurogenomics/rworkflows/blob/master/action.yml):
+an open-source action available on the [GitHub Actions
+Marketplace](https://github.com/marketplace/actions/rworkflows).
+
+### `rworkflows` action steps
+
 [**GitHub Actions**](https://docs.github.com/en/actions) are a powerful
 way to automatically launch workflows every time you push changes to a
-GitHub repository. This is a form of [**Continuous Integration
-(CI)**](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
+GitHub repository. This is a form of [**Continuous
+Integration/Deployment
+(CI/CD)**](https://docs.github.com/en/actions/automating-builds-and-tests/about-continuous-integration),
 which helps ensure that your code is always working as expected (without
 having to manually check each time).
 
@@ -41,26 +61,37 @@ specifically for the development of R packages. We also provide an R
 function to automatically generate a **workflow file** that calls the
 `rworkflows` composite action:
 
-Currently, `rworkflows` **action** performs the following tasks:
+Currently, `rworkflows` **action** can perform the following tasks (with
+options to enable/disable/modify each step):
 
-1.  Builds a Docker container to run subsequent steps within.
-2.  Builds and checks your R package (with
+1.  🐳 Builds a Docker container to run subsequent steps within.
+2.  🐍 Builds and/or activates a custom `conda` environment.
+3.  🛠️ Installs system dependencies
+4.  🛠️ Installs LaTeX dependencies.
+5.  🛠 Installs R dependencies.
+6.  ✅ Builds and checks your R package (with
     [**CRAN**](https://cran.r-project.org/) and/or
     [**Bioconductor**](https://bioconductor.org/) checks).  
-3.  Runs [unit tests](https://testthat.r-lib.org/).  
-4.  Runs [code coverage tests](https://covr.r-lib.org/) and uploads the
-    results to [**Codecov**](https://about.codecov.io/).  
-5.  (Re)builds and launches a documentation website for your R
+7.  📋 Runs [unit tests](https://testthat.r-lib.org/).  
+8.  📋 Runs [code coverage tests](https://covr.r-lib.org/) and uploads
+    the results to [**Codecov**](https://about.codecov.io/).  
+9.  🚀 (Re)builds and launches a documentation website for your R
     package.  
-6.  Pushes an [**Rstudio**](https://posit.co/)
-    [**Docker**](https://www.docker.com/) container to
-    [**DockerHub**](https://hub.docker.com/) with your R package and all
-    its dependencies pre-installed.
+10. 🐳 Pushes a [**Docker**](https://www.docker.com/) container (with
+    [**Rstudio**](https://posit.co/) and all dependencies pre-installed)
+    to your choice of container registry (e.g. [GitHub Container
+    Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
+    [**DockerHub**](https://hub.docker.com/)).
+11. 🔭 Generates [workflow
+    telemetry](https://github.com/runforesight/workflow-telemetry-action)
+    report.
+12. 🎖 Updates relevant badges added to your README with
+    `rworkflows::use_badges()`.
 
 Importantly, this **workflow** is designed to work with any R package
 out-of-the-box. This means you won’t have to manually edit any yaml
 files, just run the `rworkflows::use_workflow()` function and you’re
-ready to go!
+ready to go within seconds!
 
 > **Note**: `rworkflows` uses, was inspired by, and benefits from the
 > work of many other projects, especially:  
@@ -85,6 +116,7 @@ Install and create the workflow in your R package’s project folder.
 #### Install rworkflows R package ####
 ### For the stable CRAN release
 if(!require("rworkflows")) install.packages("rworkflows")
+
 ### Or, for the latest development version
 # if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
 
@@ -240,6 +272,14 @@ package dependencies change.
 
 A very useful command line tool for testing **GitHub Actions** locally.
 
+### [`actions/runner-images`](https://github.com/actions/runner-images)
+
+Runner images for each OS provided by GitHub.
+
+### [`actions/setup-miniconda`](https://github.com/marketplace/actions/setup-miniconda)
+
+GitHub Action to setup Miniconda and conda environments.
+
 # Session Info
 
 <details>
@@ -248,35 +288,39 @@ A very useful command line tool for testing **GitHub Actions** locally.
 utils::sessionInfo()
 ```
 
-    ## R version 4.2.1 (2022-06-23)
-    ## Platform: x86_64-apple-darwin17.0 (64-bit)
-    ## Running under: macOS Big Sur ... 10.16
+    ## R version 4.3.1 (2023-06-16)
+    ## Platform: aarch64-apple-darwin20 (64-bit)
+    ## Running under: macOS Sonoma 14.1
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    ## 
+    ## time zone: Europe/London
+    ## tzcode source: internal
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] pillar_1.9.0        compiler_4.2.1      RColorBrewer_1.1-3 
-    ##  [4] BiocManager_1.30.20 yulab.utils_0.0.6   tools_4.2.1        
-    ##  [7] digest_0.6.31       jsonlite_1.8.4      evaluate_0.21      
-    ## [10] lifecycle_1.0.3     tibble_3.2.1        gtable_0.3.3       
-    ## [13] pkgconfig_2.0.3     rlang_1.1.1         cli_3.6.1          
-    ## [16] rstudioapi_0.14     rvcheck_0.2.1       yaml_2.3.7         
-    ## [19] xfun_0.40           fastmap_1.1.1       dplyr_1.1.2        
-    ## [22] knitr_1.44          generics_0.1.3      desc_1.4.2         
-    ## [25] vctrs_0.6.3         dlstats_0.1.7       rprojroot_2.0.3    
-    ## [28] grid_4.2.1          tidyselect_1.2.0    here_1.0.1         
-    ## [31] data.table_1.14.8   glue_1.6.2          R6_2.5.1           
-    ## [34] fansi_1.0.4         rmarkdown_2.22      ggplot2_3.4.2      
-    ## [37] badger_0.2.3        magrittr_2.0.3      scales_1.2.1       
-    ## [40] htmltools_0.5.5     rworkflows_0.99.13  colorspace_2.1-0   
-    ## [43] renv_0.17.3         utf8_1.2.3          munsell_0.5.0
+    ##  [1] gtable_0.3.4        jsonlite_1.8.7      renv_1.0.3         
+    ##  [4] dplyr_1.1.3         compiler_4.3.1      BiocManager_1.30.22
+    ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       
+    ## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         
+    ## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     
+    ## [16] knitr_1.44          yulab.utils_0.1.0   tibble_3.2.1       
+    ## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.3    
+    ## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 
+    ## [25] rlang_1.1.1         utf8_1.2.4          cachem_1.0.8       
+    ## [28] badger_0.2.3        xfun_0.40           fs_1.6.3           
+    ## [31] memoise_2.0.1.9000  cli_3.6.1           magrittr_2.0.3     
+    ## [34] rworkflows_0.99.14  digest_0.6.33       grid_4.3.1         
+    ## [37] rstudioapi_0.15.0   lifecycle_1.0.3     vctrs_0.6.4        
+    ## [40] data.table_1.14.8   evaluate_0.22       glue_1.6.2         
+    ## [43] fansi_1.0.5         colorspace_2.1-0    rmarkdown_2.25     
+    ## [46] tools_4.3.1         pkgconfig_2.0.3     htmltools_0.5.6.1
 
 </details>

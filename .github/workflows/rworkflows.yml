@@ -14,8 +14,7 @@ name: rworkflows
     - RELEASE_**
 jobs:
   rworkflows:
-    permissions:
-      contents: write
+    permissions: write-all
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     container: ${{ matrix.config.cont }}
@@ -27,19 +26,21 @@ jobs:
           r: devel
           bioc: devel
           cont: bioconductor/bioconductor_docker:devel
-          rspm: https://packagemanager.rstudio.com/cran/__linux__/latest/release
+          python-version: 3.11
         - os: macOS-latest
           r: latest
           bioc: release
+          python-version: 3.11
         - os: windows-latest
           r: latest
           bioc: release
+          python-version: 3.11
     steps:
     - uses: neurogenomics/rworkflows@master
       with:
-        run_bioccheck: ${{ true }}
+        run_bioccheck: ${{ false }}
         run_rcmdcheck: ${{ true }}
-        as_cran: ${{ true }}
+        as_cran: ${{ false }}
         run_vignettes: ${{ true }}
         has_testthat: ${{ true }}
         run_covr: ${{ true }}
@@ -53,3 +54,4 @@ jobs:
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         runner_os: ${{ runner.os }}
         cache_version: cache-v1
+        miniforge_variant: ""
