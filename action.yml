@@ -128,7 +128,7 @@ inputs:
       `Miniforge3` will be used. Visit
       https://github.com/conda-forge/miniforge/releases/ for more information on
       available versions.
-    default: ''
+    default: 'latest'
   activate_environment:
     description: >
       Environment name (or path) to activate on all shells. Default is `test`
