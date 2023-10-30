@@ -1,7 +1,6 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "ghcr.io/neurogenomics/rworkflows:dev",
   "features": {
-    "ghcr.io/neurogenomics/rworkflows:dev": {},
     "ghcr.io/devcontainers/features/conda:1": {}
   }
 }
