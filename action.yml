@@ -187,7 +187,6 @@ runs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: false
-        use-mamba: true
         python-version: ${{ matrix.python-version }}
         miniforge-variant: ${{ inputs.miniforge_variant }}
         miniforge-version: ${{ inputs.miniforge_version }}

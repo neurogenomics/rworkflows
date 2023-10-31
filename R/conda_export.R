@@ -27,7 +27,7 @@ conda_export <- function(name,
   
   force(name)
   #### Find conda executable ####
-  conda <- reticulate::conda_binary() 
+  conda <- conda_path()
   #### Get packages ####
   dir.create(dirname(save_path),recursive = TRUE,showWarnings = FALSE)
   if(grepl("requirements\\.txt$",save_path)){
