@@ -1,0 +1,6 @@
+{
+  "image": "ghcr.io/neurogenomics/rworkflows:dev",
+  "features": {
+    "ghcr.io/devcontainers/features/conda:1": {}
+  }
+}
