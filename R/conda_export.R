@@ -12,6 +12,7 @@
 #' @param preview Print the requirements file to the R console.
 #' @param verbose Print messages. 
 #' @source https://stackoverflow.com/a/55687210
+#' @returns Path to requirements file.
 #' 
 #' @export 
 #' @examples

@@ -27,6 +27,9 @@ If the file ends with requirements.txt, a pip-style requirements.txt file
 
 \item{verbose}{Print messages.}
 }
+\value{
+Path to requirements file.
+}
 \description{
 Get a list of installed packages within a conda environment.
  Generates a requirements.txt file.
