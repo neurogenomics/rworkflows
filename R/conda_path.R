@@ -1,7 +1,7 @@
 conda_path <- function(){
   ## Use sys var
   conda <- Sys.getenv("CONDA")
-  if(file.exists(conda)){
+  if(conda!=""){
     options(reticulate.conda_binary = conda)
     return(conda)
   } 
