@@ -4,7 +4,7 @@
     "ghcr.io/devcontainers/features/conda:1": {}
   },
   "customizations": {
-		// Configure properties specific to VS Code.
+	  // Configure properties specific to VS Code.
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"settings": {},
@@ -12,7 +12,7 @@
         "reditorsupport.r",
         "visualstudioexptteam.vscodeintellicode",
         "ionutvmi.path-autocomplete"
-      ],
+      ]
 		}
   }
 }
