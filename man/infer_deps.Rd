@@ -68,7 +68,7 @@ Infers the R packages that your R package depends on.
 }
 \examples{
 #### Get example DESCRIPTION file ####
-url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION" 
+url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
 path <- tempfile(fileext = "DESCRIPTION")
 utils::download.file(url,path)
 

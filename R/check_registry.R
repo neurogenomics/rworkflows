@@ -6,8 +6,9 @@
 #' 
 #' @keywords internal
 check_registry <- function(registry){
-  registry <- registry[1]
+  
   if(!is.null(registry)){
+    registry <- registry[1]
     if(!grepl("/$",registry)){
       registry <- paste0(registry,"/")
     }
