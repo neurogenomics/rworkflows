@@ -46,9 +46,8 @@ test_that("construct_conda_yml works", {
                                  save_path = save_path)
     testthat::expect_true(file.exists(path2))
     
-    conda <- conda_path()
-    out <- reticulate::conda_create(conda = conda,
-                                    environment = path2, 
+    # conda <- conda_path()
+    out <- reticulate::conda_create(environment = path2, 
                                     envname = envname)
     testthat::expect_true(file.exists(out))
     testthat::expect_equal(basename(out),"python")

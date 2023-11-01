@@ -1,3 +1,10 @@
+# rworkflows 1.0.0
+
+## New features
+
+* Synchronise `rworkflows` package versioning with `rworkflows` action 
+Release versioning.
+
 # rworkflows 0.99.15
 
 ## New features

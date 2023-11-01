@@ -11,7 +11,8 @@ conda_export(
   name,
   save_path = tempfile(fileext = "_requirements.txt"),
   preview = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ If the file ends with requirements.txt, a pip-style requirements.txt file
 \item{preview}{Print the requirements file to the R console.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{Optional arguments, reserved for future expansion.}
 }
 \value{
 Path to requirements file.
