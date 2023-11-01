@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -69,6 +69,45 @@
       <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="rworkflows-100">rworkflows 1.0.0<a class="anchor" aria-label="anchor" href="#rworkflows-100"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
+<ul><li>Synchronise <code>rworkflows</code> package versioning with <code>rworkflows</code> action Release versioning.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.99.15" id="rworkflows-09915">rworkflows 0.99.15<a class="anchor" aria-label="anchor" href="#rworkflows-09915"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-99-15">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-15"></a></h3>
+<ul><li>Add <em>.devcontainer/devcontainer.json</em>
+</li>
+<li>
+<code>use_vignette_docker</code>
+<ul><li>New helper func: <code>infer_docker_org</code>
+</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-99-15">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-15"></a></h3>
+<ul><li>
+<code>infer_deps</code>
+<ul><li>Pass <code>infer_deps</code> the <em>DESCRIPTION</em> path directly within the <code>fill_description</code> func.</li>
+<li>Fix unit tests.</li>
+</ul></li>
+<li>
+<code>conda_*</code>
+<ul><li>Try to get reticularte to find the path to conda installed by <code>setup-miniconda</code>.</li>
+</ul></li>
+<li>New func: <code>use_codespace</code>
+<ul><li>Create dev container config file.</li>
+</ul></li>
+<li>
+<em>.Rprofile</em>
+<ul><li>Added to avoid CRAN issues with bioc packages.</li>
+</ul></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.99.14" id="rworkflows-09914">rworkflows 0.99.14<a class="anchor" aria-label="anchor" href="#rworkflows-09914"></a></h2>
 <div class="section level3">

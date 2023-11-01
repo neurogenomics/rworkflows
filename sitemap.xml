@@ -94,6 +94,9 @@
     <loc>/reference/infer_deps.html</loc>
   </url>
   <url>
+    <loc>/reference/infer_docker_org.html</loc>
+  </url>
+  <url>
     <loc>/reference/is_gha.html</loc>
   </url>
   <url>
@@ -107,6 +110,9 @@
   </url>
   <url>
     <loc>/reference/use_badges.html</loc>
+  </url>
+  <url>
+    <loc>/reference/use_codespace.html</loc>
   </url>
   <url>
     <loc>/reference/use_dockerfile.html</loc>

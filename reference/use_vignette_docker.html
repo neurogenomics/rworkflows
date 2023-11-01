@@ -19,7 +19,7 @@ Dockerhub."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@ Dockerhub."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_vignette_docker</span><span class="op">(</span></span>
-<span>  <span class="va">docker_org</span>,</span>
+<span>  docker_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  docker_registry <span class="op">=</span> <span class="st">"ghcr.io"</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Docker/Singularity Containers"</span>,</span>
 <span>  vignette_index_entry <span class="op">=</span> <span class="st">"docker"</span>,</span>
@@ -99,7 +99,9 @@ Dockerhub."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
     <h2>Arguments</h2>
     <dl><dt>docker_org</dt>
 <dd><p>Docker registry organization name. 
-Can simply be your registry username instead.</p></dd>
+Can simply be your registry username instead.
+If <code>NULL</code>, <code>docker_org</code> will be inferred as the R package's GitHub 
+owner.</p></dd>
 
 
 <dt>docker_registry</dt>
@@ -120,11 +122,11 @@ which is used when creating the navigation bar in the <span class="pkg">pkgdown<
 
 
 <dt>save_dir</dt>
-<dd><p>Directory to save the vignette file to.</p></dd>
+<dd><p>Directory to save the file to.</p></dd>
 
 
 <dt>path</dt>
-<dd><p>Path to the vignette file.</p></dd>
+<dd><p>Path to the file.</p></dd>
 
 
 <dt>output</dt>
@@ -152,7 +154,7 @@ Docker docs</a> for further details.</p></dd>
 
 
 <dt>show</dt>
-<dd><p>Print the contents of the vignette file in the R console.</p></dd>
+<dd><p>Print the contents of the file in the R console.</p></dd>
 
 
 <dt>verbose</dt>
@@ -171,7 +173,7 @@ Docker docs</a> for further details.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_vignette_docker</span><span class="op">(</span>docker_org <span class="op">=</span> <span class="st">"neurogenomics"</span>,</span></span>
 <span class="r-in"><span>                            <span class="co">## use default save_dir in practice</span></span></span>
 <span class="r-in"><span>                            save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating new vignette file ==&gt; /tmp/RtmpTFC713/vignettes/docker.Rmd</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating new vignette file ==&gt; /tmp/RtmpLsexxg/vignettes/docker.Rmd</span>
 </code></pre></div>
     </div>
   </div>
