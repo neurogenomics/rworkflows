@@ -5,7 +5,7 @@
 \title{Use vignette: Docker}
 \usage{
 use_vignette_docker(
-  docker_org,
+  docker_org = NULL,
   docker_registry = "ghcr.io",
   title = "Docker/Singularity Containers",
   vignette_index_entry = "docker",
@@ -21,7 +21,9 @@ use_vignette_docker(
 }
 \arguments{
 \item{docker_org}{Docker registry organization name. 
-Can simply be your registry username instead.}
+Can simply be your registry username instead.
+If \code{NULL}, \code{docker_org} will be inferred as the R package's GitHub 
+owner.}
 
 \item{docker_registry}{Docker container registry to push to. 
 Options include:
@@ -36,9 +38,9 @@ Options include:
 \item{vignette_index_entry}{Index entry of the vignette, 
 which is used when creating the navigation bar in the \pkg{pkgdown} site.}
 
-\item{save_dir}{Directory to save the vignette file to.}
+\item{save_dir}{Directory to save the file to.}
 
-\item{path}{Path to the vignette file.}
+\item{path}{Path to the file.}
 
 \item{output}{Vignette output style. 
 Defaults to \link[BiocStyle]{html_document}.}
@@ -56,7 +58,7 @@ Docker docs} for further details.}
 \item{force_new}{If the file already exists, overwrite it 
 (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the vignette file in the R console.}
+\item{show}{Print the contents of the file in the R console.}
 
 \item{verbose}{Print messages.}
 }

@@ -3,7 +3,23 @@
 ## New features
 
 * Add *.devcontainer/devcontainer.json*
+* `use_vignette_docker`
+  - New helper func: `infer_docker_org`
 
+## Bug fixes 
+
+* `infer_deps` 
+  - Pass `infer_deps` the *DESCRIPTION* path directly 
+    within the `fill_description` func. 
+  - Fix unit tests.
+* `conda_*`
+  - Try to get reticularte to find the path to conda 
+  installed by `setup-miniconda`.
+* New func: `use_codespace`
+  - Create dev container config file.
+* *.Rprofile*
+  - Added to avoid CRAN issues with bioc packages.
+  
 # rworkflows 0.99.14
 
 ## New features

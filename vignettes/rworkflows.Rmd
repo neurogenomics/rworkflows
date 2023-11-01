@@ -124,17 +124,20 @@ RStudio, and all dependencies already installed.
 This vignette does not require any manual editing after creation (unless you 
 want to change things like port number, for example).
 
-Note, this is only relevant when you have a Dockerhub repo for your R package,
-e.g. created with:
-
+Note, this is only relevant when you have a container for your R package 
+stored in a public Docker registry (e.g. GitHub Container Registry, DockerHub).
+You can automatically generate one 
+by using the `rworkflows` action with `run_docker=TRUE`:  
 ```R
 rworkflows::use_workflow(run_docker = TRUE, 
-                         docker_org = "<docker_org>")
+                         docker_org = "neurogenomics")
 ```
 
+If you're using the GitHub Container Registry, `docker_org` can simply be your
+GH organization name or user name.
 ```{r}
 ## Use default save_dir in practice
-vignette2 <- rworkflows::use_vignette_docker(docker_org = "neurogenomicslab",
+vignette2 <- rworkflows::use_vignette_docker(docker_org = "neurogenomics",
                                              save_dir = tempdir())
 ```
 

@@ -1,9 +1,15 @@
 test_that("infer_deps works", {
   
-  wd <- getwd()
-  setwd("../../")
   
-  deps <- infer_deps()
+  #' #### Get example DESCRIPTION file ####
+  url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
+  path <- tempfile(fileext = "DESCRIPTION")
+  utils::download.file(url,path)
+  
+  # wd <- getwd()
+  # setwd("../../")
+  
+  deps <- infer_deps(path = path)
   # imports <- c(
   #   'utils','here','BiocStyle','yaml','stats','desc','badger',
   #   'biocViews','data.table','renv','shiny','htmltools'
@@ -21,15 +27,16 @@ test_that("infer_deps works", {
   
   
   #### Return just one output ####
-  deps2 <- infer_deps(which = "Imports")
+  deps2 <- infer_deps(path = path,
+                      which = "Imports")
   testthat::expect_false(is.list(deps2))
-  setwd(wd)
-  
+  # setwd(wd)
   
   #### Conflicting inputs ####
   testthat::expect_error(
-    deps <- infer_deps(imports = "markdown",
-                       suggests = "markdown")
+    infer_deps(path = path,
+               imports = "markdown",
+               suggests = "markdown")
   )
   
 })

@@ -5,6 +5,8 @@
 #' \href{https://hub.docker.com/}{Dockerhub}.
 #' @param docker_org Docker registry organization name. 
 #' Can simply be your registry username instead.
+#' If \code{NULL}, \code{docker_org} will be inferred as the R package's GitHub 
+#' owner.
 #' @param title Title of vignette.
 #' @param vignette_index_entry Index entry of the vignette, 
 #' which is used when creating the navigation bar in the \pkg{pkgdown} site.
@@ -16,11 +18,11 @@
 #' See the 
 #' \href{https://docs.docker.com/config/containers/container-networking/}{
 #' Docker docs} for further details.
-#' @param save_dir Directory to save the vignette file to.
-#' @param path Path to the vignette file.
+#' @param save_dir Directory to save the file to.
+#' @param path Path to the file.
 #' @param force_new If the file already exists, overwrite it 
 #' (default: \code{FALSE}).
-#' @param show Print the contents of the vignette file in the R console.
+#' @param show Print the contents of the file in the R console.
 #' @param verbose Print messages.
 #' @param output Vignette output style. 
 #' Defaults to \link[BiocStyle]{html_document}.
@@ -34,7 +36,7 @@
 #' path <- use_vignette_docker(docker_org = "neurogenomics",
 #'                             ## use default save_dir in practice
 #'                             save_dir = tempdir())
-use_vignette_docker <- function(docker_org,
+use_vignette_docker <- function(docker_org = NULL,
                                 docker_registry="ghcr.io",
                                 title="Docker/Singularity Containers",
                                 vignette_index_entry="docker",
@@ -51,6 +53,10 @@ use_vignette_docker <- function(docker_org,
   # devoptera::args2vars(use_vignette_docker, reassign = TRUE)
   
   force(docker_org)
+  #### Infer docker_org
+  docker_org <- infer_docker_org(docker_org=docker_org,
+                                 docker_registry=docker_registry,
+                                 verbose=verbose)
   #### Check if file exists already ####
   if(file.exists(path) &
      isFALSE(force_new)){
