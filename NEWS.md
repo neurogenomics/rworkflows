@@ -13,6 +13,8 @@ Release versioning.
   - Remove the need to include `construct_cont`, 
     as not everyone will have `rworkfows` installed on the machine where
     the vignette is being rendered.
+* *use_vignette_docker*
+  - Add *-autolink_bare_uris* bit to avoid CRAN check errors.
 
 # rworkflows 0.99.14
 
