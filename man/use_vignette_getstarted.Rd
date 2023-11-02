@@ -5,7 +5,7 @@
 \title{Use vignette: Get started}
 \usage{
 use_vignette_getstarted(
-  package,
+  package = names(get_description()),
   title = "Get started",
   vignette_index_entry = package,
   save_dir = here::here(),
@@ -24,9 +24,9 @@ use_vignette_getstarted(
 \item{vignette_index_entry}{Index entry of the vignette, 
 which is used when creating the navigation bar in the \pkg{pkgdown} site.}
 
-\item{save_dir}{Directory to save the vignette file to.}
+\item{save_dir}{Directory to save the file to.}
 
-\item{path}{Path to the vignette file.}
+\item{path}{Path to the file.}
 
 \item{output}{Vignette output style. 
 Defaults to \link[BiocStyle]{html_document}.}
@@ -34,7 +34,7 @@ Defaults to \link[BiocStyle]{html_document}.}
 \item{force_new}{If the file already exists, overwrite it 
 (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the vignette file in the R console.}
+\item{show}{Print the contents of the file in the R console.}
 
 \item{verbose}{Print messages.}
 }

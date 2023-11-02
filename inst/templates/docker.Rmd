@@ -8,6 +8,8 @@ output:
       "-autolink_bare_uris" 
     ]
 params:
+  cont:
+    value: NULL
   docker_registry:
     value: "ghcr.io"
   docker_org: 
@@ -28,10 +30,8 @@ library(PKG, character.only = TRUE)
 pkg <- tolower(PKG)
 #### Username of DockerHub account ####
 docker_org <- params$docker_org
-docker_registry <- params$docker_registry
-
-cont <- construct_cont(cont = paste(docker_org,pkg,sep="/"),
-                       default_registry =docker_registry)[[1]]
+docker_registry <- params$docker_registry 
+cont <- params$cont 
 docker_url <- if(grepl("ghcr.io",docker_registry)){
   paste("https://ghcr.io",cont,sep="/")
 } else {

@@ -200,7 +200,7 @@ runs:
       if: runner.os == 'Linux'
       run: |
         mkdir -p /__w/_temp/Library
-        echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
+        echo ".libPaths('/__w/_temp/Library')" >> ~/.Rprofile
         git config --global --add safe.directory '*'
       shell: bash {0}
 

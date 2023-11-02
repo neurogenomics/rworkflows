@@ -1,11 +1,13 @@
 test_that("use_vignette_docker works", {
   
-  path <- use_vignette_docker(docker_org = "neurogenomicslab",
+  path <- use_vignette_docker(package = "mypackage",
+                              docker_org = "neurogenomicslab",
                               save_dir = tempdir())
   testthat::expect_true(file.exists(path))
   
   out <- testthat::capture_output_lines({
-    path2 <- use_vignette_docker(docker_org = "neurogenomicslab",
+    path2 <- use_vignette_docker(package = "mypackage",
+                                 docker_org = "neurogenomicslab",
                                  save_dir = tempdir(), 
                                  show = TRUE)
   })

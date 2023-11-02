@@ -5,7 +5,7 @@
 \title{Infer dependencies}
 \usage{
 infer_deps(
-  path = here::here(),
+  path = here::here("DESCRIPTION"),
   which = c("Imports", "Suggests"),
   imports_thresh = 2,
   imports = NULL,
@@ -67,5 +67,10 @@ A character vector of R package names.
 Infers the R packages that your R package depends on.
 }
 \examples{
-deps <- infer_deps()
+#### Get example DESCRIPTION file ####
+url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
+path <- tempfile(fileext = "DESCRIPTION")
+utils::download.file(url,path)
+
+deps <- infer_deps(path = path)
 }

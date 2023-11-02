@@ -28,24 +28,27 @@ jobs:
           r: devel
           bioc: devel
           cont: ghcr.io/bioconductor/bioconductor_docker:devel
+          python-version: 3.11
         - os: macOS-latest
           r: latest
           bioc: release
+          python-version: 3.11
         - os: windows-latest
           r: latest
           bioc: release
+          python-version: 3.11
     steps:
     - uses: neurogenomics/rworkflows@dev
       with:
         run_bioccheck: ${{ false }}
-        run_rcmdcheck: ${{ false }}
+        run_rcmdcheck: ${{ true }}
         as_cran: ${{ true }}
-        run_vignettes: ${{ false }}
-        has_testthat: ${{ false }}
-        run_covr: ${{ false }}
+        run_vignettes: ${{ true }}
+        has_testthat: ${{ true }}
+        run_covr: ${{ true }}
         run_pkgdown: ${{ false }}
         has_runit: ${{ false }}
-        has_latex: ${{ false }}
+        has_latex: ${{ true }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         docker_user: bschilder
@@ -54,4 +57,4 @@ jobs:
         runner_os: ${{ runner.os }}
         cache_version: cache-v1
         free_diskspace: ${{ true }}
-        miniforge_variant: ""
+        miniforge_variant: false

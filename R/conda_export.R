@@ -11,29 +11,31 @@
 #'  will be generated.
 #' @param preview Print the requirements file to the R console.
 #' @param verbose Print messages. 
+#' @inheritParams reticulate::conda_export
 #' @source https://stackoverflow.com/a/55687210
+#' @returns Path to requirements file.
 #' 
 #' @export 
 #' @examples
 #' \dontrun{
 #' conda_export()
 #' }
-conda_export <- function(name,
+conda_export <- function(name, 
                          save_path=tempfile(fileext = "_requirements.txt"),
                          preview=FALSE,
-                         verbose=TRUE){
+                         verbose=TRUE,
+                         ...){
   requireNamespace("reticulate")
   
   force(name)
-  #### Find conda executable ####
-  conda <- reticulate::conda_binary() 
   #### Get packages ####
   dir.create(dirname(save_path),recursive = TRUE,showWarnings = FALSE)
   if(grepl("requirements\\.txt$",save_path)){
-    system(paste(conda,"list -n testenv --export >",save_path))  
+    system(paste("conda","list -n testenv --export >",save_path))  
   } else if (grepl("\\.yml$|\\.yaml$",save_path)){
     reticulate::conda_export(envname = name,
-                             file = save_path)  
+                             file = save_path,
+                             ...)  
   } 
   #### Read ####
   txt <- readLines(save_path)

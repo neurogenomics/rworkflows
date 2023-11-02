@@ -34,3 +34,4 @@ rworkflows-merged
 ^vignettes/*\.gz$
 ^vignettes/*\.toc$
 ^vignettes/*\.tex$
+^\.devcontainer$

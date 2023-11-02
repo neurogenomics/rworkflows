@@ -20,8 +20,13 @@
 #' @importFrom desc desc
 #' @importFrom renv dependencies
 #' @examples 
-#' deps <- infer_deps()
-infer_deps <- function(path = here::here(),
+#' #### Get example DESCRIPTION file ####
+#' url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
+#' path <- tempfile(fileext = "DESCRIPTION")
+#' utils::download.file(url,path)
+#' 
+#' deps <- infer_deps(path = path)
+infer_deps <- function(path = here::here("DESCRIPTION"),
                        which = c("Imports","Suggests"),
                        imports_thresh = 2,
                        imports = NULL,

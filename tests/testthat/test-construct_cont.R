@@ -18,9 +18,16 @@ test_that("construct_cont works", {
   testthat::expect_null(cont3[[2]])
   testthat::expect_null(cont3[[3]])
   
-  cont4 <- construct_cont(default_tag = "release", 
+  cont4 <- construct_cont(default_tag = "release",
+                          default_registry = "ghcr.io",
                           run_check_cont = TRUE) 
   testthat::expect_equal(cont4[[1]], paste0(default_registry,"bioconductor/bioconductor_docker:latest"))
   testthat::expect_null(cont4[[2]])
   testthat::expect_null(cont4[[3]])
+  
+  
+  cont5 <- construct_cont(default_registry = NULL) 
+  testthat::expect_equal(cont5[[1]],"bioconductor/bioconductor_docker:devel")
+  testthat::expect_null(cont5[[2]])
+  testthat::expect_null(cont5[[3]])
 })
