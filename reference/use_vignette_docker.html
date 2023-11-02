@@ -80,13 +80,16 @@ Dockerhub."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_vignette_docker</span><span class="op">(</span></span>
+<span>  package <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="get_description.html">get_description</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  docker_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  docker_registry <span class="op">=</span> <span class="st">"ghcr.io"</span>,</span>
+<span>  cont <span class="op">=</span> <span class="fu"><a href="construct_cont.html">construct_cont</a></span><span class="op">(</span>cont <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">docker_org</span>, <span class="va">package</span>, sep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span>, default_registry <span class="op">=</span></span>
+<span>    <span class="va">docker_registry</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Docker/Singularity Containers"</span>,</span>
 <span>  vignette_index_entry <span class="op">=</span> <span class="st">"docker"</span>,</span>
 <span>  save_dir <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">save_dir</span>, <span class="st">"vignettes"</span>, <span class="st">"docker.Rmd"</span><span class="op">)</span>,</span>
-<span>  output <span class="op">=</span> <span class="st">"BiocStyle::html_document"</span>,</span>
+<span>  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>`BiocStyle::html_document` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>md_extensions <span class="op">=</span> <span class="st">"-autolink_bare_uris"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  port_in <span class="op">=</span> <span class="fl">8787</span>,</span>
 <span>  port_out <span class="op">=</span> <span class="fl">8900</span>,</span>
 <span>  force_new <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -97,7 +100,11 @@ Dockerhub."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>docker_org</dt>
+    <dl><dt>package</dt>
+<dd><p>R package name.</p></dd>
+
+
+<dt>docker_org</dt>
 <dd><p>Docker registry organization name. 
 Can simply be your registry username instead.
 If <code>NULL</code>, <code>docker_org</code> will be inferred as the R package's GitHub 
@@ -110,6 +117,14 @@ Options include:</p><ul><li><p>"ghcr.io" : <a href="https://docs.github.com/en/p
  GitHub Container Registry</a></p></li>
 <li><p>"docker.io" : <a href="https://hub.docker.com/" class="external-link">DockerHub</a></p></li>
 </ul></dd>
+
+
+<dt>cont</dt>
+<dd><p>Which Docker container to use on each OS
+(<code>NULL</code> means no container will be used for that OS).
+See 
+<a href="https://hub.docker.com/r/bioconductor/bioconductor_docker/tags" class="external-link">here</a>
+ for a list of all official Bioconductor Docker container versions.</p></dd>
 
 
 <dt>title</dt>
@@ -170,10 +185,11 @@ Docker docs</a> for further details.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_vignette_docker</span><span class="op">(</span>docker_org <span class="op">=</span> <span class="st">"neurogenomics"</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_vignette_docker</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"mypackage"</span>,</span></span>
+<span class="r-in"><span>                            docker_org <span class="op">=</span> <span class="st">"neurogenomics"</span>,</span></span>
 <span class="r-in"><span>                            <span class="co">## use default save_dir in practice</span></span></span>
 <span class="r-in"><span>                            save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating new vignette file ==&gt; /tmp/RtmpMrQfbh/vignettes/docker.Rmd</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating new vignette file ==&gt; /tmp/Rtmpmj76KK/vignettes/docker.Rmd</span>
 </code></pre></div>
     </div>
   </div>

@@ -74,37 +74,20 @@
 <div class="section level3">
 <h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
 <ul><li>Synchronise <code>rworkflows</code> package versioning with <code>rworkflows</code> action Release versioning.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.99.15" id="rworkflows-09915">rworkflows 0.99.15<a class="anchor" aria-label="anchor" href="#rworkflows-09915"></a></h2>
-<div class="section level3">
-<h3 id="new-features-0-99-15">New features<a class="anchor" aria-label="anchor" href="#new-features-0-99-15"></a></h3>
-<ul><li>Add <em>.devcontainer/devcontainer.json</em>
-</li>
 <li>
-<code>use_vignette_docker</code>
-<ul><li>New helper func: <code>infer_docker_org</code>
-</li>
+<code>use_vignette_docker</code>/<code>use_vignette_getstarted</code>
+<ul><li>Autofill <code>package</code> arg if not provided.</li>
 </ul></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-0-99-15">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-15"></a></h3>
+<h3 id="bug-fixes-1-0-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-0"></a></h3>
 <ul><li>
-<code>infer_deps</code>
-<ul><li>Pass <code>infer_deps</code> the <em>DESCRIPTION</em> path directly within the <code>fill_description</code> func.</li>
-<li>Fix unit tests.</li>
+<em>inst/template/docker.Rmd</em>
+<ul><li>Remove the need to include <code>construct_cont</code>, as not everyone will have <code>rworkfows</code> installed on the machine where the vignette is being rendered.</li>
 </ul></li>
 <li>
-<code>conda_*</code>
-<ul><li>Try to get reticularte to find the path to conda installed by <code>setup-miniconda</code>.</li>
-</ul></li>
-<li>New func: <code>use_codespace</code>
-<ul><li>Create dev container config file.</li>
-</ul></li>
-<li>
-<em>.Rprofile</em>
-<ul><li>Added to avoid CRAN issues with bioc packages.</li>
+<em>use_vignette_docker</em>
+<ul><li>Add <em>-autolink_bare_uris</em> bit to avoid CRAN check errors.</li>
 </ul></li>
 </ul></div>
 </div>
@@ -167,6 +150,13 @@
 <ul><li>
 <code>template</code> arg can now be “rworkflows_static:dev” to use the “dev” branch’s version of <em>action.yml</em> as a workflow template.</li>
 </ul></li>
+<li>Add <em>.devcontainer/devcontainer.json</em>
+</li>
+<li>
+<code>use_vignette_docker</code>
+<ul><li>New helper func: <code>infer_docker_org</code>
+</li>
+</ul></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-99-14">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-99-14"></a></h3>
@@ -180,6 +170,22 @@
 <ul><li>Remove unnecessary export:<code>echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" &gt;&gt; $GITHUB_ENV</code>
 </li>
 <li>Fix <code>runforesight/workflow-telemetry-action</code> step and move to top.</li>
+</ul></li>
+<li>
+<code>infer_deps</code>
+<ul><li>Pass <code>infer_deps</code> the <em>DESCRIPTION</em> path directly within the <code>fill_description</code> func.</li>
+<li>Fix unit tests.</li>
+</ul></li>
+<li>
+<code>conda_*</code>
+<ul><li>Try to get reticularte to find the path to conda installed by <code>setup-miniconda</code>.</li>
+</ul></li>
+<li>New func: <code>use_codespace</code>
+<ul><li>Create dev container config file.</li>
+</ul></li>
+<li>
+<em>.Rprofile</em>
+<ul><li>Added to avoid CRAN issues with bioc packages.</li>
 </ul></li>
 </ul></div>
 </div>
