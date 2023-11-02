@@ -3,6 +3,7 @@
 #' Creates a vignette rmarkdown file demonstrates how to create a
 #'  Docker/Singularity image from a container stored in 
 #' \href{https://hub.docker.com/}{Dockerhub}.
+#' @param package R package name.
 #' @param docker_org Docker registry organization name. 
 #' Can simply be your registry username instead.
 #' If \code{NULL}, \code{docker_org} will be inferred as the R package's GitHub 
@@ -27,42 +28,54 @@
 #' @param output Vignette output style. 
 #' Defaults to \link[BiocStyle]{html_document}.
 #' @inheritParams use_workflow
+#' @inheritParams construct_runners
 #' @returns Path to vignette file.
 #' 
 #' @export
 #' @importFrom yaml read_yaml as.yaml
 #' @importFrom here here
 #' @examples
-#' path <- use_vignette_docker(docker_org = "neurogenomics",
+#' path <- use_vignette_docker(package = "mypackage",
+#'                             docker_org = "neurogenomics",
 #'                             ## use default save_dir in practice
 #'                             save_dir = tempdir())
-use_vignette_docker <- function(docker_org = NULL,
+use_vignette_docker <- function(package = names(get_description()),
+                                docker_org = NULL,
                                 docker_registry="ghcr.io",
+                                cont = construct_cont(
+                                  cont = paste(docker_org,
+                                               package,
+                                               sep="/"),
+                                  default_registry =docker_registry)[[1]],
                                 title="Docker/Singularity Containers",
                                 vignette_index_entry="docker",
                                 save_dir=here::here(),
                                 path=file.path(save_dir,
                                                "vignettes",
                                                "docker.Rmd"),
-                                output="BiocStyle::html_document",
+                                output=list(
+                                  "BiocStyle::html_document"= list(
+                                    "md_extensions"="-autolink_bare_uris"
+                                    )
+                                  ),
                                 port_in=8787,
                                 port_out=8900,
                                 force_new=FALSE,
                                 show=FALSE,
                                 verbose=TRUE){
   # devoptera::args2vars(use_vignette_docker, reassign = TRUE)
-  
-  force(docker_org)
-  #### Infer docker_org
-  docker_org <- infer_docker_org(docker_org=docker_org,
-                                 docker_registry=docker_registry,
-                                 verbose=verbose)
+
   #### Check if file exists already ####
   if(file.exists(path) &
      isFALSE(force_new)){
     messager("Using existing vignette file:",path,v=verbose)
   } else {
     messager("Creating new vignette file ==>",path,v=verbose)
+    force(docker_org)
+    #### Infer docker_org
+    docker_org <- infer_docker_org(docker_org=docker_org,
+                                   docker_registry=docker_registry,
+                                   verbose=verbose) 
     dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
     #### get the template ####
     template_path <- system.file("templates","docker.Rmd",
@@ -73,6 +86,8 @@ use_vignette_docker <- function(docker_org = NULL,
                      rev(grep("---",l))[1] ) 
     yml <- yaml::read_yaml(text = l[yml_lines])
     #### Set params ####
+    ## cont
+    yml$params$cont$value <- cont
     ## docker_registry
     yml$params$docker_registry$value <- docker_registry
     ## docker_org

@@ -5,7 +5,7 @@
 \title{Use vignette: Get started}
 \usage{
 use_vignette_getstarted(
-  package,
+  package = names(get_description()),
   title = "Get started",
   vignette_index_entry = package,
   save_dir = here::here(),

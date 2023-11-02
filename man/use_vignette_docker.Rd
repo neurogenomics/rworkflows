@@ -5,13 +5,16 @@
 \title{Use vignette: Docker}
 \usage{
 use_vignette_docker(
+  package = names(get_description()),
   docker_org = NULL,
   docker_registry = "ghcr.io",
+  cont = construct_cont(cont = paste(docker_org, package, sep = "/"), default_registry =
+    docker_registry)[[1]],
   title = "Docker/Singularity Containers",
   vignette_index_entry = "docker",
   save_dir = here::here(),
   path = file.path(save_dir, "vignettes", "docker.Rmd"),
-  output = "BiocStyle::html_document",
+  output = list(`BiocStyle::html_document` = list(md_extensions = "-autolink_bare_uris")),
   port_in = 8787,
   port_out = 8900,
   force_new = FALSE,
@@ -20,6 +23,8 @@ use_vignette_docker(
 )
 }
 \arguments{
+\item{package}{R package name.}
+
 \item{docker_org}{Docker registry organization name. 
 Can simply be your registry username instead.
 If \code{NULL}, \code{docker_org} will be inferred as the R package's GitHub 
@@ -32,6 +37,12 @@ Options include:
  GitHub Container Registry}
  \item{"docker.io"} : \href{https://hub.docker.com/}{DockerHub} 
 }}
+
+\item{cont}{Which Docker container to use on each OS
+(\code{NULL} means no container will be used for that OS).
+See 
+\href{https://hub.docker.com/r/bioconductor/bioconductor_docker/tags}{here}
+ for a list of all official Bioconductor Docker container versions.}
 
 \item{title}{Title of vignette.}
 
@@ -71,7 +82,8 @@ Creates a vignette rmarkdown file demonstrates how to create a
 \href{https://hub.docker.com/}{Dockerhub}.
 }
 \examples{
-path <- use_vignette_docker(docker_org = "neurogenomics",
+path <- use_vignette_docker(package = "mypackage",
+                            docker_org = "neurogenomics",
                             ## use default save_dir in practice
                             save_dir = tempdir())
 }

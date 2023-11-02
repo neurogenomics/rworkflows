@@ -12,7 +12,7 @@
 #' path <- use_vignette_getstarted(package = "mypackage",
 #'                                 ## use default save_dir in practice
 #'                                 save_dir = tempdir())
-use_vignette_getstarted <- function(package,
+use_vignette_getstarted <- function(package = names(get_description()),
                                     title="Get started",
                                     vignette_index_entry=package,
                                     save_dir=here::here(),

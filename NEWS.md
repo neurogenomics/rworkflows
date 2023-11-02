@@ -4,29 +4,16 @@
 
 * Synchronise `rworkflows` package versioning with `rworkflows` action 
 Release versioning.
-
-# rworkflows 0.99.15
-
-## New features
-
-* Add *.devcontainer/devcontainer.json*
-* `use_vignette_docker`
-  - New helper func: `infer_docker_org`
-
-## Bug fixes 
-
-* `infer_deps` 
-  - Pass `infer_deps` the *DESCRIPTION* path directly 
-    within the `fill_description` func. 
-  - Fix unit tests.
-* `conda_*`
-  - Try to get reticularte to find the path to conda 
-  installed by `setup-miniconda`.
-* New func: `use_codespace`
-  - Create dev container config file.
-* *.Rprofile*
-  - Added to avoid CRAN issues with bioc packages.
+* `use_vignette_docker`/`use_vignette_getstarted`
+  - Autofill `package` arg if not provided.
   
+## Bug fixes
+
+* *inst/template/docker.Rmd*
+  - Remove the need to include `construct_cont`, 
+    as not everyone will have `rworkfows` installed on the machine where
+    the vignette is being rendered.
+
 # rworkflows 0.99.14
 
 ## New features
@@ -68,6 +55,9 @@ Release versioning.
 * `use_workflow`
   - `template` arg can now be "rworkflows_static:dev" to use the "dev" branch's 
   version of *action.yml* as a workflow template.
+* Add *.devcontainer/devcontainer.json*
+* `use_vignette_docker`
+  - New helper func: `infer_docker_org`
 
 ## Bug fixes
 
@@ -81,6 +71,19 @@ Release versioning.
 * *action.yml*
   - Remove unnecessary  export:`echo "GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}" >> $GITHUB_ENV`
   - Fix `runforesight/workflow-telemetry-action` step and move to top.
+* `infer_deps` 
+  - Pass `infer_deps` the *DESCRIPTION* path directly 
+    within the `fill_description` func. 
+  - Fix unit tests.
+* `conda_*`
+  - Try to get reticularte to find the path to conda 
+  installed by `setup-miniconda`.
+* New func: `use_codespace`
+  - Create dev container config file.
+* *.Rprofile*
+  - Added to avoid CRAN issues with bioc packages.
+
+
 
 # rworkflows 0.99.13
 

@@ -6,9 +6,9 @@ checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-p
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
-[![](https://img.shields.io/badge/doi-https://doi.org/10.21203/rs.3.rs--2399015/v1-blue.svg)](https://doi.org/https://doi.org/10.21203/rs.3.rs-2399015/v1)
+[![](https://img.shields.io/badge/doi-https://doi.org/10.5281/zenodo.10048573-blue.svg)](https://doi.org/https://doi.org/10.5281/zenodo.10048573)
 <br>
-[![](https://img.shields.io/badge/devel%20version-0.99.14-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-1.0.0-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -24,7 +24,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Oct-28-2023</i>  
+README updated: <i>Nov-01-2023</i>  
 </h4>
 
 ## Intro
@@ -84,7 +84,7 @@ options to enable/disable/modify each step):
     [**DockerHub**](https://hub.docker.com/)).
 11. 🔭 Generates [workflow
     telemetry](https://github.com/runforesight/workflow-telemetry-action)
-    report.
+    report.  
 12. 🎖 Updates relevant badges added to your README with
     `rworkflows::use_badges()`.
 
@@ -317,7 +317,7 @@ utils::sessionInfo()
     ## [25] rlang_1.1.1         utf8_1.2.4          cachem_1.0.8       
     ## [28] badger_0.2.3        xfun_0.40           fs_1.6.3           
     ## [31] memoise_2.0.1.9000  cli_3.6.1           magrittr_2.0.3     
-    ## [34] rworkflows_0.99.14  digest_0.6.33       grid_4.3.1         
+    ## [34] rworkflows_1.0.0    digest_0.6.33       grid_4.3.1         
     ## [37] rstudioapi_0.15.0   lifecycle_1.0.3     vctrs_0.6.4        
     ## [40] data.table_1.14.8   evaluate_0.22       glue_1.6.2         
     ## [43] fansi_1.0.5         colorspace_2.1-0    rmarkdown_2.25     
