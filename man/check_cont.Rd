@@ -14,8 +14,6 @@ See
  for a list of all official Bioconductor Docker container versions.}
 
 \item{verbose}{Print messages.}
-
-\item{domain}{Container repository API domain.}
 }
 \value{
 Null

@@ -14,10 +14,10 @@ owner.}
 
 \item{docker_registry}{Docker container registry to push to. 
 Options include:
-\itemize{
- \item{"ghcr.io"} : \href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
- GitHub Container Registry}
- \item{"docker.io"} : \href{https://hub.docker.com/}{DockerHub} 
+\describe{
+ \item{"ghcr.io" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
+ GitHub Container Registry}}  
+ \item{"docker.io" : }{\href{https://hub.docker.com/}{DockerHub}}
 }}
 
 \item{verbose}{Print messages.}

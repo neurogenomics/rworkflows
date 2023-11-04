@@ -9,7 +9,7 @@ bioc_r_versions(bioc_version = NULL, depth = NULL, return_opts = FALSE)
 \arguments{
 \item{bioc_version}{Version of Bioc to return info for.
 Can be:
-\itemize{
+\describe{
 \item{"devel"}{Get the current development version of Bioc.}
 \item{"release"}{Get the current release version of Bioc.}
 \item{<numeric>}{A specific Bioc version number (e.g. \code{3.16}).}
@@ -19,7 +19,7 @@ Can be:
 \item{depth}{How many levels deep into the R version to include.
 For example, is the R version number is "4.2.0", 
 the following depths would return:
-\itemize{
+\describe{
 \item{\code{depth=NULL}: }{"4.2.0"}
 \item{\code{depth=1}: }{"4"}
 \item{\code{depth=2}: }{"4.2"}

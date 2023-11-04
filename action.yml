@@ -502,7 +502,7 @@ runs:
     ## DockerHub steps
     - name: 🐳✏️ Create Docker file 
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux'
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       env:
         BASE_IMAGE: ${{ matrix.config.cont }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -514,7 +514,7 @@ runs:
       
     - name: 🐳🚀 Build and push to GHCR 
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'ghcr.io'
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'ghcr.io'
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -522,7 +522,7 @@ runs:
         username: ${{ github.repository_owner }}
         password: ${{ inputs.GITHUB_TOKEN }}
         registry: ${{ inputs.docker_registry }}
-        repository: ${{ github.repository }}
+        repository: ${{ github.repository_owner }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
@@ -534,7 +534,7 @@ runs:
           
     - name: 🐳🚀 Build and push to DockerHub 
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'docker.io'
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'docker.io'
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
