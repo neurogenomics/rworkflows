@@ -1,3 +1,14 @@
+# rworkflows 1.0.1
+
+## New features
+
+- Change command "\nodocker" to "[nodocker]" for consistency with other commands.
+
+## Bug fixes
+
+- *action.yml* 
+  - `repository: ${{ github.repository }}` --> `repository: ${{ env.packageName }}`
+
 # rworkflows 1.0.0
 
 ## New features
@@ -15,6 +26,7 @@ Release versioning.
     the vignette is being rendered.
 * *use_vignette_docker*
   - Add *-autolink_bare_uris* bit to avoid CRAN check errors.
+* Change `\itemize` --> `describe` to avoid CRAN check errors.
 
 # rworkflows 0.99.14
 

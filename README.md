@@ -24,7 +24,7 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Nov-01-2023</i>  
+README updated: <i>Nov-02-2023</i>  
 </h4>
 
 ## Intro
@@ -79,8 +79,8 @@ options to enable/disable/modify each step):
     package.  
 10. 🐳 Pushes a [**Docker**](https://www.docker.com/) container (with
     [**Rstudio**](https://posit.co/) and all dependencies pre-installed)
-    to your choice of container registry (e.g. [GitHub Container
-    Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
+    to your choice of container registry (e.g. [**GitHub Container
+    Registry**](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
     [**DockerHub**](https://hub.docker.com/)).
 11. 🔭 Generates [workflow
     telemetry](https://github.com/runforesight/workflow-telemetry-action)

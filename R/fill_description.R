@@ -6,7 +6,7 @@
 #' R package template. 
 #' For any given field, set its corresponding argument as follows 
 #' to get certain behaviour:
-#' \itemize{
+#' \describe{
 #' \item{\code{NULL}: }{Keeps the current value.}
 #' \item{\code{NA}: }{Removes the field from the 
 #' \emph{DESCRIPTION} file entirely.}

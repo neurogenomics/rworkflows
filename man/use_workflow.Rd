@@ -52,7 +52,7 @@ use_workflow(
 }
 \arguments{
 \item{template}{Workflow template name.
-\itemize{
+\describe{
 \item{"rworkflows"}{A short workflow script that calls
  the GitHub action from the GitHub Marketplace.
 The action is continually updated 
@@ -147,10 +147,10 @@ build documentation website, and deploy to \emph{gh-pages} branch.}
 
 \item{docker_registry}{Docker container registry to push to. 
 Options include:
-\itemize{
- \item{"ghcr.io"} : \href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
- GitHub Container Registry}
- \item{"docker.io"} : \href{https://hub.docker.com/}{DockerHub} 
+\describe{
+ \item{"ghcr.io" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{
+ GitHub Container Registry}}  
+ \item{"docker.io" : }{\href{https://hub.docker.com/}{DockerHub}}
 }}
 
 \item{docker_user}{Docker registry username.

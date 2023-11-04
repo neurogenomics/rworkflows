@@ -4,7 +4,7 @@
 #' (and the tag, if specified) exist using \link[rworkflows]{check_cont}.
 #' @param default_registry The default container registry to use.
 #' Options include:
-#' \itemize{
+#' \describe{
 #'  \item{"ghcr.io/" : }{\href{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}{GitHub Container Registry}}
 #'  \item{"docker.io/" : }{\href{https://hub.docker.com/}{DockerHub}}
 #'  \item{"mcr.microsoft.com/" : }{\href{https://github.com/microsoft/ContainerRegistry}{Microsoft Container Registry}}

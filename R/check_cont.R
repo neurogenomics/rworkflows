@@ -2,7 +2,6 @@
 #' 
 #' Check that a list of containers are valid.
 #' @inheritParams construct_runners
-#' @param domain Container repository API domain.
 #' @returns Null
 #' 
 #' @keywords internal 
