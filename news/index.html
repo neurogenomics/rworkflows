@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
@@ -70,7 +70,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.0.0" id="rworkflows-100">rworkflows 1.0.0<a class="anchor" aria-label="anchor" href="#rworkflows-100"></a></h2>
+<h2 class="page-header" data-toc-text="1.0.1" id="rworkflows-101">rworkflows 1.0.1<a class="anchor" aria-label="anchor" href="#rworkflows-101"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-0-1">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-1"></a></h3>
+<ul><li>Change command “” to “[nodocker]” for consistency with other commands.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-0-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-1"></a></h3>
+<ul><li>
+<em>action.yml</em>
+<ul><li>
+<code>repository: ${{ github.repository }}</code> –&gt; <code>repository: ${{ env.packageName }}</code>
+</li>
+</ul></li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.0" id="rworkflows-100">rworkflows 1.0.0<small>2023-11-02</small><a class="anchor" aria-label="anchor" href="#rworkflows-100"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
 <ul><li>Synchronise <code>rworkflows</code> package versioning with <code>rworkflows</code> action Release versioning.</li>
@@ -89,6 +105,7 @@
 <em>use_vignette_docker</em>
 <ul><li>Add <em>-autolink_bare_uris</em> bit to avoid CRAN check errors.</li>
 </ul></li>
+<li>Change <code>\itemize</code> –&gt; <code>describe</code> to avoid CRAN check errors.</li>
 </ul></div>
 </div>
     <div class="section level2">

@@ -18,7 +18,7 @@ Bioconductor."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
@@ -84,21 +84,39 @@ Bioconductor."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     <h2>Arguments</h2>
     <dl><dt>bioc_version</dt>
 <dd><p>Version of Bioc to return info for.
-Can be:</p><ul><li><p>"devel"Get the current development version of Bioc.</p></li>
-<li><p>"release"Get the current release version of Bioc.</p></li>
-<li><p>&lt;numeric&gt;A specific Bioc version number (e.g. <code>3.16</code>).</p></li>
-<li><p>NULLReturn info for all Bioc versions.</p></li>
-</ul></dd>
+Can be:</p><dl><dt>"devel"</dt>
+<dd><p>Get the current development version of Bioc.</p></dd>
+
+<dt>"release"</dt>
+<dd><p>Get the current release version of Bioc.</p></dd>
+
+<dt>&lt;numeric&gt;</dt>
+<dd><p>A specific Bioc version number (e.g. <code>3.16</code>).</p></dd>
+
+<dt>NULL</dt>
+<dd><p>Return info for all Bioc versions.</p></dd>
+
+
+</dl></dd>
 
 
 <dt>depth</dt>
 <dd><p>How many levels deep into the R version to include.
 For example, is the R version number is "4.2.0", 
-the following depths would return:</p><ul><li><p><code>depth=NULL</code>: "4.2.0"</p></li>
-<li><p><code>depth=1</code>: "4"</p></li>
-<li><p><code>depth=2</code>: "4.2"</p></li>
-<li><p><code>depth=3</code>: "4.2.0"</p></li>
-</ul></dd>
+the following depths would return:</p><dl><dt><code>depth=NULL</code>: </dt>
+<dd><p>"4.2.0"</p></dd>
+
+<dt><code>depth=1</code>: </dt>
+<dd><p>"4"</p></dd>
+
+<dt><code>depth=2</code>: </dt>
+<dd><p>"4.2"</p></dd>
+
+<dt><code>depth=3</code>: </dt>
+<dd><p>"4.2.0"</p></dd>
+
+
+</dl></dd>
 
 
 <dt>return_opts</dt>
