@@ -2,7 +2,7 @@
 
 ## New features
 
-- Change command "\nodocker" to "[nodocker]" for consistency with other commands.
+- Change command "\nodocker" to "[nodocker]" for consistency with other commands. 
 
 ## Bug fixes
 
