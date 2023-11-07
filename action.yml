@@ -385,6 +385,7 @@ runs:
         AS_CRAN: ${{ inputs.as_cran }}
         run_vignettes: ${{ inputs.run_vignettes }}
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
@@ -408,6 +409,7 @@ runs:
       if: inputs.has_runit == 'true'
       env:
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         BiocGenerics:::testPackage()
@@ -421,6 +423,7 @@ runs:
         run_vignettes: ${{ inputs.run_vignettes }}
         as_cran: ${{ inputs.as_cran }}
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         #### Install deps ####
@@ -441,6 +444,8 @@ runs:
     
     - name: 📋 Test coverage 
       if: inputs.run_covr == 'true' && runner.os == 'Linux'
+      env: 
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         covr::codecov()
       shell: Rscript {0} 

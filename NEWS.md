@@ -8,6 +8,8 @@
 
 - *action.yml* 
   - `repository: ${{ github.repository }}` --> `repository: ${{ env.packageName }}`
+  - Add `env: GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}` to any checking steps 
+  (allows piggyback to download data from Relesases) 
 
 # rworkflows 1.0.0
 
