@@ -231,8 +231,8 @@ runs:
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
     
-     - name: 🛠🔀 Install rworkflows R package
-       env:
+    - name: 🛠🔀 Install rworkflows R package
+      env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
