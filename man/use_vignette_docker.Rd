@@ -14,7 +14,7 @@ use_vignette_docker(
   vignette_index_entry = "docker",
   save_dir = here::here(),
   path = file.path(save_dir, "vignettes", "docker.Rmd"),
-  output = list(`BiocStyle::html_document` = list(md_extensions = "-autolink_bare_uris")),
+  output = list(`rmarkdown::html_document` = list(md_extensions = "-autolink_bare_uris")),
   port_in = 8787,
   port_out = 8900,
   force_new = FALSE,

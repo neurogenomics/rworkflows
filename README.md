@@ -175,6 +175,9 @@ Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 - `CODECOV_TOKEN` \[Optional\]: Bypasses issues that occasionally arise
   from GitHub API limits. [See
   more](https://docs.codecov.com/reference/overview).
+- `GitHub Variables` \[Optional\]: These are default variables that are
+  automatically set by GitHub Actions. [See
+  more](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables).
 
 ## 📚 Documentation
 

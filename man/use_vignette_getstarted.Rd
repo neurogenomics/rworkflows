@@ -10,7 +10,7 @@ use_vignette_getstarted(
   vignette_index_entry = package,
   save_dir = here::here(),
   path = file.path(save_dir, "vignettes", paste0(package, ".Rmd")),
-  output = "BiocStyle::html_document",
+  output = "rmarkdown::html_document",
   force_new = FALSE,
   show = FALSE,
   verbose = TRUE

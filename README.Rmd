@@ -114,6 +114,7 @@ To use certain features of `rworkflows`, you may need to set up one or more
 * `DOCKER_TOKEN` [Optional]: Allows GitHub Actions to push to a
     [DockerHub](https://hub.docker.com) account. [See more](https://docs.docker.com/security/for-developers/access-tokens/).  
 * `CODECOV_TOKEN` [Optional]: Bypasses issues that occasionally arise from GitHub API limits. [See more](https://docs.codecov.com/reference/overview).
+* `GitHub Variables` [Optional]: These are default variables that are automatically set by GitHub Actions. [See more](https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables).
 
 ## 📚 Documentation
 
