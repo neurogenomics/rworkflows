@@ -10,6 +10,8 @@ rworkflows-merged
 ^reports
 ^inst/hex$
 ^hex$
+.*\.pdf$
+^CITATION$
 
 .*\.Rproj$
 ^\.Rproj\.user$

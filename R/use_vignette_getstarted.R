@@ -19,7 +19,7 @@ use_vignette_getstarted <- function(package = names(get_description()),
                                     path=file.path(save_dir,
                                                    "vignettes",
                                                    paste0(package,".Rmd")),
-                                    output="BiocStyle::html_document",
+                                    output="rmarkdown::html_document",
                                     force_new=FALSE,
                                     show=FALSE,
                                     verbose=TRUE){

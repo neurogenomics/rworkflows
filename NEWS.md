@@ -1,3 +1,26 @@
+# rworkflows 1.0.2
+
+## New features
+
+* *action.yml* 
+  - Condense steps
+  - Use new `rworkflows` funcs to specific system and latex deps
+* *Dockerfile*
+  - Use new `rworkflows` funcs to specific system and latex deps
+* New functions:
+  - `dependencies_linux`
+  - `dependencies_macos`
+  - `dependencies_windows`
+  - `dependencies_latex`
+* README: update and condense.
+  
+## Bug fixes
+
+* Get rid of CRAN NOTE by reducing package size:
+  - Remove unused *inst* files.
+  - Change vignettes to use `rmarkdown::render` instead of `BiocStyle::html_document`.
+  - Add to *.Rbuildignore*: .`*\.pdf$`, `^CITATION$`
+
 # rworkflows 1.0.1
 
 ## New features
@@ -9,7 +32,7 @@
 - *action.yml* 
   - `repository: ${{ github.repository }}` --> `repository: ${{ env.packageName }}`
   - Add `env: GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}` to any checking steps 
-  (allows piggyback to download data from Relesases) 
+  (allows piggyback to download data from Releases) 
 
 # rworkflows 1.0.0
 

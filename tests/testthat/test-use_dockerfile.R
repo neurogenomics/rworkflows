@@ -9,5 +9,5 @@ test_that("use_dockerfile works", {
                             show = TRUE)
   })
   testthat::expect_true(file.exists(path2))
-  testthat::expect_equal("# ----- R Package Dockerfile -----",out[[1]])
+  testthat::expect_equal("# ----- rworkflows Dockerfile ----- ",out[[1]])
 })

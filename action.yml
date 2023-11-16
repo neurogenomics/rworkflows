@@ -202,11 +202,8 @@ runs:
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" >> ~/.Rprofile
         git config --global --add safe.directory '*'
-      shell: bash {0}
-
-    ## Most of these steps are the same as the ones in
-    ## https://github.com/r-lib/actions/blob/master/examples/check-standard.yaml
-    ## If they update their steps, we will also need to update ours.
+      shell: bash {0} 
+      
     - name: ⏬ Checkout repository 
       uses: actions/checkout@v4
     
@@ -224,15 +221,22 @@ runs:
       uses: r-lib/actions/setup-pandoc@v2
       with: 
         pandoc-version: ${{ inputs.pandoc_version }} 
-
+    
     - name: ❔ Query dependencies 
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        options(crayon.enabled = TRUE)
-        install.packages('remotes')
-        remotes::install_github("r-lib/remotes")
+        options(crayon.enabled = TRUE) 
+        if(!require("remotes", quietly=TRUE)) install.packages('remotes')
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+      shell: Rscript {0}
+    
+     - name: 🛠🔀 Install rworkflows R package
+       env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows", upgrade=TRUE)
       shell: Rscript {0}
 
     - name: 🏦 Restore R package cache 
@@ -256,37 +260,15 @@ runs:
     - name: 🛠 Install Linux system dependencies  
       if: runner.os == 'Linux'
       run: |
-        sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
-        echo $sysreqs
+        sysreqs=$(Rscript -e 'rworkflows::dependencies_linux()')
         sudo -s eval "$sysreqs"
-        sudo apt-get install -y qpdf rsync
       shell: bash {0}
 
     - name: 🛠 Install macOS system dependencies 
       if: runner.os == 'macOS'
       run: |
-        #### --- Justifications for each package --- ####
-        ### libxml2 ###
-        # Enable installing XML from source if needed
-        ### imagemagick@6 ###
-        # Required to install magick as noted at
-        # https://github.com/r-lib/usethis/commit/f1f1e0d10c1ebc75fd4c18fa7e2de4551fd9978f#diff-9bfee71065492f63457918efcd912cf2
-        ### harfbuzz fribidi ###
-        # For textshaping, required by ragg, and required by pkgdown
-        ### libgit2 ###
-        # For installing usethis's dependency gert
-        ### xquartz --cask ###
-        # Required for tcltk
-        ### libxfont ###
-        # Required for some ggplot2 functions
-        ### texlive ###
-        # Required for rendering Sweave files (even with r-lib/actions/setup-tinytex)
-        
-        #### --- Install packages --- ####
-        ### Install normally ###
-        brew install libxml2 imagemagick@6 harfbuzz fribidi libgit2 texlive
-        ### Install via cask ###
-        brew install xquartz --cask
+        sysreqs=$(Rscript -e 'rworkflows::dependencies_macos()')
+        sudo -s eval "$sysreqs"
         ### Set up xml2 ###
         echo "XML_CONFIG=/usr/local/opt/libxml2/bin/xml2-config" >> $GITHUB_ENV
       shell: bash {0}
@@ -294,29 +276,24 @@ runs:
     - name: 🛠 Install Windows system dependencies 
       if: inputs.has_latex == 'true' && runner.os == 'Windows'
       run: |
-        #### npm ####
         npm install curl
       shell: pwsh {0}
       
-    - name: 🛠 Install latex 
+    - name: 🛠 Install LaTeX 
       if: inputs.has_latex == 'true'
       uses: r-lib/actions/setup-tinytex@v2
       env: 
         TINYTEX_INSTALLER: ${{ inputs.tinytex_installer }}
         TINYTEX_VERSION: ${{ inputs.tinytex_version }}
 
-    - name: 🛠 Install latex packages 
+    - name: 🛠 Install LaTeX packages 
       if: inputs.has_latex == 'true'
       env:
         tinytex_installer: ${{ inputs.tinytex_installer }}
         tinytex_version: ${{ inputs.tinytex_version }}
       run: | 
-        install.packages("tinytex")
-        extra_packages <- c("bera","nowidow","parnotes","marginfix","etoolbox",
-        "titlesec","sectsty","framed","enumitem","parskip","soul","placeins",
-        "footmisc","changepage","xstring","caption","mathtools","fancyhdr",
-        "preprint","ragged2e","pdfcrop","titling","silence","everysel")
-        tinytex::tlmgr_install(pkgs = extra_packages)
+        if(!require("tinytex",quietly=TRUE)) install.packages("tinytex")
+        rworkflows::dependencies_latex()
       shell: Rscript {0} 
 
     - name: 🛠 Install dependencies pass 1 
@@ -324,13 +301,10 @@ runs:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
-         ## For running the checks
-         message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
-         install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
+         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout")) 
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
-         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE)
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
       continue-on-error: true
       shell: Rscript {0}
 
@@ -342,29 +316,8 @@ runs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
-        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE)
-      shell: Rscript {0}
-
-    - name: 🛠 Install RUnit (via BiocGenerics) 
-      if:  inputs.has_runit == 'true'
-      run: |
-        options(crayon.enabled = TRUE)
-        BiocManager::install("BiocGenerics")
-      shell: Rscript {0}
-
-    - name: 🛠 Install covr 
-      if: inputs.run_covr == 'true' && runner.os == 'Linux'
-      run: |
-        options(crayon.enabled = TRUE)
-        install.packages("covr")
-      shell: Rscript {0}
-
-    - name: 🛠 Install pkgdown 
-      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
-      run: |
-        options(crayon.enabled = TRUE)
-        install.packages("pkgdown")
-      shell: Rscript {0}
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
+      shell: Rscript {0} 
 
     - name: ℹ️ Session info ️
       run: |
@@ -388,7 +341,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
-        if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
+        if(!require("rcmdcheck",quietly=TRUE)) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
         run_build_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--no-build-vignettes"
         run_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--ignore-vignettes"
@@ -412,6 +365,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        if(!require("BiocGenerics",quietly=TRUE)) BiocManager::install("BiocGenerics")
         BiocGenerics:::testPackage()
       shell: Rscript {0}
         
@@ -427,8 +381,7 @@ runs:
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         #### Install deps ####
-        if(!require("BiocManager", quietly=TRUE)) install.packages("BiocManager")
-        if(!require("BiocCheck", quietly=TRUE)) BiocManager::install("BiocCheck")
+        if(!require("BiocCheck",quietly=TRUE)) BiocManager::install("BiocCheck")
         #### Allow for packages on CRAN ####
         no_check_vignettes <- Sys.getenv("run_vignettes")=='true'
         as_cran <- Sys.getenv("as_cran")=='true'
@@ -447,6 +400,7 @@ runs:
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
+        if(!require("covr",quietly=TRUE)) install.packages("covr")
         covr::codecov()
       shell: Rscript {0} 
       
@@ -455,36 +409,26 @@ runs:
       run: R CMD INSTALL .
       shell: bash {0}
 
-    - name: ℹ️ Get R package info 
-      if: runner.os == 'Linux'
-      run: |
-        #### DockerHub repos must be lowercase (,,) ####
-        name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
-        echo "packageName=${name,,}" >> $GITHUB_ENV
-        echo "packageNameOrig=${name}" >> $GITHUB_ENV
-        echo $name
-        version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
-        echo "packageVersion=${version}" >> $GITHUB_ENV
-        echo $version
-        echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
-      shell: bash {0}
-
     - name: 📦 Render README 
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       env:
         DISPLAY: 99.0
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
-          if(!require("rmarkdown", quietly=TRUE)) install.packages("rmarkdown");
+          if(!require("rmarkdown",quietly=TRUE)) install.packages("rmarkdown");
           rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
         }
       shell: Rscript {0} 
         
     - name: 📦 Build pkgdown site 
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
+        if(!require("pkgdown",quietly=TRUE)) install.packages("pkgdown")
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
       shell: Rscript {0}
         
@@ -504,16 +448,25 @@ runs:
         name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check 
         
-    ## DockerHub steps
+    ## DockerHub steps 
+    - name: ℹ️ Get R package info 
+      if: runner.os == 'Linux'
+      run: |
+        #### DockerHub repos must be lowercase (,,) ####
+        name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+        echo "packageName=${name,,}" >> $GITHUB_ENV
+        echo "packageNameOrig=${name}" >> $GITHUB_ENV 
+        version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
+        echo "packageVersion=${version}" >> $GITHUB_ENV 
+      shell: bash {0}
+      
     - name: 🐳✏️ Create Docker file 
       if: |
         (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       env:
-        BASE_IMAGE: ${{ matrix.config.cont }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        BASE_IMAGE: ${{ matrix.config.cont }}
       run: |
-        options(crayon.enabled = TRUE)
-        if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0} 
       
@@ -523,6 +476,7 @@ runs:
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        timeout: ${{ inputs.timeout }}
       with:
         username: ${{ github.repository_owner }}
         password: ${{ inputs.GITHUB_TOKEN }}
@@ -534,8 +488,7 @@ runs:
           ${{ env.packageVersion }},
           latest
         build_args: |
-          PKG=${{ env.packageNameOrig }},
-          BASE_IMAGE=${{ matrix.config.cont }}
+          PKG=${{ env.packageNameOrig }}
           
     - name: 🐳🚀 Build and push to DockerHub 
       if: |
@@ -543,6 +496,7 @@ runs:
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        timeout: ${{ inputs.timeout }}
       with:
         username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}
@@ -553,5 +507,4 @@ runs:
           ${{ env.packageVersion }},
           latest
         build_args: |
-          PKG=${{ env.packageNameOrig }},
-          BASE_IMAGE=${{ env.BASE_IMAGE }}
+          PKG=${{ env.packageNameOrig }}

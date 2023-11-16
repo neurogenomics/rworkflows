@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 1.0.1
+Version: 1.0.2
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -59,7 +59,8 @@ Suggests:
     BiocPkgTools,
     biocViews,
     reticulate,
-    rvest
+    rvest,
+    tinytex
 VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3

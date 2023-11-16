@@ -11,7 +11,7 @@ output:
 ```{r, echo=FALSE, include=FALSE}
 pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 title <- read.dcf("DESCRIPTION", fields = "Title")[1]
-description <- read.dcf("DESCRIPTION", fields = "Description")[1]
+description <- gsub("\n"," ",read.dcf("DESCRIPTION", fields = "Description")[1])
 URL <- read.dcf('DESCRIPTION', fields = 'URL')[1]
 owner <- tolower(strsplit(URL,"/")[[1]][4])
 ```

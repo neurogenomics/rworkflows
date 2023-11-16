@@ -3,7 +3,7 @@ title: "Bioconductor"
 author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
 date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
-  BiocStyle::html_document
+  rmarkdown::html_vignette
 vignette: >
     %\VignetteIndexEntry{Bioconductor} 
     %\usepackage[utf8]{inputenc}

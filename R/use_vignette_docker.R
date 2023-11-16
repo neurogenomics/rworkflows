@@ -54,7 +54,7 @@ use_vignette_docker <- function(package = names(get_description()),
                                                "vignettes",
                                                "docker.Rmd"),
                                 output=list(
-                                  "BiocStyle::html_document"= list(
+                                  "rmarkdown::html_document"= list(
                                     "md_extensions"="-autolink_bare_uris"
                                     )
                                   ),

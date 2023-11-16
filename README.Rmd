@@ -9,8 +9,16 @@ output:
 ```{r setup, include=FALSE}
 pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 ```
+## 📘 Citation 
 
-## Intro
+If you use of reference the ``r pkg`` suite, please cite: 
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+> `r utils::citation(pkg)$textVersion`
+
+## ℹ Intro
+
+### 📖 Background
 
 `rworkflows` is a suite of tools to make it easy for R developers to implement
 reproducible best practices on GitHub. 
@@ -21,7 +29,7 @@ It includes three main components:
 set up short, customisable workflows that trigger the `rworkflows` action.  
 3. [**`rworkflows` action**](https://github.com/neurogenomics/rworkflows/blob/master/action.yml): an open-source action available on the [GitHub Actions  Marketplace](https://github.com/marketplace/actions/rworkflows). 
 
-### `rworkflows` action steps 
+### ⚙️ `rworkflows` action steps 
 
 [**GitHub Actions**](https://docs.github.com/en/actions) 
 are a powerful way to automatically launch workflows 
@@ -60,144 +68,96 @@ This means you won't have to manually edit any yaml files,
 just run the `rworkflows::use_workflow()` function 
 and you're ready to go within seconds!
 
-> **Note**: `rworkflows` uses, was inspired by, and benefits from the work of many other projects, especially:  
-[`biocthis`](https://github.com/lcolladotor/biocthis), [`usethis`](https://github.com/r-lib/usethis), [`actions/`](https://github.com/actions), [`r-lib/actions`](https://github.com/r-lib/actions), [`bioc-actions`](https://github.com/grimbough/bioc-actions), [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action), [`docker/build-push-action`](https://github.com/docker/build-push-action), [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker). For more details on how these projects relate to `rworkflows`, please see [below](#acknowledgments).
+> **🙏 Acknowledgements**: `rworkflows` uses, was inspired by, and benefits from the work of [many other projects](#acknowledgments), especially: [`biocthis`](https://github.com/lcolladotor/biocthis), [`usethis`](https://github.com/r-lib/usethis), [`actions/`](https://github.com/actions), [`r-lib/actions`](https://github.com/r-lib/actions), [`bioc-actions`](https://github.com/grimbough/bioc-actions), [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action), [`docker/build-push-action`](https://github.com/docker/build-push-action), [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker).  
  
-## Quickstart
+## ⏩ Quickstart
 
 Install and create the workflow in your R package's project folder.
 
+In R (only need to do once per repository):
 ```R
-## in R
-
-#### Install rworkflows R package ####
-### For the stable CRAN release
+### 1. Install stable CRAN release
 if(!require("rworkflows")) install.packages("rworkflows")
-
-### Or, for the latest development version
+### Or, install latest development version
 # if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows")
 
-### Create workflow file
+### 2. Create workflow file
 path <- rworkflows::use_workflow()
 ```
-Push to GitHub, and let everything else run automatically!
-You can check the status of your workflow by clicking on the *Actions* tab
-in your GitHub repo.
+Then, in the Terminal:  
 ```bash
-## in the Terminal
+### 3. Push to GitHub
 git add .
-git commit -m "Added rworkflows"
+git commit -m "Added rworkflows" # Arbitrary commit message
 git push
 ```
 
-**Note**: If you want to skip running **GitHub Actions** on a particular push, 
-simply add "[skip ci]" somewhere in the commit message, e.g.:
-`git commit -m "Update README [skip ci]"`
+Now you can let everything run on GitHub automatically!
+You can check the status of your workflow by clicking on the [*Actions* tab](https://github.com/neurogenomics/rworkflows/actions)
+in your GitHub repo.
 
-## Documentation
+### 🤫 Special commit messages 
+Including special keywords in your commit message will have a certain effect:  
+- `"[skip ci]"`: will skip running the workflow on this push.  
+- `"[nodocker]"`: will skip any Docker registry steps.  
+- `"[noncache]"`: will not use any cached installations or files.  
 
-### [Vignettes](https://neurogenomics.github.io/rworkflows/articles/)
+For example: `git commit -m "Update README [skip ci]"` will skip running any GitHub Actions.
 
-#### [Get started](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html) 
-Introductory vignette for using `rworkflows`.
-
-#### [Docker/Singularity](https://neurogenomics.github.io/rworkflows/articles/docker)  
-Copy-and-paste instructions for creating a **Docker** or **Singularity** container
-with the `rworkflows` R package pre-installed.  
-
-#### [Dependency graph](https://neurogenomics.github.io/rworkflows/articles/depgraph). 
-Interactive graph showing all the GitHub repos that currently use 
-the `rworkflows` action.
-
-### [Videos](https://www.youtube.com/@NeurogenomicsLab)
-
-#### [rworkflows: taming the Wild West of R packages](https://youtu.be/nLIG2prEmCg) 
-Talk on the background, motivation, and utility of `rworkflows`.
-
-#### [Getting into the flow with rworkflows: an introductory tutorial](https://youtu.be/vcpMsil3EAU)
-Step-by-step tutorial showing how to use `rworkflows` in an R package.
-
-### GitHub Secrets
+### 🔐 GitHub Secrets
 To use certain features of `rworkflows`, you may need to set up one or more
 [GitHub Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
 
 * `PAT_GITHUB` [Optional]: Can grant access to private
     repos on GitHub Actions. You can generate your very own Personal
-    Authentication Token with `usethis::create_github_token()`. See the [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) for details.   
+    Authentication Token with `usethis::create_github_token()`. [See more](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).   
 * `DOCKER_TOKEN` [Optional]: Allows GitHub Actions to push to a
-    [DockerHub](https://hub.docker.com) account. 
+    [DockerHub](https://hub.docker.com) account. [See more](https://docs.docker.com/security/for-developers/access-tokens/).  
+* `CODECOV_TOKEN` [Optional]: Bypasses issues that occasionally arise from GitHub API limits. [See more](https://docs.codecov.com/reference/overview).
 
-## Citation 
+## 📚 Documentation
 
-If you use ``r pkg``, please cite: 
+### [🧑‍🎓 Vignettes](https://neurogenomics.github.io/rworkflows/articles/)
 
-<!-- Modify this by editing the file: inst/CITATION  -->
-> `r utils::citation(pkg)$textVersion`
+- [📖 **Get started**](https://neurogenomics.github.io/rworkflows/articles/rworkflows.html): Introductory vignette for using `rworkflows`.  
+- [🐳 **Docker/Singularity**](https://neurogenomics.github.io/rworkflows/articles/docker): Copy-and-paste instructions for creating a **Docker** or **Singularity** container with the `rworkflows` R package pre-installed.  
+- [🕸️ **Dependency graph**](https://neurogenomics.github.io/rworkflows/articles/depgraph):  Interactive graph showing all the GitHub repos that currently use 
+the `rworkflows` action.  
 
-## Acknowledgments
+### [🎥 Videos](https://www.youtube.com/@NeurogenomicsLab)
+
+- [🤠 **rworkflows: taming the Wild West of R packages**](https://youtu.be/nLIG2prEmCg): Talk on the background, motivation, and utility of `rworkflows`.  
+- [🌊 **Getting into the flow with rworkflows: an introductory tutorial**](https://youtu.be/vcpMsil3EAU): Step-by-step tutorial showing how to use `rworkflows` in an R package.  
+
+## 🙏 Acknowledgments
 `rworkflows` builds upon the work of many others, especially the following:
 
-### [`biocthis`](https://github.com/lcolladotor/biocthis)
-This workflow is largely inspired by the workflow generated by the 
-[`use_bioc_github_action()`](https://lcolladotor.github.io/biocthis/articles/biocthis.html) function within the 
-[`biothis`]( https://www.bioconductor.org/packages/release/bioc/html/biocthis.html) 
-package, developed by @lcolladotor. 
-
-#### Key changes in `rworkflows` 
-- Uses dynamic variables to specify R/Bioconductor versions 
+- [`biocthis`](https://github.com/lcolladotor/biocthis): This workflow is largely inspired by the workflow generated by the 
+[`use_bioc_github_action()`](https://lcolladotor.github.io/biocthis/articles/biocthis.html) function within the [`biothis`]( https://www.bioconductor.org/packages/release/bioc/html/biocthis.html) 
+package, developed by @lcolladotor. Key changes in `rworkflows` 
+  - Uses dynamic variables to specify R/Bioconductor versions 
 (e.g. `r: "latest"`) and the name of your R package, as opposed to static 
 names that are likely to become outdated (e.g. `r: "4.0.1"`).  
-- Additional error handling and dependencies checks.  
-- Re-renders `README.Rmd` before rebuilding the documentation website.  
+  - Additional error handling and dependencies checks.  
+  - Re-renders `README.Rmd` before rebuilding the documentation website.  
+  - Conda support
+  - Ability to change registry  
+- [`usethis`](https://github.com/r-lib/usethis): `biocthis` was in turn inspired by `usethis`.  
+- [`actions/`](https://github.com/actions): A general set of **GitHub Actions** maintained by the core GitHub team.  
+- [`r-lib/actions`](https://github.com/r-lib/actions): A set of **GitHub Actions** for R development maintained by the Rstudio/Posit team.  
+- [`bioc-actions`](https://github.com/grimbough/bioc-actions)
+[Bioconductor](https://www.bioconductor.org/)-oriented **GitHub Actions** created by @grimbough.  
+- [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action): Builds and deploys the **GitHub Pages** documentation website
+in the `rworkflows` GHA workflows.  
+- [`docker/build-push-action`](https://github.com/docker/build-push-action): A set of **GitHub Actions** for building/pushing **Docker** containers.  
+- [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker): Uses the official [`bioconductor/bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker) **Docker** container.  
+  - **Note**: Whenever a new version of Bioconductor is released, the `bioconductor/bioconductor_docker` container will often lag behind the actual. Bioconductor releases for up to several days, due to the time it takes to update the container. This means that sometimes "devel" in `Bioconductor/bioconductor_docker` is actually referring to the current "release" version of Bioconductor (i.e. the previous Bioc version's "devel"). For further details, see this [Issue](https://github.com/Bioconductor/bioconductor_docker/issues/37), and the [Bioconductor release schedule](https://www.bioconductor.org/about/release-announcements/).  
+- [`scFlow`](https://github.com/combiz/scFlow): The `rworkflows` Dockerfile template was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile). Unlike other Dockerfiles, this one does not require any manual editing when applying to different R packages. This means that users who are unfamiliar with **Docker** do not have to troubleshoot making this file correctly. It also means that it will continue to work  even if your R package dependencies change. 
+- [`act`](https://github.com/nektos/act): A very useful command line tool for testing **GitHub Actions** locally. 
+- [`actions/runner-images`](https://github.com/actions/runner-images): Runner images for each OS provided by GitHub.  
+- [`actions/setup-miniconda`](https://github.com/marketplace/actions/setup-miniconda): GitHub Action to setup Miniconda and conda environments.
 
-### [`usethis`](https://github.com/r-lib/usethis)
-`biocthis` was in turn inspired by `usethis`.
-
-### [`actions/`](https://github.com/actions)
-A general set of **GitHub Actions** maintained by the core GitHub team.
-
-### [`r-lib/actions`](https://github.com/r-lib/actions)
-A set of **GitHub Actions** for R development maintained by the Rstudio/Posit team.
-
-### [`bioc-actions`](https://github.com/grimbough/bioc-actions)
-[Bioconductor](https://www.bioconductor.org/)-oriented **GitHub Actions** created by @grimbough.
-
-### [`JamesIves/github-pages-deploy-action`](https://github.com/JamesIves/github-pages-deploy-action)
-Builds and deploys the **GitHub Pages** documentation website
-in the `rworkflows` GHA workflows.
-
-### [`docker/build-push-action`](https://github.com/docker/build-push-action)
-A set of **GitHub Actions** for building/pushing **Docker** containers.
-
-### [`bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker)
-Uses the official 
-[`bioconductor/bioconductor_docker`](https://github.com/Bioconductor/bioconductor_docker)
-**Docker** container.  
-
-**NOTE**: Whenever a new version of Bioconductor is released, 
-the `bioconductor/bioconductor_docker` container will often lag behind the actual Bioconductor releases 
-for up to several days, due to the time it takes to update the container. 
-This means that sometimes "devel" in `Bioconductor/bioconductor_docker` is actually referring to the current "release" version of Bioconductor (i.e. the previous Bioc version's "devel"). 
-For further details, see this [Issue](https://github.com/Bioconductor/bioconductor_docker/issues/37), and the [Bioconductor release schedule](https://www.bioconductor.org/about/release-announcements/). 
-
-### [`scFlow`](https://github.com/combiz/scFlow)
-This Dockerfile was partly adapted from the [scFlow Dockerfile](https://github.com/combiz/scFlow/blob/master/Dockerfile).
-Unlike other Dockerfiles, this one
-**does not require any manual editing when applying to different R packages**. 
-This means that users who are unfamiliar with **Docker** do not have to troubleshoot
-making this file correctly. It also means that it will continue to work 
-even if your R package dependencies change. 
-
-### [`act`](https://github.com/nektos/act)
-A very useful command line tool for testing **GitHub Actions** locally. 
-
-### [`actions/runner-images`](https://github.com/actions/runner-images)
-Runner images for each OS provided by GitHub.
-
-### [`actions/setup-miniconda`](https://github.com/marketplace/actions/setup-miniconda)
-GitHub Action to setup Miniconda and conda environments.
-
-# Session Info  
+## ℹ Session Info  
 
 <details>
 
