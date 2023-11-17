@@ -1,7 +1,10 @@
 # rworkflows 1.0.2
 
 ## New features
-
+* `use_workflow`:
+  - Set `run_docker=TRUE` as the new default to encourage users to utilise this
+    feature (now that it doesn't require a DOCKER_TOKEN secret).
+  - Omit 
 * *action.yml* 
   - Condense steps
   - Use new `rworkflows` funcs to specific system and latex deps
@@ -13,7 +16,9 @@
   - `dependencies_windows`
   - `dependencies_latex`
 * README: update and condense.
-* Add to `fill_yaml(omit_defaults=)`: "docker_registry", "cache_version
+* `fill_yaml` 
+- Add to `omit_defaults`: "docker_registry", "cache_version
+- Add "docker_token" to `omit_defaults` arg when docker_registry is "ghcr.io".
   
 ## Bug fixes
 

@@ -65,7 +65,7 @@ inputs:
   run_docker: 
     description: >
       Whether to build and push a Docker container to DockerHub.
-    default: false
+    default: true
   docker_registry: 
     description: >
       Docker container registry to push to. 
@@ -255,6 +255,8 @@ runs:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
+        ## Devel version of remotes required to due bugs in current CRAN release
+        remotes::install_github("r-lib/remotes", upgrade = TRUE)
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows@dev", upgrade=TRUE)
       shell: Rscript {0}
       

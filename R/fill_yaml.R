@@ -31,10 +31,10 @@ fill_yaml <- function(## function-level args
                       has_latex,
                       tinytex_installer,
                       tinytex_version,
-                      pandoc_version,
+                      pandoc_version, 
+                      github_token,
                       run_docker,  
                       docker_registry,
-                      github_token,
                       docker_user,
                       docker_org,
                       docker_token,
@@ -47,6 +47,10 @@ fill_yaml <- function(## function-level args
   # devoptera::args2vars(use_workflow)
   
   docker_registry <- docker_registry[1]
+  #### Omit token if using ghcr.io ####
+  if(grepl("ghcr.io",docker_registry)){
+    omit_defaults <- c(omit_defaults,"docker_token")
+  }
   #### name ####
   yml$name <- name
   #### on ####

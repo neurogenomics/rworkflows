@@ -175,7 +175,7 @@ use_workflow <- function(## action-level args
                          ### Site 
                          run_pkgdown=TRUE,   
                          ### Container
-                         run_docker=FALSE,  
+                         run_docker=TRUE,  
                          docker_registry="ghcr.io",
                          docker_user=NULL,
                          docker_org=docker_user,

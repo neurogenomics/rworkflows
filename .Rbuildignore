@@ -1,12 +1,5 @@
 Icon?
 action.yml$
-action_split.yml$
-build-docker
-build-site
-check-r
-install-r
-install-system
-rworkflows-merged
 ^reports
 ^inst/hex$
 ^hex$

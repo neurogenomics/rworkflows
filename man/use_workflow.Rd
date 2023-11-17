@@ -34,7 +34,7 @@ use_workflow(
   tinytex_version = NULL,
   pandoc_version = "2.19",
   run_pkgdown = TRUE,
-  run_docker = FALSE,
+  run_docker = TRUE,
   docker_registry = "ghcr.io",
   docker_user = NULL,
   docker_org = docker_user,
