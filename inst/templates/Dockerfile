@@ -13,13 +13,13 @@ ADD . /$PKG
 WORKDIR /$PKG
 #### --Step 3--: Install rworkflows ####
 RUN Rscript -e 'if(!require("remotes")) install.packages("remotes"); \
-                if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows");'
+                if(!require("rworkflows")) remotes::install_github("neurogenomics/rworkflows@dev");'
 #### --Step 4--: Install system dependencies ####
 RUN sysreqs=$(Rscript -e 'rworkflows::dependencies_linux()') \
     sudo -s eval "$sysreqs"
 #### --Step 5--:Install package dependencies ####
 RUN Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE, timeout=Sys.getenv("timeout")); \
-                if(!require("BiocManager")) install.packages("BiocManager"); \ 
+                if(!require("BiocManager",quietly=TRUE)) install.packages("BiocManager"); \ 
                 repos <- BiocManager::repositories(); \
-                remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE);'
+                remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE);'
 RUN rm -rf /$PKG

@@ -8,7 +8,9 @@ fill_yaml <- function(## function-level args
                                         "miniforge_version",
                                         "activate_environment",
                                         "environment_file",
-                                        "channels"),
+                                        "channels",
+                                        "docker_registry",
+                                        "cache_version"),
                       enable_act,
                       ## action-level args
                       name,

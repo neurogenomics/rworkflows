@@ -44,8 +44,6 @@ workflow <- rworkflows::use_workflow(run_bioccheck = FALSE,
                                      run_rcmdcheck = TRUE,  
                                      run_pkgdown = TRUE, 
                                      run_docker = TRUE,
-                                     docker_user = "bschilder",
-                                     docker_org = "neurogenomicslab",
                                      force_new = TRUE,
                                      ## Use default save_dir in practice
                                      save_dir = tempdir())
@@ -60,9 +58,7 @@ workflow_static <- rworkflows::use_workflow(name = "rworkflows_static",
                                      run_bioccheck = FALSE, 
                                      run_rcmdcheck = TRUE,  
                                      run_pkgdown = TRUE, 
-                                     run_docker = TRUE,
-                                     docker_user = "bschilder",
-                                     docker_org = "neurogenomicslab",
+                                     run_docker = TRUE, 
                                      force_new = TRUE,
                                      ## Use default save_dir in practice
                                      save_dir = tempdir())

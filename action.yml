@@ -103,6 +103,7 @@ inputs:
     default: cache-v1 
   runner_os:
     description: >
+      !!DEPRECATED!!: Uses default variable `runner.os` instead.
       The Operating System (OS) that the workflow is running on.
     default: 'Linux'
   timeout:
@@ -268,7 +269,7 @@ runs:
       if: runner.os == 'macOS'
       run: |
         sysreqs=$(Rscript -e 'rworkflows::dependencies_macos()')
-        sudo -s eval "$sysreqs"
+        eval "$sysreqs"
         ### Set up xml2 ###
         echo "XML_CONFIG=/usr/local/opt/libxml2/bin/xml2-config" >> $GITHUB_ENV
       shell: bash {0}

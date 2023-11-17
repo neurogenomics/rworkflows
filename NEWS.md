@@ -13,6 +13,7 @@
   - `dependencies_windows`
   - `dependencies_latex`
 * README: update and condense.
+* Add to `fill_yaml(omit_defaults=)`: "docker_registry", "cache_version
   
 ## Bug fixes
 
@@ -20,6 +21,9 @@
   - Remove unused *inst* files.
   - Change vignettes to use `rmarkdown::render` instead of `BiocStyle::html_document`.
   - Add to *.Rbuildignore*: .`*\.pdf$`, `^CITATION$`
+* Deprecate `runner_os` arg: 
+  - No longer needed as this is now inferred from the default `runner.os` 
+    GitHub variable,
 
 # rworkflows 1.0.1
 
