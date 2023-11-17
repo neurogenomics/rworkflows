@@ -175,10 +175,6 @@ runs:
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
         comment_on_pr: false
-    
-    - name: 🪲 Setup interactive debugging
-      if: inputs.run_debug == 'true'
-      uses: mxschmitt/action-tmate@v3
         
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true' && runner.os == 'Linux'
@@ -218,6 +214,15 @@ runs:
     - name: ⏬ Checkout repository 
       uses: actions/checkout@v4
     
+    - name: 🏦 Restore R package cache 
+      if: |
+        !contains(github.event.head_commit.message, '[nocache]') && runner.os != 'Linux'
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.R_LIBS_USER }}
+        key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+        restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
+    
     ## R/Bioc are already installed on the Bioc Docker container, 
     ## and reinstalling them causes errors.
     - name: 🛠 Setup R and Bioconductor 
@@ -241,25 +246,7 @@ runs:
         if(!require("remotes", quietly=TRUE)) install.packages('remotes')
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
-
-    - name: 🏦 Restore R package cache 
-      if: |
-        !contains(github.event.head_commit.message, '[nocache]') && runner.os != 'Linux'
-      uses: actions/cache@v3
-      with:
-        path: ${{ env.R_LIBS_USER }}
-        key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
-
-    - name: 🏦 Cache R packages on Linux 
-      if: |
-        !contains(github.event.head_commit.message, '[nocache]') && runner.os == 'Linux'
-      uses: actions/cache@v3
-      with:
-        path: /home/runner/work/_temp/Library
-        key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
-        restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
-
+      
     - name: 🛠🔀 Install rworkflows R package
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -341,6 +328,15 @@ runs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         }, error = function(x){utils::sessionInfo()})
       shell: Rscript {0}
+
+    - name: 🏦 Cache R packages on Linux 
+      if: |
+        !contains(github.event.head_commit.message, '[nocache]') && runner.os == 'Linux'
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/work/_temp/Library
+        key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+        restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
     - name: ✅ Run CMD check 
       if: inputs.run_rcmdcheck == 'true'
@@ -521,3 +517,7 @@ runs:
           latest
         build_args: |
           PKG=${{ env.packageNameOrig }}
+          
+    - name: 🪲 Setup interactive debugging
+      if: inputs.run_debug == 'true' && ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3 
