@@ -51,6 +51,7 @@ Construct a command to install system dependencies for the
 Linux OS environment.
 Includes all dependencies listed by \link[remotes]{system_requirements}, 
 in addition to user-specified dependencies via \code{extra}.
+Set to \code{NULL} to return a character vector of dependencies instead.
 }
 \examples{
 dependencies_linux(package="rworkflows")

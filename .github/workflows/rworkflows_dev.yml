@@ -53,4 +53,5 @@ jobs:
         run_docker: ${{ true }}
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         free_diskspace: ${{ true }}
-        miniforge_variant: false
+        miniforge_variant: ${{ false }}
+        run_debug: ${{ true }}

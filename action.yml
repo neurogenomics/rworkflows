@@ -96,6 +96,7 @@ inputs:
       (e.g. {{ secrets.PAT_GITHUB }}) which allows access to private
       repositories. Read here for more details: 
       https://docs.github.com/en/actions/security-guides/automatic-token-authentication.
+    required: true
   cache_version: 
     description: >
       Which cache version to use. 
@@ -159,6 +160,11 @@ inputs:
     description: >
       Free up additional disk space by deleting non-essential sofwares.
     default: false
+  run_debug:
+    description: >
+      Whether to enable interactive debug mode using the
+      [tmate action](https://github.com/mxschmitt/action-tmate).
+    default: false
 
 runs:
   using: 'composite'
@@ -169,6 +175,10 @@ runs:
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
         comment_on_pr: false
+    
+    - name: 🪲 Setup interactive debugging
+      if: inputs.run_debug == 'true'
+      uses: mxschmitt/action-tmate@v3
         
     - name: 💾 Free Disk Space
       if: inputs.free_diskspace == 'true' && runner.os == 'Linux'

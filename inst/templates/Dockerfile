@@ -10,7 +10,10 @@ RUN Rscript -e 'if(!require("remotes")) install.packages("remotes"); \
 #### --Step 3--: Install system dependencies ####
 RUN sysreqs=$(Rscript -e 'rworkflows::dependencies_linux(package="rworkflows")') && \ 
     sudo -s eval "$sysreqs"
-#### --Step 2--: Create a buildzone folder ####
+# Cleanup unnecessary apt files
+RUN apt-get clean && \ 
+    rm -rf /var/lib/apt/lists/*
+#### --Step 4--: Create a buildzone folder ####
 # BiocCheck requires the buildzone to have the same name as the R package
 ARG PKG
 RUN echo $PKG

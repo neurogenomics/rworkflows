@@ -4,7 +4,8 @@
 #' Linux OS environment.
 #' Includes all dependencies listed by \link[remotes]{system_requirements}, 
 #' in addition to user-specified dependencies via \code{extra}.
-#' @param prefix Prefix to prepend to the command.
+#' Set to \code{NULL} to return a character vector of dependencies instead.
+#' @param prefix Prefix to prepend to the command. 
 #' @param extra Additional dependencies to install.
 #' @param verbose Print messages.
 #' @inheritParams remotes::system_requirements
@@ -41,8 +42,13 @@ dependencies_linux <- function(os = "ubuntu",
                                                  os_release = os_release,
                                                  ...)
                )
-  deps <- unique(c(deps,extra))
-  cmd <- paste(prefix,paste(deps,collapse = " "))
-  messager(cmd,v=verbose)
-  cat(cmd)
+  deps <- sort(unique(c(deps,extra)))
+  #### Return ####
+  if(is.null(prefix)){
+    return(deps)
+  } else {
+    cmd <- paste(prefix,paste(deps,collapse = " ")) 
+    messager(cmd,v=verbose)
+    cat(cmd)
+  }
 }
