@@ -15,7 +15,7 @@ params:
   docker_org:
     value: neurogenomics
 vignette: |
-  %\VignetteIndexEntry{docker}
+  %\VignetteIndexEntry{Docker/Singularity Containers}
   %\usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 ---

@@ -9,7 +9,7 @@ use_dockerfile(
   path = file.path(save_dir, "Dockerfile"),
   base_image = construct_cont()[[1]],
   force_new = FALSE,
-  timeout = options("timeout"),
+  timeout = 2000,
   preview = FALSE,
   verbose = TRUE
 )

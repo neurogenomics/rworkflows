@@ -33,7 +33,7 @@ use_vignette_getstarted <- function(package = names(get_description()),
     messager("Using existing vignette file:",path,v=verbose)
   } else {
     messager("Creating new vignette file ==>",path,v=verbose)
-    dir.create(dirname(path), previewWarnings = FALSE, recursive = TRUE)
+    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
     #### get the template ####
     template_path <- system.file("templates","templateR.Rmd",
                                  package = "rworkflows")
