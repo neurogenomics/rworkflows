@@ -455,7 +455,7 @@ runs:
     - name: ℹ️ Get R package info 
       if: runner.os == 'Linux'
       run: |
-        #### DockerHub repos must be lowercase (,,) ####
+        #### DockerHub repos must be lowercase (,,) #### 
         name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
         echo "packageName=${name,,}" >> $GITHUB_ENV
         echo "packageNameOrig=${name}" >> $GITHUB_ENV 

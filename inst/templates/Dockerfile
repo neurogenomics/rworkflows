@@ -18,7 +18,7 @@ RUN Rscript -e 'if(!require("remotes")) install.packages("remotes"); \
 RUN sysreqs=$(Rscript -e 'rworkflows::dependencies_linux()') \ 
     sudo -s eval "$sysreqs"
 #### --Step 5--:Install package dependencies ####
-RUN Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE, timeout={TIMEOUT}); \ 
+RUN Rscript -e 'options(crayon.enabled=TRUE, timeout={TIMEOUT}); \ 
                 if(!require("BiocManager",quietly=TRUE)) install.packages("BiocManager"); \ 
                 repos <- BiocManager::repositories(); \ 
                 remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE);' 
