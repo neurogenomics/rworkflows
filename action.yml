@@ -231,14 +231,6 @@ runs:
         if(!require("remotes", quietly=TRUE)) install.packages('remotes')
         saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
       shell: Rscript {0}
-    
-    - name: 🛠🔀 Install rworkflows R package
-      env:
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-      run: |
-        options(crayon.enabled = TRUE)
-        if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows@dev", upgrade=TRUE)
-      shell: Rscript {0}
 
     - name: 🏦 Restore R package cache 
       if: |
@@ -258,6 +250,14 @@ runs:
         key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
         restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
 
+    - name: 🛠🔀 Install rworkflows R package
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows@dev", upgrade=TRUE)
+      shell: Rscript {0}
+      
     - name: 🛠 Install Linux system dependencies  
       if: runner.os == 'Linux'
       run: |
