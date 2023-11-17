@@ -21,6 +21,7 @@ use_workflow(
   github_token = "${{ secrets.GITHUB_TOKEN }}",
   cache_version = "cache-v1",
   enable_act = FALSE,
+  timeout = 2000,
   run_bioccheck = FALSE,
   run_rcmdcheck = TRUE,
   as_cran = TRUE,
@@ -102,6 +103,9 @@ when reinstalling software in GHA.}
 \item{enable_act}{Whether to add extra lines to the yaml to 
 enable local workflow checking with 
 \href{https://github.com/nektos/act}{act}.}
+
+\item{timeout}{The maximum time (in seconds) to wait for long R processes, 
+such as dependency installations, downloads, and code checks.}
 
 \item{run_bioccheck}{Run Bioconductor checks using
 \href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{
@@ -211,7 +215,7 @@ for more information.}
 \item{force_new}{If the GHA workflow yaml already exists, 
 overwrite with new one (default: \code{FALSE}).}
 
-\item{preview}{Print the yaml file to the R console.}
+\item{preview}{Print the file to the R console.}
 
 \item{verbose}{Print messages.}
 }

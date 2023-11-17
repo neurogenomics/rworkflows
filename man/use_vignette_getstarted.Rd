@@ -12,7 +12,7 @@ use_vignette_getstarted(
   path = file.path(save_dir, "vignettes", paste0(package, ".Rmd")),
   output = "rmarkdown::html_document",
   force_new = FALSE,
-  show = FALSE,
+  preview = FALSE,
   verbose = TRUE
 )
 }
@@ -24,17 +24,17 @@ use_vignette_getstarted(
 \item{vignette_index_entry}{Index entry of the vignette, 
 which is used when creating the navigation bar in the \pkg{pkgdown} site.}
 
-\item{save_dir}{Directory to save the file to.}
+\item{save_dir}{Directory to save workflow to.}
 
 \item{path}{Path to the file.}
 
 \item{output}{Vignette output style. 
-Defaults to \link[BiocStyle]{html_document}.}
+Defaults to \link[rmarkdown]{html_document}.}
 
-\item{force_new}{If the file already exists, overwrite it 
-(default: \code{FALSE}).}
+\item{force_new}{If the GHA workflow yaml already exists, 
+overwrite with new one (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the file in the R console.}
+\item{preview}{Print the file to the R console.}
 
 \item{verbose}{Print messages.}
 }

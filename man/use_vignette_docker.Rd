@@ -18,7 +18,7 @@ use_vignette_docker(
   port_in = 8787,
   port_out = 8900,
   force_new = FALSE,
-  show = FALSE,
+  preview = FALSE,
   verbose = TRUE
 )
 }
@@ -54,7 +54,7 @@ which is used when creating the navigation bar in the \pkg{pkgdown} site.}
 \item{path}{Path to the file.}
 
 \item{output}{Vignette output style. 
-Defaults to \link[BiocStyle]{html_document}.}
+Defaults to \link[rmarkdown]{html_document}.}
 
 \item{port_in}{Port number to route into the docker container.
 See the 
@@ -69,7 +69,7 @@ Docker docs} for further details.}
 \item{force_new}{If the file already exists, overwrite it 
 (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the file in the R console.}
+\item{preview}{Print the file to the R console.}
 
 \item{verbose}{Print messages.}
 }

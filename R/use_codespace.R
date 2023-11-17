@@ -10,6 +10,7 @@
 #' @param customizations Named list of customizations to add to the Codespace.
 #' See \href{https://containers.dev/supporting}{here}
 #'  for details.
+#' @inheritParams use_workflow
 #' @inheritParams use_vignette_docker
 #' @returns Path to dev container config file.
 #' 
@@ -34,7 +35,7 @@ use_codespace <- function(template="devcontainer.json",
                           path=file.path(save_dir,
                                          template),
                           force_new=FALSE,
-                          show=FALSE,
+                          preview=FALSE,
                           verbose=TRUE){
   # devoptera::args2vars(use_codespace)
   
@@ -52,7 +53,7 @@ use_codespace <- function(template="devcontainer.json",
     jsonlite::write_json(jsn,path)
   }
   #### Preview ####
-  if(isTRUE(show)){
+  if(isTRUE(preview)){
     messager("Config file preview:",v=verbose)
     cat(paste(readLines(path),collapse ="\n"))
   }

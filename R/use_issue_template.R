@@ -2,6 +2,7 @@
 #' 
 #' Creates one or more Issue Templates to be used in a GitHub repository.
 #' @param templates The names of templates to be used.
+#' @inheritParams use_workflow
 #' @inheritParams use_dockerfile
 #' @returns Path to Issue Templates.
 #' 
@@ -16,7 +17,7 @@ use_issue_template <- function(templates=c("bug_report.md",
                                                    "ISSUE_TEMPLATE"),
                                path=file.path(save_dir,templates),
                                force_new=FALSE,
-                               show=FALSE,
+                               preview=FALSE,
                                verbose=TRUE){
   for(p in path){ 
     if(file.exists(p) &&
@@ -30,7 +31,7 @@ use_issue_template <- function(templates=c("bug_report.md",
                 to = p,  
                 overwrite = TRUE)
     }
-    if(isTRUE(show)){
+    if(isTRUE(preview)){
       messager("Issue Template preview:",v=verbose)
       cat(paste(readLines(p),collapse ="\n"))
     }

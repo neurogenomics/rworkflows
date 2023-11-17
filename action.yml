@@ -108,7 +108,7 @@ inputs:
     default: 'Linux'
   timeout:
     description: >
-      The maximum time to wait for long R processes like 
+      The maximum time to wait (in seconds) for long R processes such as  
       dependency installations, downloads, and code checks.
     default: 2000
   miniforge_variant:
@@ -467,8 +467,10 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         BASE_IMAGE: ${{ matrix.config.cont }}
+        timeout: ${{ inputs.timeout }}
       run: |
-        path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
+        path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"),
+                                           timeout=Sys.getenv("timeout"))
       shell: Rscript {0} 
       
     - name: 🐳🚀 Build and push to GHCR 
@@ -477,7 +479,6 @@ runs:
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-        timeout: ${{ inputs.timeout }}
       with:
         username: ${{ github.repository_owner }}
         password: ${{ inputs.GITHUB_TOKEN }}
@@ -497,7 +498,6 @@ runs:
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-        timeout: ${{ inputs.timeout }}
       with:
         username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}

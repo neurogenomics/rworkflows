@@ -6,7 +6,7 @@ test_that("use_issue_template works", {
   out <- testthat::capture_output_lines(
     path2 <- use_issue_template(save_dir=tempdir(),
                                force_new = FALSE,
-                               show = TRUE)
+                               preview = TRUE)
   )
   testthat::expect_true(all(file.exists(path2)))
   testthat::expect_equal("name: Bug report",out[[2]])

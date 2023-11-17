@@ -2,6 +2,7 @@
 #' 
 #' Creates an rmarkdown README file that autofills using metadata from the 
 #' R package \emph{DESCRIPTION} file.
+#' @inheritParams use_workflow
 #' @inheritParams use_vignette_docker
 #' @returns Path to README file.
 #' 
@@ -15,7 +16,7 @@ use_readme <- function(save_dir=here::here(),
                        path=file.path(save_dir,
                                       "README.Rmd"),
                        force_new=FALSE,
-                       show=FALSE,
+                       preview=FALSE,
                        verbose=TRUE){
   
   #### Check if file exists already ####
@@ -33,7 +34,7 @@ use_readme <- function(save_dir=here::here(),
                      to = path, 
                      overwrite = TRUE)
   }
-  if(isTRUE(show)){
+  if(isTRUE(preview)){
     messager("README file preview:",v=verbose)
     cat(paste(readLines(path),collapse ="\n"))
   }

@@ -9,7 +9,8 @@ use_dockerfile(
   path = file.path(save_dir, "Dockerfile"),
   base_image = construct_cont()[[1]],
   force_new = FALSE,
-  show = FALSE,
+  timeout = options("timeout"),
+  preview = FALSE,
   verbose = TRUE
 )
 }
@@ -23,7 +24,10 @@ use_dockerfile(
 \item{force_new}{If a Docker file already exists, overwrite it 
 (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the Docker file in the R console.}
+\item{timeout}{The maximum time (in seconds) to wait for long R processes, 
+such as dependency installations, downloads, and code checks.}
+
+\item{preview}{Print the file to the R console.}
 
 \item{verbose}{Print messages.}
 }

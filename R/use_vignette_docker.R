@@ -23,10 +23,8 @@
 #' @param path Path to the file.
 #' @param force_new If the file already exists, overwrite it 
 #' (default: \code{FALSE}).
-#' @param show Print the contents of the file in the R console.
-#' @param verbose Print messages.
 #' @param output Vignette output style. 
-#' Defaults to \link[BiocStyle]{html_document}.
+#' Defaults to \link[rmarkdown]{html_document}.
 #' @inheritParams use_workflow
 #' @inheritParams construct_runners
 #' @returns Path to vignette file.
@@ -61,7 +59,7 @@ use_vignette_docker <- function(package = names(get_description()),
                                 port_in=8787,
                                 port_out=8900,
                                 force_new=FALSE,
-                                show=FALSE,
+                                preview=FALSE,
                                 verbose=TRUE){
   # devoptera::args2vars(use_vignette_docker, reassign = TRUE)
 
@@ -110,7 +108,7 @@ use_vignette_docker <- function(package = names(get_description()),
     writeLines(text = new_rmd,
                con = path) 
   }
-  if(isTRUE(show)){
+  if(isTRUE(preview)){
     messager("Vignette file preview:",v=verbose)
     cat(paste(readLines(path),collapse ="\n"))
   }

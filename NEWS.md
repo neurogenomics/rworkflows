@@ -23,7 +23,8 @@
   - Add to *.Rbuildignore*: .`*\.pdf$`, `^CITATION$`
 * Deprecate `runner_os` arg: 
   - No longer needed as this is now inferred from the default `runner.os` 
-    GitHub variable,
+    GitHub variable.
+* Harmonise arguments: `show`--> `preview`
 
 # rworkflows 1.0.1
 

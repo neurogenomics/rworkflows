@@ -2,6 +2,7 @@
 #' 
 #' Creates a "Get started" rmarkdown vignette file.
 #' @param package R package name.
+#' @inheritParams use_workflow
 #' @inheritParams use_vignette_docker
 #' @returns Path to vignette file.
 #' 
@@ -21,7 +22,7 @@ use_vignette_getstarted <- function(package = names(get_description()),
                                                    paste0(package,".Rmd")),
                                     output="rmarkdown::html_document",
                                     force_new=FALSE,
-                                    show=FALSE,
+                                    preview=FALSE,
                                     verbose=TRUE){
   # devoptera::args2vars(use_vignette_getstarted, reassign = TRUE)
   
@@ -32,7 +33,7 @@ use_vignette_getstarted <- function(package = names(get_description()),
     messager("Using existing vignette file:",path,v=verbose)
   } else {
     messager("Creating new vignette file ==>",path,v=verbose)
-    dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+    dir.create(dirname(path), previewWarnings = FALSE, recursive = TRUE)
     #### get the template ####
     template_path <- system.file("templates","templateR.Rmd",
                                  package = "rworkflows")
@@ -56,7 +57,7 @@ use_vignette_getstarted <- function(package = names(get_description()),
     writeLines(text = new_rmd,
                con = path) 
   }
-  if(isTRUE(show)){
+  if(isTRUE(preview)){
     messager("Vignette file preview:",v=verbose)
     cat(paste(readLines(path),collapse ="\n"))
   }

@@ -14,7 +14,7 @@ use_codespace(
   save_dir = here::here(".devcontainer"),
   path = file.path(save_dir, template),
   force_new = FALSE,
-  show = FALSE,
+  preview = FALSE,
   verbose = TRUE
 )
 }
@@ -31,14 +31,14 @@ See \href{https://docs.github.com/en/codespaces/setting-up-your-project-for-code
 See \href{https://containers.dev/supporting}{here}
  for details.}
 
-\item{save_dir}{Directory to save the file to.}
+\item{save_dir}{Directory to save workflow to.}
 
 \item{path}{Path to the file.}
 
-\item{force_new}{If the file already exists, overwrite it 
-(default: \code{FALSE}).}
+\item{force_new}{If the GHA workflow yaml already exists, 
+overwrite with new one (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the file in the R console.}
+\item{preview}{Print the file to the R console.}
 
 \item{verbose}{Print messages.}
 }

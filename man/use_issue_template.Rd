@@ -9,21 +9,21 @@ use_issue_template(
   save_dir = here::here(".github", "ISSUE_TEMPLATE"),
   path = file.path(save_dir, templates),
   force_new = FALSE,
-  show = FALSE,
+  preview = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
 \item{templates}{The names of templates to be used.}
 
-\item{save_dir}{Directory to save the Docker file to.}
+\item{save_dir}{Directory to save workflow to.}
 
 \item{path}{Path to the Docker file.}
 
-\item{force_new}{If a Docker file already exists, overwrite it 
-(default: \code{FALSE}).}
+\item{force_new}{If the GHA workflow yaml already exists, 
+overwrite with new one (default: \code{FALSE}).}
 
-\item{show}{Print the contents of the Docker file in the R console.}
+\item{preview}{Print the file to the R console.}
 
 \item{verbose}{Print messages.}
 }

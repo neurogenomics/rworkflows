@@ -4,7 +4,7 @@ test_that("use_readme works", {
   testthat::expect_true(file.exists(path[1]))
   
   out <- testthat::capture_output_lines({
-    path2 <- use_readme(save_dir = tempdir(), show = TRUE)
+    path2 <- use_readme(save_dir = tempdir(), preview = TRUE)
   })
   
   testthat::expect_true(file.exists(path2))

@@ -7,8 +7,7 @@
 #' @param path Path to the Docker file.
 #' @param force_new If a Docker file already exists, overwrite it 
 #' (default: \code{FALSE}).
-#' @param show Print the contents of the Docker file in the R console.
-#' @param verbose Print messages.
+#' @inheritParams use_workflow
 #' @returns Path to Docker file.
 #' 
 #' @export
@@ -20,7 +19,8 @@ use_dockerfile <- function(save_dir=here::here(),
                            path=file.path(save_dir,"Dockerfile"),
                            base_image=construct_cont()[[1]],
                            force_new=FALSE,
-                           show=FALSE,
+                           timeout=2000,
+                           preview=FALSE,
                            verbose=TRUE){
   # devoptera::args2vars(use_dockerfile)
   
@@ -36,9 +36,10 @@ use_dockerfile <- function(save_dir=here::here(),
               overwrite = TRUE)
     txt <- readLines(path)
     txt <- gsub("^FROM \\{BASE_IMAGE\\}",paste("FROM",base_image),txt)
+    txt <- gsub("\\{TIMEOUT\\}",timeout,txt)
     writeLines(txt,path)
   }
-  if(isTRUE(show)){
+  if(isTRUE(preview)){
     messager("Docker file preview:",v=verbose)
     cat(paste(readLines(path),collapse ="\n"))
   }

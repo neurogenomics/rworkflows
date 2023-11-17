@@ -13,6 +13,6 @@ test_that("use_codespace works", {
   run_tests(path)
   
   ## Second time
-  path2 <- use_codespace(save_dir=save_dir, show=TRUE)
+  path2 <- use_codespace(save_dir=save_dir, preview=TRUE)
   run_tests(path2)
 })

@@ -130,7 +130,9 @@
 #' to use in order of priority. See
 #' \href{https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/}{here}
 #' for more information.
-#' @param preview Print the yaml file to the R console.
+#' @param preview Print the file to the R console.
+#' @param timeout  The maximum time (in seconds) to wait for long R processes, 
+#' such as dependency installations, downloads, and code checks.
 #' @param verbose Print messages.
 #' @returns Path or yaml object.
 #' 
@@ -156,6 +158,7 @@ use_workflow <- function(## action-level args
                          github_token="${{ secrets.GITHUB_TOKEN }}",
                          cache_version="cache-v1",
                          enable_act=FALSE,
+                         timeout=2000,
                          ### Checks
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
