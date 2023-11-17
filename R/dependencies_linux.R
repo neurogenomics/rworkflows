@@ -17,15 +17,25 @@
 dependencies_linux <- function(os = "ubuntu", 
                                os_release = "20.04",
                                extra=c("qpdf",
-                                       "rsync"),
+                                       "rsync",
+                                       
+                                       "git-core",
+                                       "libicu-dev",
+                                       "zlib1g-dev" ,
+                                       "xfonts-100dpi",
+                                       "xfonts-75dpi" ,
+                                       "biber" ,
+                                       "libsbml5-dev",
+                                       "cmake",
+                                       "pandoc" ,
+                                       "pandoc-citeproc"),
                                prefix=paste("apt-get update -y",
                                             "apt-get install -y",
                                             sep=" && "),
                                verbose = TRUE,
                                 ...
                                 ){ 
-  # devoptera::args2vars(linux_dependencies)
-  
+  # devoptera::args2vars(linux_dependencies) 
   deps <- gsub("apt-get install -y ", "", 
                     remotes::system_requirements(os = os,
                                                  os_release = os_release,

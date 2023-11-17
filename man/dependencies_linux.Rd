@@ -7,7 +7,8 @@
 dependencies_linux(
   os = "ubuntu",
   os_release = "20.04",
-  extra = c("qpdf", "rsync"),
+  extra = c("qpdf", "rsync", "git-core", "libicu-dev", "zlib1g-dev", "xfonts-100dpi",
+    "xfonts-75dpi", "biber", "libsbml5-dev", "cmake", "pandoc", "pandoc-citeproc"),
   prefix = paste("apt-get update -y", "apt-get install -y", sep = " && "),
   verbose = TRUE,
   ...
