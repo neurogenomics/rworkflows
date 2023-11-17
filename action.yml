@@ -213,6 +213,14 @@ runs:
       
     - name: ⏬ Checkout repository 
       uses: actions/checkout@v4
+      
+    ## R/Bioc are already installed on the Bioc Docker container, 
+    ## and reinstalling them causes errors.
+    - name: 🛠 Setup R and Bioconductor 
+      if: runner.os != 'Linux'
+      uses: grimbough/bioc-actions/setup-bioc@v1
+      with:
+        bioc-version: ${{ matrix.config.bioc }} 
     
     - name: 🏦 Restore R package cache 
       if: |
@@ -222,14 +230,6 @@ runs:
         path: ${{ env.R_LIBS_USER }}
         key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
         restore-keys: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-
-    
-    ## R/Bioc are already installed on the Bioc Docker container, 
-    ## and reinstalling them causes errors.
-    - name: 🛠 Setup R and Bioconductor 
-      if: runner.os != 'Linux'
-      uses: grimbough/bioc-actions/setup-bioc@v1
-      with:
-        bioc-version: ${{ matrix.config.bioc }}
 
     ## pandoc is already included in the Bioconductor docker images
     - name: 🛠 Install Pandoc 
@@ -519,5 +519,5 @@ runs:
           PKG=${{ env.packageNameOrig }}
           
     - name: 🪲 Setup interactive debugging
-      if: inputs.run_debug == 'true' && ${{ failure() }}
+      if: ${{ failure() && !cancelled() && inputs.run_debug == 'true' }}
       uses: mxschmitt/action-tmate@v3 
