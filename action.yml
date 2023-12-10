@@ -463,11 +463,11 @@ runs:
         echo $version
         echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
         #### Ensure dockerOrg is lowercase ####
-        if inputs.docker_registry=="ghcr.io"; 
+        if ${{ inputs.docker_registry }}=="ghcr.io"; 
         then
-          echo "dockerOrg=${{ github.repository_owner,, }}" >> $GITHUB_ENV
+          echo "dockerOrg=${ github.repository_owner,, }" >> $GITHUB_ENV
         else
-          echo "dockerOrg=${{ inputs.docker_org,, }}" >> $GITHUB_ENV
+          echo "dockerOrg=${ inputs.docker_org,, }" >> $GITHUB_ENV
         fi
       shell: bash {0}
 
