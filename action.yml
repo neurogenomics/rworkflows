@@ -456,7 +456,7 @@ runs:
         dockerRegistry: ${{ inputs.docker_registry }}
         dockerOrg: ${{ inputs.docker_org }}
         dockerUser: ${{ inputs.docker_user }}
-        dockerPass: ${{ inputs.DOCKER_TOKEN }}
+        DOCKER_TOKEN: ${{ inputs.DOCKER_TOKEN }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         #### Docker repos must be lowercase (,,) ####
@@ -475,7 +475,7 @@ runs:
         if [[ $dockerRegistry == "docker.io" ]]; then
           echo "dockerOrg=${dockerOrg,,}" >> $GITHUB_ENV
           echo "dockerUser=${dockerUser}" >> $GITHUB_ENV
-          echo "dockerPass=${dockerPass}" >> $GITHUB_ENV;
+          echo "dockerPass=${DOCKER_TOKEN}" >> $GITHUB_ENV;
         else
           echo "dockerOrg=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
           echo "dockerUser=${GITHUB_ACTOR}" >> $GITHUB_ENV
