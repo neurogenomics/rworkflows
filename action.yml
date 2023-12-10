@@ -453,7 +453,7 @@ runs:
     - name: ℹ️ Get R package info 
       if: runner.os == 'Linux'
       run: |
-        #### DockerHub repos must be lowercase (,,) ####
+        #### Docker repos must be lowercase (,,) ####
         name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
         echo "packageName=${name,,}" >> $GITHUB_ENV
         echo "packageNameOrig=${name}" >> $GITHUB_ENV
@@ -463,15 +463,14 @@ runs:
         echo $version
         echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
         #### Adjust docker args depending on docker_registry ####
-        if ${{ inputs.docker_registry }}=="docker.io"; 
-        then
-          echo "dockerOrg=${ inputs.docker_org,, }" >> $GITHUB_ENV
-          echo "dockerUser=${ inputs.docker_user }" >> $GITHUB_ENV
-          echo "dockerPass=${ inputs.DOCKER_TOKEN }" >> $GITHUB_ENV
+        if [[ "$inputs.docker_registry" != "docker.io" ]]; then
+          echo "dockerOrg=${inputs.docker_org,,}" >> $GITHUB_ENV
+          echo "dockerUser=${inputs.docker_user}" >> $GITHUB_ENV
+          echo "dockerPass=${inputs.DOCKER_TOKEN}" >> $GITHUB_ENV
         else
-          echo "dockerOrg=${ github.repository_owner,, }" >> $GITHUB_ENV
-          echo "dockerUser=${ github.repository_owner }" >> $GITHUB_ENV
-          echo "dockerPass=${ inputs.GITHUB_TOKEN }" >> $GITHUB_ENV
+          echo "dockerOrg=${github.repository_owner,,}" >> $GITHUB_ENV
+          echo "dockerUser=${github.repository_owner}" >> $GITHUB_ENV
+          echo "dockerPass=${inputs.GITHUB_TOKEN}" >> $GITHUB_ENV
         fi
       shell: bash {0}
 
