@@ -452,32 +452,33 @@ runs:
 
     - name: ℹ️ Get R package info 
       if: runner.os == 'Linux'
+      env:
+        dockerRegistry: ${{ inputs.docker_registry }}
+        dockerOrg: ${{ inputs.docker_org }}
+        dockerUser: ${{ inputs.docker_user }}
+        dockerPass: ${{ inputs.DOCKER_TOKEN }}
       run: |
         #### Docker repos must be lowercase (,,) ####
         ## NOTE: Bash cannot intrepret variables with "." in them when trying to
         ## string manipulation (e.g. making lowercase with ",,").
         ## So use "GITHUB_REPOSITORY_OWNER" instead of "github.repository_owner",
         ## or store the variable as an intermediate variable without "." in it.
-        ## Also be sure to exclude any surrounded spaces inside the "{}" when using ",,".
-        name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
-        echo "packageName=${name,,}" >> $GITHUB_ENV
-        echo "packageNameOrig=${name}" >> $GITHUB_ENV
-        echo $name
+        ## Also be sure to exclude any surrounding spaces inside the "{}" when using ",,".
+        packageNameOrig=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+        echo "packageName=${packageNameOrig,,}" >> $GITHUB_ENV
+        echo "packageNameOrig=${packageNameOrig}" >> $GITHUB_ENV
         version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
         echo "packageVersion=${version}" >> $GITHUB_ENV
-        echo $version
         echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
         #### Adjust docker args depending on docker_registry ####
-        dockerRegistry=${{ inputs.docker_registry }}
         if [[ $dockerRegistry == "docker.io" ]]; then
-          DOCKER_ORG=${{ inputs.docker_org }}
-          echo "dockerOrg=${DOCKER_ORG,,}" >> $GITHUB_ENV
-          echo "dockerUser=${ inputs.docker_user }" >> $GITHUB_ENV
-          echo "dockerPass=${ inputs.DOCKER_TOKEN }" >> $GITHUB_ENV;
+          echo "dockerOrg=${dockerOrg,,}" >> $GITHUB_ENV
+          echo "dockerUser=${dockerUser}" >> $GITHUB_ENV
+          echo "dockerPass=${dockerPass}" >> $GITHUB_ENV;
         else
           echo "dockerOrg=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
           echo "dockerUser=${GITHUB_ACTOR}" >> $GITHUB_ENV
-          echo "dockerPass=${ inputs.GITHUB_TOKEN }" >> $GITHUB_ENV;
+          echo "dockerPass=${GITHUB_TOKEN}" >> $GITHUB_ENV;
         fi
       shell: bash {0}
 
