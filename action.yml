@@ -463,12 +463,12 @@ runs:
         echo $version
         echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
         #### Ensure dockerOrg is lowercase ####
-        if inputs.docker_registry=="ghcr.io"; then
-          dockerOrg=${{ github.repository_owner }}
+        if inputs.docker_registry=="ghcr.io"; 
+        then
+          echo "dockerOrg=${{ github.repository_owner,, }}" >> $GITHUB_ENV
         else
-          dockerOrg=${{ inputs.docker_org }}
+          echo "dockerOrg=${{ inputs.docker_org,, }}" >> $GITHUB_ENV
         fi
-        echo "dockerOrg=${{ dockerOrg,, }}" >> $GITHUB_ENV
       shell: bash {0}
 
     - name: 📦 Render README 
@@ -529,7 +529,7 @@ runs:
         username: ${{ github.repository_owner }}
         password: ${{ inputs.GITHUB_TOKEN }}
         registry: ${{ inputs.docker_registry }}
-        repository: ${{ github.repository_owner }}/${{ env.packageName }}
+        repository: ${{ env.dockerOrg }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
@@ -548,7 +548,7 @@ runs:
       with:
         username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}
-        repository: ${{ inputs.docker_org }}/${{ env.packageName }}
+        repository: ${{ env.dockerOrg }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
