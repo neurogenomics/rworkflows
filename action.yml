@@ -522,7 +522,7 @@ runs:
         username: ${{ github.repository_owner }}
         password: ${{ inputs.GITHUB_TOKEN }}
         registry: ${{ inputs.docker_registry }}
-        repository: ${{ github.repository_owner }}/${{ env.packageName }}
+        repository: ${{ github.repository_owner,, }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
@@ -541,7 +541,7 @@ runs:
       with:
         username: ${{ inputs.docker_user }}
         password: ${{ inputs.DOCKER_TOKEN }}
-        repository: ${{ inputs.docker_org }}/${{ env.packageName }}
+        repository: ${{ inputs.docker_org,, }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
