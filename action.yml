@@ -462,12 +462,16 @@ runs:
         echo "packageVersion=${version}" >> $GITHUB_ENV
         echo $version
         echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
-        #### Ensure dockerOrg is lowercase ####
-        if ${{ inputs.docker_registry }}=="ghcr.io"; 
+        #### Adjust docker args depending on docker_registry ####
+        if ${{ inputs.docker_registry }}=="docker.io"; 
         then
-          echo "dockerOrg=${ github.repository_owner,, }" >> $GITHUB_ENV
-        else
           echo "dockerOrg=${ inputs.docker_org,, }" >> $GITHUB_ENV
+          echo "dockerUser=${ inputs.docker_user }" >> $GITHUB_ENV
+          echo "dockerPass=${ inputs.DOCKER_TOKEN }" >> $GITHUB_ENV
+        else
+          echo "dockerOrg=${ github.repository_owner,, }" >> $GITHUB_ENV
+          echo "dockerUser=${ github.repository_owner }" >> $GITHUB_ENV
+          echo "dockerPass=${ inputs.GITHUB_TOKEN }" >> $GITHUB_ENV
         fi
       shell: bash {0}
 
@@ -519,15 +523,15 @@ runs:
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0} 
       
-    - name: 🐳🚀 Build and push to GHCR 
+    - name: 🐳🚀 Build and Push to Docker Registry 
       if: |
-        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'ghcr.io'
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       with:
-        username: ${{ github.repository_owner }}
-        password: ${{ inputs.GITHUB_TOKEN }}
+        username: ${{ env.dockerUser }}
+        password: ${{ env.dockerPass }}
         registry: ${{ inputs.docker_registry }}
         repository: ${{ env.dockerOrg }}/${{ env.packageName }}
         tag_with_ref: true
@@ -538,22 +542,3 @@ runs:
         build_args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
-          
-    - name: 🐳🚀 Build and push to DockerHub 
-      if: |
-        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'docker.io'
-      uses: docker/build-push-action@v1
-      env: 
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-      with:
-        username: ${{ inputs.docker_user }}
-        password: ${{ inputs.DOCKER_TOKEN }}
-        repository: ${{ env.dockerOrg }}/${{ env.packageName }}
-        tag_with_ref: true
-        tag_with_sha: false
-        tags: |
-          ${{ env.packageVersion }},
-          latest
-        build_args: |
-          PKG=${{ env.packageNameOrig }},
-          BASE_IMAGE=${{ env.BASE_IMAGE }}
