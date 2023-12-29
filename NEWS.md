@@ -12,6 +12,8 @@
   - Add convenient `testthat` functions `skip_on_cran()` and `skip_if_offline`.
 * Reduce package size by making vignettes `rmarkdown::html_vignette`
   instead of `BiocStyle::html_document`.
+*  URL: https://github.com/runforesight/workflow-telemetry-action (moved to https://github.com/catchpoint/workflow-telemetry-action)
+
 
 # rworkflows 1.0.0
 
