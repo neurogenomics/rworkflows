@@ -23,9 +23,9 @@ jobs:
       matrix:
         config:
         - os: ubuntu-latest
-          r: devel
-          bioc: devel
-          cont: ghcr.io/bioconductor/bioconductor_docker:devel
+          r: auto
+          bioc: release
+          cont: ghcr.io/bioconductor/bioconductor_docker
           python-version: 3.11
         - os: macOS-latest
           r: latest
