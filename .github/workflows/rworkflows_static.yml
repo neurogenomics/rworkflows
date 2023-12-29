@@ -44,7 +44,7 @@ jobs:
         - os: ubuntu-latest
           r: auto
           bioc: release
-          cont: ghcr.io/bioconductor/bioconductor_docker
+          cont: ghcr.io/bioconductor/bioconductor_docker:latest
           rspm: ~
         - os: macOS-latest
           bioc: release

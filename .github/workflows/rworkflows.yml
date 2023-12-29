@@ -25,7 +25,7 @@ jobs:
         - os: ubuntu-latest
           r: auto
           bioc: release
-          cont: ghcr.io/bioconductor/bioconductor_docker
+          cont: ghcr.io/bioconductor/bioconductor_docker:latest
           python-version: 3.11
         - os: macOS-latest
           r: latest
