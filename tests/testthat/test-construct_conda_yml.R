@@ -47,7 +47,6 @@ test_that("construct_conda_yml works", {
     testthat::expect_true(file.exists(path2))
     
     ## Don't run on CRAN servers due to ongoing internet connectivity issues
-    testthat::skip_on_cran()
     testthat::skip_if_offline()
     
     # conda <- conda_path()

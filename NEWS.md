@@ -9,11 +9,12 @@
 * *action.yml* 
   - `repository: ${{ github.repository }}` --> `repository: ${{ env.packageName }}`
 * CRAN: 
-  - Add convenient `testthat` functions `skip_on_cran()` and `skip_if_offline`.
+  - Add convenient `testthat` function `skip_if_offline`.
 * Reduce package size by making vignettes `rmarkdown::html_vignette`
   instead of `BiocStyle::html_document`.
 *  URL: https://github.com/runforesight/workflow-telemetry-action (moved to https://github.com/catchpoint/workflow-telemetry-action)
-
+* Skip tests that are sensitive to working directory location 
+  (which can cause issues when running `devtools::test_coverage()` in the terminal) #112
 
 # rworkflows 1.0.0
 

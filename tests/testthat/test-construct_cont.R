@@ -19,7 +19,6 @@ test_that("construct_cont works", {
   testthat::expect_null(cont3[[3]])
   
   ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  testthat::skip_on_cran()
   testthat::skip_if_offline()
   
   cont4 <- construct_cont(default_tag = "release",

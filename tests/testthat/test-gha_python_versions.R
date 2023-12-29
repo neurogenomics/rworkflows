@@ -1,6 +1,5 @@
 test_that("gha_python_versions works", {
   ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  testthat::skip_on_cran()
   testthat::skip_if_offline()
   
   testthat::expect_equal(gha_python_versions(python_version = "3.11"),"3.11")
