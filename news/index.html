@@ -83,6 +83,11 @@
 <code>repository: ${{ github.repository }}</code> –&gt; <code>repository: ${{ env.packageName }}</code>
 </li>
 </ul></li>
+<li>CRAN:
+<ul><li>Add convenient <code>testthat</code> functions <code>skip_on_cran()</code> and <code>skip_if_offline</code>.</li>
+</ul></li>
+<li>Reduce package size by making vignettes <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code> instead of <code><a href="https://rdrr.io/pkg/BiocStyle/man/html_document.html" class="external-link">BiocStyle::html_document</a></code>.</li>
+<li>URL: <a href="https://github.com/runforesight/workflow-telemetry-action" class="external-link uri">https://github.com/runforesight/workflow-telemetry-action</a> (moved to <a href="https://github.com/catchpoint/workflow-telemetry-action" class="external-link uri">https://github.com/catchpoint/workflow-telemetry-action</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">

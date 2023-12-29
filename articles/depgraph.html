@@ -98,7 +98,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i><br>
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Vignette updated: <i>Dec-10-2023</i><br>
+Vignette updated: <i>Dec-29-2023</i><br>
 </h4></h4>
       
       <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/HEAD/vignettes/depgraph.Rmd" class="external-link"><code>vignettes/depgraph.Rmd</code></a></small>
@@ -155,13 +155,16 @@ Vignette updated: <i>Dec-10-2023</i><br>
 <div class="section level2">
 <h2 id="show">Show<a class="anchor" aria-label="anchor" href="#show"></a>
 </h2>
-<div class="float">
-<img src="https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png" alt="rworkflow depgraph"><div class="figcaption">rworkflow depgraph</div>
-</div>
+<div class="section level3">
+<h3 id="rworkflow-depgraph">
+<a href="https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png" class="external-link">rworkflow
+depgraph</a><a class="anchor" aria-label="anchor" href="#rworkflow-depgraph"></a>
+</h3>
 <p>Hover over each node to show additional metadata.</p>
 <!-- ```{r fig.height=20, fig.width=20} -->
 <!-- htmltools::includeHTML("https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.html") -->
 <!-- ``` -->
+</div>
 </div>
 <div class="section level2">
 <h2 id="identify-highly-downloaded-packages">Identify highly downloaded packages<a class="anchor" aria-label="anchor" href="#identify-highly-downloaded-packages"></a>
@@ -190,8 +193,8 @@ there are 25,000 R packages that are exclusively distributes via GitHub
 </h2>
 <details><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R Under development (unstable) (2023-11-22 r85609)</span></span>
-<span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
+<pre><code><span><span class="co">## R version 4.3.2 (2023-10-31)</span></span>
+<span><span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span><span class="co">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
@@ -213,21 +216,17 @@ there are 25,000 R packages that are exclusively distributes via GitHub
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] data.table_1.14.10 BiocStyle_2.31.0  </span></span>
+<span><span class="co">## [1] data.table_1.14.10</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] vctrs_0.6.5         cli_3.6.1           knitr_1.45         </span></span>
-<span><span class="co">##  [4] rlang_1.1.2         xfun_0.41           stringi_1.8.2      </span></span>
-<span><span class="co">##  [7] purrr_1.0.2         textshaping_0.3.7   jsonlite_1.8.8     </span></span>
-<span><span class="co">## [10] glue_1.6.2          htmltools_0.5.7     ragg_1.2.6         </span></span>
-<span><span class="co">## [13] sass_0.4.8          rmarkdown_2.25      evaluate_0.23      </span></span>
-<span><span class="co">## [16] jquerylib_0.1.4     fastmap_1.1.1       yaml_2.3.7         </span></span>
-<span><span class="co">## [19] lifecycle_1.0.4     memoise_2.0.1       bookdown_0.37      </span></span>
-<span><span class="co">## [22] BiocManager_1.30.22 stringr_1.5.1       compiler_4.4.0     </span></span>
-<span><span class="co">## [25] fs_1.6.3            systemfonts_1.0.5   digest_0.6.33      </span></span>
-<span><span class="co">## [28] R6_2.5.1            magrittr_2.0.3      bslib_0.6.1        </span></span>
-<span><span class="co">## [31] tools_4.4.0         pkgdown_2.0.7       cachem_1.0.8       </span></span>
-<span><span class="co">## [34] desc_1.4.3</span></span></code></pre>
+<span><span class="co">##  [1] vctrs_0.6.5       cli_3.6.2         knitr_1.45        rlang_1.1.2      </span></span>
+<span><span class="co">##  [5] xfun_0.41         stringi_1.8.3     purrr_1.0.2       textshaping_0.3.7</span></span>
+<span><span class="co">##  [9] jsonlite_1.8.8    glue_1.6.2        htmltools_0.5.7   ragg_1.2.6       </span></span>
+<span><span class="co">## [13] sass_0.4.8        rmarkdown_2.25    evaluate_0.23     jquerylib_0.1.4  </span></span>
+<span><span class="co">## [17] fastmap_1.1.1     yaml_2.3.8        lifecycle_1.0.4   memoise_2.0.1    </span></span>
+<span><span class="co">## [21] stringr_1.5.1     compiler_4.3.2    fs_1.6.3          systemfonts_1.0.5</span></span>
+<span><span class="co">## [25] digest_0.6.33     R6_2.5.1          magrittr_2.0.3    bslib_0.6.1      </span></span>
+<span><span class="co">## [29] tools_4.3.2       pkgdown_2.0.7     cachem_1.0.8      desc_1.4.3</span></span></code></pre>
 </details><hr>
 </div>
   </div>

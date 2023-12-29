@@ -102,7 +102,7 @@
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>
 </h4>
 <h4>
-README updated: <i>Dec-10-2023</i>
+README updated: <i>Dec-29-2023</i>
 </h4>
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
@@ -134,7 +134,7 @@ README updated: <i>Dec-10-2023</i>
 <li>🚀 (Re)builds and launches a documentation website for your R package.<br>
 </li>
 <li>🐳 Pushes a <a href="https://www.docker.com/" class="external-link"><strong>Docker</strong></a> container (with <a href="https://posit.co/" class="external-link"><strong>Rstudio</strong></a> and all dependencies pre-installed) to your choice of container registry (e.g. <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" class="external-link"><strong>GitHub Container Registry</strong></a>, <a href="https://hub.docker.com/" class="external-link"><strong>DockerHub</strong></a>).</li>
-<li>🔭 Generates <a href="https://github.com/runforesight/workflow-telemetry-action" class="external-link">workflow telemetry</a> report.<br>
+<li>🔭 Generates <a href="https://github.com/catchpoint/workflow-telemetry-action" class="external-link">workflow telemetry</a> report.<br>
 </li>
 <li>🎖 Updates relevant badges added to your README with <code><a href="reference/use_badges.html">rworkflows::use_badges()</a></code>.</li>
 </ol>
@@ -327,8 +327,8 @@ README updated: <i>Dec-10-2023</i>
 </h1></div>
 <details><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## R Under development (unstable) (2023-11-22 r85609)</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="do">## Platform: x86_64-pc-linux-gnu</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## R version 4.3.2 (2023-10-31)</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="do">## Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="do">## Running under: Ubuntu 22.04.3 LTS</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="do">## Matrix products: default</span></span>
@@ -354,20 +354,20 @@ README updated: <i>Dec-10-2023</i>
 <span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="do">## loaded via a namespace (and not attached):</span></span>
 <span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="do">##  [1] gtable_0.3.4        jsonlite_1.8.8      renv_1.0.3         </span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="do">##  [4] dplyr_1.1.4         compiler_4.4.0      BiocManager_1.30.22</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="do">##  [4] dplyr_1.1.4         compiler_4.3.2      BiocManager_1.30.22</span></span>
 <span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="do">##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.3.0       </span></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="do">## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         </span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="do">## [10] yaml_2.3.8          fastmap_1.1.1       here_1.0.1         </span></span>
 <span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="do">## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     </span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="do">## [16] knitr_1.45          yulab.utils_0.1.0   tibble_3.2.1       </span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="do">## [16] knitr_1.45          yulab.utils_0.1.2   tibble_3.2.1       </span></span>
 <span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="do">## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.0.4    </span></span>
 <span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="do">## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 </span></span>
 <span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="do">## [25] rlang_1.1.2         utf8_1.2.4          cachem_1.0.8       </span></span>
 <span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="do">## [28] badger_0.2.3        xfun_0.41           fs_1.6.3           </span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="do">## [31] memoise_2.0.1       cli_3.6.1           magrittr_2.0.3     </span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="do">## [34] rworkflows_1.0.1    digest_0.6.33       grid_4.4.0         </span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="do">## [31] memoise_2.0.1       cli_3.6.2           magrittr_2.0.3     </span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="do">## [34] rworkflows_1.0.1    digest_0.6.33       grid_4.3.2         </span></span>
 <span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="do">## [37] lifecycle_1.0.4     vctrs_0.6.5         data.table_1.14.10 </span></span>
 <span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="do">## [40] evaluate_0.23       glue_1.6.2          fansi_1.0.6        </span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="do">## [43] colorspace_2.1-0    tools_4.4.0         pkgconfig_2.0.3    </span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="do">## [43] colorspace_2.1-0    tools_4.3.2         pkgconfig_2.0.3    </span></span>
 <span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="do">## [46] htmltools_0.5.7</span></span></code></pre></div>
 </details>
 </div>
