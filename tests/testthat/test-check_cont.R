@@ -1,4 +1,7 @@
 test_that("check_cont works", {
+  ## Don't run on CRAN servers due to ongoing internet connectivity issues
+  testthat::skip_on_cran()
+  testthat::skip_if_offline()
   
   testthat::expect_no_warning(
     check_cont(cont = "bioconductor/bioconductor_docker:devel")

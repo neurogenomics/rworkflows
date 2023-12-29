@@ -1,4 +1,7 @@
 test_that("url_exists works", {
+  ## Don't run on CRAN servers due to ongoing internet connectivity issues
+  testthat::skip_on_cran()
+  testthat::skip_if_offline()
   
   testthat::expect_true(
     rworkflows:::url_exists("https://github.com/neurogenomics/rworkflows")

@@ -2,12 +2,16 @@
 
 ## New features
 
-- Change command "\nodocker" to "[nodocker]" for consistency with other commands. 
+* Change command "\nodocker" to "[nodocker]" for consistency with other commands. 
 
 ## Bug fixes
 
-- *action.yml* 
+* *action.yml* 
   - `repository: ${{ github.repository }}` --> `repository: ${{ env.packageName }}`
+* CRAN: 
+  - Add convenient `testthat` functions `skip_on_cran()` and `skip_if_offline`.
+* Reduce package size by making vignettes `rmarkdown::html_vignette`
+  instead of `BiocStyle::html_document`.
 
 # rworkflows 1.0.0
 

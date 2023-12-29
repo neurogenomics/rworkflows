@@ -1,4 +1,7 @@
 test_that("bioc_r_versions works", {
+  ## Don't run on CRAN servers due to ongoing internet connectivity issues
+  testthat::skip_on_cran()
+  testthat::skip_if_offline()
   
   ver1 <- bioc_r_versions(bioc_version="devel")
   testthat::expect_true(ver1$bioc>="3.17")

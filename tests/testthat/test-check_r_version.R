@@ -1,4 +1,7 @@
 test_that("check_r_version works", {
+  ## Don't run on CRAN servers due to ongoing internet connectivity issues
+  testthat::skip_on_cran()
+  testthat::skip_if_offline()
   
   testthat::expect_equal(
     check_r_version(r = "4.1"),

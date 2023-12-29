@@ -1,4 +1,7 @@
 test_that("construct_runners works", {
+  ## Don't run on CRAN servers due to ongoing internet connectivity issues
+  testthat::skip_on_cran()
+  testthat::skip_if_offline()
   
   #### Set up tests ####  
   run_tests <- function(runners){

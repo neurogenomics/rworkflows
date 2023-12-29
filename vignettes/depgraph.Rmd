@@ -3,7 +3,7 @@ title: "Dependency graph"
 author: "<h4>Authors: <i>`r auths <- eval(parse(text = gsub('person','c',read.dcf('../DESCRIPTION', fields = 'Authors@R'))));paste(auths[names(auths)=='given'],auths[names(auths)=='family'], collapse = ', ')`</i></h4>" 
 date: "<h4>Vignette updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
-  BiocStyle::html_document
+  rmarkdown::html_vignette
 vignette: >
     %\VignetteIndexEntry{depgraph} 
     %\usepackage[utf8]{inputenc}
@@ -51,13 +51,13 @@ saveRDS(res, here::here("reports","dep_graph_res.rds"))
 
 ## Count stars/clones/views
 
-``` r
+```r
 knitr::kable(res$report)
 ```
 
 # Show
 
-![rworkflow depgraph](https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png)
+## [rworkflow depgraph](https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png)
 
 Hover over each node to show additional metadata.
 
