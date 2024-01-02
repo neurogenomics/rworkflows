@@ -1,5 +1,5 @@
 test_that("use_badges works", {
-  testthat::skip_if_offline()
+  if(!is_gha()) testthat::skip_if_offline()
   
   run_tests <- function(badges){
     testthat::expect_length(badges,1)
