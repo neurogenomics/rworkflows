@@ -24,8 +24,18 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Dec-29-2023</i>  
+README updated: <i>Jan-02-2024</i>  
 </h4>
+
+## Citation
+
+If you use `rworkflows`, please cite:
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+
+> Schilder, B.M., Murphy, A.E. & Skene, N.G. rworkflows: automating
+> reproducible practices for the R community. Nat Commun 15, 149 (2024).
+> <https://doi.org/10.1038/s41467-023-44484-5>
 
 ## Intro
 
@@ -180,18 +190,6 @@ Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
   [DockerHub](https://hub.docker.com) account.
-
-## Citation
-
-If you use `rworkflows`, please cite:
-
-<!-- Modify this by editing the file: inst/CITATION  -->
-
-> Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2023) The
-> rworkflows suite: automated continuous integration for quality
-> checking, documentation website creation, and containerised deployment
-> of R packages, *Research Square*;
-> <https://doi.org/10.21203/rs.3.rs-2399015/v1>
 
 ## Acknowledgments
 

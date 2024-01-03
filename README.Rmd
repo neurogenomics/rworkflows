@@ -10,6 +10,13 @@ output:
 pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]
 ```
 
+## Citation 
+
+If you use ``r pkg``, please cite: 
+
+<!-- Modify this by editing the file: inst/CITATION  -->
+> `r utils::citation(pkg)$textVersion`
+
 ## Intro
 
 `rworkflows` is a suite of tools to make it easy for R developers to implement
@@ -126,13 +133,6 @@ To use certain features of `rworkflows`, you may need to set up one or more
     Authentication Token with `usethis::create_github_token()`. See the [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) for details.   
 * `DOCKER_TOKEN` [Optional]: Allows GitHub Actions to push to a
     [DockerHub](https://hub.docker.com) account. 
-
-## Citation 
-
-If you use ``r pkg``, please cite: 
-
-<!-- Modify this by editing the file: inst/CITATION  -->
-> `r utils::citation(pkg)$textVersion`
 
 ## Acknowledgments
 `rworkflows` builds upon the work of many others, especially the following:

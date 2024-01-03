@@ -3,13 +3,13 @@ citHeader("If you use rworkflows, please cite:")
 bibentry(
   bibtype = "Article",
   entry    = "Article",
-  title    = "The rworkflows suite: automated continuous integration for quality checking, documentation website creation, and containerised deployment of R packages",
+  title    = "rworkflows: automating reproducible practices for the R community.",
   author   = "Brian M. Schilder, Alan E. Murphy, Nathan G. Skene",
-  journal  = "Research Square",
-  year     = "2023",
-  volume   = "",
-  number   = "",
+  journal  = "Nature Communications",
+  year     = "2024",
+  volume   = "15",
+  number   = "149",
   pages    = "",
-  url      = "https://doi.org/10.21203/rs.3.rs-2399015/v1",
-  textVersion = paste("Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2023) The rworkflows suite: automated continuous integration for quality checking, documentation website creation, and containerised deployment of R packages, *Research Square*; https://doi.org/10.21203/rs.3.rs-2399015/v1")
+  url      = "https://doi.org/10.1038/s41467-023-44484-5",
+  textVersion = "Schilder, B.M., Murphy, A.E. & Skene, N.G. rworkflows: automating reproducible practices for the R community. Nat Commun 15, 149 (2024). https://doi.org/10.1038/s41467-023-44484-5"
 )
