@@ -1,10 +1,12 @@
 ---
 title: ""  
-author: "`r rworkflows::use_badges(add_actions=c('rworkflows','rworkflows_static','rworkflows_dev'), add_cran_release = TRUE, add_cran_checks = TRUE, add_cran_download_month=TRUE, add_cran_download_total=TRUE, add_codecov_graphs='icicle', hex_height=350, add_doi='https://doi.org/10.5281/zenodo.10048573')`" 
+author: "`r rworkflows::use_badges(add_actions=c('rworkflows','rworkflows_static','rworkflows_dev'), add_cran_release = TRUE, add_cran_checks = FALSE, add_cran_download_month=TRUE, add_cran_download_total=TRUE, add_codecov_graphs='icicle', hex_height=350, add_doi='https://doi.org/10.5281/zenodo.10048573')`" 
 date: "<h4>README updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   github_document
 ---
+
+[![CRAN checks](https://badges.cranchecks.info/worst/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
 
 ```{r setup, include=FALSE}
 pkg <- read.dcf("DESCRIPTION", fields = "Package")[1]

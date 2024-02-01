@@ -1,6 +1,9 @@
 test_that("check_cont works", {
   ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  if(!is_gha()) testthat::skip_if_offline()
+  if(!is_gha()) {
+    testthat::skip_if_offline()
+    testthat::skip_on_cran()
+  }
   
   testthat::expect_no_warning(
     check_cont(cont = "bioconductor/bioconductor_docker:devel")
@@ -23,8 +26,7 @@ test_that("check_cont works", {
   #### Include registry ####
   testthat::expect_no_warning(
     check_cont(cont = "ghcr.io/bioconductor/bioconductor_docker")
-  )
-  
+  ) 
   testthat::expect_no_warning(
     check_cont(cont = "docker.io/bioconductor/bioconductor_docker:devel")
   )

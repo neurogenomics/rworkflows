@@ -1,7 +1,5 @@
 <img src='https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' title='Hex sticker for rworkflows' height='350'><br>
 [![](https://www.r-pkg.org/badges/version/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
-[![CRAN
-checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
 [![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![License:
@@ -24,8 +22,11 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Jan-02-2024</i>  
+README updated: <i>Feb-01-2024</i>  
 </h4>
+
+[![CRAN
+checks](https://badges.cranchecks.info/worst/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
 
 ## Citation
 
@@ -288,7 +289,7 @@ utils::sessionInfo()
 
     ## R version 4.3.1 (2023-06-16)
     ## Platform: aarch64-apple-darwin20 (64-bit)
-    ## Running under: macOS Sonoma 14.2.1
+    ## Running under: macOS Sonoma 14.3
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
@@ -297,7 +298,7 @@ utils::sessionInfo()
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
     ## 
-    ## time zone: America/New_York
+    ## time zone: Europe/London
     ## tzcode source: internal
     ## 
     ## attached base packages:
@@ -309,15 +310,15 @@ utils::sessionInfo()
     ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.3.0       
     ## [10] yaml_2.3.8          fastmap_1.1.1       here_1.0.1         
     ## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     
-    ## [16] knitr_1.45          yulab.utils_0.1.2   tibble_3.2.1       
+    ## [16] knitr_1.45          yulab.utils_0.1.3   tibble_3.2.1       
     ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.0.4    
     ## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 
-    ## [25] rlang_1.1.2         utf8_1.2.4          cachem_1.0.8       
+    ## [25] rlang_1.1.3         utf8_1.2.4          cachem_1.0.8       
     ## [28] badger_0.2.3        xfun_0.41           fs_1.6.3           
     ## [31] memoise_2.0.1.9000  cli_3.6.2           magrittr_2.0.3     
-    ## [34] rworkflows_1.0.1    digest_0.6.33       grid_4.3.1         
+    ## [34] rworkflows_1.0.1    digest_0.6.34       grid_4.3.1         
     ## [37] rstudioapi_0.15.0   lifecycle_1.0.4     vctrs_0.6.5        
-    ## [40] data.table_1.14.10  evaluate_0.23       glue_1.6.2         
+    ## [40] data.table_1.14.10  evaluate_0.23       glue_1.7.0         
     ## [43] fansi_1.0.6         colorspace_2.1-0    rmarkdown_2.25     
     ## [46] tools_4.3.1         pkgconfig_2.0.3     htmltools_0.5.7
 
