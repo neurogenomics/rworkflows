@@ -366,10 +366,10 @@ runs:
         install.packages("pkgdown")
       shell: Rscript {0}
 
-    - name: 🛠 Install gh cli
+    - name: 🛠 Install gh cli and jq
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       run: |
-        sudo apt-get install -y gh
+        sudo apt-get install -y gh jq
       shell: bash {0}
 
     - name: 🛠 Update quarto to latest release
