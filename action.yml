@@ -366,6 +366,10 @@ runs:
         install.packages("pkgdown")
       shell: Rscript {0}
 
+    - name: 🛠 Install quarto 
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      uses: quarto-dev/quarto-actions/setup@v2
+
     - name: ℹ️ Session info ️
       run: |
         options(width = 100, crayon.enabled = TRUE)
