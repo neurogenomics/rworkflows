@@ -96,6 +96,12 @@ inputs:
       (e.g. {{ secrets.PAT_GITHUB }}) which allows access to private
       repositories. Read here for more details: 
       https://docs.github.com/en/actions/security-guides/automatic-token-authentication.
+  CODECOV_TOKEN:
+    description: >
+      Codecov repository token needed to upload coverage reports. 
+      Providing this token helps prevent report upload failures by bypassing
+      Codecov's GitHub API rate limits. Read here for more details:
+      https://docs.codecov.com/docs/adding-the-codecov-token
   cache_version: 
     description: >
       Which cache version to use. 
@@ -441,9 +447,13 @@ runs:
     
     - name: 📋 Test coverage 
       if: inputs.run_covr == 'true' && runner.os == 'Linux'
+      env: 
+        CODECOV_TOKEN: ${{ inputs.CODECOV_TOKEN }}
       run: |
+        ## NOTE: codecov() uses CODECOV_TOKEN env var if specified.
+        ## (recommended)
         covr::codecov()
-      shell: Rscript {0} 
+      shell: Rscript {0}
       
     - name: 🛠 Install package ️
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
