@@ -1,5 +1,5 @@
 pandoc: 3.1.1
-pkgdown: 2.0.7
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   bioconductor: bioconductor.html
@@ -7,5 +7,4 @@ articles:
   docker: docker.html
   repos: repos.html
   rworkflows: rworkflows.html
-last_built: 2024-01-02T19:57Z
-
+last_built: 2024-08-19T21:55Z
