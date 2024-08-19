@@ -372,6 +372,18 @@ runs:
         install.packages("pkgdown")
       shell: Rscript {0}
 
+    - name: 🛠 Install gh cli and jq
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      run: |
+        sudo apt-get install -y gh jq
+      shell: bash {0}
+
+    - name: 🛠 Update quarto to latest release
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      uses: quarto-dev/quarto-actions/setup@v2
+      with:
+        version: release
+
     - name: ℹ️ Session info ️
       run: |
         options(width = 100, crayon.enabled = TRUE)
