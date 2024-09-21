@@ -1,3 +1,14 @@
+# rworkflows 1.0.2
+
+## New features
+
+* Update *rworkflows.yml* to use new Bioc release, 3.19
+
+## Bug fixes
+
+* Get back up on CRAN after deprecation occurred while I was away.
+* Remove .*Rprofile* (didn't seem to help CRAN and was getting outdated)
+
 # rworkflows 1.0.1
 
 ## New features
