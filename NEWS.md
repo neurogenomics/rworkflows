@@ -2,6 +2,7 @@
 
 ## New features
 
+* Update to R 4.4.1 and ensure everything stil works.
 * Update *rworkflows.yml* to use new Bioc release, 3.19
 
 ## Bug fixes
