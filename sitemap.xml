@@ -1,135 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/bioconductor.html</loc>
-  </url>
-  <url>
-    <loc>/articles/depgraph.html</loc>
-  </url>
-  <url>
-    <loc>/articles/docker.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/repos.html</loc>
-  </url>
-  <url>
-    <loc>/articles/rworkflows.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bioc_r_versions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocpkgtools_db.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_miniconda_args.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_registry.html</loc>
-  </url>
-  <url>
-    <loc>/reference/conda_export.html</loc>
-  </url>
-  <url>
-    <loc>/reference/construct_authors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/construct_conda_yml.html</loc>
-  </url>
-  <url>
-    <loc>/reference/construct_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/construct_runners.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dt_to_desc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fill_description.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_authors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_description.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_description_repo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_github_url_db.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_hex.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gha_python_versions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/infer_biocviews.html</loc>
-  </url>
-  <url>
-    <loc>/reference/infer_deps.html</loc>
-  </url>
-  <url>
-    <loc>/reference/infer_docker_org.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_gha.html</loc>
-  </url>
-  <url>
-    <loc>/reference/message_parallel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/messager.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stopper.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_badges.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_codespace.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_dockerfile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_issue_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_readme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_vignette_docker.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_vignette_getstarted.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_workflow.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/bioconductor.html</loc></url>
+<url><loc>/articles/depgraph.html</loc></url>
+<url><loc>/articles/docker.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/repos.html</loc></url>
+<url><loc>/articles/rworkflows.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/bioc_r_versions.html</loc></url>
+<url><loc>/reference/biocpkgtools_db.html</loc></url>
+<url><loc>/reference/check_cont.html</loc></url>
+<url><loc>/reference/check_miniconda_args.html</loc></url>
+<url><loc>/reference/check_registry.html</loc></url>
+<url><loc>/reference/conda_export.html</loc></url>
+<url><loc>/reference/construct_authors.html</loc></url>
+<url><loc>/reference/construct_conda_yml.html</loc></url>
+<url><loc>/reference/construct_cont.html</loc></url>
+<url><loc>/reference/construct_runners.html</loc></url>
+<url><loc>/reference/dt_to_desc.html</loc></url>
+<url><loc>/reference/fill_description.html</loc></url>
+<url><loc>/reference/get_authors.html</loc></url>
+<url><loc>/reference/get_description.html</loc></url>
+<url><loc>/reference/get_description_repo.html</loc></url>
+<url><loc>/reference/get_github_url_db.html</loc></url>
+<url><loc>/reference/get_hex.html</loc></url>
+<url><loc>/reference/gha_python_versions.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/infer_biocviews.html</loc></url>
+<url><loc>/reference/infer_deps.html</loc></url>
+<url><loc>/reference/infer_docker_org.html</loc></url>
+<url><loc>/reference/is_gha.html</loc></url>
+<url><loc>/reference/message_parallel.html</loc></url>
+<url><loc>/reference/messager.html</loc></url>
+<url><loc>/reference/stopper.html</loc></url>
+<url><loc>/reference/use_badges.html</loc></url>
+<url><loc>/reference/use_codespace.html</loc></url>
+<url><loc>/reference/use_dockerfile.html</loc></url>
+<url><loc>/reference/use_issue_template.html</loc></url>
+<url><loc>/reference/use_readme.html</loc></url>
+<url><loc>/reference/use_vignette_docker.html</loc></url>
+<url><loc>/reference/use_vignette_getstarted.html</loc></url>
+<url><loc>/reference/use_workflow.html</loc></url>
 </urlset>
+
