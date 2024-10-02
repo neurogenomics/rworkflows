@@ -1,14 +1,26 @@
+# rworkflows 1.0.3
+
+## New features
+
+* New arg `run_telemetry` allows users to disable workflow telemetry.
+
+## Bug fixes
+
+* Add `GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}` to all code check steps.
+
 # rworkflows 1.0.2
 
 ## New features
 
-* Update to R 4.4.1 and ensure everything stil works.
+* Update to R 4.4.1 and ensure everything still works.
 * Update *rworkflows.yml* to use new Bioc release, 3.19
 
 ## Bug fixes
 
 * Get back up on CRAN after deprecation occurred while I was away.
 * Remove .*Rprofile* (didn't seem to help CRAN and was getting outdated)
+* *test-construct_conda_yml.R*: Add conditional to only run certain steps 
+  if `reticulate` is installed (for `noSuggests` tests in CRAN).
 
 # rworkflows 1.0.1
 
