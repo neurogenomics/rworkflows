@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -70,16 +70,29 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.3" id="rworkflows-103">rworkflows 1.0.3<a class="anchor" aria-label="anchor" href="#rworkflows-103"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-0-3">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-3"></a></h3>
+<ul><li>New arg <code>run_telemetry</code> allows users to disable workflow telemetry.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-0-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-3"></a></h3>
+<ul><li>Add <code>GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}</code> to all code check steps.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2" id="rworkflows-102">rworkflows 1.0.2<small>2024-09-22</small><a class="anchor" aria-label="anchor" href="#rworkflows-102"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-0-2">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-2"></a></h3>
-<ul><li>Update to R 4.4.1 and ensure everything stil works.</li>
+<ul><li>Update to R 4.4.1 and ensure everything still works.</li>
 <li>Update <em>rworkflows.yml</em> to use new Bioc release, 3.19</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-0-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-2"></a></h3>
 <ul><li>Get back up on CRAN after deprecation occurred while I was away.</li>
 <li>Remove .<em>Rprofile</em> (didn’t seem to help CRAN and was getting outdated)</li>
+<li>
+<em>test-construct_conda_yml.R</em>: Add conditional to only run certain steps if <code>reticulate</code> is installed (for <code>noSuggests</code> tests in CRAN).</li>
 </ul></div>
 </div>
     <div class="section level2">
