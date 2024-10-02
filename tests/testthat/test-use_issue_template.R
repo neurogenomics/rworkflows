@@ -9,5 +9,5 @@ test_that("use_issue_template works", {
                                show = TRUE)
   )
   testthat::expect_true(all(file.exists(path2)))
-  testthat::expect_equal("name: Bug report",out[[2]])
+  testthat::expect_equal("description: File a bug report",out[[2]])
 })
