@@ -30,7 +30,8 @@ test_that("construct_conda_yml works", {
   
   
   #### Construct an actual conda env ####
-  if(conda_installed() && 
+  if("reticulate" %in% rownames(installed.packages()) &&
+     conda_installed() && 
      is_gha() &&
      .Platform$OS.type != "windows"){ 
     envname <- "testenv"

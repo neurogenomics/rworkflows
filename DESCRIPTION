@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 1.0.1
+Version: 1.0.3
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -64,4 +64,4 @@ VignetteBuilder: knitr
 License: GPL-3
 Config/testthat/edition: 3
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
