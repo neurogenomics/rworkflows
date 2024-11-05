@@ -1,3 +1,10 @@
+# rworkflows 1.0.4
+
+## New features
+
+* New arg `force_install` allows users to bypass cache while installing
+  dependencies.
+
 # rworkflows 1.0.3
 
 ## New features
