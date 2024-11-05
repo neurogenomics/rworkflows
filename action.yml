@@ -339,6 +339,7 @@ runs:
       shell: Rscript {0} 
 
     - name: 🛠 Install dependencies pass 1 
+      if: inputs.force_install == 'false'
       env:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
@@ -349,7 +350,23 @@ runs:
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
-         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=${{ inputs.force_install }})
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
+      continue-on-error: true
+      shell: Rscript {0}
+      
+    - name: 🛠 Install dependencies pass 1 (Bypass cache)
+      if: inputs.force_install == 'true'
+      env:
+        timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+         ## For running the checks
+         message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
+         install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
+         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
+         repos <- BiocManager::repositories()
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE)
       continue-on-error: true
       shell: Rscript {0}
 
@@ -361,7 +378,7 @@ runs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
-        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=${{ inputs.force_install }})
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
       shell: Rscript {0}
 
     - name: 🛠 Install RUnit (via BiocGenerics) 
