@@ -1,0 +1,57 @@
+name: rworkflows_force_install
+'on':
+  push:
+    branches:
+    - master
+    - main
+    - devel
+    - RELEASE_**
+  pull_request:
+    branches:
+    - master
+    - main
+    - devel
+    - RELEASE_**
+jobs:
+  rworkflows:
+    permissions: write-all
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    container: ${{ matrix.config.cont }}
+    strategy:
+      fail-fast: ${{ false }}
+      matrix:
+        config:
+        - os: ubuntu-latest
+          r: auto
+          bioc: release
+          cont: ghcr.io/bioconductor/bioconductor_docker:RELEASE_3_19
+          python-version: 3.11
+        - os: macOS-latest
+          r: latest
+          bioc: release
+          python-version: 3.11
+        - os: windows-latest
+          r: latest
+          bioc: release
+          python-version: 3.11
+    steps:
+    - uses: HDash/rworkflows@force_install
+      with:
+        run_bioccheck: ${{ false }}
+        run_rcmdcheck: ${{ true }}
+        as_cran: ${{ true }}
+        run_vignettes: ${{ true }}
+        has_testthat: ${{ true }}
+        run_covr: ${{ false }}
+        run_pkgdown: ${{ false }}
+        has_runit: ${{ false }}
+        # has_latex: ${{ true }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run_docker: ${{ false }}
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        runner_os: ${{ runner.os }}
+        cache_version: cache-v1
+        force_install: ${{ true }}
+        # free_diskspace: ${{ true }}
+        # miniforge_variant: false

@@ -169,6 +169,13 @@ inputs:
       Whether to run the workflow telemetry action: 
       https://github.com/catchpoint/workflow-telemetry-action
     default: true
+  force_install:
+    description: >
+      Whether to force install packages. If `true`, all packages will be
+      reinstalled, bypassing the cache.
+      Recommended to set to `true` when pushing changes without updating R
+      package version, such as during pre-release phase of developement.
+    default: false
 
 runs:
   using: 'composite'
@@ -342,7 +349,7 @@ runs:
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
-         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=${{ inputs.force_install }})
       continue-on-error: true
       shell: Rscript {0}
 
@@ -354,7 +361,7 @@ runs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
-        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=${{ inputs.force_install }})
       shell: Rscript {0}
 
     - name: 🛠 Install RUnit (via BiocGenerics) 
