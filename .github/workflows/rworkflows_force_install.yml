@@ -1,4 +1,4 @@
-name: rworkflows
+name: rworkflows_force_install
 'on':
   push:
     branches:
@@ -36,7 +36,7 @@ jobs:
           bioc: release
           python-version: 3.11
     steps:
-    - uses: neurogenomics/rworkflows@master
+    - uses: HDash/rworkflows@force_install
       with:
         run_bioccheck: ${{ false }}
         run_rcmdcheck: ${{ true }}
