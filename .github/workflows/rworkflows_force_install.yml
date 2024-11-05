@@ -36,7 +36,7 @@ jobs:
           bioc: release
           python-version: 3.11
     steps:
-    - uses: HDash/rworkflows@force_install
+    - uses: HDash/rworkflows@master
       with:
         run_bioccheck: ${{ false }}
         run_rcmdcheck: ${{ true }}
