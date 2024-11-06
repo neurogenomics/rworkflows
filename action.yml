@@ -96,6 +96,12 @@ inputs:
       (e.g. {{ secrets.PAT_GITHUB }}) which allows access to private
       repositories. Read here for more details: 
       https://docs.github.com/en/actions/security-guides/automatic-token-authentication.
+  CODECOV_TOKEN:
+    description: >
+      Codecov repository token needed to upload coverage reports. 
+      Providing this token helps prevent report upload failures by bypassing
+      Codecov's GitHub API rate limits. Read here for more details:
+      https://docs.codecov.com/docs/adding-the-codecov-token
   cache_version: 
     description: >
       Which cache version to use. 
@@ -158,11 +164,17 @@ inputs:
     description: >
       Free up additional disk space by deleting non-essential sofwares.
     default: false
+  run_telemetry:
+    description: >
+      Whether to run the workflow telemetry action: 
+      https://github.com/catchpoint/workflow-telemetry-action
+    default: true
 
 runs:
   using: 'composite'
   steps:
     - name: 🔭 Collect Workflow Telemetry 
+      if: inputs.run_telemetry == 'true'
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: true
       with:
@@ -397,6 +409,7 @@ runs:
         AS_CRAN: ${{ inputs.as_cran }}
         run_vignettes: ${{ inputs.run_vignettes }}
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
@@ -420,6 +433,7 @@ runs:
       if: inputs.has_runit == 'true'
       env:
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         BiocGenerics:::testPackage()
@@ -433,6 +447,7 @@ runs:
         run_vignettes: ${{ inputs.run_vignettes }}
         as_cran: ${{ inputs.as_cran }}
         timeout: ${{ inputs.timeout }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         #### Install deps ####
@@ -453,12 +468,19 @@ runs:
     
     - name: 📋 Test coverage 
       if: inputs.run_covr == 'true' && runner.os == 'Linux'
+      env: 
+        CODECOV_TOKEN: ${{ inputs.CODECOV_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
+        ## NOTE: codecov() uses CODECOV_TOKEN env var if specified.
+        ## (recommended)
         covr::codecov()
-      shell: Rscript {0} 
+      shell: Rscript {0}
       
     - name: 🛠 Install package ️
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      env: 
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: R CMD INSTALL .
       shell: bash {0}
 
@@ -509,6 +531,8 @@ runs:
         
     - name: 📦 Build pkgdown site 
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)

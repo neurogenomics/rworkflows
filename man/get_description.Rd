@@ -36,11 +36,10 @@ for \emph{DESCRIPTION} files.}
 \item{use_repos}{Use R standard R package repositories like CRAN and Bioc
 to find \emph{DESCRIPTION} files.}
 
-\item{repo}{The requested Bioconductor repository. The default will be the
-Bioconductor software repository: BioCsoft. Available repos include:
-"BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
-that not all repos are available for all versions, particularly older
-versions (but who would use those, right?).}
+\item{repo}{\code{character(1)} The requested Bioconductor repository. The default
+is to pull from the "BioCsoft" repository. Possible repositories include
+"BioCsoft", "BioCexp", "BioCworkflows", "BioCann", and "CRAN". Note that
+not all repos are available for all versions, particularly older versions.}
 
 \item{verbose}{Print messages.}
 }
