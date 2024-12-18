@@ -1,3 +1,9 @@
+# rworkflows 1.0.4
+
+## Bug fixes
+
+* Remove deprecated package (`pandoc-citeproc`) from Dockerfile.
+
 # rworkflows 1.0.3
 
 ## New features
