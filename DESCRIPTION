@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 1.0.4
+Version: 1.0.5
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",

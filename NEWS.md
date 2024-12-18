@@ -1,4 +1,4 @@
-# rworkflows 1.0.4
+# rworkflows 1.0.5
 
 ## New features
 
