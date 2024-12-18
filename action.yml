@@ -169,6 +169,13 @@ inputs:
       Whether to run the workflow telemetry action: 
       https://github.com/catchpoint/workflow-telemetry-action
     default: true
+  force_install:
+    description: >
+      Whether to force install packages. If `true`, all packages will be
+      reinstalled, bypassing the cache.
+      Recommended to set to `true` when pushing changes without updating R
+      package version, such as during pre-release phase of developement.
+    default: false
 
 runs:
   using: 'composite'
@@ -335,6 +342,7 @@ runs:
       env:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        force_install: ${{ inputs.force_install }}
       run: |
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
          ## For running the checks
@@ -342,7 +350,7 @@ runs:
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
-         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=Sys.getenv("force_install"))
       continue-on-error: true
       shell: Rscript {0}
 
