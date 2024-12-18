@@ -27,7 +27,6 @@ RUN apt-get update && \
     libicu-dev \
     libssl-dev \
     make pandoc \
-    pandoc-citeproc \
     zlib1g-dev \
   	xfonts-100dpi \
   	xfonts-75dpi \
