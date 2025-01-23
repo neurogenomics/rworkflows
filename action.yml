@@ -609,7 +609,6 @@ runs:
     - name: 🪲 Setup interactive debugging
       if: ${{ failure() && !cancelled() && inputs.run_debug == 'true' }}
       uses: mxschmitt/action-tmate@v3 
-=======
+      build_args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
->>>>>>> master
