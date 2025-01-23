@@ -1,3 +1,10 @@
+# rworkflows 1.0.6
+
+## Bug fixes
+
+* Update to `actions/upload-artifact@v4` as v3 is now deprecated. 
+  Contributed in PR #139
+
 # rworkflows 1.0.5
 
 ## New features
