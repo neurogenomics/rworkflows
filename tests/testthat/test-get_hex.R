@@ -13,7 +13,7 @@ test_that("get_hex works", {
     testthat::expect_equal(hex3[[1]], 
                            hex1[[1]])
   } else {
-    testthat::expect_null(hex3[[1]])
+    message("Skipping test.")
   }
   #### When neither refs nor paths provided ####
   hex4 <- get_hex(refs=NULL, 

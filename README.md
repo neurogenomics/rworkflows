@@ -1,14 +1,12 @@
 <img src='https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png' title='Hex sticker for rworkflows' height='350'><br>
 [![](https://www.r-pkg.org/badges/version/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
-[![CRAN
-checks](https://badges.cranchecks.info/summary/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
 [![](http://cranlogs.r-pkg.org/badges/last-month/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/rworkflows?color=black)](https://cran.r-project.org/package=rworkflows)
 [![License:
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.5281/zenodo.10048573-blue.svg)](https://doi.org/https://doi.org/10.5281/zenodo.10048573)
 <br>
-[![](https://img.shields.io/badge/devel%20version-1.0.2-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-1.0.7-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -24,22 +22,21 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Nov-16-2023</i>  
+README updated: <i>Jan-23-2025</i>  
 </h4>
+
+[![CRAN
+checks](https://badges.cranchecks.info/worst/rworkflows.svg)](https://cran.r-project.org/web/checks/check_results_rworkflows.html)
 
 ## 📘 Citation
 
-If you use of reference the `rworkflows` suite, please cite:
+If you use `rworkflows`, please cite:
 
 <!-- Modify this by editing the file: inst/CITATION  -->
 
-> Brian M. Schilder, Alan E. Murphy, & Nathan G. Skene (2023) The
-> rworkflows suite: automated continuous integration for quality
-> checking, documentation website creation, and containerised deployment
-> of R packages, *Research Square*;
-> <https://doi.org/10.21203/rs.3.rs-2399015/v1>
-
-## ℹ Intro
+> Schilder, B.M., Murphy, A.E. & Skene, N.G. rworkflows: automating
+> reproducible practices for the R community. Nat Commun 15, 149 (2024).
+> <https://doi.org/10.1038/s41467-023-44484-5>
 
 ### 📖 Background
 
@@ -97,7 +94,7 @@ options to enable/disable/modify each step):
     Registry**](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
     [**DockerHub**](https://hub.docker.com/)).
 11. 🔭 Generates [workflow
-    telemetry](https://github.com/runforesight/workflow-telemetry-action)
+    telemetry](https://github.com/catchpoint/workflow-telemetry-action)
     report.  
 12. 🎖 Updates relevant badges added to your README with
     `rworkflows::use_badges()`.
@@ -277,39 +274,38 @@ following:
 utils::sessionInfo()
 ```
 
-    ## R version 4.3.1 (2023-06-16)
-    ## Platform: aarch64-apple-darwin20 (64-bit)
-    ## Running under: macOS Sonoma 14.1
+    ## R version 4.4.2 (2024-10-31)
+    ## Platform: aarch64-apple-darwin20
+    ## Running under: macOS Sequoia 15.2
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
     ## 
-    ## time zone: Europe/London
+    ## time zone: America/New_York
     ## tzcode source: internal
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.4        jsonlite_1.8.7      renv_1.0.3         
-    ##  [4] dplyr_1.1.3         compiler_4.3.1      BiocManager_1.30.22
-    ##  [7] tidyselect_1.2.0    rvcheck_0.2.1       scales_1.2.1       
-    ## [10] yaml_2.3.7          fastmap_1.1.1       here_1.0.1         
-    ## [13] ggplot2_3.4.4       R6_2.5.1            generics_0.1.3     
-    ## [16] knitr_1.45          yulab.utils_0.1.0   tibble_3.2.1       
-    ## [19] desc_1.4.2          dlstats_0.1.7       rprojroot_2.0.4    
-    ## [22] munsell_0.5.0       pillar_1.9.0        RColorBrewer_1.1-3 
-    ## [25] rlang_1.1.2         utf8_1.2.4          cachem_1.0.8       
-    ## [28] badger_0.2.3        xfun_0.41           fs_1.6.3           
-    ## [31] memoise_2.0.1.9000  cli_3.6.1           magrittr_2.0.3     
-    ## [34] rworkflows_1.0.2    digest_0.6.33       grid_4.3.1         
-    ## [37] rstudioapi_0.15.0   lifecycle_1.0.4     vctrs_0.6.4        
-    ## [40] data.table_1.14.8   evaluate_0.23       glue_1.6.2         
-    ## [43] fansi_1.0.5         colorspace_2.1-0    rmarkdown_2.25     
-    ## [46] tools_4.3.1         pkgconfig_2.0.3     htmltools_0.5.7
+    ##  [1] gtable_0.3.6        jsonlite_1.8.9      renv_1.0.11        
+    ##  [4] dplyr_1.1.4         compiler_4.4.2      BiocManager_1.30.25
+    ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.3.0       
+    ## [10] yaml_2.3.10         fastmap_1.2.0       here_1.0.1         
+    ## [13] ggplot2_3.5.1       R6_2.5.1            generics_0.1.3     
+    ## [16] knitr_1.49          yulab.utils_0.1.9   tibble_3.2.1       
+    ## [19] desc_1.4.3          dlstats_0.1.7       munsell_0.5.1      
+    ## [22] rprojroot_2.0.4     pillar_1.10.1       RColorBrewer_1.1-3 
+    ## [25] rlang_1.1.4         badger_0.2.4        xfun_0.50          
+    ## [28] fs_1.6.5            cli_3.6.3           magrittr_2.0.3     
+    ## [31] rworkflows_1.0.5    digest_0.6.37       grid_4.4.2         
+    ## [34] rstudioapi_0.17.1   lifecycle_1.0.4     vctrs_0.6.5        
+    ## [37] evaluate_1.0.1      glue_1.8.0          data.table_1.16.4  
+    ## [40] colorspace_2.1-1    rmarkdown_2.29      tools_4.4.2        
+    ## [43] pkgconfig_2.0.3     htmltools_0.5.8.1
 
 </details>

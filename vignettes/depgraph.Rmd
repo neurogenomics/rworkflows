@@ -51,13 +51,13 @@ saveRDS(res, here::here("reports","dep_graph_res.rds"))
 
 ## Count stars/clones/views
 
-``` r
+```r
 knitr::kable(res$report)
 ```
 
 # Show
 
-![rworkflow depgraph](https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png)
+## [rworkflow depgraph](https://github.com/neurogenomics/rworkflows/raw/master/reports/rworkflows_depgraph.png)
 
 Hover over each node to show additional metadata.
 

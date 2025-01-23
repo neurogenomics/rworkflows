@@ -30,7 +30,8 @@ test_that("construct_conda_yml works", {
   
   
   #### Construct an actual conda env ####
-  if(conda_installed() && 
+  if("reticulate" %in% rownames(installed.packages()) &&
+     conda_installed() && 
      is_gha() &&
      .Platform$OS.type != "windows"){ 
     envname <- "testenv"
@@ -45,6 +46,9 @@ test_that("construct_conda_yml works", {
                                  return_path = TRUE,
                                  save_path = save_path)
     testthat::expect_true(file.exists(path2))
+    
+    ## Don't run on CRAN servers due to ongoing internet connectivity issues
+    if(!is_gha()) testthat::skip_if_offline()
     
     # conda <- conda_path()
     out <- reticulate::conda_create(environment = path2, 

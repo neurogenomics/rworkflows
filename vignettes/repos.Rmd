@@ -26,7 +26,7 @@ r_repos_res <- echogithub::r_repos(
   width = 9)
 ```
 
-[!Upset plot](https://github.com/neurogenomics/rworkflows/raw/master/reports/r_repos_upset.pdf)
+## [Upset plot](https://github.com/neurogenomics/rworkflows/raw/master/reports/r_repos_upset.pdf)
 
 ## Save results 
 

@@ -1,4 +1,4 @@
-# rworkflows 1.0.2
+# rworkflows 1.0.7
 
 ## New features
 * `use_workflow`:
@@ -31,18 +31,70 @@
     GitHub variable.
 * Harmonise arguments: `show`--> `preview`
 
+# rworkflows 1.0.6
+
+## Bug fixes
+
+* Update to `actions/upload-artifact@v4` as v3 is now deprecated. 
+  Contributed in PR #139
+
+# rworkflows 1.0.5
+
+## New features
+
+* New arg `force_install` allows users to bypass cache while installing
+  dependencies.
+
+# rworkflows 1.0.4
+
+## Bug fixes
+
+* Remove deprecated package (`pandoc-citeproc`) from Dockerfile.
+
+# rworkflows 1.0.3
+
+## New features
+
+* New arg `run_telemetry` allows users to disable workflow telemetry.
+
+## Bug fixes
+
+* Add `GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}` to all code check steps.
+
+# rworkflows 1.0.2
+
+## New features
+
+* Update to R 4.4.1 and ensure everything still works.
+* Update *rworkflows.yml* to use new Bioc release, 3.19
+
+## Bug fixes
+
+* Get back up on CRAN after deprecation occurred while I was away.
+* Remove .*Rprofile* (didn't seem to help CRAN and was getting outdated)
+* *test-construct_conda_yml.R*: Add conditional to only run certain steps 
+  if `reticulate` is installed (for `noSuggests` tests in CRAN).
+>>>>>>> master
+
 # rworkflows 1.0.1
 
 ## New features
 
-- Change command "\nodocker" to "[nodocker]" for consistency with other commands. 
+* Change command "\nodocker" to "[nodocker]" for consistency with other commands. 
 
 ## Bug fixes
 
-- *action.yml* 
+* *action.yml* 
   - `repository: ${{ github.repository }}` --> `repository: ${{ env.packageName }}`
   - Add `env: GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}` to any checking steps 
   (allows piggyback to download data from Releases) 
+* CRAN: 
+  - Add convenient `testthat` function `skip_if_offline`.
+* Reduce package size by making vignettes `rmarkdown::html_vignette`
+  instead of `BiocStyle::html_document`.
+*  URL: https://github.com/runforesight/workflow-telemetry-action (moved to https://github.com/catchpoint/workflow-telemetry-action)
+* Skip tests that are sensitive to working directory location 
+  (which can cause issues when running `devtools::test_coverage()` in the terminal) #112
 
 # rworkflows 1.0.0
 

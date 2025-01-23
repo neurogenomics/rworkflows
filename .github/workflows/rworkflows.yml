@@ -23,9 +23,9 @@ jobs:
       matrix:
         config:
         - os: ubuntu-latest
-          r: devel
-          bioc: devel
-          cont: ghcr.io/bioconductor/bioconductor_docker:devel
+          r: auto
+          bioc: release
+          cont: ghcr.io/bioconductor/bioconductor_docker:RELEASE_3_19
           python-version: 3.11
         - os: macOS-latest
           r: latest
@@ -46,9 +46,16 @@ jobs:
         run_covr: ${{ true }}
         run_pkgdown: ${{ true }}
         has_runit: ${{ false }}
-        has_latex: ${{ true }}
+        # has_latex: ${{ true }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+<<<<<<< HEAD
         free_diskspace: ${{ true }}
         miniforge_variant: false
+=======
+        runner_os: ${{ runner.os }}
+        cache_version: cache-v1
+        # free_diskspace: ${{ true }}
+        # miniforge_variant: false
+>>>>>>> master

@@ -42,9 +42,9 @@ jobs:
       matrix:
         config:
         - os: ubuntu-latest
-          bioc: devel
           r: auto
-          cont: ghcr.io/bioconductor/bioconductor_docker:devel
+          bioc: release
+          cont: ghcr.io/bioconductor/bioconductor_docker:RELEASE_3_18
           rspm: ~
         - os: macOS-latest
           bioc: release
@@ -358,7 +358,7 @@ jobs:
         token: ${{ env.GITHUB_TOKEN }}
     - name: ⏫ Upload check results
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r
           }}-results

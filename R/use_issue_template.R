@@ -11,8 +11,9 @@
 #' @importFrom here here
 #' @examples 
 #' path <- use_issue_template(save_dir=tempdir())
-use_issue_template <- function(templates=c("bug_report.md",
-                                           "feature_request.md"),
+use_issue_template <- function(templates=c("bug_report.yml",
+                                           "feature_request.yml",
+                                           "config.yml"),
                                save_dir=here::here(".github",
                                                    "ISSUE_TEMPLATE"),
                                path=file.path(save_dir,templates),

@@ -97,6 +97,12 @@ inputs:
       repositories. Read here for more details: 
       https://docs.github.com/en/actions/security-guides/automatic-token-authentication.
     required: true
+  CODECOV_TOKEN:
+    description: >
+      Codecov repository token needed to upload coverage reports. 
+      Providing this token helps prevent report upload failures by bypassing
+      Codecov's GitHub API rate limits. Read here for more details:
+      https://docs.codecov.com/docs/adding-the-codecov-token
   cache_version: 
     description: >
       Which cache version to use. 
@@ -164,12 +170,24 @@ inputs:
     description: >
       Whether to enable interactive debug mode using the
       [tmate action](https://github.com/mxschmitt/action-tmate).
+  run_telemetry:
+    description: >
+      Whether to run the workflow telemetry action: 
+      https://github.com/catchpoint/workflow-telemetry-action
+    default: true
+  force_install:
+    description: >
+      Whether to force install packages. If `true`, all packages will be
+      reinstalled, bypassing the cache.
+      Recommended to set to `true` when pushing changes without updating R
+      package version, such as during pre-release phase of developement.
     default: false
 
 runs:
   using: 'composite'
   steps:
     - name: 🔭 Collect Workflow Telemetry 
+      if: inputs.run_telemetry == 'true'
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: true
       with:
@@ -300,11 +318,12 @@ runs:
       env:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        force_install: ${{ inputs.force_install }}
       run: |
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout")) 
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          repos <- BiocManager::repositories()
-         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
+         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=Sys.getenv("force_install"))
       continue-on-error: true
       shell: Rscript {0}
 
@@ -317,7 +336,40 @@ runs:
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
-      shell: Rscript {0} 
+      shell: Rscript {0}
+
+    - name: 🛠 Install RUnit (via BiocGenerics) 
+      if:  inputs.has_runit == 'true'
+      run: |
+        options(crayon.enabled = TRUE)
+        BiocManager::install("BiocGenerics")
+      shell: Rscript {0}
+
+    - name: 🛠 Install covr 
+      if: inputs.run_covr == 'true' && runner.os == 'Linux'
+      run: |
+        options(crayon.enabled = TRUE)
+        install.packages("covr")
+      shell: Rscript {0}
+
+    - name: 🛠 Install pkgdown 
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      run: |
+        options(crayon.enabled = TRUE)
+        install.packages("pkgdown")
+      shell: Rscript {0}
+
+    - name: 🛠 Install gh cli and jq
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      run: |
+        sudo apt-get install -y gh jq
+      shell: bash {0}
+
+    - name: 🛠 Update quarto to latest release
+      if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      uses: quarto-dev/quarto-actions/setup@v2
+      with:
+        version: release
 
     - name: ℹ️ Session info ️
       run: |
@@ -407,15 +459,51 @@ runs:
     - name: 📋 Test coverage 
       if: inputs.run_covr == 'true' && runner.os == 'Linux'
       env: 
+        CODECOV_TOKEN: ${{ inputs.CODECOV_TOKEN }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        if(!require("covr",quietly=TRUE)) install.packages("covr")
+        ## NOTE: codecov() uses CODECOV_TOKEN env var if specified. (recommended) 
         covr::codecov()
-      shell: Rscript {0} 
+      shell: Rscript {0}
       
     - name: 🛠 Install package ️
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
+      env: 
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: R CMD INSTALL .
+      shell: bash {0}
+
+    - name: ℹ️ Get R package info 
+      if: runner.os == 'Linux'
+      env:
+        dockerRegistry: ${{ inputs.docker_registry }}
+        dockerOrg: ${{ inputs.docker_org }}
+        dockerUser: ${{ inputs.docker_user }}
+        DOCKER_TOKEN: ${{ inputs.DOCKER_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+        #### Docker repos must be lowercase (,,) ####
+        ## NOTE: Bash cannot intrepret variables with "." in them when trying to
+        ## string manipulation (e.g. making lowercase with ",,").
+        ## So use "GITHUB_REPOSITORY_OWNER" instead of "github.repository_owner",
+        ## or store the variable as an intermediate variable without "." in it.
+        ## Also be sure to exclude any surrounding spaces inside the "{}" when using ",,".
+        packageNameOrig=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+        echo "packageName=${packageNameOrig,,}" >> $GITHUB_ENV
+        echo "packageNameOrig=${packageNameOrig}" >> $GITHUB_ENV
+        version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
+        echo "packageVersion=${version}" >> $GITHUB_ENV
+        echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
+        #### Adjust docker args depending on docker_registry ####
+        if [[ $dockerRegistry == "docker.io" ]]; then
+          echo "dockerOrg=${dockerOrg,,}" >> $GITHUB_ENV
+          echo "dockerUser=${dockerUser}" >> $GITHUB_ENV
+          echo "dockerPass=${DOCKER_TOKEN}" >> $GITHUB_ENV;
+        else
+          echo "dockerOrg=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
+          echo "dockerUser=${GITHUB_ACTOR}" >> $GITHUB_ENV
+          echo "dockerPass=${GITHUB_TOKEN}" >> $GITHUB_ENV;
+        fi
       shell: bash {0}
 
     - name: 📦 Render README 
@@ -452,7 +540,7 @@ runs:
 
     - name: ⏫ Upload check results 
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-results
         path: check 
@@ -481,17 +569,17 @@ runs:
                                            timeout=Sys.getenv("timeout"))
       shell: Rscript {0} 
       
-    - name: 🐳🚀 Build and push to GHCR 
+    - name: 🐳🚀 Build and Push to Docker Registry 
       if: |
-        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux' && inputs.docker_registry == 'ghcr.io'
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       uses: docker/build-push-action@v1
       env: 
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       with:
-        username: ${{ github.repository_owner }}
-        password: ${{ inputs.GITHUB_TOKEN }}
+        username: ${{ env.dockerUser }}
+        password: ${{ env.dockerPass }}
         registry: ${{ inputs.docker_registry }}
-        repository: ${{ github.repository_owner }}/${{ env.packageName }}
+        repository: ${{ env.dockerOrg }}/${{ env.packageName }}
         tag_with_ref: true
         tag_with_sha: false
         tags: |
@@ -521,3 +609,7 @@ runs:
     - name: 🪲 Setup interactive debugging
       if: ${{ failure() && !cancelled() && inputs.run_debug == 'true' }}
       uses: mxschmitt/action-tmate@v3 
+=======
+          PKG=${{ env.packageNameOrig }},
+          BASE_IMAGE=${{ matrix.config.cont }}
+>>>>>>> master
