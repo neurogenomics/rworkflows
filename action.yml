@@ -348,9 +348,10 @@ runs:
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
-         repos <- BiocManager::repositories()
+         install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
-         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, type="both", force=Sys.getenv("force_install"))
+         #remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=Sys.getenv("force_install"))
+         pak::local_install(ask=FALSE, upgrade=TRUE, dependencies=TRUE)
       continue-on-error: true
       shell: Rscript {0}
 
@@ -362,7 +363,7 @@ runs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
-        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, type="both", force=FALSE)
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
       shell: Rscript {0}
 
     - name: 🛠 Install RUnit (via BiocGenerics) 

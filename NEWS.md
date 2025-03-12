@@ -2,9 +2,7 @@
 
 ## Enhancements
 
-* Add additional CRAN repo with binaries for Ubuntu, speeding up dependency
-  installation on Ubuntu runners. Pass 2 still uses original
-  `BiocManager::repositories()` as a fallback.
+* Use `pak::local_install()` to speed up dependency install.
   
 ## Documentation
 * Mention `CODECOV_TOKEN` in GitHub Secrets section.
