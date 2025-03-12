@@ -18,7 +18,7 @@ Authors@R:
              role = c("aut"),
              email = "n.skene@imperial.ac.uk",
              comment = c(ORCID = "0000-0002-6807-3180")),
-      person(given = "Hiranyamaya",
+      person(given = "Hiranyamaya (Hiru)",
            family = "Dash",
            role = c("ctb"),
            email = "hdash.work@gmail.com",

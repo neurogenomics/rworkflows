@@ -19,10 +19,11 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 <br>
 <a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
 <h4>  
-Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
+Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene, Hiranyamaya
+(Hiru) Dash</i>  
 </h4>
 <h4>  
-README updated: <i>Mar-11-2025</i>  
+README updated: <i>Mar-12-2025</i>  
 </h4>
 
 [![CRAN
@@ -311,7 +312,7 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.6        jsonlite_1.9.1      renv_1.0.11        
+    ##  [1] gtable_0.3.6        jsonlite_1.9.1      renv_1.1.2         
     ##  [4] dplyr_1.1.4         compiler_4.4.2      BiocManager_1.30.25
     ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.3.0       
     ## [10] yaml_2.3.10         fastmap_1.2.0       here_1.0.1         
