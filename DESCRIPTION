@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 1.0.6
+Version: 1.0.7
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -17,8 +17,12 @@ Authors@R:
              family = "Skene",
              role = c("aut"),
              email = "n.skene@imperial.ac.uk",
-             comment = c(ORCID = "0000-0002-6807-3180")) 
-             ) 
+             comment = c(ORCID = "0000-0002-6807-3180")),
+      person(given = "Hiranyamaya",
+           family = "Dash",
+           role = c("ctb"),
+           email = "hdash.work@gmail.com",
+           comment = c(ORCID = "0009-0005-5514-505X"))) 
 Description: Reproducibility is essential to the progress of research, 
   yet achieving it remains elusive even in computational fields. 
   Continuous Integration (CI) platforms offer a powerful way to launch automated workflows 
