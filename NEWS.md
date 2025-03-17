@@ -1,12 +1,13 @@
 # rworkflows 1.0.7
 
-## Enhancements
+## New features
 
-* Use `pak::local_install()` to speed up dependency install.
+* Add input for number of cores to use for R package installation (`ncpus`).
+* Add `CODECOV_TOKEN` and `ncpus` to `rworkflows.yml` template.
   
 ## Documentation
 * Mention `CODECOV_TOKEN` in GitHub Secrets section.
-* Add `CODECOV_TOKEN` to `rworkflows.yml` template.
+
 
 # rworkflows 1.0.6
 
