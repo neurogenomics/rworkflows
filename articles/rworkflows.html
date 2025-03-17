@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.7</span>
       </span>
     </div>
 
@@ -92,15 +92,16 @@
       <h1 data-toc-skip>Get Started</h1>
                         <h4 data-toc-skip class="author"><h4>
 <br>
-Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i><br>
+Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene, Hiranyamaya
+(Hiru) Dash</i><br>
 </h4></h4>
             
             <h4 data-toc-skip class="date"><h4>
 <br>
-Vignette updated: <i>Jan-23-2025</i><br>
+Vignette updated: <i>Mar-17-2025</i><br>
 </h4></h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/vignettes/rworkflows.Rmd" class="external-link"><code>vignettes/rworkflows.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/dev-faster-install/vignettes/rworkflows.Rmd" class="external-link"><code>vignettes/rworkflows.Rmd</code></a></small>
       <div class="hidden name"><code>rworkflows.Rmd</code></div>
 
     </div>
@@ -124,7 +125,14 @@ instructions</a>.<br>
 </li>
 <li>
 <code>DOCKER_TOKEN</code> [Optional]: Allows GitHub Actions to push
-to a <a href="https://hub.docker.com" class="external-link">DockerHub</a> account.</li>
+to a <a href="https://hub.docker.com" class="external-link">DockerHub</a> account.<br>
+</li>
+<li>
+<code>CODECOV_TOKEN</code> [Optional]: Codecov repository token to
+upload coverage reports. Providing this token helps prevent report
+upload failures by bypassing Codecov’s GitHub API rate limits. See the
+<a href="https://docs.codecov.com/docs/adding-the-codecov-token" class="external-link">Codecov
+documentation</a> for details.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -147,7 +155,7 @@ action.</p>
 <span>                                     force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/Rtmp0Lwxlj/rworkflows.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpKKhlG0/rworkflows.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="static-workflow">static workflow<a class="anchor" aria-label="anchor" href="#static-workflow"></a>
@@ -164,7 +172,7 @@ action.</p>
 <span>                                     force_new <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                                     <span class="co">## Use default save_dir in practice</span></span>
 <span>                                     save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/Rtmp0Lwxlj/rworkflows_static.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpKKhlG0/rworkflows_static.yml</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -184,13 +192,14 @@ one is available), and author names.</p>
 <pre><code><span><span class="co">## Adding codecov.</span></span></code></pre>
 <pre><code><span><span class="co">## Adding authors.</span></span></code></pre>
 <pre><code><span><span class="co">## When refs is provided, paths must have the same length (or be set to NULL). Setting paths=NULL.</span></span></code></pre>
-<img src="https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png" title="Hex sticker for rworkflows" height="300"><br><a href="https://cran.r-project.org/web/licenses/GPL-3" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg" alt="License: GPL-3"></a> <a href="https://github.com/neurogenomics/rworkflows" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.0.6-black.svg"></a>
+<img src="https://github.com/neurogenomics/rworkflows/raw/master/inst/hex/hex.png" title="Hex sticker for rworkflows" height="300"><br><a href="https://cran.r-project.org/web/licenses/GPL-3" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg" alt="License: GPL-3"></a> <a href="https://github.com/neurogenomics/rworkflows" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.0.7-black.svg"></a>
 <a href="https://github.com/neurogenomics/rworkflows" class="external-link"><img src="https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg"></a>
 <a href="https://github.com/neurogenomics/rworkflows/commits/master" class="external-link"><img src="https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg"></a>
 <br><a href="https://github.com/neurogenomics/rworkflows/actions" class="external-link"><img src="https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg" alt="R build status"></a> <a href="https://app.codecov.io/gh/neurogenomics/rworkflows" class="external-link"><img src="https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg"></a>
 <br><a href="https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master" target="_blank" class="external-link"><img src="https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg" title="Codecov icicle graph" width="200" height="50" style="vertical-align: top;"></a>
 <h5 id="use_badges-1">
-Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>
+Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene, Hiranyamaya
+(Hiru) Dash</i>
 <a class="anchor" aria-label="anchor" href="#use_badges-1"></a>
 </h5>
 </div>
@@ -206,7 +215,7 @@ to create a template <em>Dockerfile</em> and then customise it further
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">dockerfile</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_dockerfile.html">use_dockerfile</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/Rtmp0Lwxlj/Dockerfile</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new Docker file ==&gt; /tmp/RtmpKKhlG0/Dockerfile</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="templates">Templates<a class="anchor" aria-label="anchor" href="#templates"></a>
@@ -224,7 +233,7 @@ README <em>markdown</em> file.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">readme</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_readme.html">use_readme</a></span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/Rtmp0Lwxlj/README.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new README file ==&gt; /tmp/RtmpKKhlG0/README.Rmd</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="vignette-get-started">Vignette: Get started<a class="anchor" aria-label="anchor" href="#vignette-get-started"></a>
@@ -235,7 +244,7 @@ Requires additional editing to fill in examples.</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette1</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_getstarted.html">use_vignette_getstarted</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"mypackage"</span>,</span>
 <span>                                                 save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmp0Lwxlj/vignettes/mypackage.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpKKhlG0/vignettes/mypackage.Rmd</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="vignette-docker">Vignette: docker<a class="anchor" aria-label="anchor" href="#vignette-docker"></a>
@@ -258,7 +267,7 @@ name.</p>
 <code class="sourceCode R"><span><span class="co">## Use default save_dir in practice</span></span>
 <span><span class="va">vignette2</span> <span class="op">&lt;-</span> <span class="fu">rworkflows</span><span class="fu">::</span><span class="fu"><a href="../reference/use_vignette_docker.html">use_vignette_docker</a></span><span class="op">(</span>docker_org <span class="op">=</span> <span class="st">"neurogenomics"</span>,</span>
 <span>                                             save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/Rtmp0Lwxlj/vignettes/docker.Rmd</span></span></code></pre>
+<pre><code><span><span class="co">## Creating new vignette file ==&gt; /tmp/RtmpKKhlG0/vignettes/docker.Rmd</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -343,10 +352,12 @@ each <code>os</code>, as we do here:</p>
 <span><span class="co">##         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</span></span>
 <span><span class="co">##         run_docker: no</span></span>
 <span><span class="co">##         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}</span></span>
+<span><span class="co">##         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}</span></span>
 <span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
 <span><span class="co">##         cache_version: cache-v1</span></span>
+<span><span class="co">##         ncpus: 2</span></span>
 <span><span class="co">##         docker_registry: ghcr.io</span></span></code></pre>
-<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/Rtmp0Lwxlj/rworkflows.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpKKhlG0/rworkflows.yml</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="using-conda">Using conda<a class="anchor" aria-label="anchor" href="#using-conda"></a>
@@ -454,12 +465,14 @@ of your GitHub Actions runners.</p>
 <span><span class="co">##         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</span></span>
 <span><span class="co">##         run_docker: no</span></span>
 <span><span class="co">##         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}</span></span>
+<span><span class="co">##         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}</span></span>
 <span><span class="co">##         runner_os: ${{ runner.os }}</span></span>
 <span><span class="co">##         cache_version: cache-v1</span></span>
+<span><span class="co">##         ncpus: 2</span></span>
 <span><span class="co">##         docker_registry: ghcr.io</span></span>
 <span><span class="co">##         miniforge_variant: ''</span></span>
 <span><span class="co">##         environment_file: /__w/rworkflows/rworkflows/myenv_conda.yml</span></span></code></pre>
-<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/Rtmp0Lwxlj/rworkflows.yml</span></span></code></pre>
+<pre><code><span><span class="co">## Saving yaml ==&gt; /tmp/RtmpKKhlG0/rworkflows.yml</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Cleanup files</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.remove</a></span><span class="op">(</span><span class="va">environment_file</span><span class="op">)</span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
@@ -471,13 +484,13 @@ of your GitHub Actions runners.</p>
 </h2>
 <details><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R version 4.4.1 (2024-06-14)</span></span>
+<pre><code><span><span class="co">## R version 4.4.2 (2024-10-31)</span></span>
 <span><span class="co">## Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">## Running under: Ubuntu 22.04.4 LTS</span></span>
+<span><span class="co">## Running under: Ubuntu 24.04.1 LTS</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
-<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0</span></span>
+<span><span class="co">## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## locale:</span></span>
 <span><span class="co">##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span></span>
@@ -494,26 +507,26 @@ of your GitHub Actions runners.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] rworkflows_1.0.6</span></span>
+<span><span class="co">## [1] rworkflows_1.0.7</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] gtable_0.3.6        jsonlite_1.8.9      renv_1.0.11        </span></span>
-<span><span class="co">##  [4] BiocManager_1.30.25 dplyr_1.1.4         compiler_4.4.1     </span></span>
+<span><span class="co">##  [1] gtable_0.3.6        jsonlite_1.9.1      renv_1.1.2         </span></span>
+<span><span class="co">##  [4] BiocManager_1.30.25 dplyr_1.1.4         compiler_4.4.2     </span></span>
 <span><span class="co">##  [7] tidyselect_1.2.1    jquerylib_0.1.4     rvcheck_0.2.1      </span></span>
-<span><span class="co">## [10] systemfonts_1.1.0   scales_1.3.0        textshaping_0.4.0  </span></span>
+<span><span class="co">## [10] systemfonts_1.1.0   scales_1.3.0        textshaping_0.4.1  </span></span>
 <span><span class="co">## [13] yaml_2.3.10         fastmap_1.2.0       here_1.0.1         </span></span>
-<span><span class="co">## [16] ggplot2_3.5.1       R6_2.5.1            generics_0.1.3     </span></span>
-<span><span class="co">## [19] knitr_1.49          yulab.utils_0.1.9   htmlwidgets_1.6.4  </span></span>
+<span><span class="co">## [16] ggplot2_3.5.1       R6_2.6.1            generics_0.1.3     </span></span>
+<span><span class="co">## [19] knitr_1.49          yulab.utils_0.2.0   htmlwidgets_1.6.4  </span></span>
 <span><span class="co">## [22] tibble_3.2.1        desc_1.4.3          dlstats_0.1.7      </span></span>
-<span><span class="co">## [25] rprojroot_2.0.4     munsell_0.5.1       bslib_0.8.0        </span></span>
+<span><span class="co">## [25] rprojroot_2.0.4     munsell_0.5.1       bslib_0.9.0        </span></span>
 <span><span class="co">## [28] pillar_1.10.1       RColorBrewer_1.1-3  rlang_1.1.5        </span></span>
-<span><span class="co">## [31] cachem_1.1.0        badger_0.2.4        xfun_0.50          </span></span>
-<span><span class="co">## [34] fs_1.6.5            sass_0.4.9          cli_3.6.3          </span></span>
+<span><span class="co">## [31] cachem_1.1.0        badger_0.2.4        xfun_0.51          </span></span>
+<span><span class="co">## [34] fs_1.6.5            sass_0.4.9          cli_3.6.4          </span></span>
 <span><span class="co">## [37] pkgdown_2.1.1       magrittr_2.0.3      digest_0.6.37      </span></span>
-<span><span class="co">## [40] grid_4.4.1          lifecycle_1.0.4     vctrs_0.6.5        </span></span>
-<span><span class="co">## [43] data.table_1.16.4   evaluate_1.0.3      glue_1.8.0         </span></span>
-<span><span class="co">## [46] ragg_1.3.2          colorspace_2.1-1    rmarkdown_2.29     </span></span>
-<span><span class="co">## [49] tools_4.4.1         pkgconfig_2.0.3     htmltools_0.5.8.1</span></span></code></pre>
+<span><span class="co">## [40] grid_4.4.2          lifecycle_1.0.4     vctrs_0.6.5        </span></span>
+<span><span class="co">## [43] data.table_1.17.0   evaluate_1.0.3      glue_1.8.0         </span></span>
+<span><span class="co">## [46] ragg_1.3.3          colorspace_2.1-1    rmarkdown_2.29     </span></span>
+<span><span class="co">## [49] tools_4.4.2         pkgconfig_2.0.3     htmltools_0.5.8.1</span></span></code></pre>
 </details><hr>
 </div>
   </div>
