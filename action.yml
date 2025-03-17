@@ -352,12 +352,12 @@ runs:
         ncpus: ${{ inputs.ncpus }}
       run: |
          options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
-         options(Ncpus=as.integer(Sys.getenv("ncpus")))
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
          message(paste('**** Using', Sys.getenv("ncpus"), 'cores for installation.'))
+         repos <- BiocManager::repositories()
          remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=Sys.getenv("force_install"))
       continue-on-error: true
       shell: Rscript {0}
