@@ -156,6 +156,7 @@ use_workflow <- function(## action-level args
                          github_token="${{ secrets.GITHUB_TOKEN }}",
                          cache_version="cache-v1",
                          enable_act=FALSE,
+                         ncpus=2,
                          ### Checks
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
@@ -164,6 +165,7 @@ use_workflow <- function(## action-level args
                          has_testthat=TRUE, 
                          has_runit=FALSE,
                          run_covr=TRUE, 
+                         codecov_token="${{ secrets.CODECOV_TOKEN }}",
                          ### Latex
                          has_latex=FALSE,
                          tinytex_installer='TinyTeX-1',
@@ -237,6 +239,7 @@ use_workflow <- function(## action-level args
                    runners=runners,
                    ## workflow-level args
                    github_token=github_token,
+                   codecov_token=codecov_token,
                    run_bioccheck=run_bioccheck,
                    run_rcmdcheck=run_rcmdcheck, 
                    as_cran=as_cran,
@@ -260,7 +263,8 @@ use_workflow <- function(## action-level args
                    environment_file=environment_file,
                    channels=channels,
                    cache_version=cache_version,
-                   enable_act=enable_act)
+                   enable_act=enable_act,
+                   ncpus=ncpus)
   #### Preview ####
   if(isTRUE(preview)){
     preview_yaml(yml=yml) 
