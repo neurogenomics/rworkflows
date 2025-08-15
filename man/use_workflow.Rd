@@ -21,6 +21,7 @@ use_workflow(
   github_token = "${{ secrets.GITHUB_TOKEN }}",
   cache_version = "cache-v1",
   enable_act = FALSE,
+  ncpus = 2,
   run_bioccheck = FALSE,
   run_rcmdcheck = TRUE,
   as_cran = TRUE,
@@ -28,6 +29,7 @@ use_workflow(
   has_testthat = TRUE,
   has_runit = FALSE,
   run_covr = TRUE,
+  codecov_token = "${{ secrets.CODECOV_TOKEN }}",
   has_latex = FALSE,
   tinytex_installer = "TinyTeX-1",
   tinytex_version = NULL,
@@ -103,6 +105,10 @@ when reinstalling software in GHA.}
 enable local workflow checking with 
 \href{https://github.com/nektos/act}{act}.}
 
+\item{ncpus}{Number of CPUs to use for R package installation. Higher values
+can speed up the dependency installation process but may result in spurious
+errors. (default = \code{2})}
+
 \item{run_bioccheck}{Run Bioconductor checks using
 \href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{
 \code{BiocCheck::BiocCheck()}}. 
@@ -122,6 +128,12 @@ use the '--as-cran' flag to apply CRAN standards}
 \item{has_runit}{Run R Unit tests.}
 
 \item{run_covr}{Run code coverage tests and publish results to codecov.}
+
+\item{codecov_token}{Codecov repository token needed to upload coverage
+reports. Providing this token helps prevent report upload failures by
+bypassing Codecov's GitHub API rate limits. Read
+\href{https://docs.codecov.com/docs/adding-the-codecov-token}{
+here for more details}.}
 
 \item{has_latex}{Install a suite of LaTeX dependencies used for 
 rendering Sweave (.rnw) and other documentation files.}
