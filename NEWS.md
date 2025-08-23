@@ -1,3 +1,14 @@
+# rworkflows 1.0.7
+
+## New features
+
+* New arg for number of cores to use for R package installation (`ncpus`).
+* Add `CODECOV_TOKEN` and `ncpus` to `rworkflows.yml` template.
+* Update to `actions/cache@v4` as v3 is marked for deprecation.
+## Documentation
+* Mention `CODECOV_TOKEN` in GitHub Secrets section.
+
+
 # rworkflows 1.0.6
 
 ## Bug fixes

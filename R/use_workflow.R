@@ -68,6 +68,11 @@
 #' Read 
 #' \href{https://docs.github.com/en/actions/security-guides/automatic-token-authentication}{
 #' here for more details}.
+#' @param codecov_token Codecov repository token needed to upload coverage
+#' reports. Providing this token helps prevent report upload failures by
+#' bypassing Codecov's GitHub API rate limits. Read
+#' \href{https://docs.codecov.com/docs/adding-the-codecov-token}{
+#' here for more details}.
 #' @param run_docker Whether to build and push a Docker container to DockerHub.
 #' @param docker_registry Docker container registry to push to. 
 #' Options include:
@@ -95,6 +100,9 @@
 #' @param enable_act Whether to add extra lines to the yaml to 
 #' enable local workflow checking with 
 #' \href{https://github.com/nektos/act}{act}.
+#' @param ncpus Number of CPUs to use for R package installation. Higher values
+#' can speed up the dependency installation process but may result in spurious
+#' errors. (default = \code{2})
 #' @param miniforge_variant If provided, this variant of Miniforge will be
 #'  downloaded and installed. If \code{miniforge_variant=false}, 
 #'  Miniforge will not be installed at all.
@@ -156,6 +164,7 @@ use_workflow <- function(## action-level args
                          github_token="${{ secrets.GITHUB_TOKEN }}",
                          cache_version="cache-v1",
                          enable_act=FALSE,
+                         ncpus=2,
                          ### Checks
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
@@ -164,6 +173,7 @@ use_workflow <- function(## action-level args
                          has_testthat=TRUE, 
                          has_runit=FALSE,
                          run_covr=TRUE, 
+                         codecov_token="${{ secrets.CODECOV_TOKEN }}",
                          ### Latex
                          has_latex=FALSE,
                          tinytex_installer='TinyTeX-1',
@@ -237,6 +247,7 @@ use_workflow <- function(## action-level args
                    runners=runners,
                    ## workflow-level args
                    github_token=github_token,
+                   codecov_token=codecov_token,
                    run_bioccheck=run_bioccheck,
                    run_rcmdcheck=run_rcmdcheck, 
                    as_cran=as_cran,
@@ -260,7 +271,8 @@ use_workflow <- function(## action-level args
                    environment_file=environment_file,
                    channels=channels,
                    cache_version=cache_version,
-                   enable_act=enable_act)
+                   enable_act=enable_act,
+                   ncpus=ncpus)
   #### Preview ####
   if(isTRUE(preview)){
     preview_yaml(yml=yml) 

@@ -30,7 +30,11 @@ Before pushing changes to your new R package, you may want to set up one or more
     Authentication Token using [these
     instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).   
 * `DOCKER_TOKEN` [Optional]: Allows GitHub Actions to push to a
-    [DockerHub](https://hub.docker.com) account. 
+    [DockerHub](https://hub.docker.com) account.   
+* `CODECOV_TOKEN` [Optional]: Codecov repository token to upload coverage
+      reports. Providing this token helps prevent report upload failures by
+      bypassing Codecov's GitHub API rate limits. See the [Codecov documentation](https://docs.codecov.com/docs/adding-the-codecov-token)
+      for details.   
 
 # `use_workflow`
 

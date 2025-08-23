@@ -25,7 +25,7 @@ jobs:
         - os: ubuntu-latest
           r: auto
           bioc: release
-          cont: ghcr.io/bioconductor/bioconductor_docker:RELEASE_3_19
+          cont: ghcr.io/bioconductor/bioconductor_docker:RELEASE_3_20
           python-version: 3.11
         - os: macOS-latest
           r: latest
@@ -50,7 +50,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         runner_os: ${{ runner.os }}
         cache_version: cache-v1
+        ncpus: 2
         # free_diskspace: ${{ true }}
         # miniforge_variant: false
