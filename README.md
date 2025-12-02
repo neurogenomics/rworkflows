@@ -19,11 +19,11 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/bad
 <br>
 <a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
 <h4>  
-Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene, Hiranyamaya
-(Hiru) Dash</i>  
+Authors: <i>Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan
+Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Mar-17-2025</i>  
+README updated: <i>Dec-02-2025</i>  
 </h4>
 
 [![CRAN
@@ -294,13 +294,13 @@ GitHub Action to setup Miniconda and conda environments.
 utils::sessionInfo()
 ```
 
-    ## R version 4.4.2 (2024-10-31)
+    ## R Under development (unstable) (2025-10-27 r88972)
     ## Platform: aarch64-apple-darwin20
-    ## Running under: macOS Sequoia 15.3.1
+    ## Running under: macOS Tahoe 26.1
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -312,20 +312,20 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.6        jsonlite_1.9.1      renv_1.1.2         
-    ##  [4] dplyr_1.1.4         compiler_4.4.2      BiocManager_1.30.25
-    ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.3.0       
-    ## [10] yaml_2.3.10         fastmap_1.2.0       here_1.0.1         
-    ## [13] ggplot2_3.5.1       R6_2.6.1            generics_0.1.3     
-    ## [16] knitr_1.49          yulab.utils_0.2.0   tibble_3.2.1       
-    ## [19] desc_1.4.3          dlstats_0.1.7       munsell_0.5.1      
-    ## [22] rprojroot_2.0.4     pillar_1.10.1       RColorBrewer_1.1-3 
-    ## [25] rlang_1.1.5         badger_0.2.4        xfun_0.51          
-    ## [28] fs_1.6.5            cli_3.6.4           magrittr_2.0.3     
-    ## [31] rworkflows_1.0.7    digest_0.6.37       grid_4.4.2         
-    ## [34] rstudioapi_0.17.1   lifecycle_1.0.4     vctrs_0.6.5        
-    ## [37] evaluate_1.0.3      glue_1.8.0          data.table_1.17.0  
-    ## [40] colorspace_2.1-1    rmarkdown_2.29      tools_4.4.2        
-    ## [43] pkgconfig_2.0.3     htmltools_0.5.8.1
+    ##  [1] gtable_0.3.6        jsonlite_2.0.0      renv_1.1.5         
+    ##  [4] dplyr_1.1.4         compiler_4.6.0      BiocManager_1.30.27
+    ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.4.0       
+    ## [10] yaml_2.3.11         fastmap_1.2.0       here_1.0.2         
+    ## [13] ggplot2_4.0.0       R6_2.6.1            generics_0.1.4     
+    ## [16] knitr_1.50          yulab.utils_0.2.2   tibble_3.3.0       
+    ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.1.1    
+    ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.1.6        
+    ## [25] badger_0.2.5        xfun_0.54           fs_1.6.6           
+    ## [28] S7_0.2.1            cli_3.6.5           magrittr_2.0.4     
+    ## [31] rworkflows_1.0.8    digest_0.6.39       grid_4.6.0         
+    ## [34] rstudioapi_0.17.1   rappdirs_0.3.3      lifecycle_1.0.4    
+    ## [37] vctrs_0.6.5         evaluate_1.0.5      glue_1.8.0         
+    ## [40] data.table_1.17.8   farver_2.1.2        rmarkdown_2.30     
+    ## [43] tools_4.6.0         pkgconfig_2.0.3     htmltools_0.5.8.1
 
 </details>

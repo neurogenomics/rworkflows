@@ -603,3 +603,5 @@ runs:
         build_args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
+        secrets: |
+          GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}

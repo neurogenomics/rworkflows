@@ -44,7 +44,8 @@ RUN mkdir -p /$PKG
 ADD . /$PKG
 WORKDIR /$PKG
 #### Install package dependencies ####
-RUN Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE, timeout=2000); \
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_PAT \
+    Rscript -e 'options(download.file.method="libcurl", crayon.enabled=TRUE, timeout=2000); \
                 if(!require("BiocManager")) install.packages("BiocManager"); \
                 if(!require("remotes")) install.packages("remotes"); \
                 repos <- BiocManager::repositories(); \
