@@ -1,6 +1,6 @@
 test_that("get_authors works", {
   
-  true_auths <- "Brian Schilder, Alan Murphy, Nathan Skene, Hiranyamaya (Hiru) Dash"
+  true_auths <- "Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan Skene"
   #### ref is NULL ####
   auths1 <- get_authors(ref = NULL)
   testthat::expect_null(auths1)
