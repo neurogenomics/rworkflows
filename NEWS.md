@@ -1,3 +1,11 @@
+# rworkflows 1.0.8
+
+## Miscellaneous
+
+* Docker build now uses GITHUB_TOKEN for authentication to avoid rate limiting.
+Token is passed as a secret and consumed during the build stage to prevent it
+from being stored in the final image.
+
 # rworkflows 1.0.7
 
 ## New features
