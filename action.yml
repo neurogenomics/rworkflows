@@ -583,6 +583,13 @@ runs:
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0} 
+      
+    - name: 🐳⬇️ Set up Docker
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/setup-docker-action@v4
+      with:
+        github-token: ${{ inputs.GITHUB_TOKEN }}
           
     - name: 🐳🔒 Login to Docker Registry
       if: |
