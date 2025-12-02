@@ -5,6 +5,7 @@
 * Docker build now uses GITHUB_TOKEN for authentication to avoid rate limiting.
 Token is passed as a secret and consumed during the build stage to prevent it
 from being stored in the final image.
+* Update Docker workflow to use `docker/build-push-action@v6`.
 
 # rworkflows 1.0.7
 
