@@ -28,15 +28,7 @@ jobs:
           r: auto
           bioc: release
           cont: ghcr.io/bioconductor/bioconductor_docker:latest
-          python-version: 3.11
-        - os: macOS-latest
-          r: latest
-          bioc: release
-          python-version: 3.11
-        - os: windows-latest
-          r: latest
-          bioc: release
-          python-version: 3.11
+          python-version: 3.12
     steps:
     - uses: neurogenomics/rworkflows@docker-ghtoken
       with:

@@ -587,9 +587,9 @@ runs:
     - name: 🐳⬇️ Set up Docker
       if: |
         (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
-      uses: docker/setup-docker-action@v4
-      with:
-        github-token: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+        sudo apt-get install -y docker.io
+      shell: bash {0}
           
     - name: 🐳🔒 Login to Docker Registry
       if: |
