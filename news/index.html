@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.8</span>
       </span>
     </div>
 
@@ -66,9 +66,17 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/revert-143-docker-ghtoken/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/docker-ghtoken/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.8" id="rworkflows-108">rworkflows 1.0.8<a class="anchor" aria-label="anchor" href="#rworkflows-108"></a></h2>
+<div class="section level3">
+<h3 id="miscellaneous-1-0-8">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-1-0-8"></a></h3>
+<ul><li>Docker build now uses GITHUB_TOKEN for authentication to avoid rate limiting. Token is passed as a secret and consumed during the build stage to prevent it from being stored in the final image.</li>
+<li>Update Docker workflow to use <code>docker/build-push-action@v6</code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.7" id="rworkflows-107">rworkflows 1.0.7<a class="anchor" aria-label="anchor" href="#rworkflows-107"></a></h2>
 <div class="section level3">

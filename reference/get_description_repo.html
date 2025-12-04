@@ -20,7 +20,7 @@ in standard R repositories (CRAN, Bioc).
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.8</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@ in standard R repositories (CRAN, Bioc).
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get <em>DESCRIPTION</em> files for R repos</h1>
-    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/revert-143-docker-ghtoken/R/get_description_repo.R" class="external-link"><code>R/get_description_repo.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/docker-ghtoken/R/get_description_repo.R" class="external-link"><code>R/get_description_repo.R</code></a></small>
     <div class="hidden name"><code>get_description_repo.Rd</code></div>
     </div>
 
@@ -113,8 +113,10 @@ not all repos are available for all versions, particularly older versions.</p></
 
 
 <dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>The requested Bioconductor version. Will
-default to use the BiocManager defaults (i.e., <code><a href="https://rdrr.io/r/base/Version.html" class="external-link">version()</a></code>).</p></dd>
+<dd><p><code>character(1)</code> or <code>package_version</code> indicating the
+<em>Bioconductor</em> version (e.g., "3.22"). Defaults to the "current version"
+provided by <code><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">BiocManager::version()</a></code>. The keywords "release" and "devel"
+are also accepted.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
