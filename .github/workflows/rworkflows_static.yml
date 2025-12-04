@@ -423,6 +423,12 @@ jobs:
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0}
+    - name: "\U0001F433⬇️ Set up Docker"
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
+      run: |
+        sudo apt-get install -y docker.io
+      shell: bash {0}
     - name: "\U0001F433\U0001F512 Login to Docker Registry"
       if: |
         (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
@@ -440,10 +446,12 @@ jobs:
         (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
       uses: docker/build-push-action@v6
       with:
+        context: '.'
+        file: ./Dockerfile
         push: ${{ true }}
         tags: |
-          ${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
-          ${{ env.dockerOrg }}/${{ env.packageName }}:latest
+          ${{ env.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
+          ${{ env.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:latest
         build-args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
