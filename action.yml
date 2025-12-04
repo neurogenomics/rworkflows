@@ -511,7 +511,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         #### Docker repos must be lowercase (,,) ####
-        ## NOTE: Bash cannot intrepret variables with "." in them when trying to
+        ## NOTE: Bash cannot interpret variables with "." in them when trying to
         ## string manipulation (e.g. making lowercase with ",,").
         ## So use "GITHUB_REPOSITORY_OWNER" instead of "github.repository_owner",
         ## or store the variable as an intermediate variable without "." in it.
@@ -583,6 +583,13 @@ runs:
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0} 
+      
+    - name: 🐳⬇️ Set up Docker
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
+      run: |
+        sudo apt-get install -y docker.io
+      shell: bash {0}
           
     - name: 🐳🔒 Login to Docker Registry
       if: |
@@ -603,10 +610,12 @@ runs:
         (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       uses: docker/build-push-action@v6
       with:
+        context: "."
+        file: ./Dockerfile
         push: true
         tags: |
-          ${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
-          ${{ env.dockerOrg }}/${{ env.packageName }}:latest
+          ${{ inputs.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
+          ${{ inputs.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:latest
         build-args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
@@ -614,3 +623,5 @@ runs:
           GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
+
