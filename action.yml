@@ -610,7 +610,7 @@ runs:
         (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
       uses: docker/build-push-action@v6
       with:
-        context: .
+        context: "."
         file: ./Dockerfile
         push: true
         tags: |
@@ -623,4 +623,5 @@ runs:
           GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+
 
