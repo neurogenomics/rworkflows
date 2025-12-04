@@ -188,7 +188,7 @@ runs:
   steps:
     - name: 🔭 Collect Workflow Telemetry 
       if: inputs.run_telemetry == 'true'
-      uses: runforesight/workflow-telemetry-action@v1
+      uses: catchpoint/workflow-telemetry-action@v2
       continue-on-error: true
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}

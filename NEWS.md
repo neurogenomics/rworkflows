@@ -6,6 +6,7 @@
 Token is passed as a secret and consumed during the build stage to prevent it
 from being stored in the final image.
 * Update Docker workflow to use `docker/build-push-action@v6`.
+* Update workflow-telemetry action.
 
 # rworkflows 1.0.7
 
