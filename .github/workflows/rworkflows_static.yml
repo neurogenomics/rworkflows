@@ -27,7 +27,9 @@ env:
   run_docker: ${{ false }}
   docker_registry: ghcr.io
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  ncpus: 2.0
   cache_version: cache-v1
   miniforge_variant: ${{ false }}
   activate_environment: test
@@ -42,9 +44,9 @@ jobs:
       matrix:
         config:
         - os: ubuntu-latest
+          bioc: devel
           r: auto
-          bioc: release
-          cont: ghcr.io/bioconductor/bioconductor_docker:latest
+          cont: ghcr.io/bioconductor/bioconductor_docker:devel
           rspm: ~
         - os: macOS-latest
           bioc: release
@@ -64,10 +66,12 @@ jobs:
       RGL_USE_NULL: ${{ true }}
     steps:
     - name: "\U0001F52D Collect Workflow Telemetry"
+      if: env.run_telemetry == 'true'
       uses: runforesight/workflow-telemetry-action@v1
       continue-on-error: ${{ true }}
       with:
         github_token: ${{ env.GITHUB_TOKEN }}
+        comment_on_pr: ${{ false }}
     - name: "\U0001F4BE Free Disk Space"
       if: env.free_diskspace == 'true' && runner.os == 'Linux'
       uses: jlumbroso/free-disk-space@main
@@ -203,25 +207,29 @@ jobs:
       env:
         timeout: ${{ env.timeout }}
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        force_install: ${{ env.force_install }}
+        ncpus: ${{ env.ncpus }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
         ## For running the checks
         message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
         install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
+        message(paste('**** Using', Sys.getenv("ncpus"), 'cores for installation.'))
         repos <- BiocManager::repositories()
-        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE)
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=Sys.getenv("force_install"))
       continue-on-error: ${{ true }}
       shell: Rscript {0}
     - name: "\U0001F6E0 Install dependencies pass 2"
       env:
         timeout: ${{ env.timeout }}
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        ncpus: ${{ env.ncpus }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
-        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=TRUE)
+        remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
       shell: Rscript {0}
     - name: "\U0001F6E0 Install RUnit (via BiocGenerics)"
       if: env.has_runit == 'true'
@@ -241,6 +249,16 @@ jobs:
         options(crayon.enabled = TRUE)
         install.packages("pkgdown")
       shell: Rscript {0}
+    - name: "\U0001F6E0 Install gh cli and jq"
+      if: env.run_pkgdown == 'true' && runner.os == 'Linux'
+      run: |
+        sudo apt-get install -y gh jq
+      shell: bash {0}
+    - name: "\U0001F6E0 Update quarto to latest release"
+      if: env.run_pkgdown == 'true' && runner.os == 'Linux'
+      uses: quarto-dev/quarto-actions/setup@v2
+      with:
+        version: release
     - name: ℹ️ Session info ️
       run: |
         options(width = 100, crayon.enabled = TRUE)
@@ -259,6 +277,7 @@ jobs:
         AS_CRAN: ${{ env.as_cran }}
         run_vignettes: ${{ env.run_vignettes }}
         timeout: ${{ env.timeout }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
@@ -280,6 +299,7 @@ jobs:
       if: env.has_runit == 'true'
       env:
         timeout: ${{ env.timeout }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         BiocGenerics:::testPackage()
@@ -292,6 +312,7 @@ jobs:
         run_vignettes: ${{ env.run_vignettes }}
         as_cran: ${{ env.as_cran }}
         timeout: ${{ env.timeout }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
         #### Install deps ####
@@ -311,25 +332,51 @@ jobs:
       shell: Rscript {0}
     - name: "\U0001F4CB Test coverage"
       if: env.run_covr == 'true' && runner.os == 'Linux'
+      env:
+        CODECOV_TOKEN: ${{ env.CODECOV_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
+        ## NOTE: codecov() uses CODECOV_TOKEN env var if specified.
+        ## (recommended)
         covr::codecov()
       shell: Rscript {0}
     - name: "\U0001F6E0 Install package ️"
       if: env.run_pkgdown == 'true' && runner.os == 'Linux'
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: R CMD INSTALL .
       shell: bash {0}
     - name: ℹ️ Get R package info
       if: runner.os == 'Linux'
+      env:
+        dockerRegistry: ${{ env.docker_registry }}
+        dockerOrg: ${{ env.docker_org }}
+        dockerUser: ${{ env.docker_user }}
+        DOCKER_TOKEN: ${{ env.DOCKER_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
-        #### DockerHub repos must be lowercase (,,) ####
-        name=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
-        echo "packageName=${name,,}" >> $GITHUB_ENV
-        echo "packageNameOrig=${name}" >> $GITHUB_ENV
-        echo $name
+        #### Docker repos must be lowercase (,,) ####
+        ## NOTE: Bash cannot intrepret variables with "." in them when trying to
+        ## string manipulation (e.g. making lowercase with ",,").
+        ## So use "GITHUB_REPOSITORY_OWNER" instead of "github.repository_owner",
+        ## or store the variable as an intermediate variable without "." in it.
+        ## Also be sure to exclude any surrounding spaces inside the "{}" when using ",,".
+        packageNameOrig=$(grep '^Package:' DESCRIPTION | cut -d\   -f2)
+        echo "packageName=${packageNameOrig,,}" >> $GITHUB_ENV
+        echo "packageNameOrig=${packageNameOrig}" >> $GITHUB_ENV
         version=$(grep Version DESCRIPTION | grep -o "[0-9.]\+")
         echo "packageVersion=${version}" >> $GITHUB_ENV
-        echo $version
         echo "BASE_IMAGE=${{ matrix.config.cont }}" >> $GITHUB_ENV
+        #### Adjust docker args depending on docker_registry ####
+        if [[ $dockerRegistry == "docker.io" ]]; then
+          echo "dockerOrg=${dockerOrg,,}" >> $GITHUB_ENV
+          echo "dockerUser=${dockerUser}" >> $GITHUB_ENV
+          echo "dockerPass=${DOCKER_TOKEN}" >> $GITHUB_ENV;
+        else
+          echo "dockerOrg=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
+          echo "dockerUser=${GITHUB_ACTOR}" >> $GITHUB_ENV
+          echo "dockerPass=${GITHUB_TOKEN}" >> $GITHUB_ENV;
+        fi
       shell: bash {0}
     - name: "\U0001F4E6 Render README"
       if: env.run_pkgdown == 'true' && runner.os == 'Linux'
@@ -344,6 +391,8 @@ jobs:
       shell: Rscript {0}
     - name: "\U0001F4E6 Build pkgdown site"
       if: env.run_pkgdown == 'true' && runner.os == 'Linux'
+      env:
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         options(crayon.enabled = TRUE)
         pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
@@ -365,7 +414,7 @@ jobs:
         path: check
     - name: "\U0001F433✏️ Create Docker file"
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && runner.os == 'Linux'
+        (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
       env:
         BASE_IMAGE: ${{ matrix.config.cont }}
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
@@ -374,40 +423,31 @@ jobs:
         if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows")
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0}
-    - name: "\U0001F433\U0001F680 Build and push to GHCR"
+    - name: "\U0001F433\U0001F512 Login to Docker Registry"
       if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && runner.os == 'Linux' && env.docker_registry == 'ghcr.io'
-      uses: docker/build-push-action@v1
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/login-action@v3
       with:
-        username: ${{ github.repository_owner }}
-        password: ${{ env.GITHUB_TOKEN }}
         registry: ${{ env.docker_registry }}
-        repository: ${{ github.repository }}
-        tag_with_ref: ${{ true }}
-        tag_with_sha: ${{ false }}
+        username: ${{ env.dockerUser }}
+        password: ${{ env.dockerPass }}
+    - name: "\U0001F433⚙️ Setup Docker Buildx"
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/setup-buildx-action@v3
+    - name: "\U0001F433\U0001F680 Build and Push to Docker Registry"
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && env.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/build-push-action@v6
+      with:
+        push: ${{ true }}
         tags: |
-          ${{ env.packageVersion }},
-          latest
-        build_args: |
+          ${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
+          ${{ env.dockerOrg }}/${{ env.packageName }}:latest
+        build-args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
-    - name: "\U0001F433\U0001F680 Build and push to DockerHub"
-      if: |
-        (!contains(github.event.head_commit.message, '/nodocker')) && env.run_docker == 'true' && runner.os == 'Linux' && env.docker_registry == 'docker.io'
-      uses: docker/build-push-action@v1
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
-      with:
-        username: ${{ env.docker_user }}
-        password: ${{ env.DOCKER_TOKEN }}
-        repository: ${{ env.docker_org }}/${{ env.packageName }}
-        tag_with_ref: ${{ true }}
-        tag_with_sha: ${{ false }}
-        tags: |
-          ${{ env.packageVersion }},
-          latest
-        build_args: |-
-          PKG=${{ env.packageNameOrig }},
-          BASE_IMAGE=${{ env.BASE_IMAGE }}
+        secrets: |
+          GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max

@@ -6,15 +6,13 @@
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.5281/zenodo.10048573-blue.svg)](https://doi.org/https://doi.org/10.5281/zenodo.10048573)
 <br>
-[![](https://img.shields.io/badge/devel%20version-1.0.7-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-1.0.8-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
-[![R build
-status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/rworkflows)
 <br>
 <a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
@@ -23,7 +21,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan
 Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Dec-02-2025</i>  
+README updated: <i>Dec-04-2025</i>  
 </h4>
 
 [![CRAN
