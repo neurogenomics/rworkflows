@@ -614,8 +614,8 @@ runs:
         file: ./Dockerfile
         push: true
         tags: |
-          ${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
-          ${{ env.dockerOrg }}/${{ env.packageName }}:latest
+          ${{ inputs.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
+          ${{ inputs.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:latest
         build-args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}

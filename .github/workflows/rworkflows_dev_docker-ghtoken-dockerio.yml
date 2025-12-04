@@ -1,4 +1,4 @@
-name: rworkflows_dev_docker-ghtoken
+name: rworkflows_dev_docker-ghtoken-dockerio
 'on':
   push:
     branches:
@@ -43,6 +43,10 @@ jobs:
         # has_latex: ${{ true }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run_docker: ${{ true }}
+        docker_registry: docker.io
+        docker_org: ${{ secrets.DOCKER_ORG }}
+        docker_user: bschilder
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         runner_os: ${{ runner.os }}
         cache_version: cache-v1
