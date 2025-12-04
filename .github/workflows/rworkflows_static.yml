@@ -356,7 +356,7 @@ jobs:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         #### Docker repos must be lowercase (,,) ####
-        ## NOTE: Bash cannot intrepret variables with "." in them when trying to
+        ## NOTE: Bash cannot interpret variables with "." in them when trying to
         ## string manipulation (e.g. making lowercase with ",,").
         ## So use "GITHUB_REPOSITORY_OWNER" instead of "github.repository_owner",
         ## or store the variable as an intermediate variable without "." in it.
