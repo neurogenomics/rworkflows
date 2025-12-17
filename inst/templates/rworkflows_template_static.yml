@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, r: 'devel', bioc: 'devel', cont: "bioconductor/bioconductor_docker:devel"}
+          - { os: ubuntu-latest, r: 'auto', bioc: 'release', cont: "bioconductor/bioconductor_docker:release"}
           - { os: macOS-latest, r: 'latest', bioc: 'release'}
           - { os: windows-latest, r: 'latest', bioc: 'release'} 
     env:
