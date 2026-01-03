@@ -1,3 +1,5 @@
+rworkflows_*.tar.gz
+rworkflows.Rcheck
 Icon?
 inst/hex/*.pptx
 inst/hex/*.svg
