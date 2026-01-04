@@ -1,6 +1,6 @@
 ---
 title: ""  
-author: "`r rworkflows::use_badges(add_actions=c('rworkflows','rworkflows_static','rworkflows_dev'), add_cran_release = TRUE, add_cran_checks = FALSE, add_cran_download_month=TRUE, add_cran_download_total=TRUE, add_codecov_graphs='icicle', hex_height=350, add_doi='https://doi.org/10.5281/zenodo.10048573')`" 
+author: "`r rworkflows::use_badges(add_actions=c('rworkflows','rworkflows_static'), add_cran_release = TRUE, add_cran_checks = FALSE, add_cran_download_month=TRUE, add_cran_download_total=TRUE, add_codecov_graphs='icicle', hex_height=350, add_doi='https://doi.org/10.5281/zenodo.10048573')`" 
 date: "<h4>README updated: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   github_document
@@ -134,7 +134,11 @@ To use certain features of `rworkflows`, you may need to set up one or more
     repos on GitHub Actions. You can generate your very own Personal
     Authentication Token with `usethis::create_github_token()`. See the [GitHub docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) for details.   
 * `DOCKER_TOKEN` [Optional]: Allows GitHub Actions to push to a
-    [DockerHub](https://hub.docker.com) account. 
+    [DockerHub](https://hub.docker.com) account.  
+* `CODECOV_TOKEN` [Optional]: Codecov repository token to upload coverage
+      reports. Providing this token helps prevent report upload failures by
+      bypassing Codecov's GitHub API rate limits. See the [Codecov documentation](https://docs.codecov.com/docs/adding-the-codecov-token)
+      for details.   
 
 ## Acknowledgments
 `rworkflows` builds upon the work of many others, especially the following:

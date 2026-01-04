@@ -33,9 +33,11 @@ fill_yaml <- function(## function-level args
                       run_docker,  
                       docker_registry,
                       github_token,
+                      codecov_token,
                       docker_user,
                       docker_org,
                       docker_token,
+                      ncpus,
                       cache_version, 
                       miniforge_variant,
                       miniforge_version,
@@ -90,7 +92,11 @@ fill_yaml <- function(## function-level args
   #### Omit certain variables when equal to default ####
   ## Don't do this for rworkflows_static as this setup has no default values.
   for(a in args_list){
-    nm <- if(a %in% c("github_token","docker_token")) toupper(a) else a
+    nm <- if(a %in% c("github_token","docker_token","codecov_token")) {
+        toupper(a)
+      } else {
+        a
+      }
     with2[nm] <- if(a %in% omit_defaults &&
                     template!="rworkflows_static") {
       omit_if_default(arg = a)

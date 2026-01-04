@@ -176,13 +176,19 @@ inputs:
       Recommended to set to `true` when pushing changes without updating R
       package version, such as during pre-release phase of developement.
     default: false
+  ncpus:
+    description: >
+      Number of CPUs to use for R package installation. Higher values can speed
+      up the dependency installation process but may result in spurious errors.
+      Default is 2.
+    default: 2
 
 runs:
   using: 'composite'
   steps:
     - name: 🔭 Collect Workflow Telemetry 
       if: inputs.run_telemetry == 'true'
-      uses: runforesight/workflow-telemetry-action@v1
+      uses: catchpoint/workflow-telemetry-action@v2
       continue-on-error: true
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
@@ -257,7 +263,7 @@ runs:
     - name: 🏦 Restore R package cache 
       if: |
         !contains(github.event.head_commit.message, '[nocache]') && runner.os != 'Linux'
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ env.R_LIBS_USER }}
         key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
@@ -266,7 +272,7 @@ runs:
     - name: 🏦 Cache R packages on Linux 
       if: |
         !contains(github.event.head_commit.message, '[nocache]') && runner.os == 'Linux'
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: /home/runner/work/_temp/Library
         key: ${{ inputs.cache_version }}-${{ runner.os }}-biocversion-${{ matrix.config.bioc }}-r-${{  matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
@@ -343,12 +349,14 @@ runs:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         force_install: ${{ inputs.force_install }}
+        ncpus: ${{ inputs.ncpus }}
       run: |
-         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
+         message(paste('**** Using', Sys.getenv("ncpus"), 'cores for installation.'))
          repos <- BiocManager::repositories()
          remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=Sys.getenv("force_install"))
       continue-on-error: true
@@ -358,8 +366,9 @@ runs:
       env:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        ncpus: ${{ inputs.ncpus }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
@@ -502,7 +511,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         #### Docker repos must be lowercase (,,) ####
-        ## NOTE: Bash cannot intrepret variables with "." in them when trying to
+        ## NOTE: Bash cannot interpret variables with "." in them when trying to
         ## string manipulation (e.g. making lowercase with ",,").
         ## So use "GITHUB_REPOSITORY_OWNER" instead of "github.repository_owner",
         ## or store the variable as an intermediate variable without "." in it.
@@ -575,22 +584,44 @@ runs:
         path <- rworkflows::use_dockerfile(base_image=Sys.getenv("BASE_IMAGE"))
       shell: Rscript {0} 
       
-    - name: 🐳🚀 Build and Push to Docker Registry 
+    - name: 🐳⬇️ Set up Docker
       if: |
         (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
-      uses: docker/build-push-action@v1
-      env: 
-        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      run: |
+        sudo apt-get install -y docker.io
+      shell: bash {0}
+          
+    - name: 🐳🔒 Login to Docker Registry
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/login-action@v3
       with:
+        registry: ${{ inputs.docker_registry }}
         username: ${{ env.dockerUser }}
         password: ${{ env.dockerPass }}
-        registry: ${{ inputs.docker_registry }}
-        repository: ${{ env.dockerOrg }}/${{ env.packageName }}
-        tag_with_ref: true
-        tag_with_sha: false
+        
+    - name: 🐳⚙️ Setup Docker Buildx
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/setup-buildx-action@v3
+      
+    - name: 🐳🚀 Build and Push to Docker Registry
+      if: |
+        (!contains(github.event.head_commit.message, '[nodocker]')) && inputs.run_docker == 'true' && runner.os == 'Linux'
+      uses: docker/build-push-action@v6
+      with:
+        context: "."
+        file: ./Dockerfile
+        push: true
         tags: |
-          ${{ env.packageVersion }},
-          latest
-        build_args: |
+          ${{ inputs.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:${{ env.packageVersion }},
+          ${{ inputs.docker_registry }}/${{ env.dockerOrg }}/${{ env.packageName }}:latest
+        build-args: |
           PKG=${{ env.packageNameOrig }},
           BASE_IMAGE=${{ matrix.config.cont }}
+        secrets: |
+          GITHUB_TOKEN=${{ inputs.GITHUB_TOKEN }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+

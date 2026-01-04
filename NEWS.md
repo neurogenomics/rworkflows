@@ -1,3 +1,24 @@
+# rworkflows 1.0.8
+
+## Miscellaneous
+
+* Docker build now uses GITHUB_TOKEN for authentication to avoid rate limiting.
+Token is passed as a secret and consumed during the build stage to prevent it
+from being stored in the final image.
+* Update Docker workflow to use `docker/build-push-action@v6`.
+* Update workflow-telemetry action.
+
+# rworkflows 1.0.7
+
+## New features
+
+* New arg for number of cores to use for R package installation (`ncpus`).
+* Add `CODECOV_TOKEN` and `ncpus` to `rworkflows.yml` template.
+* Update to `actions/cache@v4` as v3 is marked for deprecation.
+## Documentation
+* Mention `CODECOV_TOKEN` in GitHub Secrets section.
+
+
 # rworkflows 1.0.6
 
 ## Bug fixes

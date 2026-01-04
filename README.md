@@ -6,23 +6,22 @@
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.5281/zenodo.10048573-blue.svg)](https://doi.org/https://doi.org/10.5281/zenodo.10048573)
 <br>
-[![](https://img.shields.io/badge/devel%20version-1.0.5-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-1.0.8-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![R build
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
-[![R build
-status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_dev/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/rworkflows)
 <br>
 <a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
 <h4>  
-Authors: <i>Brian Schilder, Alan Murphy, Nathan Skene</i>  
+Authors: <i>Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan
+Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Dec-18-2024</i>  
+README updated: <i>Dec-04-2025</i>  
 </h4>
 
 [![CRAN
@@ -190,7 +189,13 @@ Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
   docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   for details.  
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
-  [DockerHub](https://hub.docker.com) account.
+  [DockerHub](https://hub.docker.com) account.  
+- `CODECOV_TOKEN` \[Optional\]: Codecov repository token to upload
+  coverage reports. Providing this token helps prevent report upload
+  failures by bypassing Codecov’s GitHub API rate limits. See the
+  [Codecov
+  documentation](https://docs.codecov.com/docs/adding-the-codecov-token)
+  for details.
 
 ## Acknowledgments
 
@@ -287,13 +292,13 @@ GitHub Action to setup Miniconda and conda environments.
 utils::sessionInfo()
 ```
 
-    ## R version 4.4.1 (2024-06-14)
+    ## R Under development (unstable) (2025-10-27 r88972)
     ## Platform: aarch64-apple-darwin20
-    ## Running under: macOS 15.1
+    ## Running under: macOS Tahoe 26.1
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -305,21 +310,20 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.6        jsonlite_1.8.9      renv_1.0.11        
-    ##  [4] dplyr_1.1.4         compiler_4.4.1      BiocManager_1.30.25
-    ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.3.0       
-    ## [10] yaml_2.3.10         fastmap_1.2.0       here_1.0.1         
-    ## [13] ggplot2_3.5.1       R6_2.5.1            generics_0.1.3     
-    ## [16] knitr_1.48          yulab.utils_0.1.7   tibble_3.2.1       
-    ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.0.4    
-    ## [22] munsell_0.5.1       pillar_1.9.0        RColorBrewer_1.1-3 
-    ## [25] rlang_1.1.4         utf8_1.2.4          badger_0.2.4       
-    ## [28] xfun_0.49           fs_1.6.5            cli_3.6.3          
-    ## [31] magrittr_2.0.3      rworkflows_1.0.4    digest_0.6.37      
-    ## [34] grid_4.4.1          rstudioapi_0.17.1   lifecycle_1.0.4    
-    ## [37] vctrs_0.6.5         evaluate_1.0.1      glue_1.8.0         
-    ## [40] data.table_1.16.2   fansi_1.0.6         colorspace_2.1-1   
-    ## [43] rmarkdown_2.29      tools_4.4.1         pkgconfig_2.0.3    
-    ## [46] htmltools_0.5.8.1
+    ##  [1] gtable_0.3.6        jsonlite_2.0.0      renv_1.1.5         
+    ##  [4] dplyr_1.1.4         compiler_4.6.0      BiocManager_1.30.27
+    ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.4.0       
+    ## [10] yaml_2.3.11         fastmap_1.2.0       here_1.0.2         
+    ## [13] ggplot2_4.0.0       R6_2.6.1            generics_0.1.4     
+    ## [16] knitr_1.50          yulab.utils_0.2.2   tibble_3.3.0       
+    ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.1.1    
+    ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.1.6        
+    ## [25] badger_0.2.5        xfun_0.54           fs_1.6.6           
+    ## [28] S7_0.2.1            cli_3.6.5           magrittr_2.0.4     
+    ## [31] rworkflows_1.0.8    digest_0.6.39       grid_4.6.0         
+    ## [34] rstudioapi_0.17.1   rappdirs_0.3.3      lifecycle_1.0.4    
+    ## [37] vctrs_0.6.5         evaluate_1.0.5      glue_1.8.0         
+    ## [40] data.table_1.17.8   farver_2.1.2        rmarkdown_2.30     
+    ## [43] tools_4.6.0         pkgconfig_2.0.3     htmltools_0.5.8.1
 
 </details>
