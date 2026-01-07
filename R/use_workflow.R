@@ -142,9 +142,9 @@
 #' @param verbose Print messages.
 #' @returns Path or yaml object.
 #' 
-#' @source \href{https://github.com/vubiostat/r-yaml/issues/5}{
+#' @source \href{https://github.com/r-lib/yaml/issues/5}{
 #' Issue reading in "on:"/"y","n" elements}.
-#' @source \href{https://github.com/vubiostat/r-yaml/issues/123}{
+#' @source \href{https://github.com/r-lib/yaml/issues/123}{
 #' Issue writing "on:" as "'as':"}
 #' 
 #' @export
