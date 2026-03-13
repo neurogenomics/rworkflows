@@ -122,9 +122,9 @@ inputs:
       If `miniforge_variant=false`, Miniforge will not be installed at all.
       If `miniforge_variant=""`, the "Miniforge3" variant will be installed.
       If `miniforge_version` is not provided, the `latest` version will be used.
-      Currently-known values: - "Miniforge3" (default) - "Miniforge-pypy3" -
-      "Mambaforge" - "Mambaforge-pypy3".
-      Visit https://github.com/conda-forge/miniforge/releases/ for more 
+      Currently-known values: - "Miniforge3" (default) - "Miniforge-pypy3".
+      Note: "Mambaforge" and "Mambaforge-pypy3" are discontinued and will 404.
+      Visit https://github.com/conda-forge/miniforge/releases/ for more
       information on available variants.
     default: false
   miniforge_version:
@@ -207,9 +207,13 @@ runs:
         echo "NOT_CRAN=${{ !inputs.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
     
+    ## Checkout before Miniconda so that environment_file can reference repo files
+    - name: ⏬ Checkout repository
+      uses: actions/checkout@v4
+
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: false
         python-version: ${{ matrix.python-version }}
@@ -218,22 +222,16 @@ runs:
         activate-environment: ${{ inputs.activate_environment }}
         environment-file: ${{ inputs.environment_file }}
         channels: ${{ inputs.channels }}
-    
+
     ## Set the R library to the directory matching the
     ## R packages cache step further below when running on Docker (Linux).
-    - name: 📚 Set R library home on Linux 
+    - name: 📚 Set R library home on Linux
       if: runner.os == 'Linux'
       run: |
         mkdir -p /__w/_temp/Library
         echo ".libPaths('/__w/_temp/Library')" >> ~/.Rprofile
         git config --global --add safe.directory '*'
       shell: bash {0}
-
-    ## Most of these steps are the same as the ones in
-    ## https://github.com/r-lib/actions/blob/master/examples/check-standard.yaml
-    ## If they update their steps, we will also need to update ours.
-    - name: ⏬ Checkout repository 
-      uses: actions/checkout@v4
     
     ## R/Bioc are already installed on the Bioc Docker container, 
     ## and reinstalling them causes errors.
