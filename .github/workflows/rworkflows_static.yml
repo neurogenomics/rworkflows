@@ -65,7 +65,7 @@ jobs:
     steps:
     - name: "\U0001F52D Collect Workflow Telemetry"
       if: env.run_telemetry == 'true'
-      uses: runforesight/workflow-telemetry-action@v1
+      uses: catchpoint/workflow-telemetry-action@v2
       continue-on-error: ${{ true }}
       with:
         github_token: ${{ env.GITHUB_TOKEN }}
@@ -81,17 +81,6 @@ jobs:
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !env.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
-    - name: "\U0001F40D Setup Miniconda"
-      if: env.miniforge_variant != 'false'
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: ${{ false }}
-        python-version: ${{ matrix.python-version }}
-        miniforge-variant: ${{ env.miniforge_variant }}
-        miniforge-version: ${{ env.miniforge_version }}
-        activate-environment: ${{ env.activate_environment }}
-        environment-file: ${{ env.environment_file }}
-        channels: ${{ env.channels }}
     - name: "\U0001F4DA Set R library home on Linux"
       if: runner.os == 'Linux'
       run: |
@@ -101,6 +90,17 @@ jobs:
       shell: bash {0}
     - name: ⏬ Checkout repository
       uses: actions/checkout@v4
+    - name: "\U0001F40D Setup Miniconda"
+      if: env.miniforge_variant != 'false'
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: ${{ false }}
+        python-version: ${{ matrix.python-version }}
+        miniforge-variant: ${{ env.miniforge_variant }}
+        miniforge-version: ${{ env.miniforge_version }}
+        activate-environment: ${{ env.activate_environment }}
+        environment-file: ${{ env.environment_file }}
+        channels: ${{ env.channels }}
     - name: "\U0001F6E0 Setup R and Bioconductor"
       if: runner.os != 'Linux'
       uses: grimbough/bioc-actions/setup-bioc@v1
@@ -211,7 +211,7 @@ jobs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
         ## For running the checks
         message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
-        install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
+        install.packages(c("rcmdcheck","rmarkdown","BiocManager"), dependencies = TRUE)
         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
         message(paste('**** Using', Sys.getenv("ncpus"), 'cores for installation.'))
         repos <- BiocManager::repositories()
@@ -384,6 +384,7 @@ jobs:
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
           if(!require("rmarkdown", quietly=TRUE)) install.packages("rmarkdown");
+          if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows");
           rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
         }
       shell: Rscript {0}
