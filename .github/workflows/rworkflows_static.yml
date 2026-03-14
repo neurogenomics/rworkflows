@@ -380,6 +380,7 @@ jobs:
       if: env.run_pkgdown == 'true' && runner.os == 'Linux'
       env:
         DISPLAY: 99.0
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)

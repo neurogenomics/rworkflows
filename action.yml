@@ -532,10 +532,11 @@ runs:
         fi
       shell: bash {0}
 
-    - name: 📦 Render README 
+    - name: 📦 Render README
       if: inputs.run_pkgdown == 'true' && runner.os == 'Linux'
       env:
         DISPLAY: 99.0
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
