@@ -384,6 +384,7 @@ jobs:
         if(file.exists("README.Rmd")){
           options(crayon.enabled = TRUE)
           if(!require("rmarkdown", quietly=TRUE)) install.packages("rmarkdown");
+          if(!require("rworkflows", quietly=TRUE)) remotes::install_github("neurogenomics/rworkflows");
           rmarkdown::render("README.Rmd", output_format = rmarkdown::github_document(html_preview = FALSE));
         }
       shell: Rscript {0}
