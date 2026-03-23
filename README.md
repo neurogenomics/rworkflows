@@ -21,7 +21,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan
 Skene</i>  
 </h4>
 <h4>  
-README updated: <i>Dec-04-2025</i>  
+README updated: <i>Mar-23-2026</i>  
 </h4>
 
 [![CRAN
@@ -292,13 +292,13 @@ GitHub Action to setup Miniconda and conda environments.
 utils::sessionInfo()
 ```
 
-    ## R Under development (unstable) (2025-10-27 r88972)
-    ## Platform: aarch64-apple-darwin20
-    ## Running under: macOS Tahoe 26.1
+    ## R Under development (unstable) (2026-02-16 r89426)
+    ## Platform: aarch64-apple-darwin23
+    ## Running under: macOS Tahoe 26.3
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/lib/libRblas.0.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+    ## BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
     ## 
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -310,20 +310,21 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.6        jsonlite_2.0.0      renv_1.1.5         
-    ##  [4] dplyr_1.1.4         compiler_4.6.0      BiocManager_1.30.27
+    ##  [1] gtable_0.3.6        jsonlite_2.0.0      renv_1.1.7         
+    ##  [4] dplyr_1.2.0         compiler_4.6.0      BiocManager_1.30.27
     ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.4.0       
-    ## [10] yaml_2.3.11         fastmap_1.2.0       here_1.0.2         
-    ## [13] ggplot2_4.0.0       R6_2.6.1            generics_0.1.4     
-    ## [16] knitr_1.50          yulab.utils_0.2.2   tibble_3.3.0       
+    ## [10] yaml_2.3.12         fastmap_1.2.0       here_1.0.2         
+    ## [13] ggplot2_4.0.2       R6_2.6.1            generics_0.1.4     
+    ## [16] knitr_1.51          yulab.utils_0.2.4   tibble_3.3.1       
     ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.1.1    
-    ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.1.6        
-    ## [25] badger_0.2.5        xfun_0.54           fs_1.6.6           
-    ## [28] S7_0.2.1            cli_3.6.5           magrittr_2.0.4     
-    ## [31] rworkflows_1.0.8    digest_0.6.39       grid_4.6.0         
-    ## [34] rstudioapi_0.17.1   rappdirs_0.3.3      lifecycle_1.0.4    
-    ## [37] vctrs_0.6.5         evaluate_1.0.5      glue_1.8.0         
-    ## [40] data.table_1.17.8   farver_2.1.2        rmarkdown_2.30     
-    ## [43] tools_4.6.0         pkgconfig_2.0.3     htmltools_0.5.8.1
+    ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.1.7        
+    ## [25] badger_0.2.5        xfun_0.56           fs_1.6.6           
+    ## [28] S7_0.2.1            otel_0.2.0          cli_3.6.5          
+    ## [31] magrittr_2.0.4      rworkflows_1.0.10   digest_0.6.39      
+    ## [34] grid_4.6.0          rstudioapi_0.18.0   rappdirs_0.3.4     
+    ## [37] lifecycle_1.0.5     vctrs_0.7.1         data.table_1.18.2.1
+    ## [40] evaluate_1.0.5      glue_1.8.0          farver_2.1.2       
+    ## [43] rmarkdown_2.30      tools_4.6.0         pkgconfig_2.0.3    
+    ## [46] htmltools_0.5.9
 
 </details>
