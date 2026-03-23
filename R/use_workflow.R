@@ -103,6 +103,14 @@
 #' @param ncpus Number of CPUs to use for R package installation. Higher values
 #' can speed up the dependency installation process but may result in spurious
 #' errors. (default = \code{2})
+#' @param timeout The maximum time to wait for long R processes like
+#' dependency installations, downloads, and code checks. (default = \code{2000})
+#' @param force_install Whether to force install packages. If \code{true}, all 
+#' packages will be reinstalled, bypassing the cache.
+#' @param run_telemetry Whether to run the workflow telemetry action:
+#' https://github.com/catchpoint/workflow-telemetry-action
+#' @param free_diskspace Whether to free up additional disk space by deleting 
+#' non-essential software.
 #' @param miniforge_variant If provided, this variant of Miniforge will be
 #'  downloaded and installed. If \code{miniforge_variant=false}, 
 #'  Miniforge will not be installed at all.
@@ -163,9 +171,13 @@ use_workflow <- function(## action-level args
                          ### General
                          github_token="${{ secrets.GITHUB_TOKEN }}",
                          cache_version="cache-v1",
-                         enable_act=FALSE,
-                         ncpus=2,
-                         ### Checks
+                          enable_act=FALSE,
+                          ncpus=2,
+                          timeout=2000,
+                          force_install=FALSE,
+                          run_telemetry=TRUE,
+                          free_diskspace=FALSE,
+                          ### Checks
                          run_bioccheck=FALSE,
                          run_rcmdcheck=TRUE, 
                          as_cran=TRUE,
@@ -271,9 +283,13 @@ use_workflow <- function(## action-level args
                    environment_file=environment_file,
                    channels=channels,
                    cache_version=cache_version,
-                   enable_act=enable_act,
-                   ncpus=ncpus)
-  #### Preview ####
+                    enable_act=enable_act,
+                    ncpus=ncpus,
+                    timeout=timeout,
+                    force_install=force_install,
+                    run_telemetry=run_telemetry,
+                    free_diskspace=free_diskspace)
+   #### Preview ####
   if(isTRUE(preview)){
     preview_yaml(yml=yml) 
   }

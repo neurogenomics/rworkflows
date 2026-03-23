@@ -6,7 +6,7 @@
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.5281/zenodo.10048573-blue.svg)](https://doi.org/https://doi.org/10.5281/zenodo.10048573)
 <br>
-[![](https://img.shields.io/badge/devel%20version-1.0.8-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-1.0.11-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -320,7 +320,7 @@ utils::sessionInfo()
     ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.1.7        
     ## [25] badger_0.2.5        xfun_0.56           fs_1.6.6           
     ## [28] S7_0.2.1            otel_0.2.0          cli_3.6.5          
-    ## [31] magrittr_2.0.4      rworkflows_1.0.10   digest_0.6.39      
+    ## [31] magrittr_2.0.4      rworkflows_1.0.11   digest_0.6.39      
     ## [34] grid_4.6.0          rstudioapi_0.18.0   rappdirs_0.3.4     
     ## [37] lifecycle_1.0.5     vctrs_0.7.1         data.table_1.18.2.1
     ## [40] evaluate_1.0.5      glue_1.8.0          farver_2.1.2       

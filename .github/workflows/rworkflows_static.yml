@@ -30,6 +30,10 @@ env:
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
   ncpus: 2.0
+  timeout: 2000.0
+  force_install: ${{ false }}
+  run_telemetry: ${{ true }}
+  free_diskspace: ${{ false }}
   cache_version: cache-v1
   miniforge_variant: ${{ false }}
   activate_environment: test
@@ -44,18 +48,20 @@ jobs:
       matrix:
         config:
         - os: ubuntu-latest
+          bioc: devel
           r: auto
-          bioc: release
-          cont: ghcr.io/bioconductor/bioconductor_docker:latest
-          python-version: 3.11
+          cont: ghcr.io/bioconductor/bioconductor_docker:devel
+          rspm: ~
         - os: macOS-latest
-          r: latest
           bioc: release
-          python-version: 3.11
+          r: auto
+          cont: ~
+          rspm: ~
         - os: windows-latest
-          r: latest
           bioc: release
-          python-version: 3.11
+          r: auto
+          cont: ~
+          rspm: ~
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: ${{ true }}
       RSPM: ${{ matrix.config.rspm }}
@@ -81,13 +87,6 @@ jobs:
         echo "TZ=UTC" >> $GITHUB_ENV
         echo "NOT_CRAN=${{ !env.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
-    - name: "\U0001F4DA Set R library home on Linux"
-      if: runner.os == 'Linux'
-      run: |
-        mkdir -p /__w/_temp/Library
-        echo ".libPaths('/__w/_temp/Library')" >> ~/.Rprofile
-        git config --global --add safe.directory '*'
-      shell: bash {0}
     - name: ⏬ Checkout repository
       uses: actions/checkout@v4
     - name: "\U0001F40D Setup Miniconda"
@@ -101,6 +100,13 @@ jobs:
         activate-environment: ${{ env.activate_environment }}
         environment-file: ${{ env.environment_file }}
         channels: ${{ env.channels }}
+    - name: "\U0001F4DA Set R library home on Linux"
+      if: runner.os == 'Linux'
+      run: |
+        mkdir -p /__w/_temp/Library
+        echo ".libPaths('/__w/_temp/Library')" >> ~/.Rprofile
+        git config --global --add safe.directory '*'
+      shell: bash {0}
     - name: "\U0001F6E0 Setup R and Bioconductor"
       if: runner.os != 'Linux'
       uses: grimbough/bioc-actions/setup-bioc@v1
@@ -211,7 +217,7 @@ jobs:
         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
         ## For running the checks
         message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
-        install.packages(c("rcmdcheck","rmarkdown","BiocManager"), dependencies = TRUE)
+        install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
         message(paste('****', Sys.time(), 'pass number 1 at installing dependencies****'))
         message(paste('**** Using', Sys.getenv("ncpus"), 'cores for installation.'))
         repos <- BiocManager::repositories()
