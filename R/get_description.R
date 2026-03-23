@@ -30,14 +30,12 @@
 #' @importFrom here here
 #' @importFrom methods is
 #' @importFrom utils download.file
-#' @importFrom tools R_user_dir
 #' @examples 
 #' d <- get_description(refs="neurogenomics/rworkflows")
 get_description <- function(refs=NULL,
                             paths=here::here("DESCRIPTION"),
                             db=NULL,
-                            cache_dir=tools::R_user_dir(package = "rworkflows",
-                                                        which = "cache"),
+                            cache_dir=tempdir(),
                             force_new=FALSE,
                             use_wd=TRUE,
                             use_repos=FALSE,

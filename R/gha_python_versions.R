@@ -6,14 +6,12 @@
 #'  or a character string of one or more versions of python.
 #'  
 #' @keywords internal
-#' @importFrom tools R_user_dir
 #' @importFrom utils download.file
 gha_python_versions <- function(
     python_version=NULL,
     ## versions_explicit must be TRUE for setup-miniconda to recognize it
     versions_explicit=TRUE,
-    cache_dir=tools::R_user_dir(package = "rworkflows",
-                                which = "cache"),
+    cache_dir=tempdir(),
     verbose=TRUE){
   # devoptera::args2vars(gha_python_versions)
   

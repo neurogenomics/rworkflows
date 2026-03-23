@@ -1,8 +1,6 @@
 get_description_manual <- function(refs=NULL,
                                    paths=here::here("DESCRIPTION"),
-                                   cache_dir=tools::R_user_dir(
-                                     package = "rworkflows",
-                                     which = "cache"),
+                                   cache_dir=tempdir(),
                                    force_new=FALSE,
                                    use_wd=TRUE,
                                    verbose=TRUE){

@@ -1,3 +1,9 @@
+# rworkflows 1.0.10
+
+## Miscellaneous
+
+* Switch default `cache_dir` to `tempdir()`.
+
 # rworkflows 1.0.9
 
 ## Bug Fixes

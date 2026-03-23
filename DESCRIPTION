@@ -1,7 +1,7 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 1.0.8
+Version: 1.0.10
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
@@ -46,7 +46,6 @@ Imports:
     desc,
     badger,
     renv,
-    tools,
     methods,
     BiocManager,
     data.table
