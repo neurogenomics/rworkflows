@@ -349,7 +349,7 @@ runs:
         force_install: ${{ inputs.force_install }}
         ncpus: ${{ inputs.ncpus }}
       run: |
-         options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
+         options(crayon.enabled = TRUE, timeout=as.integer(Sys.getenv("timeout")), Ncpus=as.integer(Sys.getenv("ncpus")))
          ## For running the checks
          message(paste('****', Sys.time(), 'installing rcmdcheck ****'))
          install.packages(c("rmarkdown","BiocManager"), dependencies = TRUE)
@@ -366,7 +366,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         ncpus: ${{ inputs.ncpus }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"), Ncpus=as.integer(Sys.getenv("ncpus")))
+        options(crayon.enabled = TRUE, timeout=as.integer(Sys.getenv("timeout")), Ncpus=as.integer(Sys.getenv("ncpus")))
         message(paste('****', Sys.time(), 'pass number 2 at installing dependencies****'))
         repos <- BiocManager::repositories()
         remotes::install_local(repos=repos, dependencies=TRUE, build_vignettes=FALSE, upgrade=TRUE, force=FALSE)
@@ -426,7 +426,7 @@ runs:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        options(crayon.enabled = TRUE, timeout=as.integer(Sys.getenv("timeout")))
         if(!require("rcmdcheck", quietly=TRUE)) install.packages("rcmdcheck")
         as_cran <- if(Sys.getenv("AS_CRAN")=='true') "--as-cran" else NULL
         run_build_vignettes <- if(Sys.getenv("run_vignettes")=='true') NULL else "--no-build-vignettes"
@@ -450,7 +450,7 @@ runs:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        options(crayon.enabled = TRUE, timeout=as.integer(Sys.getenv("timeout")))
         BiocGenerics:::testPackage()
       shell: Rscript {0}
         
@@ -464,7 +464,7 @@ runs:
         timeout: ${{ inputs.timeout }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
-        options(crayon.enabled = TRUE, timeout=Sys.getenv("timeout"))
+        options(crayon.enabled = TRUE, timeout=as.integer(Sys.getenv("timeout")))
         #### Install deps ####
         if(!require("BiocManager", quietly=TRUE)) install.packages("BiocManager")
         if(!require("BiocCheck", quietly=TRUE)) BiocManager::install("BiocCheck")

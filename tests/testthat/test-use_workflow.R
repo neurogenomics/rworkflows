@@ -39,9 +39,14 @@ test_that("use_workflow works", {
                        force_new = TRUE,
                        tinytex_installer = "TinyTeX",
                        save_dir = tempdir())
-  testthat::expect_equal(yml$on,yml3$on)
-  testthat::expect_equal(length(yml$jobs[[1]]$steps),1)
-  testthat::expect_gte(length(yml3$jobs[[1]]$steps),20)
+testthat::expect_equal(yml$on,yml3$on)
+   testthat::expect_equal(length(yml$jobs[[1]]$steps),1)
+   testthat::expect_gte(length(yml3$jobs[[1]]$steps),20)
+   #### Test that new env vars are properly set for rworkflows_static ####
+   testthat::expect_equal(yml3$env$timeout, 2000)
+   testthat::expect_equal(yml3$env$force_install, "${{ false }}")
+   testthat::expect_equal(yml3$env$run_telemetry, "${{ true }}")
+   testthat::expect_equal(yml3$env$free_diskspace, "${{ false }}")
   
   #### Modify conda args ####
   environment_file <- construct_conda_yml(dependencies = c("python>=3.9","anndata"),

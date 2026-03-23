@@ -22,6 +22,10 @@ use_workflow(
   cache_version = "cache-v1",
   enable_act = FALSE,
   ncpus = 2,
+  timeout = 2000,
+  force_install = FALSE,
+  run_telemetry = TRUE,
+  free_diskspace = FALSE,
   run_bioccheck = FALSE,
   run_rcmdcheck = TRUE,
   as_cran = TRUE,
@@ -108,6 +112,18 @@ enable local workflow checking with
 \item{ncpus}{Number of CPUs to use for R package installation. Higher values
 can speed up the dependency installation process but may result in spurious
 errors. (default = \code{2})}
+
+\item{timeout}{The maximum time to wait for long R processes like
+dependency installations, downloads, and code checks. (default = \code{2000})}
+
+\item{force_install}{Whether to force install packages. If \code{true}, all 
+packages will be reinstalled, bypassing the cache.}
+
+\item{run_telemetry}{Whether to run the workflow telemetry action:
+https://github.com/catchpoint/workflow-telemetry-action}
+
+\item{free_diskspace}{Whether to free up additional disk space by deleting 
+non-essential software.}
 
 \item{run_bioccheck}{Run Bioconductor checks using
 \href{https://doi.org/doi:10.18129/B9.bioc.BiocCheck}{
