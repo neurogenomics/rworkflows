@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.10</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>GitHub Actions python versions</h1>
-    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/R/gha_python_versions.R" class="external-link"><code>R/gha_python_versions.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/cran-resubmit/R/gha_python_versions.R" class="external-link"><code>R/gha_python_versions.R</code></a></small>
     <div class="hidden name"><code>gha_python_versions.Rd</code></div>
     </div>
 
@@ -78,7 +78,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gha_python_versions</span><span class="op">(</span></span>
 <span>  python_version <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  versions_explicit <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  cache_dir <span class="op">=</span> <span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">R_user_dir</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"rworkflows"</span>, which <span class="op">=</span> <span class="st">"cache"</span><span class="op">)</span>,</span>
+<span>  cache_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -126,7 +126,7 @@ as opposed to flexibly (e.g. <code>r: "latest", bioc: "release"</code>).</p></dd
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Brian Schilder, Alan Murphy, Nathan Skene.</p>
+  <p></p><p>Developed by Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">

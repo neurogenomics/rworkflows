@@ -18,7 +18,7 @@ Returns a template when authors is not provided (default)."><!-- mathjax --><scr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.10</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@ Returns a template when authors is not provided (default)."><!-- mathjax --><scr
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Construct authors</h1>
-    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/R/construct_authors.R" class="external-link"><code>R/construct_authors.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/cran-resubmit/R/construct_authors.R" class="external-link"><code>R/construct_authors.R</code></a></small>
     <div class="hidden name"><code>construct_authors.Rd</code></div>
     </div>
 
@@ -80,7 +80,7 @@ Returns a template when <code>authors</code> is not provided (default).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">construct_authors</span><span class="op">(</span></span>
 <span>  authors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  template <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/person.html" class="external-link">person</a></span><span class="op">(</span>given <span class="op">=</span> <span class="st">"yourGivenName"</span>, family <span class="op">=</span> <span class="st">"yourFamilyName"</span>, role <span class="op">=</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cre"</span><span class="op">)</span>, email <span class="op">=</span> <span class="st">"yourEmail@email.com"</span>, comment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>ORCID <span class="op">=</span> <span class="st">"yourOrcidId"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cre"</span><span class="op">)</span>, email <span class="op">=</span> <span class="st">"yourEmail@email.com"</span>, comment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>ORCID <span class="op">=</span> <span class="st">"0000-0001-2345-6789"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -109,7 +109,6 @@ construct_authors.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">authors</span> <span class="op">&lt;-</span> <span class="fu">construct_authors</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Invalid ORCID iD: ‘yourOrcidId’.</span>
 </code></pre></div>
     </div>
   </div>
@@ -120,7 +119,7 @@ construct_authors.</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Brian Schilder, Alan Murphy, Nathan Skene.</p>
+  <p></p><p>Developed by Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan Skene.</p>
 </div>
 
 <div class="pkgdown">
