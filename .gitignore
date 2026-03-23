@@ -49,6 +49,7 @@ vignettes/*.R
 # R Environment Variables
 .Renviron 
 inst/doc
+.Rhistory
 # Sweave vignette outputs
 vignettes/*.bbl
 vignettes/*.log
