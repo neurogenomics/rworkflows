@@ -5,6 +5,10 @@
 * Update templates to terminate with empty line.
 * Add dummy ORCID ID (which passes checksum test) to pass tests.
 
+## Miscellaneous
+
+* Update maintainer (Brian -> Hiru).
+
 # rworkflows 1.0.8
 
 ## Miscellaneous
