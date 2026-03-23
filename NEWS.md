@@ -1,3 +1,9 @@
+# rworkflows 1.0.9
+
+## Bug Fixes
+
+* Update templates to terminate with empty line.
+
 # rworkflows 1.0.8
 
 ## Miscellaneous
