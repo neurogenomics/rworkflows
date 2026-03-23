@@ -19,7 +19,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.11</span>
       </span>
     </div>
 
@@ -90,6 +90,10 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
 <span>  cache_version <span class="op">=</span> <span class="st">"cache-v1"</span>,</span>
 <span>  enable_act <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ncpus <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>  force_install <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  run_telemetry <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  free_diskspace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  run_bioccheck <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  run_rcmdcheck <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  as_cran <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -209,6 +213,26 @@ enable local workflow checking with
 <dd><p>Number of CPUs to use for R package installation. Higher values
 can speed up the dependency installation process but may result in spurious
 errors. (default = <code>2</code>)</p></dd>
+
+
+<dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
+<dd><p>The maximum time to wait for long R processes like
+dependency installations, downloads, and code checks. (default = <code>2000</code>)</p></dd>
+
+
+<dt id="arg-force-install">force_install<a class="anchor" aria-label="anchor" href="#arg-force-install"></a></dt>
+<dd><p>Whether to force install packages. If <code>true</code>, all
+packages will be reinstalled, bypassing the cache.</p></dd>
+
+
+<dt id="arg-run-telemetry">run_telemetry<a class="anchor" aria-label="anchor" href="#arg-run-telemetry"></a></dt>
+<dd><p>Whether to run the workflow telemetry action:
+https://github.com/catchpoint/workflow-telemetry-action</p></dd>
+
+
+<dt id="arg-free-diskspace">free_diskspace<a class="anchor" aria-label="anchor" href="#arg-free-diskspace"></a></dt>
+<dd><p>Whether to free up additional disk space by deleting
+non-essential software.</p></dd>
 
 
 <dt id="arg-run-bioccheck">run_bioccheck<a class="anchor" aria-label="anchor" href="#arg-run-bioccheck"></a></dt>
@@ -396,7 +420,7 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving yaml ==&gt; /tmp/Rtmpl1btcG/.github/workflows/rworkflows.yml</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving yaml ==&gt; /tmp/Rtmpchm1xt/.github/workflows/rworkflows.yml</span>
 </code></pre></div>
     </div>
   </div>

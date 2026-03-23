@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.11</span>
       </span>
     </div>
 
@@ -69,6 +69,14 @@
       <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/static-fix/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.11" id="rworkflows-1011">rworkflows 1.0.11<a class="anchor" aria-label="anchor" href="#rworkflows-1011"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-0-11">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-11"></a></h3>
+<ul><li>Fix <code>use_workflow(template="rworkflows_static")</code> not generating the <code>timeout</code>, <code>force_install</code>, <code>run_telemetry</code>, and <code>free_diskspace</code> environment variables. (<a href="https://github.com/neurogenomics/rworkflows/issues/146" class="external-link">#146</a>)</li>
+<li>Add <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer()</a></code> coercion to all R <code>options(timeout=...)</code> calls for robustness. These were causing <code><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file()</a></code> to fail with <code>cannot download any files</code> when the timeout was not properly converted to a numeric value.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.10" id="rworkflows-1010">rworkflows 1.0.10<a class="anchor" aria-label="anchor" href="#rworkflows-1010"></a></h2>
 <div class="section level3">
