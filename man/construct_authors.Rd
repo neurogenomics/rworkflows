@@ -7,7 +7,7 @@
 construct_authors(
   authors = NULL,
   template = c(utils::person(given = "yourGivenName", family = "yourFamilyName", role =
-    c("cre"), email = "yourEmail@email.com", comment = c(ORCID = "yourOrcidId")))
+    c("cre"), email = "yourEmail@email.com", comment = c(ORCID = "0000-0001-2345-6789")))
 )
 }
 \arguments{

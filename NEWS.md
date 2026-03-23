@@ -1,3 +1,20 @@
+# rworkflows 1.0.10
+
+## Miscellaneous
+
+* Switch default `cache_dir` to `tempdir()`.
+
+# rworkflows 1.0.9
+
+## Bug Fixes
+
+* Update templates to terminate with empty line.
+* Add dummy ORCID ID (which passes checksum test) to pass tests.
+
+## Miscellaneous
+
+* Update maintainer (Brian -> Hiru).
+
 # rworkflows 1.0.8
 
 ## Miscellaneous

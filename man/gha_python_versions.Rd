@@ -7,7 +7,7 @@
 gha_python_versions(
   python_version = NULL,
   versions_explicit = TRUE,
-  cache_dir = tools::R_user_dir(package = "rworkflows", which = "cache"),
+  cache_dir = tempdir(),
   verbose = TRUE
 )
 }

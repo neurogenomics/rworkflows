@@ -25,8 +25,10 @@ is to pull from the "BioCsoft" repository. Possible repositories include
 "BioCsoft", "BioCexp", "BioCworkflows", "BioCann", and "CRAN". Note that
 not all repos are available for all versions, particularly older versions.}
 
-\item{version}{The requested Bioconductor version. Will
-default to use the BiocManager defaults (i.e., \code{version()}).}
+\item{version}{\code{character(1)} or \code{package_version} indicating the
+\emph{Bioconductor} version (e.g., "3.22"). Defaults to the "current version"
+provided by \code{BiocManager::version()}. The keywords "release" and "devel"
+are also accepted.}
 
 \item{verbose}{Print messages.}
 }

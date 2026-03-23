@@ -8,7 +8,7 @@ get_description(
   refs = NULL,
   paths = here::here("DESCRIPTION"),
   db = NULL,
-  cache_dir = tools::R_user_dir(package = "rworkflows", which = "cache"),
+  cache_dir = tempdir(),
   force_new = FALSE,
   use_wd = TRUE,
   use_repos = FALSE,

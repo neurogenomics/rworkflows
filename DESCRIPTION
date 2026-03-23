@@ -1,11 +1,11 @@
 Package: rworkflows
 Type: Package
 Title: Test, Document, Containerise, and Deploy R Packages
-Version: 1.0.8
+Version: 1.0.10
 Authors@R:
     c(person(given = "Brian",
            family = "Schilder",
-           role = c("aut","cre"),
+           role = c("aut"),
            email = "brian_schilder@alumni.brown.edu",
            comment = c(ORCID = "0000-0001-5949-2191")),
       person(given = "Alan",
@@ -15,7 +15,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-2487-8753")),
       person(given = "Hiranyamaya (Hiru)",
            family = "Dash",
-           role = c("ctb"),
+           role = c("ctb","cre"),
            email = "hdash.work@gmail.com",
            comment = c(ORCID = "0009-0005-5514-505X")),
       person(given = "Nathan",
@@ -46,7 +46,6 @@ Imports:
     desc,
     badger,
     renv,
-    tools,
     methods,
     BiocManager,
     data.table

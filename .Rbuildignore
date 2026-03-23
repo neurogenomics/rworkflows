@@ -10,6 +10,7 @@ rworkflows-merged
 ^reports
 ^inst/hex$
 ^hex$
+^\.Rhistory$
 
 .*\.Rproj$
 ^\.Rproj\.user$
