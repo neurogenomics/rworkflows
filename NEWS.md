@@ -3,6 +3,7 @@
 ## Bug Fixes
 
 * Update templates to terminate with empty line.
+* Add dummy ORCID ID (which passes checksum test) to pass tests.
 
 # rworkflows 1.0.8
 

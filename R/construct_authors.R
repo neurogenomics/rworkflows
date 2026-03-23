@@ -17,7 +17,7 @@ construct_authors <- function(authors=NULL,
     family = "yourFamilyName",
     role = c("cre"),
     email = "yourEmail@email.com",
-    comment = c(ORCID = "yourOrcidId"))
+    comment = c(ORCID = "0000-0001-2345-6789"))
   )
 ){
   if(is.null(authors)){
