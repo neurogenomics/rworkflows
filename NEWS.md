@@ -8,6 +8,11 @@
 These were causing `download.file()` to fail with `cannot download any files`
 when the timeout was not properly converted to a numeric value.
 
+## Miscellaneous
+
+* `construct_authors()`: Add test case compatible for both new and old versions
+of R.
+
 # rworkflows 1.0.10
 
 ## Miscellaneous
