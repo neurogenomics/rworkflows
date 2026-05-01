@@ -1,5 +1,7 @@
 test_that("fill_description works", {
-  
+  ## Skip if offline: downloads a DESCRIPTION file from GitHub
+  if(!is_gha()) testthat::skip_if_offline()
+
   url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
   path <- tempfile(pattern = "DESCRIPTION")
   utils::download.file(url,path)
