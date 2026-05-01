@@ -35,7 +35,17 @@ inputs:
       Run unit tests with the `testthat` package and report the results.
       Requires a subdirectory named 'tests'.
     default: true
-  has_runit: 
+  run_lintr:
+    description: >
+      Run `lintr::lint_package()` and emit GitHub annotations for each
+      lint. Does not fail the workflow by default.
+    default: true
+  run_spelling:
+    description: >
+      Run `spelling::spell_check_package()` and surface any misspellings
+      via GitHub annotations. Does not fail the workflow by default.
+    default: true
+  has_runit:
     description: >
       Run unit tests with the `RUnit` package.
       Requires a subdirectory named 'unitTests'.
@@ -481,15 +491,60 @@ runs:
             `no-check-bioc-help` = as_cran)
       shell: Rscript {0}
     
-    - name: 📋 Test coverage 
+    - name: 📋 Test coverage
       if: inputs.run_covr == 'true' && runner.os == 'Linux'
-      env: 
+      env:
         CODECOV_TOKEN: ${{ inputs.CODECOV_TOKEN }}
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
       run: |
         ## NOTE: codecov() uses CODECOV_TOKEN env var if specified.
         ## (recommended)
         covr::codecov()
+      shell: Rscript {0}
+
+    - name: 🧹 Lint package (lintr)
+      if: inputs.run_lintr == 'true' && runner.os == 'Linux'
+      continue-on-error: true
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("lintr", quietly=TRUE)) install.packages("lintr")
+        lints <- tryCatch(lintr::lint_package(),
+                          error = function(e){
+                            message("lintr failed: ", conditionMessage(e)); list()
+                          })
+        message(sprintf("**** Found %d lint(s) ****", length(lints)))
+        for (l in lints) {
+          cat(sprintf("::warning file=%s,line=%s,col=%s::[lintr] %s\n",
+                      l$filename,
+                      if(is.null(l$line_number)) 1 else l$line_number,
+                      if(is.null(l$column_number)) 1 else l$column_number,
+                      l$message))
+        }
+      shell: Rscript {0}
+
+    - name: 🔤 Spell check (spelling)
+      if: inputs.run_spelling == 'true' && runner.os == 'Linux'
+      continue-on-error: true
+      run: |
+        options(crayon.enabled = TRUE)
+        if(!require("spelling", quietly=TRUE)) install.packages("spelling")
+        mis <- tryCatch(spelling::spell_check_package(),
+                        error = function(e){
+                          message("spelling failed: ", conditionMessage(e))
+                          data.frame(word=character(), found=I(list()))
+                        })
+        message(sprintf("**** Found %d misspelled word(s) ****", nrow(mis)))
+        if (nrow(mis) > 0) {
+          for (i in seq_len(nrow(mis))) {
+            for (loc in mis$found[[i]]) {
+              parts <- strsplit(loc, ":", fixed = TRUE)[[1]]
+              file <- parts[1]
+              line <- if (length(parts) > 1) parts[2] else "1"
+              cat(sprintf("::warning file=%s,line=%s::[spelling] possible misspelling: %s\n",
+                          file, line, mis$word[i]))
+            }
+          }
+        }
       shell: Rscript {0}
       
     - name: 🛠 Install package ️
