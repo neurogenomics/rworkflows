@@ -36,5 +36,9 @@ Get the respective version of R for a given version of
 \href{https://bioconductor.org/}{Bioconductor}.
 }
 \examples{
-ver <- bioc_r_versions(bioc_version="devel")
+if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+  ver <- bioc_r_versions(bioc_version="devel")
+} else {
+  message("No internet connection available, skipping example.")
+}
 }

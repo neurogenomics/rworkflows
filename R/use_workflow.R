@@ -159,7 +159,11 @@
 #' @importFrom here here
 #' @importFrom yaml as.yaml read_yaml write_yaml yaml.load
 #' @examples
-#' path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 use_workflow <- function(## action-level args
                          template="rworkflows",
                          name=template,

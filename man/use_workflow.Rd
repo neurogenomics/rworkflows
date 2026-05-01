@@ -252,5 +252,9 @@ Create workflow that calls an
 \href{https://github.com/features/actions}{GitHub Actions (GHA)}
 }
 \examples{
-path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+  path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+} else {
+  message("No internet connection available, skipping example.")
+}
 }

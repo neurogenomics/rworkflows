@@ -63,24 +63,28 @@
 #' @import desc
 #' @importFrom here here
 #' @examples
-#' #### Get example DESCRIPTION file ####
-#' url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION" 
-#' path <- tempfile(fileext = "DESCRIPTION")
-#' utils::download.file(url,path)
-#' 
-#' #### Fill out DESCRIPTION file ####
-#' d <- fill_description(
-#'   path = path,
-#'   package = "MyPackageName",
-#'   title = "This Package Does Awesome Stuff",
-#'   description = paste(
-#'     "MyPackageName does several awesome things.",
-#'     "Describe thing1.",
-#'     "Describe thing2.",
-#'     "Describe thing3."
-#'   ),
-#'   github_owner = "OwnerName",
-#'   biocviews = c("Genetics", "SystemsBiology"))
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   #### Get example DESCRIPTION file ####
+#'   url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
+#'   path <- tempfile(fileext = "DESCRIPTION")
+#'   utils::download.file(url,path)
+#'
+#'   #### Fill out DESCRIPTION file ####
+#'   d <- fill_description(
+#'     path = path,
+#'     package = "MyPackageName",
+#'     title = "This Package Does Awesome Stuff",
+#'     description = paste(
+#'       "MyPackageName does several awesome things.",
+#'       "Describe thing1.",
+#'       "Describe thing2.",
+#'       "Describe thing3."
+#'     ),
+#'     github_owner = "OwnerName",
+#'     biocviews = c("Genetics", "SystemsBiology"))
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 fill_description <- function(path = here::here("DESCRIPTION"),
                              package,
                              title,

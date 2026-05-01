@@ -43,6 +43,10 @@ URL
 Get the URL of a hex sticker for a given R package (if one exists).
 }
 \examples{
-hex_url <- get_hex(refs=c("neurogenomics/rworkflows",
-                          "neurogenomics/echolocatoR"))
+if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+  hex_url <- get_hex(refs=c("neurogenomics/rworkflows",
+                            "neurogenomics/echolocatoR"))
+} else {
+  message("No internet connection available, skipping example.")
+}
 }

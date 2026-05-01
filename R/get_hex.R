@@ -12,8 +12,12 @@
 #' @export
 #' @import desc
 #' @examples
-#' hex_url <- get_hex(refs=c("neurogenomics/rworkflows",
-#'                           "neurogenomics/echolocatoR"))
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   hex_url <- get_hex(refs=c("neurogenomics/rworkflows",
+#'                             "neurogenomics/echolocatoR"))
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 get_hex <- function(refs=NULL,
                     paths=here::here("DESCRIPTION"),
                     hex_path="inst/hex/hex.png",

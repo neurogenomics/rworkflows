@@ -30,8 +30,12 @@
 #' @importFrom here here
 #' @importFrom methods is
 #' @importFrom utils download.file
-#' @examples 
-#' d <- get_description(refs="neurogenomics/rworkflows")
+#' @examples
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   d <- get_description(refs="neurogenomics/rworkflows")
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 get_description <- function(refs=NULL,
                             paths=here::here("DESCRIPTION"),
                             db=NULL,
