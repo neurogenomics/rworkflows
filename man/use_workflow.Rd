@@ -32,6 +32,8 @@ use_workflow(
   run_vignettes = TRUE,
   has_testthat = TRUE,
   has_runit = FALSE,
+  run_lintr = TRUE,
+  run_spelling = TRUE,
   run_covr = TRUE,
   codecov_token = "${{ secrets.CODECOV_TOKEN }}",
   has_latex = FALSE,
@@ -142,6 +144,13 @@ use the '--as-cran' flag to apply CRAN standards}
 \item{has_testthat}{Run unit tests and report results.}
 
 \item{has_runit}{Run R Unit tests.}
+
+\item{run_lintr}{Run \code{lintr::lint_package()} and emit each lint as
+a GitHub workflow annotation. Does not fail the workflow.}
+
+\item{run_spelling}{Run \code{spelling::spell_check_package()} and emit
+each misspelling as a GitHub workflow annotation. Does not fail the
+workflow.}
 
 \item{run_covr}{Run code coverage tests and publish results to codecov.}
 
