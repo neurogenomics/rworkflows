@@ -14,6 +14,12 @@ vignette: >
 ```{r, echo=FALSE, include=FALSE}
 pkg <- read.dcf("../DESCRIPTION", fields = "Package")[1]
 library(pkg, character.only = TRUE)
+## Skip internet-dependent chunks gracefully when offline
+has_net <- requireNamespace("curl", quietly = TRUE) && curl::has_internet()
+if (!has_net) {
+  message("No internet connection available; ",
+          "internet-dependent chunks will be skipped.")
+}
 ```
 
 ```R
@@ -43,10 +49,10 @@ Before pushing changes to your new R package, you may want to set up one or more
 User only have to run `use_workflow` once per R package to create
 a workflow file that calls the `rworkflows` action. 
 
-```{r}
-workflow <- rworkflows::use_workflow(run_bioccheck = FALSE, 
-                                     run_rcmdcheck = TRUE,  
-                                     run_pkgdown = TRUE, 
+```{r, eval=has_net}
+workflow <- rworkflows::use_workflow(run_bioccheck = FALSE,
+                                     run_rcmdcheck = TRUE,
+                                     run_pkgdown = TRUE,
                                      run_docker = TRUE,
                                      docker_user = "bschilder",
                                      docker_org = "neurogenomicslab",
@@ -57,13 +63,13 @@ workflow <- rworkflows::use_workflow(run_bioccheck = FALSE,
 
 ## static workflow
 
-Alternatively, you may use 
+Alternatively, you may use
 
-```{r}
+```{r, eval=has_net}
 workflow_static <- rworkflows::use_workflow(name = "rworkflows_static",
-                                     run_bioccheck = FALSE, 
-                                     run_rcmdcheck = TRUE,  
-                                     run_pkgdown = TRUE, 
+                                     run_bioccheck = FALSE,
+                                     run_rcmdcheck = TRUE,
+                                     run_pkgdown = TRUE,
                                      run_docker = TRUE,
                                      docker_user = "bschilder",
                                      docker_org = "neurogenomicslab",
@@ -74,10 +80,10 @@ workflow_static <- rworkflows::use_workflow(name = "rworkflows_static",
 
 # `use_badges`
 
-This function creates a banner containing badges, 
+This function creates a banner containing badges,
 a hex sticker (if one is available), and author names.
 
-```{r, results='asis'}
+```{r, results='asis', eval=has_net}
 badges <- rworkflows::use_badges()
 ```
 
@@ -157,7 +163,7 @@ You can instruct GitHub Actions to install a version of python, with whatever le
 If you supply one `python_version`, it will be applied to all runners. 
 You also assign a different `python_version` to each `os`, as we do here:
 
-```{r}
+```{r, eval=has_net}
 runners <- rworkflows::construct_runners(
   python_version = list("ubuntu-latest"="3.10.11",
                         "macOS-latest"="3.9",
@@ -204,9 +210,9 @@ environment_file <- "https://github.com/RajLabMSSM/echoconda/raw/main/inst/conda
 Now we can supply the conda `environment_file` path, and Miniconda will 
 automatically be installed to build the conda env on all of 
 your GitHub Actions runners. 
-```{r} 
-workflow <- rworkflows::use_workflow(environment_file = environment_file, 
-                                     preview = TRUE, 
+```{r, eval=has_net}
+workflow <- rworkflows::use_workflow(environment_file = environment_file,
+                                     preview = TRUE,
                                      force_new = TRUE,
                                      ## Use default save_dir in practice
                                      save_dir = tempdir())
