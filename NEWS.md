@@ -1,3 +1,30 @@
+# rworkflows 1.0.12
+
+## Bug Fixes
+
+* Comply with CRAN policy on graceful handling of unavailable internet
+resources:
+    - Add `testthat::skip_if_offline()` to all tests whose call stacks may
+      reach the internet (`test-check_bioc_version.R`, `test-fill_description.R`,
+      `test-get_authors.R`, `test-get_hex.R`, `test-infer_deps.R`).
+    - Move the existing offline guard up in `test-construct_cont.R` so that
+      the `versions_explicit = TRUE` branch (which calls `bioc_r_versions()`)
+      is also skipped when offline.
+    - Wrap all examples that may use internet resources in
+      `curl::has_internet()` so they emit an informative message instead of
+      erroring when offline (`bioc_r_versions`, `construct_runners`,
+      `fill_description`, `get_description`, `get_hex`, `infer_deps`,
+      `use_badges`, `use_workflow`).
+    - Gate internet-dependent code chunks in the `bioconductor` and
+      `rworkflows` vignettes on `curl::has_internet()` so vignette rebuilds
+      degrade gracefully when offline.
+* Add `curl` to `Suggests` to support the new offline guards in examples
+and vignettes.
+
+## Miscellaneous
+
+* Update system requirements Ubuntu version for Linux runners in actions.
+
 # rworkflows 1.0.11
 
 ## Bug Fixes
