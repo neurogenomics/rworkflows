@@ -219,7 +219,7 @@ runs:
     
     ## Checkout before Miniconda so that environment_file can reference repo files
     - name: ⏬ Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'

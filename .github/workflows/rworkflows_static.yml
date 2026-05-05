@@ -90,7 +90,7 @@ jobs:
         echo "NOT_CRAN=${{ !env.as_cran }}" >> $GITHUB_ENV
       shell: bash {0}
     - name: ⏬ Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: "\U0001F40D Setup Miniconda"
       if: env.miniforge_variant != 'false'
       uses: conda-incubator/setup-miniconda@v4
