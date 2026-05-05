@@ -10,6 +10,10 @@
   GitHub workflow annotation. Does not fail the workflow.
 * `use_workflow()` now exposes matching `run_lintr` and `run_spelling`
   arguments, written into the generated workflow `with:` block.
+* `run_lintr` and `run_spelling` steps now also append a titled section to
+  the GitHub Actions run summary (`$GITHUB_STEP_SUMMARY`), with per-finding
+  details inside a collapsed `<details>` block. The existing inline
+  workflow annotations are unchanged.
 
 ## Bug Fixes
 
