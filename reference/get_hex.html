@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.12</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get hex</h1>
-    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/R/get_hex.R" class="external-link"><code>R/get_hex.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/dev2/R/get_hex.R" class="external-link"><code>R/get_hex.R</code></a></small>
     <div class="hidden name"><code>get_hex.Rd</code></div>
     </div>
 
@@ -134,8 +134,12 @@ set its height with <code>hex_height</code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">hex_url</span> <span class="op">&lt;-</span> <span class="fu">get_hex</span><span class="op">(</span>refs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"neurogenomics/rworkflows"</span>,</span></span>
-<span class="r-in"><span>                          <span class="st">"neurogenomics/echolocatoR"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"curl"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu">curl</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/curl/reference/nslookup.html" class="external-link">has_internet</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">hex_url</span> <span class="op">&lt;-</span> <span class="fu">get_hex</span><span class="op">(</span>refs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"neurogenomics/rworkflows"</span>,</span></span>
+<span class="r-in"><span>                            <span class="st">"neurogenomics/echolocatoR"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"No internet connection available, skipping example."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> When refs is provided, paths must have the same length (or be set to NULL). Setting paths=NULL.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Cannot find DESCRIPTION for: echolocatoR</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Cannot find DESCRIPTION file for: neurogenomics/echolocatoR</span>

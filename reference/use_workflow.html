@@ -19,7 +19,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.12</span>
       </span>
     </div>
 
@@ -68,7 +68,7 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Use GitHub Actions workflow</h1>
-    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/R/use_workflow.R" class="external-link"><code>R/use_workflow.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/neurogenomics/rworkflows/blob/dev2/R/use_workflow.R" class="external-link"><code>R/use_workflow.R</code></a></small>
     <div class="hidden name"><code>use_workflow.Rd</code></div>
     </div>
 
@@ -100,6 +100,8 @@ GitHub Actions (GHA)"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
 <span>  run_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  has_testthat <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  has_runit <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  run_lintr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_spelling <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  run_covr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  codecov_token <span class="op">=</span> <span class="st">"${{ secrets.CODECOV_TOKEN }}"</span>,</span>
 <span>  has_latex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -265,6 +267,17 @@ use the '–as-cran' flag to apply CRAN standards</p></dd>
 <dd><p>Run R Unit tests.</p></dd>
 
 
+<dt id="arg-run-lintr">run_lintr<a class="anchor" aria-label="anchor" href="#arg-run-lintr"></a></dt>
+<dd><p>Run <code>lintr::lint_package()</code> and emit each lint as
+a GitHub workflow annotation. Does not fail the workflow.</p></dd>
+
+
+<dt id="arg-run-spelling">run_spelling<a class="anchor" aria-label="anchor" href="#arg-run-spelling"></a></dt>
+<dd><p>Run <code>spelling::spell_check_package()</code> and emit
+each misspelling as a GitHub workflow annotation. Does not fail the
+workflow.</p></dd>
+
+
 <dt id="arg-run-covr">run_covr<a class="anchor" aria-label="anchor" href="#arg-run-covr"></a></dt>
 <dd><p>Run code coverage tests and publish results to codecov.</p></dd>
 
@@ -419,8 +432,12 @@ overwrite with new one (default: <code>FALSE</code>).</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving yaml ==&gt; /tmp/RtmpmTVetO/.github/workflows/rworkflows.yml</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"curl"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu">curl</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/curl/reference/nslookup.html" class="external-link">has_internet</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">use_workflow</span><span class="op">(</span>save_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,<span class="st">".github"</span>,<span class="st">"workflows"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"No internet connection available, skipping example."</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving yaml ==&gt; /tmp/Rtmp6qC90C/.github/workflows/rworkflows.yml</span>
 </code></pre></div>
     </div>
   </div>
