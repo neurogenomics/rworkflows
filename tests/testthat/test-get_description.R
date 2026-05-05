@@ -22,8 +22,8 @@ test_that("get_description works", {
                         paths="typo")
   d6 <- get_description(refs=NULL, 
                         paths="typo")
-  d7 <- get_description(refs=NULL, 
-                        paths=here::here("DESCRIPTION")
+  d7 <- get_description(refs=NULL,
+                        paths=system.file("DESCRIPTION", package="rworkflows")
                         )
   d8 <- get_description(refs=c("stats","data.table"), 
                         paths=NULL)

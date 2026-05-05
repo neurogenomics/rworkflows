@@ -8,8 +8,8 @@ test_that("get_hex works", {
   testthat::expect_equal(hex2$rworkflows,
                          hex1$`neurogenomics/rworkflows`)  
   #### When DESCRIPTION path provided ####
-  hex3 <- get_hex(refs=NULL, 
-                  paths=here::here("DESCRIPTION"))
+  hex3 <- get_hex(refs=NULL,
+                  paths=system.file("DESCRIPTION", package="rworkflows"))
   testthat::expect_equal(hex3[[1]],
                          hex1[[1]])
   #### When neither refs nor paths provided ####
@@ -36,7 +36,7 @@ test_that("get_hex works", {
                          hex1[[1]])
   #### When paths length > refs length ####
   hex7 <- get_hex(refs="neurogenomics/rworkflows", 
-                  paths = rep(here::here("DESCRIPTION"),2))
+                  paths = rep(system.file("DESCRIPTION", package="rworkflows"),2))
   testthat::expect_equal(hex7[[1]], 
                          hex1[[1]])
   #### Can't find URL: but URL inferred ####
