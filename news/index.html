@@ -73,8 +73,8 @@
 <h2 class="page-header" data-toc-text="1.0.12" id="rworkflows-1012">rworkflows 1.0.12<a class="anchor" aria-label="anchor" href="#rworkflows-1012"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-0-12">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-0-12"></a></h3>
-<ul><li>Add <code>run_lintr</code> action input (default <code>true</code>) which runs <code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code> and surfaces each lint as a GitHub workflow annotation. Does not fail the workflow.</li>
-<li>Add <code>run_spelling</code> action input (default <code>true</code>) which runs <code><a href="https://docs.ropensci.org/spelling//reference/spell_check_package.html" class="external-link">spelling::spell_check_package()</a></code> and surfaces each misspelling as a GitHub workflow annotation. Does not fail the workflow.</li>
+<ul><li>Add <code>run_lintr</code> action input (default <code>true</code>) which runs <code>lintr::lint_package()</code> and surfaces each lint as a GitHub workflow annotation. Does not fail the workflow.</li>
+<li>Add <code>run_spelling</code> action input (default <code>true</code>) which runs <code>spelling::spell_check_package()</code> and surfaces each misspelling as a GitHub workflow annotation. Does not fail the workflow.</li>
 <li>
 <code><a href="../reference/use_workflow.html">use_workflow()</a></code> now exposes matching <code>run_lintr</code> and <code>run_spelling</code> arguments, written into the generated workflow <code>with:</code> block.</li>
 </ul></div>
