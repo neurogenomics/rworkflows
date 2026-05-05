@@ -35,6 +35,10 @@ and vignettes.
 ## Miscellaneous
 
 * Update system requirements Ubuntu version for Linux runners in actions.
+* Bump `conda-incubator/setup-miniconda` from `@v3` to `@v4`. v4 upgrades
+  the action runtime to Node.js 24, which is supported by GitHub-hosted
+  runners but requires self-hosted runners on a recent `actions/runner`
+  release.
 
 # rworkflows 1.0.11
 

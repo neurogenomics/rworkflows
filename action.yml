@@ -223,7 +223,7 @@ runs:
 
     - name: 🐍 Setup Miniconda
       if: inputs.miniforge_variant != 'false'
-      uses: conda-incubator/setup-miniconda@v3
+      uses: conda-incubator/setup-miniconda@v4
       with:
         auto-update-conda: false
         python-version: ${{ matrix.python-version }}
