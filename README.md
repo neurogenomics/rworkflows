@@ -21,7 +21,7 @@ Authors: <i>Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan
 Skene</i>  
 </h4>
 <h4>  
-README updated: <i>May-01-2026</i>  
+README updated: <i>May-05-2026</i>  
 </h4>
 
 [![CRAN
@@ -301,7 +301,7 @@ utils::sessionInfo()
     ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
     ## 
     ## locale:
-    ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
     ## 
     ## time zone: Europe/London
     ## tzcode source: internal
@@ -321,9 +321,10 @@ utils::sessionInfo()
     ## [25] badger_0.2.5        xfun_0.57           fs_2.1.0           
     ## [28] S7_0.2.2            otel_0.2.0          cli_3.6.6          
     ## [31] magrittr_2.0.5      rworkflows_1.0.12   digest_0.6.39      
-    ## [34] grid_4.6.0          rappdirs_0.3.4      lifecycle_1.0.5    
-    ## [37] vctrs_0.7.3         data.table_1.18.2.1 evaluate_1.0.5     
-    ## [40] glue_1.8.1          farver_2.1.2        rmarkdown_2.31     
-    ## [43] tools_4.6.0         pkgconfig_2.0.3     htmltools_0.5.9
+    ## [34] grid_4.6.0          rstudioapi_0.18.0   rappdirs_0.3.4     
+    ## [37] lifecycle_1.0.5     vctrs_0.7.3         data.table_1.18.2.1
+    ## [40] evaluate_1.0.5      glue_1.8.1          farver_2.1.2       
+    ## [43] rmarkdown_2.31      tools_4.6.0         pkgconfig_2.0.3    
+    ## [46] htmltools_0.5.9
 
 </details>

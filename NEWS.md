@@ -1,5 +1,16 @@
 # rworkflows 1.0.12
 
+## New Features
+
+* Add `run_lintr` action input (default `true`) which runs
+  `lintr::lint_package()` and surfaces each lint as a GitHub workflow
+  annotation. Does not fail the workflow.
+* Add `run_spelling` action input (default `true`) which runs
+  `spelling::spell_check_package()` and surfaces each misspelling as a
+  GitHub workflow annotation. Does not fail the workflow.
+* `use_workflow()` now exposes matching `run_lintr` and `run_spelling`
+  arguments, written into the generated workflow `with:` block.
+
 ## Bug Fixes
 
 * Comply with CRAN policy on graceful handling of unavailable internet
