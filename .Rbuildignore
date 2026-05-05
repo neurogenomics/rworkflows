@@ -36,3 +36,4 @@ rworkflows-merged
 ^vignettes/*\.toc$
 ^vignettes/*\.tex$
 ^\.devcontainer$
+^cran-comments\.md$

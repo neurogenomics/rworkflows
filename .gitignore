@@ -57,3 +57,5 @@ vignettes/*.pdf
 vignettes/*.gz
 vignettes/*.toc
 vignettes/*.tex
+# CRAN
+cran-comments.md
