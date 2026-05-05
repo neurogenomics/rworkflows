@@ -21,7 +21,8 @@
 resources:
     - Add `testthat::skip_if_offline()` to all tests whose call stacks may
       reach the internet (`test-check_bioc_version.R`, `test-fill_description.R`,
-      `test-get_authors.R`, `test-get_hex.R`, `test-infer_deps.R`).
+      `test-get_authors.R`, `test-get_hex.R`, `test-infer_biocviews.R`,
+      `test-infer_deps.R`).
     - Move the existing offline guard up in `test-construct_cont.R` so that
       the `versions_explicit = TRUE` branch (which calls `bioc_r_versions()`)
       is also skipped when offline.

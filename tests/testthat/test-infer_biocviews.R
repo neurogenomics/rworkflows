@@ -1,5 +1,6 @@
-test_that("infer_biocviews works", { 
-  
+test_that("infer_biocviews works", {
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
+
   # Don't run simply bc biocViews::recommendBiocViews is unable
   ## to find the DESCRIPTION file when running examples.
   # biocviews1 <- infer_biocviews(pkgdir = "../../")
