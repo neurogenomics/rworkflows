@@ -114,6 +114,7 @@ jobs:
       uses: grimbough/bioc-actions/setup-bioc@v1
       with:
         bioc-version: ${{ matrix.config.bioc }}
+        Ncpus: ${{ env.ncpus }}
     - name: "\U0001F6E0 Install Pandoc"
       if: env.pandoc_version != 'false' && runner.os != 'Linux'
       uses: r-lib/actions/setup-pandoc@v2

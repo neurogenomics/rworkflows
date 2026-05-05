@@ -245,11 +245,12 @@ runs:
     
     ## R/Bioc are already installed on the Bioc Docker container, 
     ## and reinstalling them causes errors.
-    - name: 🛠 Setup R and Bioconductor 
+    - name: 🛠 Setup R and Bioconductor
       if: runner.os != 'Linux'
       uses: grimbough/bioc-actions/setup-bioc@v1
       with:
         bioc-version: ${{ matrix.config.bioc }}
+        Ncpus: ${{ inputs.ncpus }}
 
     ## pandoc is already included in the Bioconductor docker images
     - name: 🛠 Install Pandoc 

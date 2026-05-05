@@ -43,6 +43,9 @@ and vignettes.
   the action runtime to Node.js 24, which is supported by GitHub-hosted
   runners but requires self-hosted runners on a recent `actions/runner`
   release.
+* Forward the `ncpus` input to `grimbough/bioc-actions/setup-bioc@v1` (as
+  its `Ncpus` input) so non-Linux R installs use the configured parallel
+  job count instead of the action's default of 3.
 
 # rworkflows 1.0.11
 
