@@ -1,4 +1,4 @@
-testthat::skip_if_offline(host = "github.com")
+if (!is_gha()) testthat::skip_if_offline(host = "github.com")
 test_that("get_description works", {
   
   run_tests <- function(dl){
@@ -60,7 +60,7 @@ test_that("get_description works", {
                          d1[[1]])
 
   #### Search CRAN/Bioc repos ####
-  testthat::skip_if_offline(host = "bioconductor.org")
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   #### Run first time ####
   d13a <- get_description(refs="ABSSeq",
                          db = rworkflows::biocpkgtools_db,

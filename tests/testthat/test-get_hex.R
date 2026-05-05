@@ -1,5 +1,5 @@
 test_that("get_hex works", {
-  testthat::skip_if_offline(host = "github.com")
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
 
   #### When repo name provided ####
   hex1 <- get_hex(refs="neurogenomics/rworkflows")

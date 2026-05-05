@@ -1,5 +1,5 @@
 test_that("use_workflow works", {
-  testthat::skip_if_offline(host = "github.com")
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
   
   path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
   testthat::expect_true(file.exists(path))

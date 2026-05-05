@@ -1,5 +1,5 @@
 test_that("check_bioc_version works", {
-  testthat::skip_if_offline(host = "bioconductor.org")
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
 
   testthat::expect_equal(
     check_bioc_version(bioc = "3.17"),

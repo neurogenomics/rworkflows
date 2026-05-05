@@ -1,5 +1,5 @@
 test_that("check_cont works", {
-  testthat::skip_if_offline(host = "ghcr.io")
+  if (!is_gha()) testthat::skip_if_offline(host = "ghcr.io")
   
   testthat::expect_no_warning(
     check_cont(cont = "bioconductor/bioconductor_docker:devel")

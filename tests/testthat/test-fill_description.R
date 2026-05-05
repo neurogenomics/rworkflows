@@ -1,5 +1,5 @@
 test_that("fill_description works", {
-  testthat::skip_if_offline(host = "github.com")
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
 
   url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
   path <- tempfile(pattern = "DESCRIPTION")

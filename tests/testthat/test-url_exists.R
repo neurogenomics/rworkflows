@@ -1,5 +1,5 @@
 test_that("url_exists works", {
-  testthat::skip_if_offline(host = "github.com")
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
   
   testthat::expect_true(
     rworkflows:::url_exists("https://github.com/neurogenomics/rworkflows")

@@ -1,5 +1,5 @@
 test_that("construct_runners works", {
-  testthat::skip_if_offline(host = "bioconductor.org")
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   
   #### Set up tests ####  
   run_tests <- function(runners){

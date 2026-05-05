@@ -1,5 +1,5 @@
 test_that("check_r_version works", {
-  testthat::skip_if_offline(host = "bioconductor.org")
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   
   testthat::expect_equal(
     check_r_version(r = "4.1"),

@@ -1,5 +1,5 @@
 test_that("bioc_r_versions works", {
-  testthat::skip_if_offline(host = "bioconductor.org")
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   
   ver1 <- bioc_r_versions(bioc_version="devel")
   testthat::expect_true(ver1$bioc>="3.17")
