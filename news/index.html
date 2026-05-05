@@ -77,6 +77,8 @@
 <li>Add <code>run_spelling</code> action input (default <code>true</code>) which runs <code><a href="https://docs.ropensci.org/spelling//reference/spell_check_package.html" class="external-link">spelling::spell_check_package()</a></code> and surfaces each misspelling as a GitHub workflow annotation. Does not fail the workflow.</li>
 <li>
 <code><a href="../reference/use_workflow.html">use_workflow()</a></code> now exposes matching <code>run_lintr</code> and <code>run_spelling</code> arguments, written into the generated workflow <code>with:</code> block.</li>
+<li>
+<code>run_lintr</code> and <code>run_spelling</code> steps now also append a titled section to the GitHub Actions run summary (<code>$GITHUB_STEP_SUMMARY</code>), with per-finding details inside a collapsed <code>&lt;details&gt;</code> block. The existing inline workflow annotations are unchanged.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-0-12">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-12"></a></h3>
@@ -91,6 +93,8 @@
 <div class="section level3">
 <h3 id="miscellaneous-1-0-12">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-1-0-12"></a></h3>
 <ul><li>Update system requirements Ubuntu version for Linux runners in actions.</li>
+<li>Bump <code>conda-incubator/setup-miniconda</code> from <code>@v3</code> to <code>@v4</code>. v4 upgrades the action runtime to Node.js 24, which is supported by GitHub-hosted runners but requires self-hosted runners on a recent <code>actions/runner</code> release.</li>
+<li>Forward the <code>ncpus</code> input to <code>grimbough/bioc-actions/setup-bioc@v1</code> (as its <code>Ncpus</code> input) so non-Linux R installs use the configured parallel job count instead of the action’s default of 3.</li>
 </ul></div>
 </div>
     <div class="section level2">
