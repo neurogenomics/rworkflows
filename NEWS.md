@@ -62,11 +62,17 @@ and vignettes.
 * Forward the `ncpus` input to `grimbough/bioc-actions/setup-bioc@v1` (as
   its `Ncpus` input) so non-Linux R installs use the configured parallel
   job count instead of the action's default of 3.
-* Tests: replace `if(!is_gha()) skip_if_offline()` gates with
-  host-specific `skip_if_offline(host=...)` calls
+* Tests: replace `is_gha()` gates that were guarding internet access
+  with host-specific `skip_if_offline(host=...)` calls
   (`bioconductor.org`, `github.com`, `raw.githubusercontent.com`,
-  `ghcr.io`, `conda.anaconda.org`) so individual tests skip when their
-  actual remote is unreachable rather than relying on a GHA escape hatch.
+  `ghcr.io`) so individual tests skip when their actual remote is
+  unreachable. This includes the `get_description` Bioc-repo block,
+  which previously gated on `is_gha() | is_rstudio()` to dodge CRAN
+  flakiness (#65); it now skips on `bioconductor.org` instead.
+  `is_gha()` is retained only for the `construct_conda_yml`
+  env-creation block, where the test is genuinely GHA-only (creates
+  and leaves a conda env behind, so should not run on developer
+  machines).
 
 # rworkflows 1.0.11
 
