@@ -35,6 +35,17 @@ resources:
       degrade gracefully when offline.
 * Add `curl` to `Suggests` to support the new offline guards in examples
 and vignettes.
+* Vignettes: replace `read.dcf("../DESCRIPTION", ...)` with
+  `utils::packageDescription("rworkflows", ...)` so the setup chunks no
+  longer fail under `R CMD check`'s `tools::checkVignettes()`, which
+  tangles each vignette to a `.R` file and sources it from a temp working
+  directory where `../DESCRIPTION` does not resolve. The same change is
+  applied to `inst/templates/{templateR,docker}.Rmd` via a `__PKG__`
+  placeholder that `use_vignette_getstarted()` / `use_vignette_docker()`
+  substitute at write time.
+* `use_vignette_getstarted()` / `use_vignette_docker()`: raise a clear
+  error when `package` is `NULL` or empty (previously they silently
+  produced a malformed file).
 
 ## Miscellaneous
 
@@ -43,9 +54,19 @@ and vignettes.
   the action runtime to Node.js 24, which is supported by GitHub-hosted
   runners but requires self-hosted runners on a recent `actions/runner`
   release.
+* Bump `actions/checkout` from `@v4` to `@v6` (the bundled example
+  workflow goes from `@v3`). v5 moved the runtime to Node.js 24 (requires
+  runner >= v2.327.1, satisfied by all GitHub-hosted runners) and v6
+  persists git auth credentials to a separate `.gitauth` file instead of
+  `.git/config`; neither change affects this action.
 * Forward the `ncpus` input to `grimbough/bioc-actions/setup-bioc@v1` (as
   its `Ncpus` input) so non-Linux R installs use the configured parallel
   job count instead of the action's default of 3.
+* Tests: replace `if(!is_gha()) skip_if_offline()` gates with
+  host-specific `skip_if_offline(host=...)` calls
+  (`bioconductor.org`, `github.com`, `raw.githubusercontent.com`,
+  `ghcr.io`, `conda.anaconda.org`) so individual tests skip when their
+  actual remote is unreachable rather than relying on a GHA escape hatch.
 
 # rworkflows 1.0.11
 
