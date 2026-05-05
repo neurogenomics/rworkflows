@@ -66,7 +66,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/dev2/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
@@ -89,12 +89,17 @@
 <li>Gate internet-dependent code chunks in the <code>bioconductor</code> and <code>rworkflows</code> vignettes on <code><a href="https://jeroen.r-universe.dev/curl/reference/nslookup.html" class="external-link">curl::has_internet()</a></code> so vignette rebuilds degrade gracefully when offline.</li>
 </ul></li>
 <li>Add <code>curl</code> to <code>Suggests</code> to support the new offline guards in examples and vignettes.</li>
+<li>Vignettes: replace <code>read.dcf("../DESCRIPTION", ...)</code> with <code>utils::packageDescription("rworkflows", ...)</code> so the setup chunks no longer fail under <code>R CMD check</code>’s <code><a href="https://rdrr.io/r/tools/checkVignettes.html" class="external-link">tools::checkVignettes()</a></code>, which tangles each vignette to a <code>.R</code> file and sources it from a temp working directory where <code>../DESCRIPTION</code> does not resolve. The same change is applied to <code>inst/templates/{templateR,docker}.Rmd</code> via a <code>__PKG__</code> placeholder that <code><a href="../reference/use_vignette_getstarted.html">use_vignette_getstarted()</a></code> / <code><a href="../reference/use_vignette_docker.html">use_vignette_docker()</a></code> substitute at write time.</li>
+<li>
+<code><a href="../reference/use_vignette_getstarted.html">use_vignette_getstarted()</a></code> / <code><a href="../reference/use_vignette_docker.html">use_vignette_docker()</a></code>: raise a clear error when <code>package</code> is <code>NULL</code> or empty (previously they silently produced a malformed file).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="miscellaneous-1-0-12">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-1-0-12"></a></h3>
 <ul><li>Update system requirements Ubuntu version for Linux runners in actions.</li>
 <li>Bump <code>conda-incubator/setup-miniconda</code> from <code>@v3</code> to <code>@v4</code>. v4 upgrades the action runtime to Node.js 24, which is supported by GitHub-hosted runners but requires self-hosted runners on a recent <code>actions/runner</code> release.</li>
+<li>Bump <code>actions/checkout</code> from <code>@v4</code> to <code>@v6</code> (the bundled example workflow goes from <code>@v3</code>). v5 moved the runtime to Node.js 24 (requires runner &gt;= v2.327.1, satisfied by all GitHub-hosted runners) and v6 persists git auth credentials to a separate <code>.gitauth</code> file instead of <code>.git/config</code>; neither change affects this action.</li>
 <li>Forward the <code>ncpus</code> input to <code>grimbough/bioc-actions/setup-bioc@v1</code> (as its <code>Ncpus</code> input) so non-Linux R installs use the configured parallel job count instead of the action’s default of 3.</li>
+<li>Tests: replace <code>if(!is_gha()) skip_if_offline()</code> gates with host-specific <code>skip_if_offline(host=...)</code> calls (<code>bioconductor.org</code>, <code>github.com</code>, <code>raw.githubusercontent.com</code>, <code>ghcr.io</code>, <code>conda.anaconda.org</code>) so individual tests skip when their actual remote is unreachable rather than relying on a GHA escape hatch.</li>
 </ul></div>
 </div>
     <div class="section level2">
