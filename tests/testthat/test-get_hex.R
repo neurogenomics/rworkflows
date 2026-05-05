@@ -1,6 +1,5 @@
 test_that("get_hex works", {
-  ## Skip if offline: get_hex() validates URLs over the network
-  if(!is_gha()) testthat::skip_if_offline()
+  testthat::skip_if_offline(host = "github.com")
 
   #### When repo name provided ####
   hex1 <- get_hex(refs="neurogenomics/rworkflows")
@@ -11,12 +10,8 @@ test_that("get_hex works", {
   #### When DESCRIPTION path provided ####
   hex3 <- get_hex(refs=NULL, 
                   paths=here::here("DESCRIPTION"))
-  if(is_gha() && testthat::is_testing()){
-    testthat::expect_equal(hex3[[1]], 
-                           hex1[[1]])
-  } else {
-    message("Skipping test.")
-  }
+  testthat::expect_equal(hex3[[1]],
+                         hex1[[1]])
   #### When neither refs nor paths provided ####
   hex4 <- get_hex(refs=NULL, 
                   paths=NULL) 
