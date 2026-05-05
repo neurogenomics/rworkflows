@@ -64,5 +64,9 @@ Construct runner configurations across multiple Operating Systems (OS)
  for GitHub Actions workflow.
 }
 \examples{
-runners <- construct_runners()
+if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+  runners <- construct_runners()
+} else {
+  message("No internet connection available, skipping example.")
+}
 }

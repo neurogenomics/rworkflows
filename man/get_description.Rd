@@ -59,5 +59,9 @@ GitHub (whenever possible). Prioritises the fastest methods that do
 not involve downloading files first.
 }
 \examples{
-d <- get_description(refs="neurogenomics/rworkflows")
+if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+  d <- get_description(refs="neurogenomics/rworkflows")
+} else {
+  message("No internet connection available, skipping example.")
+}
 }

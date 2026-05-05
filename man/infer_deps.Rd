@@ -67,10 +67,14 @@ A character vector of R package names.
 Infers the R packages that your R package depends on.
 }
 \examples{
-#### Get example DESCRIPTION file ####
-url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
-path <- tempfile(fileext = "DESCRIPTION")
-utils::download.file(url,path)
+if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+  #### Get example DESCRIPTION file ####
+  url <- "https://github.com/neurogenomics/templateR/raw/master/DESCRIPTION"
+  path <- tempfile(fileext = "DESCRIPTION")
+  utils::download.file(url,path)
 
-deps <- infer_deps(path = path)
+  deps <- infer_deps(path = path)
+} else {
+  message("No internet connection available, skipping example.")
+}
 }

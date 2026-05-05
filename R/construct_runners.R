@@ -35,8 +35,12 @@
 #' 
 #' @export
 #' @importFrom stats setNames
-#' @examples 
-#' runners <- construct_runners()
+#' @examples
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   runners <- construct_runners()
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 construct_runners <- function(os=c("ubuntu-latest",
                                    "macOS-latest",
                                    "windows-latest"),

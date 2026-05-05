@@ -86,7 +86,11 @@
 #' @export
 #' @import badger
 #' @examples
-#' badges <- rworkflows::use_badges(ref = "neurogenomics/rworkflows") 
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   badges <- rworkflows::use_badges(ref = "neurogenomics/rworkflows")
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 use_badges <- function(ref = NULL,
                        add_hex = TRUE,
                        add_actions = "rworkflows",

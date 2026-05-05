@@ -40,6 +40,11 @@
 #' @param as_cran When running R CMD checks, 
 #' use the '--as-cran' flag to apply CRAN standards
 #' @param has_testthat Run unit tests and report results.
+#' @param run_lintr Run \code{lintr::lint_package()} and emit each lint as
+#' a GitHub workflow annotation. Does not fail the workflow.
+#' @param run_spelling Run \code{spelling::spell_check_package()} and emit
+#' each misspelling as a GitHub workflow annotation. Does not fail the
+#' workflow.
 #' @param run_covr Run code coverage tests and publish results to codecov.
 #' @param run_pkgdown Knit the \emph{README.Rmd} (if available), 
 #' build documentation website, and deploy to \emph{gh-pages} branch.
@@ -159,7 +164,11 @@
 #' @importFrom here here
 #' @importFrom yaml as.yaml read_yaml write_yaml yaml.load
 #' @examples
-#' path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   path <- use_workflow(save_dir = file.path(tempdir(),".github","workflows"))
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 use_workflow <- function(## action-level args
                          template="rworkflows",
                          name=template,
@@ -182,9 +191,11 @@ use_workflow <- function(## action-level args
                          run_rcmdcheck=TRUE, 
                          as_cran=TRUE,
                          run_vignettes=TRUE,
-                         has_testthat=TRUE, 
+                         has_testthat=TRUE,
                          has_runit=FALSE,
-                         run_covr=TRUE, 
+                         run_lintr=TRUE,
+                         run_spelling=TRUE,
+                         run_covr=TRUE,
                          codecov_token="${{ secrets.CODECOV_TOKEN }}",
                          ### Latex
                          has_latex=FALSE,
@@ -264,8 +275,10 @@ use_workflow <- function(## action-level args
                    run_rcmdcheck=run_rcmdcheck, 
                    as_cran=as_cran,
                    run_vignettes=run_vignettes,
-                   has_testthat=has_testthat, 
-                   run_covr=run_covr, 
+                   has_testthat=has_testthat,
+                   run_lintr=run_lintr,
+                   run_spelling=run_spelling,
+                   run_covr=run_covr,
                    run_pkgdown=run_pkgdown, 
                    has_runit=has_runit, 
                    has_latex=has_latex,

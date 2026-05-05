@@ -24,8 +24,12 @@
 #' 
 #' @export
 #' @importFrom yaml read_yaml
-#' @examples 
-#' ver <- bioc_r_versions(bioc_version="devel")
+#' @examples
+#' if (requireNamespace("curl", quietly = TRUE) && curl::has_internet()) {
+#'   ver <- bioc_r_versions(bioc_version="devel")
+#' } else {
+#'   message("No internet connection available, skipping example.")
+#' }
 bioc_r_versions <- function(bioc_version = NULL,
                             depth = NULL,
                             return_opts = FALSE){

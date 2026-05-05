@@ -1,3 +1,52 @@
+# rworkflows 1.0.12
+
+## New Features
+
+* Add `run_lintr` action input (default `true`) which runs
+  `lintr::lint_package()` and surfaces each lint as a GitHub workflow
+  annotation. Does not fail the workflow.
+* Add `run_spelling` action input (default `true`) which runs
+  `spelling::spell_check_package()` and surfaces each misspelling as a
+  GitHub workflow annotation. Does not fail the workflow.
+* `use_workflow()` now exposes matching `run_lintr` and `run_spelling`
+  arguments, written into the generated workflow `with:` block.
+* `run_lintr` and `run_spelling` steps now also append a titled section to
+  the GitHub Actions run summary (`$GITHUB_STEP_SUMMARY`), with per-finding
+  details inside a collapsed `<details>` block. The existing inline
+  workflow annotations are unchanged.
+
+## Bug Fixes
+
+* Comply with CRAN policy on graceful handling of unavailable internet
+resources:
+    - Add `testthat::skip_if_offline()` to all tests whose call stacks may
+      reach the internet (`test-check_bioc_version.R`, `test-fill_description.R`,
+      `test-get_authors.R`, `test-get_hex.R`, `test-infer_deps.R`).
+    - Move the existing offline guard up in `test-construct_cont.R` so that
+      the `versions_explicit = TRUE` branch (which calls `bioc_r_versions()`)
+      is also skipped when offline.
+    - Wrap all examples that may use internet resources in
+      `curl::has_internet()` so they emit an informative message instead of
+      erroring when offline (`bioc_r_versions`, `construct_runners`,
+      `fill_description`, `get_description`, `get_hex`, `infer_deps`,
+      `use_badges`, `use_workflow`).
+    - Gate internet-dependent code chunks in the `bioconductor` and
+      `rworkflows` vignettes on `curl::has_internet()` so vignette rebuilds
+      degrade gracefully when offline.
+* Add `curl` to `Suggests` to support the new offline guards in examples
+and vignettes.
+
+## Miscellaneous
+
+* Update system requirements Ubuntu version for Linux runners in actions.
+* Bump `conda-incubator/setup-miniconda` from `@v3` to `@v4`. v4 upgrades
+  the action runtime to Node.js 24, which is supported by GitHub-hosted
+  runners but requires self-hosted runners on a recent `actions/runner`
+  release.
+* Forward the `ncpus` input to `grimbough/bioc-actions/setup-bioc@v1` (as
+  its `Ncpus` input) so non-Linux R installs use the configured parallel
+  job count instead of the action's default of 3.
+
 # rworkflows 1.0.11
 
 ## Bug Fixes
@@ -7,6 +56,11 @@
 * Add `as.integer()` coercion to all R `options(timeout=...)` calls for robustness.
 These were causing `download.file()` to fail with `cannot download any files`
 when the timeout was not properly converted to a numeric value.
+
+## Miscellaneous
+
+* `construct_authors()`: Add test case compatible for both new and old versions
+of R.
 
 # rworkflows 1.0.10
 

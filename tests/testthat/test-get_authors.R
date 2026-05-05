@@ -1,5 +1,7 @@
 test_that("get_authors works", {
-  
+  ## Skip if offline: get_description() may fall back to GitHub for refs
+  if(!is_gha()) testthat::skip_if_offline()
+
   true_auths <- "Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan Skene"
   #### ref is NULL ####
   auths1 <- get_authors(ref = NULL)
