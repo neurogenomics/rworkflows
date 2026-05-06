@@ -66,11 +66,11 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/dev2/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.0.12" id="rworkflows-1012">rworkflows 1.0.12<a class="anchor" aria-label="anchor" href="#rworkflows-1012"></a></h2>
+<h2 class="page-header" data-toc-text="1.0.12" id="rworkflows-1012">rworkflows 1.0.12<small>2026-05-05</small><a class="anchor" aria-label="anchor" href="#rworkflows-1012"></a></h2>
 <div class="section level3">
 <h3 id="new-features-1-0-12">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-0-12"></a></h3>
 <ul><li>Add <code>run_lintr</code> action input (default <code>true</code>) which runs <code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code> and surfaces each lint as a GitHub workflow annotation. Does not fail the workflow.</li>
@@ -219,7 +219,7 @@
 </ul></li>
 <li>Reduce package size by making vignettes <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html" class="external-link">rmarkdown::html_vignette</a></code> instead of <code><a href="https://rdrr.io/pkg/BiocStyle/man/html_document.html" class="external-link">BiocStyle::html_document</a></code>.</li>
 <li>URL: <a href="https://github.com/runforesight/workflow-telemetry-action" class="external-link uri">https://github.com/runforesight/workflow-telemetry-action</a> (moved to <a href="https://github.com/catchpoint/workflow-telemetry-action" class="external-link uri">https://github.com/catchpoint/workflow-telemetry-action</a>)</li>
-<li>Skip tests that are sensitive to working directory location (which can cause issues when running <code><a href="https://rdrr.io/pkg/devtools/man/test.html" class="external-link">devtools::test_coverage()</a></code> in the terminal) <a href="https://github.com/neurogenomics/rworkflows/issues/112" class="external-link">#112</a></li>
+<li>Skip tests that are sensitive to working directory location (which can cause issues when running <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test_coverage()</a></code> in the terminal) <a href="https://github.com/neurogenomics/rworkflows/issues/112" class="external-link">#112</a></li>
 </ul></div>
 </div>
     <div class="section level2">
