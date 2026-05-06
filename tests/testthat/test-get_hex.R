@@ -1,6 +1,5 @@
 test_that("get_hex works", {
-  ## Skip if offline: get_hex() validates URLs over the network
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
 
   #### When repo name provided ####
   hex1 <- get_hex(refs="neurogenomics/rworkflows")
@@ -9,14 +8,10 @@ test_that("get_hex works", {
   testthat::expect_equal(hex2$rworkflows,
                          hex1$`neurogenomics/rworkflows`)  
   #### When DESCRIPTION path provided ####
-  hex3 <- get_hex(refs=NULL, 
-                  paths=here::here("DESCRIPTION"))
-  if(is_gha() && testthat::is_testing()){
-    testthat::expect_equal(hex3[[1]], 
-                           hex1[[1]])
-  } else {
-    message("Skipping test.")
-  }
+  hex3 <- get_hex(refs=NULL,
+                  paths=system.file("DESCRIPTION", package="rworkflows"))
+  testthat::expect_equal(hex3[[1]],
+                         hex1[[1]])
   #### When neither refs nor paths provided ####
   hex4 <- get_hex(refs=NULL, 
                   paths=NULL) 
@@ -41,7 +36,7 @@ test_that("get_hex works", {
                          hex1[[1]])
   #### When paths length > refs length ####
   hex7 <- get_hex(refs="neurogenomics/rworkflows", 
-                  paths = rep(here::here("DESCRIPTION"),2))
+                  paths = rep(system.file("DESCRIPTION", package="rworkflows"),2))
   testthat::expect_equal(hex7[[1]], 
                          hex1[[1]])
   #### Can't find URL: but URL inferred ####

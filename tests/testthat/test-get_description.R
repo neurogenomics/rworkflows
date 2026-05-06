@@ -1,4 +1,4 @@
-skip_if_offline()
+if (!is_gha()) testthat::skip_if_offline(host = "github.com")
 test_that("get_description works", {
   
   run_tests <- function(dl){
@@ -22,8 +22,8 @@ test_that("get_description works", {
                         paths="typo")
   d6 <- get_description(refs=NULL, 
                         paths="typo")
-  d7 <- get_description(refs=NULL, 
-                        paths=here::here("DESCRIPTION")
+  d7 <- get_description(refs=NULL,
+                        paths=system.file("DESCRIPTION", package="rworkflows")
                         )
   d8 <- get_description(refs=c("stats","data.table"), 
                         paths=NULL)
@@ -56,43 +56,36 @@ test_that("get_description works", {
   testthat::expect_null(d6[[1]])
   
   
-  if(is_gha() && testthat::is_testing()){ 
-    testthat::expect_equal(d7[[1]],
-                           d1[[1]])
-  } else{
-    message("Skipping test.")
-  }
-  
+  testthat::expect_equal(d7[[1]],
+                         d1[[1]])
+
   #### Search CRAN/Bioc repos ####
-  ## Don't run on CRAN due to issues on their server: 
-  ## https://github.com/neurogenomics/rworkflows/issues/65
-  if (is_gha() | is_rstudio()) {
-    #### Run first time ####
-    d13a <- get_description(refs="ABSSeq",
-                           db = rworkflows::biocpkgtools_db, 
-                           use_repos = TRUE) 
-    testthat::expect_equal(d13a[[1]],
-                           d1[[1]])
-    #### Rerun to use stored DESCRITPION files ####
-    d13b <- get_description(refs="ABSSeq",
-                           db = rworkflows::biocpkgtools_db, 
-                           use_repos = TRUE) 
-    testthat::expect_equal(d13b[[1]],
-                           d1[[1]])
-    #### Unable to find pkg info ####
-    testthat::expect_null(
-      get_description(refs="typooo",
-                      db = rworkflows::biocpkgtools_db, 
-                      use_repos = TRUE) 
-    )
-    #### Gather remote data ####
-    d13c <- get_description(refs="ABSSeq",
-                            db = NULL, 
-                            use_repos = TRUE, 
-                            repo = "BioCsoft") 
-    testthat::expect_equal(d13c[[1]],
-                           d1[[1]])
-  }  
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
+  #### Run first time ####
+  d13a <- get_description(refs="ABSSeq",
+                         db = rworkflows::biocpkgtools_db,
+                         use_repos = TRUE)
+  testthat::expect_equal(d13a[[1]],
+                         d1[[1]])
+  #### Rerun to use stored DESCRITPION files ####
+  d13b <- get_description(refs="ABSSeq",
+                         db = rworkflows::biocpkgtools_db,
+                         use_repos = TRUE)
+  testthat::expect_equal(d13b[[1]],
+                         d1[[1]])
+  #### Unable to find pkg info ####
+  testthat::expect_null(
+    get_description(refs="typooo",
+                    db = rworkflows::biocpkgtools_db,
+                    use_repos = TRUE)
+  )
+  #### Gather remote data ####
+  d13c <- get_description(refs="ABSSeq",
+                          db = NULL,
+                          use_repos = TRUE,
+                          repo = "BioCsoft")
+  testthat::expect_equal(d13c[[1]],
+                         d1[[1]])
   #### Search GitHub repos ####
   d14 <- get_description(refs="neurogenomics/orthogene",
                          paths=NULL,

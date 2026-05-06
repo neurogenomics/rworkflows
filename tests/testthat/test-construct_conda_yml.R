@@ -46,9 +46,8 @@ test_that("construct_conda_yml works", {
                                  return_path = TRUE,
                                  save_path = save_path)
     testthat::expect_true(file.exists(path2))
-    
-    ## Don't run on CRAN servers due to ongoing internet connectivity issues
-    if(!is_gha()) testthat::skip_if_offline()
+
+    if (!is_gha()) testthat::skip_if_offline(host = "conda.anaconda.org")
     
     # conda <- conda_path()
     out <- reticulate::conda_create(environment = path2, 

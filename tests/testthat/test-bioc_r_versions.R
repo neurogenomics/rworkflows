@@ -1,6 +1,5 @@
 test_that("bioc_r_versions works", {
-  ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   
   ver1 <- bioc_r_versions(bioc_version="devel")
   testthat::expect_true(ver1$bioc>="3.17")

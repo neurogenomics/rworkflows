@@ -1,6 +1,5 @@
 test_that("construct_runners works", {
-  ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   
   #### Set up tests ####  
   run_tests <- function(runners){

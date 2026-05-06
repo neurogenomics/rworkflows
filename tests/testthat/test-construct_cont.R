@@ -12,9 +12,7 @@ test_that("construct_cont works", {
   testthat::expect_equal(cont2[[1]],
                          paste0(default_registry,"bioconductor/bioconductor_docker:",default_tag))
 
-  ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  ## (versions_explicit=TRUE / run_check_cont=TRUE both require internet)
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
 
   cont3 <- construct_cont(versions_explicit = TRUE)
   testthat::expect_true(grepl("bioconductor/bioconductor_docker:RELEASE_*",

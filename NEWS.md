@@ -21,7 +21,8 @@
 resources:
     - Add `testthat::skip_if_offline()` to all tests whose call stacks may
       reach the internet (`test-check_bioc_version.R`, `test-fill_description.R`,
-      `test-get_authors.R`, `test-get_hex.R`, `test-infer_deps.R`).
+      `test-get_authors.R`, `test-get_hex.R`, `test-infer_biocviews.R`,
+      `test-infer_deps.R`).
     - Move the existing offline guard up in `test-construct_cont.R` so that
       the `versions_explicit = TRUE` branch (which calls `bioc_r_versions()`)
       is also skipped when offline.
@@ -35,6 +36,17 @@ resources:
       degrade gracefully when offline.
 * Add `curl` to `Suggests` to support the new offline guards in examples
 and vignettes.
+* Vignettes: replace `read.dcf("../DESCRIPTION", ...)` with
+  `utils::packageDescription("rworkflows", ...)` so the setup chunks no
+  longer fail under `R CMD check`'s `tools::checkVignettes()`, which
+  tangles each vignette to a `.R` file and sources it from a temp working
+  directory where `../DESCRIPTION` does not resolve. The same change is
+  applied to `inst/templates/{templateR,docker}.Rmd` via a `__PKG__`
+  placeholder that `use_vignette_getstarted()` / `use_vignette_docker()`
+  substitute at write time.
+* `use_vignette_getstarted()` / `use_vignette_docker()`: raise a clear
+  error when `package` is `NULL` or empty (previously they silently
+  produced a malformed file).
 
 ## Miscellaneous
 
@@ -43,9 +55,28 @@ and vignettes.
   the action runtime to Node.js 24, which is supported by GitHub-hosted
   runners but requires self-hosted runners on a recent `actions/runner`
   release.
+* Bump `actions/checkout` from `@v4` to `@v6` (the bundled example
+  workflow goes from `@v3`). v5 moved the runtime to Node.js 24 (requires
+  runner >= v2.327.1, satisfied by all GitHub-hosted runners) and v6
+  persists git auth credentials to a separate `.gitauth` file instead of
+  `.git/config`; neither change affects this action.
 * Forward the `ncpus` input to `grimbough/bioc-actions/setup-bioc@v1` (as
   its `Ncpus` input) so non-Linux R installs use the configured parallel
   job count instead of the action's default of 3.
+* Tests: replace `is_gha()` gates that were guarding internet access
+  with host-specific `skip_if_offline(host=...)` calls
+  (`bioconductor.org`, `github.com`, `raw.githubusercontent.com`,
+  `ghcr.io`) so individual tests skip when their actual remote is
+  unreachable. This includes the `get_description` Bioc-repo block,
+  which previously gated on `is_gha() | is_rstudio()` to dodge CRAN
+  flakiness (#65); it now skips on `bioconductor.org` instead. Each
+  `skip_if_offline()` is then wrapped in `if (!is_gha())` so GitHub
+  Actions exercises the network path regardless of the offline probe;
+  developer machines and CRAN's check farm continue to skip when the
+  named host is unreachable. `is_gha()` is also retained for the
+  `construct_conda_yml` env-creation block, where the test is
+  genuinely GHA-only (creates and leaves a conda env behind, so should
+  not run on developer machines).
 
 # rworkflows 1.0.11
 

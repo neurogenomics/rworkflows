@@ -1,6 +1,5 @@
 test_that("check_r_version works", {
-  ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "bioconductor.org")
   
   testthat::expect_equal(
     check_r_version(r = "4.1"),

@@ -1,5 +1,5 @@
 test_that("get_yaml works", {
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
   
   testthat::expect_type(
     rworkflows:::get_yaml(template = "rworkflows"),

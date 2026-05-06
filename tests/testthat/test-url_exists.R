@@ -1,6 +1,5 @@
 test_that("url_exists works", {
-  ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "github.com")
   
   testthat::expect_true(
     rworkflows:::url_exists("https://github.com/neurogenomics/rworkflows")

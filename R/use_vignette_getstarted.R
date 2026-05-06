@@ -26,6 +26,11 @@ use_vignette_getstarted <- function(package = names(get_description()),
   # devoptera::args2vars(use_vignette_getstarted, reassign = TRUE)
   
   force(package)
+  if (length(package) != 1L || is.na(package) || !nzchar(package)) {
+    stop("`package` must be a non-empty string. ",
+         "Could not be inferred from a local DESCRIPTION; ",
+         "pass `package` explicitly.")
+  }
   #### Check if file exists already ####
   if(file.exists(path) &
      isFALSE(force_new)){
@@ -38,8 +43,9 @@ use_vignette_getstarted <- function(package = names(get_description()),
                                  package = "rworkflows")
     #### Edit the yaml header ###
     l <- readLines(template_path)
+    l <- gsub("__PKG__", package, l, fixed = TRUE)
     yml_lines <- seq(grep("---",l)[1],
-                     rev(grep("---",l))[1] ) 
+                     rev(grep("---",l))[1] )
     yml <- yaml::read_yaml(text = l[yml_lines]) 
     ## vignette title
     yml$title <- title 

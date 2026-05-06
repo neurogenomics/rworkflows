@@ -1,6 +1,5 @@
 test_that("gha_python_versions works", {
-  ## Don't run on CRAN servers due to ongoing internet connectivity issues
-  if(!is_gha()) testthat::skip_if_offline()
+  if (!is_gha()) testthat::skip_if_offline(host = "raw.githubusercontent.com")
   
   testthat::expect_equal(gha_python_versions(python_version = "3.11"),"3.11")
   testthat::expect_equal(gha_python_versions(python_version = "3.x"),"3.x")
