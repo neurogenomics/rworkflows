@@ -93,7 +93,7 @@ options to enable/disable/modify each step):
     Registry**](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry),
     [**DockerHub**](https://hub.docker.com/)).
 11. 🔭 Generates [workflow
-    telemetry](https://github.com/catchpoint/workflow-telemetry-action)
+    telemetry](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action)
     report.  
 12. 🎖 Updates relevant badges added to your README with
     `rworkflows::use_badges()`.

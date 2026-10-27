@@ -122,7 +122,7 @@ dependency installations, downloads, and code checks. (default = \code{2000})}
 packages will be reinstalled, bypassing the cache.}
 
 \item{run_telemetry}{Whether to run the workflow telemetry action:
-https://github.com/catchpoint/workflow-telemetry-action}
+https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action}
 
 \item{free_diskspace}{Whether to free up additional disk space by deleting 
 non-essential software.}

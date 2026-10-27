@@ -177,7 +177,7 @@ inputs:
   run_telemetry:
     description: >
       Whether to run the workflow telemetry action: 
-      https://github.com/catchpoint/workflow-telemetry-action
+      https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action
     default: true
   force_install:
     description: >
@@ -198,7 +198,7 @@ runs:
   steps:
     - name: 🔭 Collect Workflow Telemetry 
       if: inputs.run_telemetry == 'true'
-      uses: catchpoint/workflow-telemetry-action@v2
+      uses: chainguard-actions/catchpoint-workflow-telemetry-action@1e90e332c3ee328f96d8b4869e0138c4cc5137e8 # v2.0.0
       continue-on-error: true
       with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
