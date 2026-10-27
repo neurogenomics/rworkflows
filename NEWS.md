@@ -1,3 +1,16 @@
+# rworkflows 1.0.13
+
+## Bug Fixes
+
+* `catchpoint/workflow-telemetry-action` was deleted upstream, causing every
+  job to fail at "Set up job" (even with `run_telemetry: false`, since GitHub
+  resolves all `uses:` actions before evaluating `if:`). The telemetry step in
+  `action.yml` and `rworkflows_static.yml` now uses the
+  `chainguard-actions/catchpoint-workflow-telemetry-action` mirror, pinned to
+  the commit for v2.0.0 (#157, #158). Repositories with their own copy of
+  `rworkflows_static.yml` need the same one-line change. A longer-term rework
+  of telemetry is tracked in #159.
+
 # rworkflows 1.0.12
 
 ## New Features
