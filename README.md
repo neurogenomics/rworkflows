@@ -6,7 +6,7 @@
 GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 [![](https://img.shields.io/badge/doi-https://doi.org/10.5281/zenodo.10048573-blue.svg)](https://doi.org/https://doi.org/10.5281/zenodo.10048573)
 <br>
-[![](https://img.shields.io/badge/devel%20version-1.0.12-black.svg)](https://github.com/neurogenomics/rworkflows)
+[![](https://img.shields.io/badge/devel%20version-1.0.13-black.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows)
 [![](https://img.shields.io/github/last-commit/neurogenomics/rworkflows.svg)](https://github.com/neurogenomics/rworkflows/commits/master)
 <br> [![R build
@@ -15,13 +15,13 @@ status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows/badge.s
 status](https://github.com/neurogenomics/rworkflows/workflows/rworkflows_static/badge.svg)](https://github.com/neurogenomics/rworkflows/actions)
 [![](https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/rworkflows)
 <br>
-<a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
-<h4>  
+<a href='https://app.codecov.io/gh/neurogenomics/rworkflows/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/rworkflows/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>\
+<h4>\
 Authors: <i>Brian Schilder, Alan Murphy, Hiranyamaya (Hiru) Dash, Nathan
-Skene</i>  
+Skene</i>\
 </h4>
-<h4>  
-README updated: <i>May-05-2026</i>  
+<h4>\
+README updated: <i>Oct-27-2026</i>\
 </h4>
 
 [![CRAN
@@ -42,16 +42,16 @@ If you use `rworkflows`, please cite:
 `rworkflows` is a suite of tools to make it easy for R developers to
 implement reproducible best practices on GitHub.
 
-It includes three main components:  
-1. [**`templateR`
+It includes three main components:\
+1\. [**`templateR`
 template**](https://github.com/neurogenomics/templateR): a
 `CRAN`/`Bioc`-compatible R package template that automatically generates
-essential documentation using package metadata.  
-2. [**`rworkflows` R
+essential documentation using package metadata.\
+2\. [**`rworkflows` R
 package**](https://github.com/neurogenomics/rworkflows/blob/master/DESCRIPTION):
 a lightweight `CRAN` package to automatically set up short, customisable
-workflows that trigger the `rworkflows` action.  
-3. [**`rworkflows`
+workflows that trigger the `rworkflows` action.\
+3\. [**`rworkflows`
 action**](https://github.com/neurogenomics/rworkflows/blob/master/action.yml):
 an open-source action available on the [GitHub Actions
 Marketplace](https://github.com/marketplace/actions/rworkflows).
@@ -81,12 +81,12 @@ options to enable/disable/modify each step):
 5.  🛠 Installs R dependencies.
 6.  ✅ Builds and checks your R package (with
     [**CRAN**](https://cran.r-project.org/) and/or
-    [**Bioconductor**](https://bioconductor.org/) checks).  
-7.  📋 Runs [unit tests](https://testthat.r-lib.org/).  
+    [**Bioconductor**](https://bioconductor.org/) checks).\
+7.  📋 Runs [unit tests](https://testthat.r-lib.org/).\
 8.  📋 Runs [code coverage tests](https://covr.r-lib.org/) and uploads
-    the results to [**Codecov**](https://about.codecov.io/).  
+    the results to [**Codecov**](https://about.codecov.io/).\
 9.  🚀 (Re)builds and launches a documentation website for your R
-    package.  
+    package.\
 10. 🐳 Pushes a [**Docker**](https://www.docker.com/) container (with
     [**Rstudio**](https://posit.co/) and all dependencies pre-installed)
     to your choice of container registry (e.g. [**GitHub Container
@@ -94,7 +94,7 @@ options to enable/disable/modify each step):
     [**DockerHub**](https://hub.docker.com/)).
 11. 🔭 Generates [workflow
     telemetry](https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action)
-    report.  
+    report.\
 12. 🎖 Updates relevant badges added to your README with
     `rworkflows::use_badges()`.
 
@@ -104,7 +104,7 @@ files, just run the `rworkflows::use_workflow()` function and you’re
 ready to go within seconds!
 
 > **Note**: `rworkflows` uses, was inspired by, and benefits from the
-> work of many other projects, especially:  
+> work of many other projects, especially:\
 > [`biocthis`](https://github.com/lcolladotor/biocthis),
 > [`usethis`](https://github.com/r-lib/usethis),
 > [`actions/`](https://github.com/actions),
@@ -187,9 +187,9 @@ Secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets):
   Actions. You can generate your very own Personal Authentication Token
   with `usethis::create_github_token()`. See the [GitHub
   docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-  for details.  
+  for details.\
 - `DOCKER_TOKEN` \[Optional\]: Allows GitHub Actions to push to a
-  [DockerHub](https://hub.docker.com) account.  
+  [DockerHub](https://hub.docker.com) account.\
 - `CODECOV_TOKEN` \[Optional\]: Codecov repository token to upload
   coverage reports. Providing this token helps prevent report upload
   failures by bypassing Codecov’s GitHub API rate limits. See the
@@ -214,8 +214,8 @@ package, developed by @lcolladotor.
 
 - Uses dynamic variables to specify R/Bioconductor versions
   (e.g. `r: "latest"`) and the name of your R package, as opposed to
-  static names that are likely to become outdated (e.g. `r: "4.0.1"`).  
-- Additional error handling and dependencies checks.  
+  static names that are likely to become outdated (e.g. `r: "4.0.1"`).\
+- Additional error handling and dependencies checks.\
 - Re-renders `README.Rmd` before rebuilding the documentation website.
 
 ### [`usethis`](https://github.com/r-lib/usethis)
@@ -292,16 +292,16 @@ GitHub Action to setup Miniconda and conda environments.
 utils::sessionInfo()
 ```
 
-    ## R version 4.6.0 (2026-04-24)
+    ## R version 4.6.1 (2026-06-24)
     ## Platform: aarch64-apple-darwin23
-    ## Running under: macOS Tahoe 26.4.1
+    ## Running under: macOS Golden Gate 27.0
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
     ## LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
     ## 
     ## locale:
-    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
     ## 
     ## time zone: Europe/London
     ## tzcode source: internal
@@ -310,21 +310,20 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] gtable_0.3.6        jsonlite_2.0.0      renv_1.2.2         
-    ##  [4] dplyr_1.2.1         compiler_4.6.0      BiocManager_1.30.27
+    ##  [1] gtable_0.3.6        jsonlite_2.0.0      renv_1.3.1         
+    ##  [4] dplyr_1.2.1         compiler_4.6.1      BiocManager_1.30.27
     ##  [7] tidyselect_1.2.1    rvcheck_0.2.1       scales_1.4.0       
     ## [10] yaml_2.3.12         fastmap_1.2.0       here_1.0.2         
     ## [13] ggplot2_4.0.3       R6_2.6.1            generics_0.1.4     
-    ## [16] knitr_1.51          yulab.utils_0.2.4   tibble_3.3.1       
-    ## [19] desc_1.4.3          dlstats_0.1.7       rprojroot_2.1.1    
-    ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.2.0        
-    ## [25] badger_0.2.5        xfun_0.57           fs_2.1.0           
+    ## [16] knitr_1.52          yulab.utils_0.2.5   tibble_3.3.1       
+    ## [19] desc_1.4.3          dlstats_0.1.8       rprojroot_2.1.1    
+    ## [22] pillar_1.11.1       RColorBrewer_1.1-3  rlang_1.3.0        
+    ## [25] badger_0.2.5        xfun_0.61           fs_2.1.0           
     ## [28] S7_0.2.2            otel_0.2.0          cli_3.6.6          
-    ## [31] magrittr_2.0.5      rworkflows_1.0.12   digest_0.6.39      
-    ## [34] grid_4.6.0          rstudioapi_0.18.0   rappdirs_0.3.4     
-    ## [37] lifecycle_1.0.5     vctrs_0.7.3         data.table_1.18.2.1
-    ## [40] evaluate_1.0.5      glue_1.8.1          farver_2.1.2       
-    ## [43] rmarkdown_2.31      tools_4.6.0         pkgconfig_2.0.3    
-    ## [46] htmltools_0.5.9
+    ## [31] magrittr_2.0.5      rworkflows_1.0.13   digest_0.6.39      
+    ## [34] grid_4.6.1          rappdirs_0.3.4      lifecycle_1.0.5    
+    ## [37] vctrs_0.7.3         data.table_1.18.6.1 evaluate_1.0.5     
+    ## [40] glue_1.8.1          farver_2.1.2        rmarkdown_2.32     
+    ## [43] tools_4.6.1         pkgconfig_2.0.3     htmltools_0.5.9
 
 </details>
