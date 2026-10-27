@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rworkflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.13</span>
       </span>
     </div>
 
@@ -69,6 +69,14 @@
       <small>Source: <a href="https://github.com/neurogenomics/rworkflows/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0.13" id="rworkflows-1013">rworkflows 1.0.13<a class="anchor" aria-label="anchor" href="#rworkflows-1013"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-0-13">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-13"></a></h3>
+<ul><li>
+<code>catchpoint/workflow-telemetry-action</code> was deleted upstream, causing every job to fail at “Set up job” (even with <code>run_telemetry: false</code>, since GitHub resolves all <code>uses:</code> actions before evaluating <code>if:</code>). The telemetry step in <code>action.yml</code> and <code>rworkflows_static.yml</code> now uses the <code>chainguard-actions/catchpoint-workflow-telemetry-action</code> mirror, pinned to the commit for v2.0.0 (<a href="https://github.com/neurogenomics/rworkflows/issues/157" class="external-link">#157</a>, <a href="https://github.com/neurogenomics/rworkflows/issues/158" class="external-link">#158</a>). Repositories with their own copy of <code>rworkflows_static.yml</code> need the same one-line change. A longer-term rework of telemetry is tracked in <a href="https://github.com/neurogenomics/rworkflows/issues/159" class="external-link">#159</a>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.12" id="rworkflows-1012">rworkflows 1.0.12<small>2026-05-05</small><a class="anchor" aria-label="anchor" href="#rworkflows-1012"></a></h2>
 <div class="section level3">
