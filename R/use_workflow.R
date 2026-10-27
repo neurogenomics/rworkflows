@@ -113,7 +113,7 @@
 #' @param force_install Whether to force install packages. If \code{true}, all 
 #' packages will be reinstalled, bypassing the cache.
 #' @param run_telemetry Whether to run the workflow telemetry action:
-#' https://github.com/catchpoint/workflow-telemetry-action
+#' https://github.com/chainguard-actions/catchpoint-workflow-telemetry-action
 #' @param free_diskspace Whether to free up additional disk space by deleting 
 #' non-essential software.
 #' @param miniforge_variant If provided, this variant of Miniforge will be
